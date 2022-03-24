@@ -8,14 +8,14 @@ using ReMod.Core.Managers;
 using ReMod.Core.UI;
 using ReMod.Core.UI.QuickMenu;
 using ReMod.Core.VRChat;
-using ReModCE.Core;
-using ReModCE.Loader;
+using ReModCE_ARES.Core;
+using ReModCE_ARES.Loader;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.Core;
 using AvatarList = Il2CppSystem.Collections.Generic.List<VRC.Core.ApiAvatar>;
 
-namespace ReModCE.Components
+namespace ReModCE_ARES.Components
 {
     internal class AvatarHistoryComponent : ModComponent, IAvatarListOwner
     {
@@ -44,18 +44,18 @@ namespace ReModCE.Components
                 _excludeOwnToggle.Toggle(AvatarHistoryExcludeOwn);
             };
 
-            if (File.Exists("UserData/ReModCE/recent_avatars.bin"))
+            if (File.Exists("UserData/ReModCE_ARES/recent_avatars.bin"))
             {
                 try
                 {
                     _recentAvatars =
-                        BinaryGZipSerializer.Deserialize("UserData/ReModCE/recent_avatars.bin") as List<ReAvatar>;
+                        BinaryGZipSerializer.Deserialize("UserData/ReModCE_ARES/recent_avatars.bin") as List<ReAvatar>;
                 }
                 catch (GZipException e)
                 {
                     ReLogger.Error($"Your recent avatars file seems to be corrupted. I renamed it for you, so this error doesn't happen again.");
-                    File.Delete("UserData/ReModCE/recent_avatars.bin.corrupted");
-                    File.Move("UserData/ReModCE/recent_avatars.bin", "UserData/ReModCE/recent_avatars.bin.corrupted");
+                    File.Delete("UserData/ReModCE_ARES/recent_avatars.bin.corrupted");
+                    File.Move("UserData/ReModCE_ARES/recent_avatars.bin", "UserData/ReModCE_ARES/recent_avatars.bin.corrupted");
                     _recentAvatars = new List<ReAvatar>();
                 }
             }
@@ -169,7 +169,7 @@ namespace ReModCE.Components
 
         private void SaveAvatarsToDisk()
         {
-            BinaryGZipSerializer.Serialize(_recentAvatars, "UserData/ReModCE/recent_avatars.bin");
+            BinaryGZipSerializer.Serialize(_recentAvatars, "UserData/ReModCE_ARES/recent_avatars.bin");
         }
 
         public AvatarList GetAvatars(ReAvatarList avatarList)

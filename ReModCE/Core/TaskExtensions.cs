@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using ReModCE.Loader;
+using ReModCE_ARES.Loader;
 
-namespace ReModCE.Core
+namespace ReModCE_ARES.Core
 {
     internal static class TaskExtensions
     {

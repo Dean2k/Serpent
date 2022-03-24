@@ -11,7 +11,7 @@ using UnityEngine;
 using VRC.Core;
 using VRC.SDKBase;
 
-namespace ReModCE.Components
+namespace ReModCE_ARES.Components
 {
     internal sealed class InstanceHistoryComponent : ModComponent
     {
@@ -38,9 +38,9 @@ namespace ReModCE.Components
         public InstanceHistoryComponent()
         {
 
-            if (File.Exists("UserData/ReModCE/instance_history.json"))
+            if (File.Exists("UserData/ReModCE_ARES/instance_history.json"))
             {
-                _instanceHistory = JsonConvert.DeserializeObject<List<SavedWorld>>(File.ReadAllText("UserData/ReModCE/instance_history.json"));
+                _instanceHistory = JsonConvert.DeserializeObject<List<SavedWorld>>(File.ReadAllText("UserData/ReModCE_ARES/instance_history.json"));
             }
 
             _instanceHistory ??= new List<SavedWorld>();
@@ -105,7 +105,7 @@ namespace ReModCE.Components
                 }
 
                 _instanceHistory.Add(_currentSavedWorld);
-                File.WriteAllText("UserData/ReModCE/instance_history.json", JsonConvert.SerializeObject(_instanceHistory));
+                File.WriteAllText("UserData/ReModCE_ARES/instance_history.json", JsonConvert.SerializeObject(_instanceHistory));
 
                 if (_instanceHistoryMenu != null)
                     AddInstanceButton(_currentSavedWorld);
@@ -136,7 +136,7 @@ namespace ReModCE.Components
             _instanceHistory.Add(_currentSavedWorld);
             AddInstanceButton(_currentSavedWorld);
 
-            File.WriteAllText("UserData/ReModCE/instance_history.json", JsonConvert.SerializeObject(_instanceHistory));
+            File.WriteAllText("UserData/ReModCE_ARES/instance_history.json", JsonConvert.SerializeObject(_instanceHistory));
         }
 
         private void ReverseButtonOrder()

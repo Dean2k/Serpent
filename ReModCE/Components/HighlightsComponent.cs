@@ -4,13 +4,13 @@ using ReMod.Core.UI.QuickMenu;
 using ReMod.Core.UI.Wings;
 using ReMod.Core.Unity;
 using ReMod.Core.VRChat;
-using ReModCE.Managers;
+using ReModCE_ARES.Managers;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC;
 using VRC.Core;
 
-namespace ReModCE.Components
+namespace ReModCE_ARES.Components
 {
     internal class HighlightsComponent : ModComponent
     {
@@ -71,7 +71,7 @@ namespace ReModCE.Components
                 ToggleESP(b);
             }, ESPEnabled);
 
-            _espMirroredToggle = ReModCE.WingMenu.AddToggle("ESP", "Enable/Disable ESP", ESPEnabled.SetValue, ESPEnabled);
+            _espMirroredToggle = ReModCE_ARES.WingMenu.AddToggle("ESP", "Enable/Disable ESP", ESPEnabled.SetValue, ESPEnabled);
             
             _friendsColorButton = menu.AddButton($"<color=#{FriendsColor.Value.ToHex()}>Friends</color> Color",
                 $"Set your <color=#{FriendsColor.Value.ToHex()}>friends</color> highlight color",

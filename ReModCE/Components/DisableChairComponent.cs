@@ -5,7 +5,7 @@ using ReMod.Core.VRChat;
 using VRC;
 using VRC.Core;
 
-namespace ReModCE.Components
+namespace ReModCE_ARES.Components
 {
     internal sealed class DisableChairComponent : ModComponent
     {
@@ -15,7 +15,7 @@ namespace ReModCE.Components
 
         public DisableChairComponent()
         {
-            ReModCE.Harmony.Patch(typeof(VRC_StationInternal).GetMethod(nameof(VRC_StationInternal.Method_Public_Boolean_Player_Boolean_0)),
+            ReModCE_ARES.Harmony.Patch(typeof(VRC_StationInternal).GetMethod(nameof(VRC_StationInternal.Method_Public_Boolean_Player_Boolean_0)),
                 GetLocalPatch(nameof(PlayerCanUseStation)));
 
             ChairsDisabled = new ConfigValue<bool>(nameof(ChairsDisabled), false);

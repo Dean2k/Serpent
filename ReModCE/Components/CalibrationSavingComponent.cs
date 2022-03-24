@@ -9,11 +9,11 @@ using Newtonsoft.Json;
 using ReMod.Core;
 using ReMod.Core.Managers;
 using ReMod.Core.UI.QuickMenu;
-using ReModCE.Core;
-using ReModCE.Loader;
+using ReModCE_ARES.Core;
+using ReModCE_ARES.Loader;
 using UnityEngine;
 
-namespace ReModCE.Components
+namespace ReModCE_ARES.Components
 {
     internal class CalibrationSavingComponent : ModComponent
     {
@@ -30,7 +30,7 @@ namespace ReModCE.Components
 
         public CalibrationSavingComponent()
         {
-            if (ReModCE.IsOculus)
+            if (ReModCE_ARES.IsOculus)
                 return;
 
             CalibrationSaverEnabled = new ConfigValue<bool>(nameof(CalibrationSaverEnabled), true);
@@ -47,11 +47,11 @@ namespace ReModCE.Components
                 return;
             }
 
-            if (File.Exists("UserData/ReModCE/calibrations.json"))
+            if (File.Exists("UserData/ReModCE_ARES/calibrations.json"))
             {
                 _savedCalibrations =
                     JsonConvert.DeserializeObject<Dictionary<string, FbtCalibration>>(
-                        File.ReadAllText("UserData/ReModCE/calibrations.json"));
+                        File.ReadAllText("UserData/ReModCE_ARES/calibrations.json"));
 
                 ReLogger.Msg($"Loaded {_savedCalibrations.Count} calibrations from disk.");
             }
@@ -59,7 +59,7 @@ namespace ReModCE.Components
             {
                 ReLogger.Msg($"No saved calibrations found. Creating new.");
                 _savedCalibrations = new Dictionary<string, FbtCalibration>();
-                File.WriteAllText("UserData/ReModCE/calibrations.json", JsonConvert.SerializeObject(_savedCalibrations, Formatting.Indented, new JsonSerializerSettings
+                File.WriteAllText("UserData/ReModCE_ARES/calibrations.json", JsonConvert.SerializeObject(_savedCalibrations, Formatting.Indented, new JsonSerializerSettings
                 {
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                 }));
@@ -79,10 +79,10 @@ namespace ReModCE.Components
                     switch (methodInfo.GetParameters().Length)
                     {
                         case 1 when methodInfo.GetParameters().First().ParameterType == typeof(string) && methodInfo.ReturnType == typeof(bool) && methodInfo.GetRuntimeBaseDefinition() == methodInfo:
-                            ReModCE.Harmony.Patch(methodInfo, GetLocalPatch(nameof(IsCalibratedForAvatar)));
+                            ReModCE_ARES.Harmony.Patch(methodInfo, GetLocalPatch(nameof(IsCalibratedForAvatar)));
                             break;
                         case 3 when methodInfo.GetParameters().First().ParameterType == typeof(Animator) && methodInfo.ReturnType == typeof(void) && methodInfo.GetRuntimeBaseDefinition() == methodInfo:
-                            ReModCE.Harmony.Patch(methodInfo, postfix: GetLocalPatch(nameof(PerformCalibration)));
+                            ReModCE_ARES.Harmony.Patch(methodInfo, postfix: GetLocalPatch(nameof(PerformCalibration)));
                             break;
                     }
                 }
@@ -101,7 +101,7 @@ namespace ReModCE.Components
             menu.AddButton("Clear Saved Calibrations", "Clear your saved calibrations from your disk.", () =>
             {
                 _savedCalibrations.Clear();
-                File.Delete("UserData/ReModCE/calibrations.json");
+                File.Delete("UserData/ReModCE_ARES/calibrations.json");
             }, ResourceManager.GetSprite("remodce.dust"));
         }
 
@@ -125,7 +125,7 @@ namespace ReModCE.Components
 
             try
             {
-                File.WriteAllText("UserData/ReModCE/calibrations.json", JsonConvert.SerializeObject(_savedCalibrations, Formatting.Indented, new JsonSerializerSettings
+                File.WriteAllText("UserData/ReModCE_ARES/calibrations.json", JsonConvert.SerializeObject(_savedCalibrations, Formatting.Indented, new JsonSerializerSettings
                 {
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
                     ContractResolver = new DynamicContractResolver(new List<string> { "normalized" })

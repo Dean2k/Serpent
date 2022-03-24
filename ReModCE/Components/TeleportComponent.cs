@@ -3,14 +3,14 @@ using ReMod.Core.Managers;
 using ReMod.Core.UI;
 using ReMod.Core.UI.QuickMenu;
 using ReMod.Core.VRChat;
-using ReModCE.Managers;
+using ReModCE_ARES.Managers;
 using UnityEngine;
 using VRC;
 using VRC.Core;
 using VRC.DataModel;
 using VRC.UI;
 
-namespace ReModCE.Components
+namespace ReModCE_ARES.Components
 {
     internal sealed class TeleportComponent : ModComponent
     {

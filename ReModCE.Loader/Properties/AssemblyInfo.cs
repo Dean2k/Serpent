@@ -2,18 +2,18 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 using MelonLoader;
-using ReModCE.Loader;
+using ReModCE_ARES.Loader;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle(ReModCE.Loader.BuildInfo.Name)]
+[assembly: AssemblyTitle(ReModCE_ARES.Loader.BuildInfo.Name)]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany(ReModCE.Loader.BuildInfo.Company)]
-[assembly: AssemblyProduct(ReModCE.Loader.BuildInfo.Name)]
-[assembly: AssemblyCopyright("Created by " + ReModCE.Loader.BuildInfo.Author)]
-[assembly: AssemblyTrademark(ReModCE.Loader.BuildInfo.Company)]
+[assembly: AssemblyCompany(ReModCE_ARES.Loader.BuildInfo.Company)]
+[assembly: AssemblyProduct(ReModCE_ARES.Loader.BuildInfo.Name)]
+[assembly: AssemblyCopyright("Created by " + ReModCE_ARES.Loader.BuildInfo.Author)]
+[assembly: AssemblyTrademark(ReModCE_ARES.Loader.BuildInfo.Company)]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
@@ -34,10 +34,10 @@ using ReModCE.Loader;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion(ReModCE.Loader.BuildInfo.Version)]
-[assembly: AssemblyFileVersion(ReModCE.Loader.BuildInfo.Version)]
+[assembly: AssemblyVersion(ReModCE_ARES.Loader.BuildInfo.Version)]
+[assembly: AssemblyFileVersion(ReModCE_ARES.Loader.BuildInfo.Version)]
 
-[assembly: MelonInfo(typeof(ReLoader), ReModCE.Loader.BuildInfo.Name, ReModCE.Loader.BuildInfo.Version, ReModCE.Loader.BuildInfo.Author, ReModCE.Loader.BuildInfo.DownloadLink)]
+[assembly: MelonInfo(typeof(ReLoader), ReModCE_ARES.Loader.BuildInfo.Name, ReModCE_ARES.Loader.BuildInfo.Version, ReModCE_ARES.Loader.BuildInfo.Author, ReModCE_ARES.Loader.BuildInfo.DownloadLink)]
 
 // Create and Setup a MelonModGame to mark a Mod as Universal or Compatible with specific Games.
 // If no MelonModGameAttribute is found or any of the Values for any MelonModGame on the Mod is null or empty it will be assumed the Mod is Universal.

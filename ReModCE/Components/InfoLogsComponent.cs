@@ -2,10 +2,10 @@
 using ReMod.Core;
 using ReMod.Core.Managers;
 using ReMod.Core.UI.QuickMenu;
-using ReModCE.Loader;
+using ReModCE_ARES.Loader;
 using VRC;
 
-namespace ReModCE.Components
+namespace ReModCE_ARES.Components
 {
     internal class InfoLogsComponent : ModComponent
     {

@@ -14,7 +14,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using VRC.UI.Elements;
 
-namespace ReModCE.Components
+namespace ReModCE_ARES.Components
 {
     internal sealed class MediaControlComponent : ModComponent
     {

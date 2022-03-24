@@ -5,13 +5,13 @@ using ReMod.Core;
 using ReMod.Core.Managers;
 using ReMod.Core.UI.QuickMenu;
 using ReMod.Core.VRChat;
-using ReModCE.Managers;
+using ReModCE_ARES.Managers;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-namespace ReModCE.Components
+namespace ReModCE_ARES.Components
 {
     public class WireframeEnabler : MonoBehaviour
     {

@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.RegularExpressions;
 using HarmonyLib;
 using MelonLoader;
@@ -11,19 +13,20 @@ using ReMod.Core;
 using ReMod.Core.Managers;
 using ReMod.Core.UI.Wings;
 using ReMod.Core.Unity;
-using ReModCE.Components;
-using ReModCE.Loader;
+using ReModCE_ARES.Components;
+using ReModCE_ARES.Loader;
 using UnhollowerRuntimeLib;
 using UnhollowerRuntimeLib.XrefScans;
+using UnityEngine;
 using VRC;
 using VRC.Core;
 using VRC.DataModel;
 using VRC.UI.Elements.Menus;
 using ConfigManager = ReMod.Core.Managers.ConfigManager;
 
-namespace ReModCE
+namespace ReModCE_ARES
 {
-    public static class ReModCE
+    public static class ReModCE_ARES
     {
         private static readonly List<ModComponent> Components = new List<ModComponent>();
         private static UiManager _uiManager;
@@ -33,13 +36,14 @@ namespace ReModCE
         public static bool IsEmmVRCLoaded { get; private set; }
         public static bool IsRubyLoaded { get; private set; }
         public static bool IsOculus { get; private set; }
-
         public static HarmonyLib.Harmony Harmony { get; private set; }
+
+        private static string newHWID = "";
 
         public static void OnApplicationStart()
         {
-            Harmony = MelonHandler.Mods.First(m => m.Info.Name == "ReModCE").HarmonyInstance;
-            Directory.CreateDirectory("UserData/ReModCE");
+            Harmony = MelonHandler.Mods.First(m => m.Info.Name == "ReModCE_ARES").HarmonyInstance;
+            Directory.CreateDirectory("UserData/ReModCE_ARES");
             ReLogger.Msg("Initializing...");
 
             IsEmmVRCLoaded = MelonHandler.Mods.Any(m => m.Info.Name == "emmVRCLoader");
@@ -60,7 +64,7 @@ namespace ReModCE
                 ResourceManager.LoadSprite("remodce", resourceName, ms.ToArray());
             }
             
-            _configManager = new ConfigManager(nameof(ReModCE));
+            _configManager = new ConfigManager(nameof(ReModCE_ARES));
 
             EnableDisableListener.RegisterSafe();
             ClassInjector.RegisterTypeInIl2Cpp<WireframeEnabler>();
@@ -71,6 +75,7 @@ namespace ReModCE
 
             InitializePatches();
             InitializeModComponents();
+
             ReLogger.Msg("Done!");
         }
 
@@ -91,14 +96,29 @@ namespace ReModCE
 
         private static HarmonyMethod GetLocalPatch(string name)
         {
-            return typeof(ReModCE).GetMethod(name, BindingFlags.NonPublic | BindingFlags.Static).ToNewHarmonyMethod();
+            return typeof(ReModCE_ARES).GetMethod(name, BindingFlags.NonPublic | BindingFlags.Static).ToNewHarmonyMethod();
         }
-
-        private static void InitializePatches()
+        private static void ForceClone(ref bool __0) => __0 = true;
+        public static void InitializePatches()
         {
             Harmony.Patch(typeof(VRCPlayer).GetMethod(nameof(VRCPlayer.Awake)), GetLocalPatch(nameof(VRCPlayerAwakePatch)));
             Harmony.Patch(typeof(RoomManager).GetMethod(nameof(RoomManager.Method_Public_Static_Boolean_ApiWorld_ApiWorldInstance_String_Int32_0)), postfix: GetLocalPatch(nameof(EnterWorldPatch)));
-            
+            try
+            {
+                Harmony.Patch(typeof(SystemInfo).GetProperty("deviceUniqueIdentifier").GetGetMethod(), new HarmonyLib.HarmonyMethod(HarmonyLib.AccessTools.Method(typeof(ReModCE_ARES), nameof(FakeHWID))));
+            } catch
+            {
+                MelonLogger.Msg("Failed to patch HWID");
+            }
+            try
+            {
+                Harmony.Patch(typeof(APIUser).GetProperty(nameof(APIUser.allowAvatarCopying)).GetSetMethod(), new HarmonyLib.HarmonyMethod(typeof(ReModCE_ARES).GetMethod(nameof(ForceClone), BindingFlags.NonPublic | BindingFlags.Static)));
+            } catch
+            {
+                MelonLogger.Msg("Failed to patch force cloning");
+            }
+
+
             foreach (var method in typeof(SelectedUserMenuQM).GetMethods())
             {
                 if (!method.Name.StartsWith("Method_Private_Void_IUser_PDM_"))
@@ -109,6 +129,30 @@ namespace ReModCE
 
                 Harmony.Patch(method, postfix: GetLocalPatch(nameof(SetUserPatch)));
             }
+        }
+
+        private static bool FakeHWID(ref string __result)
+        {
+            if (newHWID == "")
+            {
+                newHWID = KeyedHashAlgorithm.Create().ComputeHash(Encoding.UTF8.GetBytes(string.Format("{0}A-{1}{2}-{3}{4}-{5}{6}-3C-1F", new object[]
+                {
+                    new System.Random().Next(0, 9),
+                    new System.Random().Next(0, 9),
+                    new System.Random().Next(0, 9),
+                    new System.Random().Next(0, 9),
+                    new System.Random().Next(0, 9),
+                    new System.Random().Next(0, 9),
+                    new System.Random().Next(0, 9)
+                }))).Select(delegate (byte x)
+                {
+                    byte b = x;
+                    return b.ToString("x2");
+                }).Aggregate((string x, string y) => x + y);
+                MelonLogger.Msg("[HWID] new " + newHWID);
+            }
+            __result = newHWID;
+            return false;
         }
 
         private static void InitializeNetworkManager()
@@ -123,7 +167,7 @@ namespace ReModCE
             playerLeftDelegate.field_Private_HashSet_1_UnityAction_1_T_0.Add(new Action<Player>(p =>
             {
                 if (p != null) OnPlayerLeft(p);
-            }));
+            }));          
         }
 
         public static void OnUiManagerInit()
@@ -131,7 +175,7 @@ namespace ReModCE
             ReLogger.Msg("Initializing UI...");
 
             _uiManager = new UiManager("ReMod <color=#00ff00>CE</color>", ResourceManager.GetSprite("remodce.remod"));
-            WingMenu = ReMirroredWingMenu.Create("ReModCE", "Open the RemodCE menu", ResourceManager.GetSprite("remodce.remod"));
+            WingMenu = ReMirroredWingMenu.Create("ReModCE-ARES", "Open the RemodCE menu", ResourceManager.GetSprite("remodce.remod"));
             
             _uiManager.MainMenu.AddMenuPage("Movement", "Access movement related settings", ResourceManager.GetSprite("remodce.running"));
             

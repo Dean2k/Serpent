@@ -2,10 +2,10 @@
 using ReMod.Core;
 using ReMod.Core.Managers;
 using ReMod.Core.UI.QuickMenu;
-using ReModCE.Managers;
+using ReModCE_ARES.Managers;
 using UnityEngine;
 
-namespace ReModCE.Components
+namespace ReModCE_ARES.Components
 {
     internal enum ThirdPersonMode
     {

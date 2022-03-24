@@ -13,8 +13,8 @@ using ReMod.Core.Managers;
 using ReMod.Core.UI;
 using ReMod.Core.UI.QuickMenu;
 using ReMod.Core.VRChat;
-using ReModCE.Core;
-using ReModCE.Loader;
+using ReModCE_ARES.Core;
+using ReModCE_ARES.Loader;
 using UnhollowerRuntimeLib;
 using UnityEngine;
 using UnityEngine.Events;
@@ -23,9 +23,9 @@ using UnityEngine.XR;
 using VRC.Core;
 using VRC.SDKBase.Validation.Performance.Stats;
 using AvatarList = Il2CppSystem.Collections.Generic.List<VRC.Core.ApiAvatar>;
-using BuildInfo = ReModCE.Loader.BuildInfo;
+using BuildInfo = ReModCE_ARES.Loader.BuildInfo;
 
-namespace ReModCE.Components
+namespace ReModCE_ARES.Components
 {
     internal class AvatarFavoritesComponent : ModComponent, IAvatarListOwner
     {
@@ -42,7 +42,7 @@ namespace ReModCE.Components
         private HttpClient _httpClient;
         private HttpClientHandler _httpClientHandler;
 
-        private const string PinPath = "UserData/ReModCE/pin";
+        private const string PinPath = "UserData/ReModCE_ARES/pin";
         private int _pinCode;
         private ReMenuButton _enterPinButton;
 
@@ -156,7 +156,7 @@ namespace ReModCE.Components
         {
             base.OnUiManagerInit(uiManager);
 
-            if (ReModCE.IsRubyLoaded)
+            if (ReModCE_ARES.IsRubyLoaded)
             {
                 _favoriteButton.Position += new Vector3(420f, 0f);
             }
@@ -219,12 +219,12 @@ namespace ReModCE.Components
 
             if (!_searchBox.field_Public_Button_0.interactable)
             {
-                if (!ReModCE.IsEmmVRCLoaded || _updatesWithoutSearch >= 10)
+                if (!ReModCE_ARES.IsEmmVRCLoaded || _updatesWithoutSearch >= 10)
                 {
                     _searchBox.field_Public_Button_0.interactable = true;
                     _searchBox.field_Public_UnityAction_1_String_0 = _searchAvatarsAction;
                 }
-                else if (ReModCE.IsEmmVRCLoaded)
+                else if (ReModCE_ARES.IsEmmVRCLoaded)
                 {
                     ++_updatesWithoutSearch;
                 }
@@ -232,7 +232,7 @@ namespace ReModCE.Components
             }
             else
             {
-                if (ReModCE.IsEmmVRCLoaded && _updatesWithoutSearch < 10)
+                if (ReModCE_ARES.IsEmmVRCLoaded && _updatesWithoutSearch < 10)
                 {
                     if (_searchBox.field_Public_UnityAction_1_String_0 == null)
                         return;

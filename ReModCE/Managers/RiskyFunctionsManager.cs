@@ -7,7 +7,7 @@ using ReMod.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace ReModCE.Managers
+namespace ReModCE_ARES.Managers
 {
     [ComponentPriority(int.MinValue)]
     internal class RiskyFunctionsManager : ModComponent
@@ -16,13 +16,7 @@ namespace ReModCE.Managers
 
         public event Action<bool> OnRiskyFunctionsChanged;
 
-        private readonly List<string> _blacklistedTags = new List<string>
-        {
-            "author_tag_game",
-            "author_tag_games",
-            "author_tag_club",
-            "admin_game"
-        };
+        private readonly List<string> _blacklistedTags = new List<string>();
 
         public bool RiskyFunctionAllowed { get; private set; }
 
@@ -43,26 +37,7 @@ namespace ReModCE.Managers
         {
             while (RoomManager.field_Internal_Static_ApiWorld_0 == null) yield return new WaitForEndOfFrame();
             var apiWorld = RoomManager.field_Internal_Static_ApiWorld_0;
-
-            var worldName = apiWorld.name.ToLower();
-            var tags = new List<string>();
-            foreach (var tag in apiWorld.tags)
-            {
-                tags.Add(tag.ToLower());
-            }
-
-            var hasBlacklistedTag = _blacklistedTags.Any(tag => tags.Contains(tag));
-            var riskyFunctionAllowed = !worldName.Contains("club") && !worldName.Contains("game") && !hasBlacklistedTag;
-
-            var rootGameObjects = SceneManager.GetActiveScene().GetRootGameObjects();
-            if (rootGameObjects.Any(go => go.name is "eVRCRiskFuncDisable" or "UniversalRiskyFuncDisable"))
-            {
-                riskyFunctionAllowed = false;
-            }
-            else if (rootGameObjects.Any(go => go.name is "eVRCRiskFuncEnable" or "UniversalRiskyFuncEnable"))
-            {
-                riskyFunctionAllowed = true;
-            }
+            var riskyFunctionAllowed = true;
 
             RiskyFunctionAllowed = riskyFunctionAllowed;
             OnRiskyFunctionsChanged?.Invoke(RiskyFunctionAllowed);

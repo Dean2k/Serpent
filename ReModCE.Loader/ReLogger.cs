@@ -1,7 +1,7 @@
 ﻿using System;
 using MelonLoader;
 
-namespace ReModCE.Loader
+namespace ReModCE_ARES.Loader
 {
     /// <summary>
     /// Logger class that forwards all logging to MelonLoader through the ReModCE Loader so the colors are set up properly.

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-namespace ReModCE.Components
+namespace ReModCE_ARES.Components
 {
     internal class PopupExComponent : ModComponent
     {

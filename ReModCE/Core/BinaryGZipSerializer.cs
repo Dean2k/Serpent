@@ -2,7 +2,7 @@
 using System.Runtime.Serialization.Formatters.Binary;
 using MelonLoader.ICSharpCode.SharpZipLib.GZip;
 
-namespace ReModCE.Core
+namespace ReModCE_ARES.Core
 {
     internal class BinaryGZipSerializer
     {

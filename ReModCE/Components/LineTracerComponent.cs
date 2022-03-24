@@ -1,9 +1,9 @@
-﻿namespace ReModCE.Components
+﻿namespace ReModCE_ARES.Components
 {
 
     using System.Collections.Generic;
 
-    using global::ReModCE.Managers;
+    using global::ReModCE_ARES.Managers;
 
     using ReMod.Core;
     using ReMod.Core.Managers;

@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using VRC.Core;
 
-namespace ReModCE.Core
+namespace ReModCE_ARES.Core
 {
     [Serializable]
     internal class ReAvatar
@@ -45,12 +45,12 @@ namespace ReModCE.Core
                 assetUrl = AssetUrl,
                 thumbnailImageUrl = string.IsNullOrEmpty(ThumbnailUrl) ? (string.IsNullOrEmpty(ImageUrl) ? "https://assets.vrchat.com/system/defaultAvatar.png" : ImageUrl) : ThumbnailUrl,
                 releaseStatus = "public",
-                unityVersion = "2019.4.29f1",
+                unityVersion = "2019.4.31f1",
                 version = 1,
                 apiVersion = 1,
                 Endpoint = "avatars",
                 Populated = false,
-                assetVersion = new AssetVersion("2019.4.29f1", 0),
+                assetVersion = new AssetVersion("2019.4.31f1", 0),
                 tags = new Il2CppSystem.Collections.Generic.List<string>(0),
                 supportedPlatforms = SupportedPlatforms,
             };

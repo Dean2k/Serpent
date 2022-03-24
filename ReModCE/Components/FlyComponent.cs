@@ -5,7 +5,7 @@ using ReMod.Core.Managers;
 using ReMod.Core.UI.QuickMenu;
 using ReMod.Core.UI.Wings;
 using ReMod.Core.VRChat;
-using ReModCE.Managers;
+using ReModCE_ARES.Managers;
 using UnhollowerRuntimeLib;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,7 +19,7 @@ using VRC_UiShape = VRC.SDKBase.VRC_UiShape;
 using Object = UnityEngine.Object;
 
 // ReSharper disable InconsistentNaming
-namespace ReModCE.Components
+namespace ReModCE_ARES.Components
 {
     internal class FlyComponent : ModComponent
     {
@@ -85,7 +85,7 @@ namespace ReModCE.Components
 
             _flyToggle = movementMenu.AddToggle("Fly", "Enable/Disable Fly", ToggleFly, _flyEnabled);
             _noclipToggle = movementMenu.AddToggle("Noclip", "Enable/Disable Noclip", ToggleNoclip, _noclipEnabled);
-            _noclipWingToggle = ReModCE.WingMenu.AddToggle("Noclip", "Enable/Disable Noclip", b =>
+            _noclipWingToggle = ReModCE_ARES.WingMenu.AddToggle("Noclip", "Enable/Disable Noclip", b =>
             {
                 if (b)
                 {

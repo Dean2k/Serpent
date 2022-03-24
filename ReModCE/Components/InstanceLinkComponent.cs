@@ -1,12 +1,12 @@
 ﻿using ReMod.Core;
 using ReMod.Core.UI;
 using ReMod.Core.VRChat;
-using ReModCE.Loader;
+using ReModCE_ARES.Loader;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.SDKBase;
 
-namespace ReModCE.Components
+namespace ReModCE_ARES.Components
 {
     internal class InstanceLinkComponent : ModComponent
     {

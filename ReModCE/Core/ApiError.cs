@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace ReModCE.Core
+namespace ReModCE_ARES.Core
 {
     internal class ApiError
     {

@@ -1,8 +1,4 @@
-# ReMod CE
-
-[![main](https://img.shields.io/github/workflow/status/RequiDev/ReModCE/main?style=for-the-badge)](https://github.com/RequiDev/ReModCE/actions/workflows/main.yml)
-[![All Releases](https://img.shields.io/github/downloads/RequiDev/ReModCE/total.svg?style=for-the-badge&logo=appveyor)](https://github.com/RequiDev/ReModCE/releases)
-[![All Releases](https://img.shields.io/github/downloads/RequiDev/ReModCE/latest/total.svg?style=for-the-badge&logo=appveyor)](https://github.com/RequiDev/ReModCE/releases/latest)
+# ReMod CE ARES
 
 ![ReModCE Logo](https://github.com/RequiDev/ReModCE/raw/master/remod_ce_logo.png)
 
@@ -30,13 +26,13 @@ In case you want to update you can always grab the latest and even previous vers
 * Search public avatars by name, description, author name and author id
 * Recently Used Avatars/Avatar History (Remembers up to 25 avatars)
 * Global Dynamic Bones with advanced settings so you have full control over where colliders go
-* Fly/Noclip (Not usable in Game/Club worlds)
-* ESP/Player Highlighting (Not usable in Game/Club worlds)
-* Wireframe ESP (Players, Pickups, World) (Not usable in Game/Club worlds)
-* Third Person (Not usable in Game/Club worlds)
+* Fly/Noclip
+* ESP/Player Highlighting
+* Wireframe ESP (Players, Pickups, World)
+* Third Person
 * Small UI adjustments like adding a "Paste" button to input popups
 * FBT Calibration Saver as already seen at [RequiDev/FBTSaver](https://github.com/RequiDev/FBTSaver)
-* Teleport to other players (Not usable in Game/Club worlds)
+* Teleport to other players
 * Media Controls which syncs with your Spotify
 * Quickly restart in either desktop or VR and automatically teleport to back where you were.
 * Copy your current instance join link or join others by using a join link
@@ -44,6 +40,8 @@ In case you want to update you can always grab the latest and even previous vers
 * Not sure if you have already joined an instance? Instance Dejavu will put an icon on instances you have visited before
 * Automatically adjusts VRChat News to be collapsible or hide it completely
 * Small utilities like disabling chairs in any world, copying user/avatar id and having confirmations for portals
+* Force Clone
+* HWID Changer
 
 ## Hotkeys
 * CTRL + F = Noclip

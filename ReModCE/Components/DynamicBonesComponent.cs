@@ -14,7 +14,7 @@ using VRC;
 using VRC.Core;
 using VRC.DataModel;
 
-namespace ReModCE.Components
+namespace ReModCE_ARES.Components
 {
     internal class DynamicBonesComponent : ModComponent
     {

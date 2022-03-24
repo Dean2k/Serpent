@@ -7,8 +7,8 @@
     <ProjectGuid>{4EA50331-5D4E-47D3-BDA5-260600CFF84C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ReModCE</RootNamespace>
-    <AssemblyName>ReModCE</AssemblyName>
+    <RootNamespace>ReModCE_ARES</RootNamespace>
+    <AssemblyName>ReModCE_ARES</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -254,12 +254,13 @@
     <Compile Include="Components\VRCNewsAdjustment.cs" />
     <Compile Include="Components\WireframeComponent.cs" />
     <Compile Include="Core\ApiError.cs" />
+    <Compile Include="Core\BasicFunctions.cs" />
     <Compile Include="Core\BinaryGZipSerializer.cs" />
     <Compile Include="Core\DynamicContractResolver.cs" />
     <Compile Include="Core\ReAvatar.cs" />
     <Compile Include="Core\TaskExtensions.cs" />
     <Compile Include="Managers\RiskyFunctionsManager.cs" />
-    <Compile Include="ReMod.cs" />
+    <Compile Include="ReModCE_ARES.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

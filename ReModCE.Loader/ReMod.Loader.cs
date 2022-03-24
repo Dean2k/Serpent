@@ -1,7 +1,6 @@
 ﻿using MelonLoader;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -11,20 +10,20 @@ using System.Security.Cryptography;
 using UnityEngine;
 using VRC.UI.Core;
 
-namespace ReModCE.Loader
+namespace ReModCE_ARES.Loader
 {
     public static class BuildInfo
     {
-        public const string Name = "ReModCE";
-        public const string Author = "Requi, FenrixTheFox, Xaiver, Potato, Psychloor";
+        public const string Name = "ReModCE_ARES";
+        public const string Author = "ShrekamusChrist, Requi, FenrixTheFox, Xaiver, Potato, Psychloor";
         public const string Company = null;
-        public const string Version = "1.0.0.4";
+        public const string Version = "1.0.0.0";
         public const string DownloadLink = "https://github.com/RequiDev/ReModCE/releases/latest/";
     }
 
     internal static class GitHubInfo
     {
-        public const string Author = "RequiDev";
+        public const string Author = "Dean2k";
         public const string Repository = "ReModCE";
         public const string Version = "latest";
     }
@@ -48,18 +47,18 @@ namespace ReModCE.Loader
         private MelonPreferences_Entry<bool> _paranoidMode;
         public override void OnApplicationStart()
         {
-            var category = MelonPreferences.CreateCategory("ReModCE");
+            var category = MelonPreferences.CreateCategory("ReModCE_ARES");
             _paranoidMode = category.CreateEntry("ParanoidMode", false, "Paranoid Mode",
                 "If enabled ReModCE will not automatically download the latest version from GitHub. Manual update will be required.",
                 true);
-            
+
             DownloadFromGitHub("ReMod.Core", out _);
-            DownloadFromGitHub("ReModCE", out var assembly);
+            DownloadFromGitHub("ReModCE_ARES", out var assembly);
 
             if (assembly == null)
                 return;
 
-            IEnumerable<Type> types;
+            System.Collections.Generic.IEnumerable<Type> types;
             try
             {
                 types = assembly.GetTypes();
@@ -69,7 +68,7 @@ namespace ReModCE.Loader
                 types = e.Types.Where(t => t != null);
             }
 
-            var remodClass = types.FirstOrDefault(type => type.Name == "ReModCE");
+            var remodClass = types.FirstOrDefault(type => type.Name == "ReModCE_ARES");
             if (remodClass == null)
             {
                 MelonLogger.Error($"Couldn't find ReModCE class in assembly. ReModCE won't load.");
@@ -138,6 +137,11 @@ namespace ReModCE.Loader
         public override void OnFixedUpdate()
         {
             _onFixedUpdate();
+        }
+
+        public void NetworkStuff()
+        {
+            _onNetworkManagerInit();
         }
 
         public override void OnUpdate()

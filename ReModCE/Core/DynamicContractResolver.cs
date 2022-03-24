@@ -4,7 +4,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace ReModCE.Core
+namespace ReModCE_ARES.Core
 {
     public class DynamicContractResolver : DefaultContractResolver
     {

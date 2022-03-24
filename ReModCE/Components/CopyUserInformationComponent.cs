@@ -7,7 +7,7 @@ using VRC;
 using VRC.Core;
 using VRC.UI;
 
-namespace ReModCE.Components
+namespace ReModCE_ARES.Components
 {
     internal sealed class CopyUserInformationComponent : ModComponent
     {

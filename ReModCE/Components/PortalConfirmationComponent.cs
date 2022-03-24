@@ -6,7 +6,7 @@ using ReMod.Core.Managers;
 using ReMod.Core.UI.QuickMenu;
 using UnhollowerRuntimeLib.XrefScans;
 
-namespace ReModCE.Components
+namespace ReModCE_ARES.Components
 {
     internal sealed class PortalConfirmationComponent : ModComponent
     {
@@ -33,7 +33,7 @@ namespace ReModCE.Components
                 return false;
             }))
             {
-                ReModCE.Harmony.Patch(t, GetLocalPatch(nameof(EnterConfirm)));
+                ReModCE_ARES.Harmony.Patch(t, GetLocalPatch(nameof(EnterConfirm)));
             }
 
             PortalConfirmationEnabled = new ConfigValue<bool>(nameof(PortalConfirmationEnabled), true);
