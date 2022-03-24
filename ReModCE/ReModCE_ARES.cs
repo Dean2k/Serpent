@@ -178,7 +178,9 @@ namespace ReModCE_ARES
             WingMenu = ReMirroredWingMenu.Create("ReModCE-ARES", "Open the RemodCE menu", ResourceManager.GetSprite("remodce.remod"));
             
             _uiManager.MainMenu.AddMenuPage("Movement", "Access movement related settings", ResourceManager.GetSprite("remodce.running"));
-            
+
+            _uiManager.MainMenu.AddMenuPage("Microphone", "Microphone Settings", ResourceManager.GetSprite("remodce.mixer"));
+
             var visualPage = _uiManager.MainMenu.AddCategoryPage("Visuals", "Access anything that will affect your game visually", ResourceManager.GetSprite("remodce.eye"));
             visualPage.AddCategory("ESP/Highlights");
             visualPage.AddCategory("Wireframe");
