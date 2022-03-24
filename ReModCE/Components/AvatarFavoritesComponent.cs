@@ -162,7 +162,7 @@ namespace ReModCE_ARES.Components
             }
 
             var menu = uiManager.MainMenu.GetMenuPage("Avatars");
-            _enabledToggle = menu.AddToggle("Avatar Favorites", "Enable/Disable avatar favorites (requires VRC+)", AvatarFavoritesEnabled);
+            _enabledToggle = menu.AddToggle("Avatar Favorites", "Enable/Disable avatar favorites", AvatarFavoritesEnabled);
             _maxAvatarsPerPageButton = menu.AddButton($"Avatars Per Page: {MaxAvatarsPerPage}",
                 "Set the maximum amount of avatars shown per page",
                 () =>
@@ -484,12 +484,7 @@ namespace ReModCE_ARES.Components
 
         private void FavoriteAvatar(ApiAvatar apiAvatar)
         {
-            var isSupporter = APIUser.CurrentUser.isSupporter;
-            if (!isSupporter)
-            {
-                VRCUiPopupManager.prop_VRCUiPopupManager_0.ShowAlert("ReMod CE", "You need VRC+ to use this feature.\nWe're not trying to destroy VRChat's monetization.");
-                return;
-            }
+            var isSupporter = true;
 
             var hasFavorited = HasAvatarFavorited(apiAvatar.id);
             

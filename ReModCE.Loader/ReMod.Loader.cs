@@ -18,7 +18,7 @@ namespace ReModCE_ARES.Loader
         public const string Author = "ShrekamusChrist, Requi, FenrixTheFox, Xaiver, Potato, Psychloor";
         public const string Company = null;
         public const string Version = "1.0.0.0";
-        public const string DownloadLink = "https://github.com/RequiDev/ReModCE/releases/latest/";
+        public const string DownloadLink = "https://github.com/Dean2k/ReModCE/releases/latest/";
     }
 
     internal static class GitHubInfo
@@ -139,11 +139,6 @@ namespace ReModCE_ARES.Loader
             _onFixedUpdate();
         }
 
-        public void NetworkStuff()
-        {
-            _onNetworkManagerInit();
-        }
-
         public override void OnUpdate()
         {
             _onUpdate();
@@ -217,7 +212,7 @@ namespace ReModCE_ARES.Loader
             byte[] latestBytes = null;
             try
             {
-                latestBytes = wc.DownloadData($"https://github.com/{GitHubInfo.Author}/{GitHubInfo.Repository}/releases/{GitHubInfo.Version}/download/{fileName}.dll");
+                latestBytes = wc.DownloadData($"https://github.com/{GitHubInfo.Author}/{GitHubInfo.Repository}/releases/latest/download/{fileName}.dll");
             }
             catch (WebException e)
             {

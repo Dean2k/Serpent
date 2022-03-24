@@ -37,7 +37,7 @@ namespace ReModCE_ARES.Components
 
         internal class Settings
         {
-            private const string SavePath = "UserData/ReModCE";
+            private const string SavePath = "UserData/ReModCE_ARES";
             private const string SaveFile = "dynamicbones.json";
 
             public Settings()
