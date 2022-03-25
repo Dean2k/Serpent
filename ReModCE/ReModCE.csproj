@@ -258,10 +258,12 @@
     <Compile Include="Core\ApiError.cs" />
     <Compile Include="Core\BasicFunctions.cs" />
     <Compile Include="Core\BinaryGZipSerializer.cs" />
+    <Compile Include="Components\CustomNameplateComponent.cs" />
     <Compile Include="Core\DynamicContractResolver.cs" />
     <Compile Include="Core\ReAvatar.cs" />
     <Compile Include="Core\TaskExtensions.cs" />
     <Compile Include="Managers\RiskyFunctionsManager.cs" />
+    <Compile Include="Managers\Wrapper.cs" />
     <Compile Include="ReModCE_ARES.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

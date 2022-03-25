@@ -68,6 +68,7 @@ namespace ReModCE_ARES
 
             EnableDisableListener.RegisterSafe();
             ClassInjector.RegisterTypeInIl2Cpp<WireframeEnabler>();
+            ClassInjector.RegisterTypeInIl2Cpp<CustomNameplate>();
 
             SetIsOculus();
 
