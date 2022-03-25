@@ -50,7 +50,7 @@ namespace ReModCE_ARES.Components
 
             FlyViewpointBased = new ConfigValue<bool>(
                 nameof(FlyViewpointBased),
-                false,
+                true,
                 "Fly Viewpoint Based",
                 "Whether to use Player/Viewpoint Transform as forward/right vectors.");
             FlyViewpointBased.OnValueChanged += () => _viewpointFlyingToggle?.Toggle(FlyViewpointBased);

@@ -96,7 +96,7 @@ namespace ReModCE_ARES.Components
                                 break;
                             case "unavailable":
                                 VRCUiPopupManager.prop_VRCUiPopupManager_0.ShowAlert("ReMod CE", "This avatar has been deleted. You can't switch into it.");
-                                _recentAvatars.RemoveAll(a => a.Id == currentAvatar.id);
+                                _recentAvatars.RemoveAll(a => a.AvatarID == currentAvatar.id);
                                 _avatarList.RefreshAvatars();
                                 break;
                             default:
@@ -106,7 +106,7 @@ namespace ReModCE_ARES.Components
                     }), new Action<ApiContainer>(ac =>
                     {
                         VRCUiPopupManager.prop_VRCUiPopupManager_0.ShowAlert("ReMod CE", "This avatar has been deleted. You can't switch into it.");
-                        _recentAvatars.RemoveAll(a => a.Id == currentAvatar.id);
+                        _recentAvatars.RemoveAll(a => a.AvatarID == currentAvatar.id);
                     }));
                 }));
             }
@@ -131,7 +131,7 @@ namespace ReModCE_ARES.Components
 
         private bool IsAvatarInHistory(string id)
         {
-            return _recentAvatars.FirstOrDefault(a => a.Id == id) != null;
+            return _recentAvatars.FirstOrDefault(a => a.AvatarID == id) != null;
         }
 
         private void AddAvatarToHistory(ApiAvatar avatar)
@@ -146,7 +146,7 @@ namespace ReModCE_ARES.Components
 
             if (IsAvatarInHistory(avatar.id))
             {
-                _recentAvatars.RemoveAll(a => a.Id == avatar.id);
+                _recentAvatars.RemoveAll(a => a.AvatarID == avatar.id);
             }
 
             _recentAvatars.Insert(0, new ReAvatar(avatar));

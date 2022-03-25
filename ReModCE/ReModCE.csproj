@@ -73,6 +73,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
       <HintPath>..\3rdparty\ml\Managed\System.Windows.Forms.dll</HintPath>
     </Reference>
@@ -244,6 +245,7 @@
     <Compile Include="Components\InstanceHistoryComponent.cs" />
     <Compile Include="Components\InstanceLinkComponent.cs" />
     <Compile Include="Components\LineTracerComponent.cs" />
+    <Compile Include="Components\AvatarThingsComponent.cs" />
     <Compile Include="Components\MediaControlComponent.cs" />
     <Compile Include="Components\PopupExComponent.cs" />
     <Compile Include="Components\AvatarHistoryComponent.cs" />

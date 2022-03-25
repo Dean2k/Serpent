@@ -1,49 +1,58 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using VRC.Core;
 
 namespace ReModCE_ARES.Core
 {
+    internal class AvatarGet
+    {
+        public List<ReAvatar> records { get; set; }
+    }
+
     [Serializable]
     internal class ReAvatar
     {
-        public string Id { get; set; }
+        public string AvatarID { get; set; }
         public string AvatarName { get; set; }
-        public string AuthorId { get; set; }
+        public string AuthorID { get; set; }
         public string AuthorName { get; set; }
-        public string Description { get; set; }
-        public string AssetUrl { get; set; }
-        public string ImageUrl { get; set; }
-        public string ThumbnailUrl { get; set; }
-        public ApiModel.SupportedPlatforms SupportedPlatforms = ApiModel.SupportedPlatforms.StandaloneWindows;
+        public string AvatarDescription { get; set; }
+        public string PCAssetURL { get; set; }
+        public string ImageURL { get; set; }
+        public string ThumbnailURL { get; set; }
+        public string UserId { get; set; }
+        public string Pin { get; set; }
 
         public ReAvatar()
         {
         }
 
+        
+
         public ReAvatar(ApiAvatar apiAvatar)
         {
-            Id = apiAvatar.id;
+            AvatarID = apiAvatar.id;
             AvatarName = apiAvatar.name;
-            AuthorId = apiAvatar.authorId;
+            AuthorID = apiAvatar.authorId;
             AuthorName = apiAvatar.authorName;
-            Description = apiAvatar.description;
-            AssetUrl = apiAvatar.assetUrl;
-            ThumbnailUrl = apiAvatar.thumbnailImageUrl;
-            SupportedPlatforms = apiAvatar.supportedPlatforms;
+            AvatarDescription = apiAvatar.description;
+            PCAssetURL = apiAvatar.assetUrl;
+            ImageURL = "None";
+            ThumbnailURL = apiAvatar.thumbnailImageUrl;
         }
 
         public ApiAvatar AsApiAvatar()
         {
             return new ApiAvatar
             {
-                id = Id,
+                id = AvatarID,
                 name = AvatarName,
-                authorId = AuthorId,
+                authorId = AuthorID,
                 authorName = AuthorName,
-                description = Description,
-                assetUrl = AssetUrl,
-                thumbnailImageUrl = string.IsNullOrEmpty(ThumbnailUrl) ? (string.IsNullOrEmpty(ImageUrl) ? "https://assets.vrchat.com/system/defaultAvatar.png" : ImageUrl) : ThumbnailUrl,
+                description = AvatarDescription,
+                assetUrl = PCAssetURL,
+                thumbnailImageUrl = string.IsNullOrEmpty(ThumbnailURL) ? (string.IsNullOrEmpty(ImageURL) ? "https://assets.vrchat.com/system/defaultAvatar.png" : ImageURL) : ThumbnailURL,
                 releaseStatus = "public",
                 unityVersion = "2019.4.31f1",
                 version = 1,
@@ -52,7 +61,7 @@ namespace ReModCE_ARES.Core
                 Populated = false,
                 assetVersion = new AssetVersion("2019.4.31f1", 0),
                 tags = new Il2CppSystem.Collections.Generic.List<string>(0),
-                supportedPlatforms = SupportedPlatforms,
+                supportedPlatforms = ApiModel.SupportedPlatforms.StandaloneWindows,
             };
         }
 

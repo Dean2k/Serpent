@@ -63,7 +63,7 @@ namespace ReModCE_ARES
                 var resourceName = Regex.Match(resource, @"([a-zA-Z\d\-_]+)\.png").Groups[1].ToString();
                 ResourceManager.LoadSprite("remodce", resourceName, ms.ToArray());
             }
-            
+
             _configManager = new ConfigManager(nameof(ReModCE_ARES));
 
             EnableDisableListener.RegisterSafe();
@@ -75,9 +75,33 @@ namespace ReModCE_ARES
             ReLogger.Msg($"Running on {(IsOculus ? "Not Steam" : "Steam")}");
 
             InitializePatches();
-            InitializeModComponents();
-
+            InitializeModComponents();         
             ReLogger.Msg("Done!");
+            ShowLogo();
+        }
+
+        private static void ShowLogo()
+        {
+            Console.Title = "ARES";
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(@"=============================================================================================================");
+            Console.WriteLine(@"                _____/\\\\\\\\\_______/\\\\\\\\\______/\\\\\\\\\\\\\\\_____/\\\\\\\\\\\___                   ");
+            Console.WriteLine(@"                 ___/\\\\\\\\\\\\\___/\\\///////\\\___\/\\\///////////____/\\\/////////\\\_                  ");
+            Console.WriteLine(@"                  __/\\\/////////\\\_\/\\\_____\/\\\___\/\\\______________\//\\\______\///__                 ");
+            Console.WriteLine(@"                   _\/\\\_______\/\\\_\/\\\\\\\\\\\/____\/\\\\\\\\\\\_______\////\\\_________                ");
+            Console.WriteLine(@"                    _\/\\\\\\\\\\\\\\\_\/\\\//////\\\____\/\\\///////___________\////\\\______               ");
+            Console.WriteLine(@"                     _\/\\\/////////\\\_\/\\\____\//\\\___\/\\\_____________________\////\\\___              ");
+            Console.WriteLine(@"                      _\/\\\_______\/\\\_\/\\\_____\//\\\__\/\\\______________/\\\______\//\\\__             ");
+            Console.WriteLine(@"                       _\/\\\_______\/\\\_\/\\\______\//\\\_\/\\\\\\\\\\\\\\\_\///\\\\\\\\\\\/___            ");
+            Console.WriteLine(@"                        _\///________\///__\///________\///__\///////////////____\///////////_____           ");
+            Console.WriteLine(@"                                                                                                             ");
+            Console.WriteLine(@"                                    ARES Client(Modified ReMod) - By ShrekamusChrist                         ");
+            Console.WriteLine(@"                                                         HotKeys                                             ");
+            Console.WriteLine(@" Noclip      = CTRL + F                                                                                      ");
+            Console.WriteLine(@" 3rd Person  = CTRL + T                                                                                      ");
+            Console.WriteLine(@"=============================================================================================================");
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         private static void SetIsOculus()
@@ -107,14 +131,16 @@ namespace ReModCE_ARES
             try
             {
                 Harmony.Patch(typeof(SystemInfo).GetProperty("deviceUniqueIdentifier").GetGetMethod(), new HarmonyLib.HarmonyMethod(HarmonyLib.AccessTools.Method(typeof(ReModCE_ARES), nameof(FakeHWID))));
-            } catch
+            }
+            catch
             {
                 MelonLogger.Msg("Failed to patch HWID");
             }
             try
             {
                 Harmony.Patch(typeof(APIUser).GetProperty(nameof(APIUser.allowAvatarCopying)).GetSetMethod(), new HarmonyLib.HarmonyMethod(typeof(ReModCE_ARES).GetMethod(nameof(ForceClone), BindingFlags.NonPublic | BindingFlags.Static)));
-            } catch
+            }
+            catch
             {
                 MelonLogger.Msg("Failed to patch force cloning");
             }
@@ -168,7 +194,7 @@ namespace ReModCE_ARES
             playerLeftDelegate.field_Private_HashSet_1_UnityAction_1_T_0.Add(new Action<Player>(p =>
             {
                 if (p != null) OnPlayerLeft(p);
-            }));          
+            }));
         }
 
         public static void OnUiManagerInit()
@@ -177,7 +203,7 @@ namespace ReModCE_ARES
 
             _uiManager = new UiManager("ReMod <color=#00ff00>CE</color>", ResourceManager.GetSprite("remodce.remod"));
             WingMenu = ReMirroredWingMenu.Create("ReModCE-ARES", "Open the RemodCE menu", ResourceManager.GetSprite("remodce.remod"));
-            
+
             _uiManager.MainMenu.AddMenuPage("Movement", "Access movement related settings", ResourceManager.GetSprite("remodce.running"));
 
             _uiManager.MainMenu.AddMenuPage("Microphone", "Microphone Settings", ResourceManager.GetSprite("remodce.mixer"));
@@ -185,14 +211,14 @@ namespace ReModCE_ARES
             var visualPage = _uiManager.MainMenu.AddCategoryPage("Visuals", "Access anything that will affect your game visually", ResourceManager.GetSprite("remodce.eye"));
             visualPage.AddCategory("ESP/Highlights");
             visualPage.AddCategory("Wireframe");
-            
+
             _uiManager.MainMenu.AddMenuPage("Dynamic Bones", "Access your global dynamic bone settings", ResourceManager.GetSprite("remodce.bone"));
             _uiManager.MainMenu.AddMenuPage("Avatars", "Access avatar related settings", ResourceManager.GetSprite("remodce.hanger"));
-            
+
             var utilityPage = _uiManager.MainMenu.AddCategoryPage("Utility", "Access miscellaneous settings", ResourceManager.GetSprite("remodce.tools"));
             utilityPage.AddCategory("Quality of Life");
             utilityPage.AddCategory("VRChat News");
-            
+
             _uiManager.MainMenu.AddMenuPage("Logging", "Access logging related settings", ResourceManager.GetSprite("remodce.log"));
             _uiManager.MainMenu.AddMenuPage("Hotkeys", "Access hotkey related settings", ResourceManager.GetSprite("remodce.keyboard"));
 
@@ -397,7 +423,7 @@ namespace ReModCE_ARES
         private static void VRCPlayerAwakePatch(VRCPlayer __instance)
         {
             if (__instance == null) return;
-            
+
             __instance.Method_Public_add_Void_OnAvatarIsReady_0(new Action(() =>
             {
                 foreach (var m in Components)
