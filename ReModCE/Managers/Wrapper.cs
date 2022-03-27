@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using VRC;
+using VRC.Core;
 using VRC.SDKBase;
 
 namespace ReModCE_ARES.Managers
@@ -18,6 +19,16 @@ namespace ReModCE_ARES.Managers
         public static bool ClientDetect(this Player player) => player.GetFrames() > 90 || player.GetFrames() < 1 || player.GetPing() > 665 || player.GetPing() < 0;
         public static bool GetIsMaster(this Player Instance) => Instance.GetVRCPlayerApi().isMaster;
         public static VRCPlayerApi GetVRCPlayerApi(this Player Instance) => Instance?.prop_VRCPlayerApi_0;
+        public static ApiAvatar GetAvatarInfo(this Player Instance) => Instance?.prop_ApiAvatar_0;
+
+        public static string GetAvatarStatus(this Player player)
+        {
+            string status = player.GetAvatarInfo().releaseStatus.ToLower();
+            if (status == "public")
+                return "<color=green>" + status + "</color>";
+            else
+                return "<color=red>" + status + "</color>";
+        }
 
         public static string GetFramesColord(this Player player)
         {

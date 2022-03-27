@@ -209,6 +209,7 @@ namespace ReModCE_ARES
             _uiManager.MainMenu.AddMenuPage("Microphone", "Microphone Settings", ResourceManager.GetSprite("remodce.mixer"));
 
             var visualPage = _uiManager.MainMenu.AddCategoryPage("Visuals", "Access anything that will affect your game visually", ResourceManager.GetSprite("remodce.eye"));
+            visualPage.AddCategory("Nameplate");
             visualPage.AddCategory("ESP/Highlights");
             visualPage.AddCategory("Wireframe");
 

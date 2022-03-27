@@ -38,7 +38,7 @@ namespace ReModCE_ARES.Components
         private Button.ButtonClickedEvent _changeButtonEvent;
 
         private const bool EnableApi = true;
-        private const string ApiUrl = "http://avatarlogger.tk";
+        private const string ApiUrl = "https://api.ares-mod.com";
         private string _userAgent = "";
         private HttpClient _httpClient;
         private HttpClientHandler _httpClientHandler;
@@ -184,7 +184,7 @@ namespace ReModCE_ARES.Components
                 }, ResourceManager.GetSprite("remodce.max"));
             if (_pinCode == 0)
             {
-                _enterPinButton = menu.AddButton("Set/Enter Pin", "Set or enter your pin for the ReMod CE API", () =>
+                _enterPinButton = menu.AddButton("Set/Enter Pin", "Set or enter your pin for the ARES API", () =>
                 {
                     VRCUiPopupManager.prop_VRCUiPopupManager_0.ShowInputPopupWithCancel("Enter pin",
                         "", InputField.InputType.Standard, true, "Submit",
@@ -294,7 +294,7 @@ namespace ReModCE_ARES.Components
             }
 
 
-            var request = new HttpRequestMessage(HttpMethod.Get, $"http://avatarlogger.tk/records/Avatars?include=AvatarID,AvatarName,AvatarDescription,AuthorID,AuthorName,PCAssetURL,ImageURL,ThumbnailURL&size=10000&filter=AvatarName,cs,{searchTerm}&filter=Releasestatus,cs,Public");
+            var request = new HttpRequestMessage(HttpMethod.Get, $"{ApiUrl}/records/Avatars?include=AvatarID,AvatarName,AvatarDescription,AuthorID,AuthorName,PCAssetURL,ImageURL,ThumbnailURL&size=10000&filter=AvatarName,cs,{searchTerm}&filter=Releasestatus,cs,Public");
 
             _httpClient.SendAsync(request).ContinueWith(rsp =>
             {
@@ -437,39 +437,25 @@ namespace ReModCE_ARES.Components
 
         private void FavoriteAvatar(ApiAvatar apiAvatar)
         {
-            var isSupporter = true;
 
             var hasFavorited = HasAvatarFavorited(apiAvatar.id);
-
-            //SendAvatarRequest(hasFavorited ? HttpMethod.Delete : HttpMethod.Put, favResponse =>
-            //{
-            //    if (!favResponse.IsSuccessStatusCode)
-            //    {
-
-            //        favResponse.Content.ReadAsStringAsync().ContinueWith(errorData =>
-            //        {
-            //            var errorMessage = JsonConvert.DeserializeObject<ApiError>(errorData.Result).Error;
-            //            ReLogger.Error($"Could not (un)favorite avatar: \"{errorMessage}\"");
-            //            if (favResponse.StatusCode == HttpStatusCode.Forbidden)
-            //            {
-            //                MelonCoroutines.Start(ShowAlertDelayed($"Could not (un)favorite avatar\nReason: \"{errorMessage}\""));
-            //            }
-            //        });
-            //    }
-            //}, new ReAvatar(apiAvatar));
-
+            if (hasFavorited)
+            {
+                string userId = user.id;
+                string pin = _pinCode.ToString();
+                string url = $"{ApiUrl}/AvatarFavRemove.php?UserId=" + HttpUtility.UrlEncode(userId) + "&Pin=" + HttpUtility.UrlEncode(pin) + "&AvatarID=" + HttpUtility.UrlEncode(apiAvatar.id);
+                _httpClient.GetStringAsync(url);
+            }
             if (!hasFavorited)
             {
                 ReAvatar reAvatar = new ReAvatar(apiAvatar);
+                reAvatar.AuthorName.replaceThis("Æ");
+                reAvatar.AvatarDescription.replaceThis("Æ");
+                reAvatar.AvatarName.replaceThis("Æ");
                 reAvatar.Pin = _pinCode.ToString();
                 reAvatar.UserId = APIUser.CurrentUser.id;
 
-
-                ReLogger.Msg(_pinCode.ToString());
-                ReLogger.Msg(APIUser.CurrentUser.id);
-
-
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://avatarlogger.tk/records/AvatarsFav");
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create($"{ApiUrl}/records/AvatarsFav");
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
                 string jsonPost = JsonConvert.SerializeObject(reAvatar);
@@ -514,26 +500,6 @@ namespace ReModCE_ARES.Components
 
             var user = APIUser.CurrentUser;
             LoginToAPI(user, FetchAvatars);
-        }
-
-
-        private void SendAvatarRequest(HttpMethod method, Action<HttpResponseMessage> onResponse, ReAvatar avater = null)
-        {
-            if (!EnableApi)
-                return;
-
-            while (APIUser.CurrentUser == null) { System.Threading.Thread.Sleep(10); };
-            user = APIUser.CurrentUser;
-
-            string userId = user.id;
-            string pin = _pinCode.ToString();
-            var request = new HttpRequestMessage(method, $"{ApiUrl}/AvatarFav.php?UserId=" + HttpUtility.UrlEncode(userId) + "&?Pin=" + HttpUtility.UrlEncode(pin));
-            if (avater != null)
-            {
-                request.Content = new StringContent(avater.ToJson(), Encoding.UTF8, "application/json");
-            }
-
-            _httpClient.SendAsync(request).ContinueWith(t => onResponse(t.Result));
         }
 
         private bool HasAvatarFavorited(string id)
