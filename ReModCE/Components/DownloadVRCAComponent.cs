@@ -19,8 +19,8 @@ namespace ReModCE_ARES.Components
 {
     internal sealed class DownloadVRCAComponent : ModComponent
     {
-        private static ReUiButton _teleportMenuButton;
-        private static ReMenuButton _teleportTargetButton;
+        private static ReUiButton _vrcaMenuButton;
+        private static ReMenuButton _vrcaTargetButton;
 
         private static PageUserInfo _userInfoPage;
 
@@ -33,13 +33,13 @@ namespace ReModCE_ARES.Components
 
             var buttonContainer = userInfoTransform.Find("Buttons/RightSideButtons/RightUpperButtonColumn/");
 
-            _teleportMenuButton = new ReUiButton("Download VRCA", Vector2.zero, new Vector2(0.68f, 1.2f), DownloadVRCA, buttonContainer);
-            _teleportTargetButton = targetMenu.AddButton("Download VRCA", "Downloads the selected users VRCA File.", DownloadVRCA, ResourceManager.GetSprite("remodce.link"));
+            _vrcaMenuButton = new ReUiButton("Download VRCA", Vector2.zero, new Vector2(0.68f, 1.2f), DownloadVRCA, buttonContainer);
+            _vrcaTargetButton = targetMenu.AddButton("Download VRCA", "Downloads the selected users VRCA File.", DownloadVRCA, ResourceManager.GetSprite("remodce.link"));
 
             RiskyFunctionsManager.Instance.OnRiskyFunctionsChanged += allowed =>
             {
-                _teleportMenuButton.Interactable = allowed;
-                _teleportTargetButton.Interactable = allowed;
+                _vrcaMenuButton.Interactable = allowed;
+                _vrcaTargetButton.Interactable = allowed;
             };
         }
 
@@ -53,7 +53,7 @@ namespace ReModCE_ARES.Components
                 {
                     Headers =
                     {
-                        "User-Agent: Other"
+                        "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36"
                     }
                 };
                 if (!Directory.Exists("ARES"))
