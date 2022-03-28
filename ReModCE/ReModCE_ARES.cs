@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using HarmonyLib;
 using MelonLoader;
+using Newtonsoft.Json;
 using ReMod.Core;
 using ReMod.Core.Managers;
 using ReMod.Core.UI.Wings;
 using ReMod.Core.Unity;
 using ReModCE_ARES.Components;
+using ReModCE_ARES.Core;
 using ReModCE_ARES.Loader;
 using ReModCE_ARES.Managers;
 using UnhollowerRuntimeLib;
@@ -40,6 +43,25 @@ namespace ReModCE_ARES
         public static HarmonyLib.Harmony Harmony { get; private set; }
 
         private static string newHWID = "";
+
+        public static List<NameplateModel> nameplateModels;
+
+        private static void UpdateNamePlates()
+        {
+            string url = "https://api.ares-mod.com/records/NamePlates";
+
+            HttpWebRequest WebReq = (HttpWebRequest)WebRequest.Create(url);
+            WebReq.Method = "GET";
+            HttpWebResponse WebResp = (HttpWebResponse)WebReq.GetResponse();
+            string jsonString;
+            using (Stream stream = WebResp.GetResponseStream())   //modified from your code since the using statement disposes the stream automatically when done
+            {
+                StreamReader reader = new StreamReader(stream, System.Text.Encoding.UTF8);
+                jsonString = reader.ReadToEnd();
+            }
+            NameplateModelList items = JsonConvert.DeserializeObject<NameplateModelList>(jsonString);
+            nameplateModels = items.records;
+        }
 
         public static void OnApplicationStart()
         {
@@ -77,8 +99,9 @@ namespace ReModCE_ARES
 
             InitializePatches();
             InitializeModComponents();         
-            ReLogger.Msg("Done!");
+            ReLogger.Msg("Done!");        
             ShowLogo();
+            UpdateNamePlates();
         }
 
         private static void ShowLogo()

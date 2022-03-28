@@ -3,9 +3,15 @@ using ReMod.Core;
 using ReMod.Core.Managers;
 using ReMod.Core.UI.QuickMenu;
 using ReMod.Core.VRChat;
+using ReModCE_ARES.Core;
+using ReModCE_ARES.Loader;
 using ReModCE_ARES.Managers;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
 using TMPro;
 using UnityEngine;
 using VRC;
@@ -19,7 +25,7 @@ namespace ReModCE_ARES.Components
         private byte ping;
         private int noUpdateCount = 0;
         private TextMeshProUGUI statsText;
-        private ImageThreeSlice background;
+        private TextMeshProUGUI customText;
         public CustomNameplate(IntPtr ptr) : base(ptr)
         {
         }
@@ -27,25 +33,64 @@ namespace ReModCE_ARES.Components
         {
             if (this.enabled)
             {
+
                 Transform stats = UnityEngine.Object.Instantiate<Transform>(this.gameObject.transform.Find("Contents/Quick Stats"), this.gameObject.transform.Find("Contents"));
                 stats.parent = this.gameObject.transform.Find("Contents");
+                stats.name = "Nameplate";
+                stats.localPosition = new Vector3(0f, 62f, 0f);
                 stats.gameObject.SetActive(true);
                 statsText = stats.Find("Trust Text").GetComponent<TextMeshProUGUI>();
                 statsText.color = Color.white;
+                statsText.isOverlay = true;
+
+
+
                 stats.Find("Trust Icon").gameObject.SetActive(false);
                 stats.Find("Performance Icon").gameObject.SetActive(false);
                 stats.Find("Performance Text").gameObject.SetActive(false);
                 stats.Find("Friend Anchor Stats").gameObject.SetActive(false);
 
-                background = this.gameObject.transform.Find("Contents/Main/Background").GetComponent<ImageThreeSlice>();
+                NameplateModel custom = IsCustom(player);
+                if (custom != null)
+                {
+                    Transform customStats = UnityEngine.Object.Instantiate<Transform>(this.gameObject.transform.Find("Contents/Quick Stats"), this.gameObject.transform.Find("Contents"));
+                    customStats.parent = this.gameObject.transform.Find("Contents");
+                    customStats.name = "StaffSetNameplate";
+                    customStats.localPosition = new Vector3(0f, 104f, 0f);
+                    customStats.gameObject.SetActive(true);
+                    customText = customStats.Find("Trust Text").GetComponent<TextMeshProUGUI>();
+                    customText.color = Color.white;
+                    customText.isOverlay = true;
 
-                background._sprite = VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.Find("Player Nameplate/Canvas/Nameplate/Contents/Main/Glow").GetComponent<ImageThreeSlice>()._sprite;
-                background.color = Color.black;
+                    customStats.Find("Trust Icon").gameObject.SetActive(false);
+                    customStats.Find("Performance Icon").gameObject.SetActive(false);
+                    customStats.Find("Performance Text").gameObject.SetActive(false);
+                    customStats.Find("Friend Anchor Stats").gameObject.SetActive(false);
+                }
+                
+
+                
 
                 frames = player._playerNet.field_Private_Byte_0;
                 ping = player._playerNet.field_Private_Byte_1;
+
+
             }
         }
+
+        private NameplateModel IsCustom(VRC.Player player)
+        {
+            try
+            {
+                return ReModCE_ARES.nameplateModels.First(x => x.UserID == player.prop_APIUser_0.id && x.Active);
+            }
+            catch {
+                ReLogger.Msg("Null is custom");
+                return null; 
+            }
+        }
+
+
 
         void Update()
         {
@@ -67,13 +112,19 @@ namespace ReModCE_ARES.Components
                 if (noUpdateCount > 150)
                     text = "<color=red>Crashed</color>";
                 statsText.text = $"[{player.GetPlatform()}] |" + $" [{player.GetAvatarStatus()}] |" + $"{(player.GetIsMaster() ? " | [<color=#0352ff>HOST</color>] |" : "")}" + $" [{text}] |" + $" [FPS: {player.GetFramesColord()}] |" + $" [Ping: {player.GetPingColord()}] " + $" {(player.ClientDetect() ? " | [<color=red>ClientUser</color>]" : "")}";
+                if (customText != null)
+                {
+                    NameplateModel custom = IsCustom(player);
+                    customText.text = custom.Text;
+                }
             }
         }
         public void Dispose()
         {
             statsText.text = null;
+            customText.text = null;
             statsText.OnDisable();
-            background.OnDisable();
+            customText.OnDisable();
             this.enabled = false;
         }
     }
