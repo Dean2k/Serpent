@@ -33,8 +33,8 @@ namespace ReModCE_ARES.Components
 
             var buttonContainer = userInfoTransform.Find("Buttons/RightSideButtons/RightUpperButtonColumn/");
 
-            _vrcaMenuButton = new ReUiButton("Download VRCA", Vector2.zero, new Vector2(0.68f, 1.2f), DownloadVRCA, buttonContainer);
-            _vrcaTargetButton = targetMenu.AddButton("Download VRCA", "Downloads the selected users VRCA File.", DownloadVRCA, ResourceManager.GetSprite("remodce.link"));
+            _vrcaMenuButton = new ReUiButton("Download VRCA", Vector2.zero, new Vector2(0.68f, 1.2f), DownloadVRCAMenuButtonOnClick, buttonContainer);
+            _vrcaTargetButton = targetMenu.AddButton("Download VRCA", "Downloads the selected users VRCA File.", DownloadVRCATargetButtonOnClick, ResourceManager.GetSprite("remodce.link"));
 
             RiskyFunctionsManager.Instance.OnRiskyFunctionsChanged += allowed =>
             {
@@ -43,11 +43,28 @@ namespace ReModCE_ARES.Components
             };
         }
 
-        private void DownloadVRCA()
+        private void DownloadVRCATargetButtonOnClick()
+        {
+            var user = QuickMenuEx.SelectedUserLocal.field_Private_IUser_0;
+            if (user == null)
+                return;
+
+            DownloadVRCA(user);
+        }
+
+        private void DownloadVRCAMenuButtonOnClick()
+        {
+            var user = _userInfoPage.field_Private_IUser_0;
+            if (user == null)
+                return;
+
+            DownloadVRCA(user);
+        }
+
+        private void DownloadVRCA(IUser user)
         {
             Task.Run(delegate
             {
-                var user = _userInfoPage.field_Private_IUser_0;
                 var player = PlayerManager.field_Private_Static_PlayerManager_0.GetPlayer(user.prop_String_0)._vrcplayer;
                 WebClient webClient = new WebClient
                 {

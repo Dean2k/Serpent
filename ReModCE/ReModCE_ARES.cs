@@ -15,6 +15,7 @@ using ReMod.Core.UI.Wings;
 using ReMod.Core.Unity;
 using ReModCE_ARES.Components;
 using ReModCE_ARES.Loader;
+using ReModCE_ARES.Managers;
 using UnhollowerRuntimeLib;
 using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
@@ -100,6 +101,7 @@ namespace ReModCE_ARES
             Console.WriteLine(@"                                                         HotKeys                                             ");
             Console.WriteLine(@" Noclip      = CTRL + F                                                                                      ");
             Console.WriteLine(@" 3rd Person  = CTRL + T                                                                                      ");
+            Console.WriteLine(@" Teleport    = CTRL + Q                                                                                      ");
             Console.WriteLine(@"=============================================================================================================");
             Console.ForegroundColor = ConsoleColor.White;
         }
@@ -208,6 +210,8 @@ namespace ReModCE_ARES
 
             _uiManager.MainMenu.AddMenuPage("Microphone", "Microphone Settings", ResourceManager.GetSprite("remodce.mixer"));
 
+            _uiManager.MainMenu.AddMenuPage("ARES", "ARES Functions", ResourceManager.GetSprite("remodce.ARES"));
+
             var visualPage = _uiManager.MainMenu.AddCategoryPage("Visuals", "Access anything that will affect your game visually", ResourceManager.GetSprite("remodce.eye"));
             visualPage.AddCategory("Nameplate");
             visualPage.AddCategory("ESP/Highlights");
@@ -264,10 +268,25 @@ namespace ReModCE_ARES
 
         public static void OnUpdate()
         {
+            if (Input.GetKey(KeyCode.LeftControl))
+            {
+                if (Input.GetKeyDown(KeyCode.Q))
+                {
+                    Tele2MousePos();
+                }
+            }
+
             foreach (var m in Components)
             {
                 m.OnUpdate();
             }
+        }
+
+        public static void Tele2MousePos()
+        {
+            Ray posF = new Ray(Camera.main.transform.position, Camera.main.transform.forward); //pos, directon 
+            RaycastHit[] PosData = Physics.RaycastAll(posF);
+            if (PosData.Length > 0) { RaycastHit pos = PosData[0]; VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.position = pos.point; }
         }
 
         public static void OnLateUpdate()
@@ -330,7 +349,7 @@ namespace ReModCE_ARES
         }
 
         private static void OnPlayerJoined(Player player)
-        {
+        {         
             foreach (var m in Components)
             {
                 m.OnPlayerJoined(player);
