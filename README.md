@@ -42,6 +42,11 @@ In case you want to update you can always grab the latest and even previous vers
 * Small utilities like disabling chairs in any world, copying user/avatar id and having confirmations for portals
 * Force Clone
 * HWID Changer
+* Item Orbit Self & Target
+* VRCA Download
+* VRCW Download
+* Teleport to mouse location (CTRL + Q)
+* Loud Microphone
 
 ## Hotkeys
 * CTRL + F = Noclip
