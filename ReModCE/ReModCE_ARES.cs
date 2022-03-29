@@ -330,6 +330,7 @@ namespace ReModCE_ARES
 
         public static void OnSceneWasLoaded(int buildIndex, string sceneName)
         {
+            UpdateNamePlates();
             foreach (var m in Components)
             {
                 m.OnSceneWasLoaded(buildIndex, sceneName);
