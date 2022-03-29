@@ -85,7 +85,6 @@ namespace ReModCE_ARES.Components
                 return ReModCE_ARES.nameplateModels.First(x => x.UserID == player.prop_APIUser_0.id && x.Active);
             }
             catch {
-                ReLogger.Msg("Null is custom");
                 return null; 
             }
         }
