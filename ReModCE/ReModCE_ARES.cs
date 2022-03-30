@@ -154,15 +154,7 @@ namespace ReModCE_ARES
         public static void InitializePatches()
         {
             Harmony.Patch(typeof(VRCPlayer).GetMethod(nameof(VRCPlayer.Awake)), GetLocalPatch(nameof(VRCPlayerAwakePatch)));
-            Harmony.Patch(typeof(RoomManager).GetMethod(nameof(RoomManager.Method_Public_Static_Boolean_ApiWorld_ApiWorldInstance_String_Int32_0)), postfix: GetLocalPatch(nameof(EnterWorldPatch)));
-            try
-            {
-                //Harmony.Patch(typeof(Photon.Realtime.LoadBalancingClient).GetMethod("OnEvent"), new HarmonyMethod(AccessTools.Method(typeof(ReModCE_ARES), nameof(OnEvent))));
-            } catch { MelonLogger.Msg("Failed to Patch Events"); }
-            try
-            {
-                //Harmony.Patch(typeof(VRC.Core.AssetManagement).GetMethod("Method_Public_Static_Object_Object_Boolean_Boolean_Boolean_0"), new HarmonyMethod(AccessTools.Method(typeof(ReModCE_ARES), nameof(OnAvatarAssetBundleLoad))));
-            } catch { MelonLogger.Msg("Failed to Patch Avatar Bundle"); }
+            Harmony.Patch(typeof(RoomManager).GetMethod(nameof(RoomManager.Method_Public_Static_Boolean_ApiWorld_ApiWorldInstance_String_Int32_0)), postfix: GetLocalPatch(nameof(EnterWorldPatch)));            
             try
             {
                 Harmony.Patch(typeof(SystemInfo).GetProperty("deviceUniqueIdentifier").GetGetMethod(), new HarmonyLib.HarmonyMethod(AccessTools.Method(typeof(ReModCE_ARES), nameof(FakeHWID))));
@@ -193,27 +185,6 @@ namespace ReModCE_ARES
             }
         }
 
-        public static bool OnAvatarAssetBundleLoad(ref UnityEngine.Object __0)
-        {
-            GameObject gameObject = __0.TryCast<GameObject>();
-            if (gameObject == null)
-            {
-                return true;
-            }
-            if (!gameObject.name.ToLower().Contains("avatar"))
-            {
-                return true;
-            }
-            string avatarId = gameObject.GetComponent<PipelineManager>().blueprintId;
-            foreach (var m in Components)
-            {
-                if (!m.OnAvatarAssetBundleLoad(gameObject, avatarId))
-                {
-                    return true;
-                }
-            }
-            return true;
-        }
 
         private static bool FakeHWID(ref string __result)
         {
@@ -312,44 +283,6 @@ namespace ReModCE_ARES
                     ReLogger.Error($"{m.GetType().Name} had an error during early UI initialization:\n{e}");
                 }
             }
-        }
-
-        public static bool OnEvent(EventData __0)
-        {
-            var eventCode = __0.Code;
-            switch (eventCode)
-            {
-                case 1:
-                case 3:
-                    return true;
-
-                case 4:
-                    return true;
-
-                case 6:
-                    return true;
-
-                case 7:
-                    return true;
-
-                case 9:
-                    return true;
-
-                case 33:
-                    return true;
-
-                case 209:
-                    return true;
-
-                case 210:
-                    return true;
-
-                case 253:
-                    return true;
-                default:
-                    break;
-            }
-            return true;
         }
 
         public static void OnFixedUpdate()

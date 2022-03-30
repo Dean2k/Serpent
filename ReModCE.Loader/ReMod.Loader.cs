@@ -9,7 +9,6 @@ using System.Reflection;
 using System.Security.Cryptography;
 using UnityEngine;
 using VRC.UI.Core;
-using ExitGames.Client.Photon;
 
 namespace ReModCE_ARES.Loader
 {
@@ -41,8 +40,6 @@ namespace ReModCE_ARES.Loader
         private Action _onLateUpdate;
         private Action _onPreferencesLoaded;
         private Action _onPreferencesSaved;
-        private Func<UnityEngine.Object, bool> _onAvatarAssetBundleLoad;
-        private Func<EventData, bool> _onEvent;
 
         private Action<int, string> _onSceneWasLoaded;
         private Action<int, string> _onSceneWasInitialized;
@@ -120,12 +117,6 @@ namespace ReModCE_ARES.Loader
                     case nameof(OnPreferencesSaved) when parameters.Length == 0:
                         _onPreferencesSaved = (Action)Delegate.CreateDelegate(typeof(Action), m);
                         break;
-                    case nameof(OnAvatarAssetBundleLoad) when parameters.Length == 1 && parameters[0].ParameterType == typeof(UnityEngine.Object):
-                        _onAvatarAssetBundleLoad = (Func<UnityEngine.Object, bool>)Delegate.CreateDelegate(typeof(Func<UnityEngine.Object, bool>), m);
-                        break;
-                    case nameof(OnEvent) when parameters.Length == 1 && parameters[0].ParameterType == typeof(EventData):
-                        _onEvent = (Func<EventData, bool>)Delegate.CreateDelegate(typeof(Func<EventData, bool>), m);
-                        break;
                 }
             }
 
@@ -146,16 +137,6 @@ namespace ReModCE_ARES.Loader
         public override void OnFixedUpdate()
         {
             _onFixedUpdate();
-        }
-
-        public bool OnEvent(EventData __0)
-        {
-            return _onEvent(__0);
-        }
-
-        public bool OnAvatarAssetBundleLoad(ref UnityEngine.Object __0)
-        {
-            return _onAvatarAssetBundleLoad(__0);
         }
 
         public override void OnUpdate()
