@@ -87,6 +87,7 @@ namespace ReModCE_ARES.Components
             {
                 if (!int.TryParse(File.ReadAllText(PinPath), out _pinCode))
                 {
+                    ReModCE_ARES.LogDebug($"Couldn't read pin file from \"{PinPath}\". File might be corrupted.");
                     ReLogger.Warning($"Couldn't read pin file from \"{PinPath}\". File might be corrupted.");
                 }
             }
@@ -306,6 +307,7 @@ namespace ReModCE_ARES.Components
                         var errorMessage = JsonConvert.DeserializeObject<ApiError>(errorData.Result).Error;
 
                         ReLogger.Error($"Could not search for avatars: \"{errorMessage}\"");
+                        ReModCE_ARES.LogDebug($"Could not search for avatars: \"{errorMessage}\"");
                         if (searchResponse.StatusCode == HttpStatusCode.Forbidden)
                         {
                             MelonCoroutines.Start(ShowAlertDelayed($"Could not search for avatars\nReason: \"{errorMessage}\""));
@@ -342,6 +344,7 @@ namespace ReModCE_ARES.Components
                 _searchedAvatars.Add(avi);
             }
 
+            ReModCE_ARES.LogDebug($"Found {_searchedAvatars.Count} avatars");
             ReLogger.Msg($"Found {_searchedAvatars.Count} avatars");
             _searchedAvatarList.RefreshAvatars();
         }
@@ -401,7 +404,7 @@ namespace ReModCE_ARES.Components
                     searchResponse.Content.ReadAsStringAsync().ContinueWith(errorData =>
                     {
                         var errorMessage = JsonConvert.DeserializeObject<ApiError>(errorData.Result).Error;
-
+                        ReModCE_ARES.LogDebug($"Could not search for avatars: \"{errorMessage}\"");
                         ReLogger.Error($"Could not search for avatars: \"{errorMessage}\"");
                         if (searchResponse.StatusCode == HttpStatusCode.Forbidden)
                         {
@@ -473,6 +476,7 @@ namespace ReModCE_ARES.Components
                 }
                 catch (Exception ex)
                 {
+                    ReModCE_ARES.LogDebug(ex.Message);
                     ReLogger.Error(ex.Message);
                 }
             }

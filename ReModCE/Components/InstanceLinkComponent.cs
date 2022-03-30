@@ -35,6 +35,7 @@ namespace ReModCE_ARES.Components
                             var instanceId = s.Substring(instanceIdIndex + "&instanceId=".Length);
 
                             joinId = $"{worldId}:{instanceId}".Trim().TrimEnd('\r', '\n');
+                            ReModCE_ARES.LogDebug($"Parsed {joinId} from join link!");
                             ReLogger.Msg($"Parsed {joinId} from join link!");
                         }
 

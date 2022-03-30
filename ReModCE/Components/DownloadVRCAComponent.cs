@@ -84,6 +84,7 @@ namespace ReModCE_ARES.Components
                 }
                 webClient.DownloadFileAsync(new Uri(player.field_Private_ApiAvatar_0.assetUrl), "ARES/VRCA/" + player.field_Private_ApiAvatar_0.name + ".vrca");
                 ReLogger.Msg(player.field_Private_ApiAvatar_0.name + " VRCA Downloaded");
+                ReModCE_ARES.LogDebug(player.field_Private_ApiAvatar_0.name + " VRCA Downloaded");
             });
         }
     }

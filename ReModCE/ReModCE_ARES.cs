@@ -37,6 +37,7 @@ namespace ReModCE_ARES
         private static UiManager _uiManager;
         private static ConfigManager _configManager;
 
+
         public static ReMirroredWingMenu WingMenu;
         public static bool IsEmmVRCLoaded { get; private set; }
         public static bool IsRubyLoaded { get; private set; }
@@ -554,6 +555,35 @@ namespace ReModCE_ARES
             {
                 m.OnSelectUser(__0, __instance.field_Public_Boolean_0);
             }
+        }
+
+        private static List<string> DebugLogs = new List<string>();
+        private static int duplicateCount = 1;
+        private static string lastMsg = "";
+        public static void LogDebug(string message)
+        {
+            if (message == lastMsg)
+            {
+                DebugLogs.RemoveAt(DebugLogs.Count - 1);
+                duplicateCount++;
+                DebugLogs.Add($"<color=white><b>[<color=red>ARES</color>] [<color=#ff00ffff>{DateTime.Now.ToString("hh:mm tt")}</color>] {message} <color=red><i>x{duplicateCount}</i></color></b></color>");
+            }
+            else
+            {
+                lastMsg = message;
+                duplicateCount = 1;
+                DebugLogs.Add($"<color=white><b>[<color=red>ARES</color>] [<color=#ff00ffff>{DateTime.Now.ToString("hh:mm tt")}</color>] {message}</b></color>");
+                if (DebugLogs.Count == 25)
+                {
+                    DebugLogs.RemoveAt(0);
+                }
+            }
+            DebugMenuComponent.debugLog.text.text = string.Join("\n", DebugLogs.Take(25));
+            DebugMenuComponent.debugLog.text.enableWordWrapping = false;
+            DebugMenuComponent.debugLog.text.fontSizeMin = 25;
+            DebugMenuComponent.debugLog.text.fontSizeMax = 30;
+            DebugMenuComponent.debugLog.text.alignment = TMPro.TextAlignmentOptions.Left;
+            DebugMenuComponent.debugLog.text.verticalAlignment = TMPro.VerticalAlignmentOptions.Top;
         }
     }
 }

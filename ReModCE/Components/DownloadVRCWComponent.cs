@@ -57,6 +57,7 @@ namespace ReModCE_ARES.Components
                 }
                 webClient.DownloadFileAsync(new Uri(world.assetUrl), "ARES/VRCW/" + world.name + ".vrcw");
                 ReLogger.Msg(world.name + " VRCW Downloaded");
+                ReModCE_ARES.LogDebug(world.name + " VRCW Downloaded");
             });
         }
     }
