@@ -38,11 +38,13 @@ namespace ReModCE_ARES.Components
             if (MelonHandler.Mods.Any(i => i.Info.Name == "FBT Saver"))
             {
                 ReLogger.Msg(ConsoleColor.Yellow, "Found FBT Saver Mod. Not loading Calibration Saver.");
+                ReModCE_ARES.LogDebug("Found FBT Saver Mod. Not loading Calibration Saver.");
                 return;
             }
 
             if (MelonHandler.Mods.Any(i => i.Info.Name == "IKTweaks")) // Added by Jdbye
             {
+                ReModCE_ARES.LogDebug("Found IKTweaks Mod. Not loading Calibration Saver.");
                 ReLogger.Msg(ConsoleColor.Yellow, "Found IKTweaks Mod. Not loading Calibration Saver.");
                 return;
             }
@@ -53,10 +55,12 @@ namespace ReModCE_ARES.Components
                     JsonConvert.DeserializeObject<Dictionary<string, FbtCalibration>>(
                         File.ReadAllText("UserData/ReModCE_ARES/calibrations.json"));
 
+                ReModCE_ARES.LogDebug($"Loaded {_savedCalibrations.Count} calibrations from disk.");
                 ReLogger.Msg($"Loaded {_savedCalibrations.Count} calibrations from disk.");
             }
             else
             {
+                ReModCE_ARES.LogDebug($"No saved calibrations found. Creating new.");
                 ReLogger.Msg($"No saved calibrations found. Creating new.");
                 _savedCalibrations = new Dictionary<string, FbtCalibration>();
                 File.WriteAllText("UserData/ReModCE_ARES/calibrations.json", JsonConvert.SerializeObject(_savedCalibrations, Formatting.Indented, new JsonSerializerSettings
@@ -89,6 +93,7 @@ namespace ReModCE_ARES.Components
             }
             catch (Exception e)
             {
+                ReModCE_ARES.LogDebug($"Could not patch VRCTrackingSteam methods. CalibrationSaver won't work.");
                 ReLogger.Warning($"Could not patch VRCTrackingSteam methods. CalibrationSaver won't work.");
             }
         }
@@ -133,6 +138,7 @@ namespace ReModCE_ARES.Components
             }
             catch (Exception e)
             {
+                ReModCE_ARES.LogDebug($"Could not save current calibration to file!\n {e}");
                 ReLogger.Error($"Could not save current calibration to file!\n {e}");
             }
         }

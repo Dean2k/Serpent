@@ -247,6 +247,7 @@
     <Compile Include="Components\EmojiBlocker.cs" />
     <Compile Include="Components\FlyComponent.cs" />
     <Compile Include="Components\HighlightsComponent.cs" />
+    <Compile Include="Components\DebugMenuComponent.cs" />
     <Compile Include="Components\InfoLogsComponent.cs" />
     <Compile Include="Components\InstanceDejavuComponent.cs" />
     <Compile Include="Components\InstanceHistoryComponent.cs" />
@@ -275,6 +276,7 @@
     <Compile Include="Core\ReAvatar.cs" />
     <Compile Include="Core\TaskExtensions.cs" />
     <Compile Include="extension.cs" />
+    <Compile Include="Managers\QMLabel.cs" />
     <Compile Include="Managers\RiskyFunctionsManager.cs" />
     <Compile Include="Managers\Wrapper.cs" />
     <Compile Include="ReModCE_ARES.cs" />

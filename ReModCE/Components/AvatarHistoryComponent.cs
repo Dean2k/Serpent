@@ -53,6 +53,7 @@ namespace ReModCE_ARES.Components
                 }
                 catch (GZipException e)
                 {
+                    ReModCE_ARES.LogDebug($"Your recent avatars file seems to be corrupted. I renamed it for you, so this error doesn't happen again.");
                     ReLogger.Error($"Your recent avatars file seems to be corrupted. I renamed it for you, so this error doesn't happen again.");
                     File.Delete("UserData/ReModCE_ARES/recent_avatars.bin.corrupted");
                     File.Move("UserData/ReModCE_ARES/recent_avatars.bin", "UserData/ReModCE_ARES/recent_avatars.bin.corrupted");
