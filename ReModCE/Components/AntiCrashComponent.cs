@@ -274,7 +274,7 @@ namespace ReModCE_ARES.Components
                         {
                             UnityEngine.Object.DestroyImmediate(skinnedMeshRenderer, allowDestroyingAssets: true);
                             ReLogger.Msg("[AnitCrash] deleted unreadable Mesh");
-                            ReModCE_ARES.LogDebug("<color=red>[AnitCrash] deleted unreadable Mesh<color>");
+                            ReModCE_ARES.LogDebug("<color=red>[AnitCrash] deleted unreadable Mesh</color>");
                             continue;
                         }
                         for (int j = 0; j < meshList.Length; j++)
