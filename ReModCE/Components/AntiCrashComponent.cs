@@ -244,26 +244,30 @@ namespace ReModCE_ARES.Components
 
         private static bool OnAvatarAssetBundleLoad(ref UnityEngine.Object __0)
         {
+            if (__0 == null) return true;
             GameObject gameObject = __0.TryCast<GameObject>();
-            if (gameObject == null)
+                if (gameObject == null)
+                {
+                    return true;
+                }
+                if (!gameObject.name.ToLower().Contains("avatar"))
+                {
+                    return true;
+                }
+            string avatarId;
+            try
             {
-                return true;
-            }
-            if (!gameObject.name.ToLower().Contains("avatar"))
-            {
-                return true;
-            }
-            string avatarId = gameObject.GetComponent<PipelineManager>().blueprintId;
+                avatarId = gameObject.GetComponent<PipelineManager>().blueprintId;
+            } catch {
+                return true; }
             return OnAvatarAssetBundleLoadCheck(gameObject, avatarId);
+
         }
 
         public static bool OnAvatarAssetBundleLoadCheck(GameObject avatar, string avatarID)
         {
-            if (AntiAvatarCrashEnabled)
+            if (AntiAvatarCrashEnabled ?? true)
             {
-
-                
-                
                 try
                 {
                     SkinnedMeshRenderer[] array = avatar.GetComponentsInChildren<SkinnedMeshRenderer>(includeInactive: true);
@@ -273,16 +277,16 @@ namespace ReModCE_ARES.Components
                         if (!skinnedMeshRenderer.sharedMesh.isReadable)
                         {
                             UnityEngine.Object.DestroyImmediate(skinnedMeshRenderer, allowDestroyingAssets: true);
-                            ReLogger.Msg("[AnitCrash] deleted unreadable Mesh");
-                            ReModCE_ARES.LogDebug("<color=red>[AnitCrash] deleted unreadable Mesh</color>");
+                            ReLogger.Msg("[AntiCrash] deleted unreadable Mesh");
+                            ReModCE_ARES.LogDebug("<color=red>[AntiCrash] deleted unreadable Mesh</color>");
                             continue;
                         }
                         for (int j = 0; j < meshList.Length; j++)
                         {
                             if (skinnedMeshRenderer.name.ToLower().Contains(meshList[j]))
                             {
-                                ReLogger.Msg("[AnitCrash] deleted blackListed Mesh " + skinnedMeshRenderer.name);
-                                ReModCE_ARES.LogDebug("<color=red>[AnitCrash] deleted blackListed Mesh " + skinnedMeshRenderer.name + "</color>");
+                                ReLogger.Msg("[AntiCrash] deleted blackListed Mesh " + skinnedMeshRenderer.name);
+                                ReModCE_ARES.LogDebug("<color=red>[AntiCrash] deleted blackListed Mesh " + skinnedMeshRenderer.name + "</color>");
                                 UnityEngine.Object.DestroyImmediate(skinnedMeshRenderer, allowDestroyingAssets: true);
                                 flag = true;
                                 break;
@@ -299,8 +303,8 @@ namespace ReModCE_ARES.Components
                             if (num >= MaxPolys)
                             {
                                 UnityEngine.Object.DestroyImmediate(skinnedMeshRenderer, allowDestroyingAssets: true);
-                                ReLogger.Msg("[AnitCrash] deleted Mesh with too many polys");
-                                ReModCE_ARES.LogDebug("<color=red>[AnitCrash] deleted Mesh with too many polys</color>");
+                                ReLogger.Msg("[AntiCrash] deleted Mesh with too many polys");
+                                ReModCE_ARES.LogDebug("<color=red>[AntiCrash] deleted Mesh with too many polys</color>");
                                 flag = true;
                                 break;
                             }
@@ -313,8 +317,8 @@ namespace ReModCE_ARES.Components
                         if (array3.Length >= MaxMaterials)
                         {
                             UnityEngine.Object.DestroyImmediate(skinnedMeshRenderer, allowDestroyingAssets: true);
-                            ReLogger.Msg("[AnitCrash] deleted Mesh with " + array3.Length + " materials");
-                            ReModCE_ARES.LogDebug("<color=red>[AnitCrash] deleted Mesh with " + array3.Length + " materials</color>");
+                            ReLogger.Msg("[AntiCrash] deleted Mesh with " + array3.Length + " materials");
+                            ReModCE_ARES.LogDebug("<color=red>[AntiCrash] deleted Mesh with " + array3.Length + " materials</color>");
                             continue;
                         }
                         for (int l = 0; l < array3.Length; l++)
@@ -324,14 +328,15 @@ namespace ReModCE_ARES.Components
                             {
                                 if (shader.name.ToLower().Contains(shaderList[m]))
                                 {
-                                    ReLogger.Msg("[AnitCrash] replaced Shader " + shader.name);
-                                    ReModCE_ARES.LogDebug("<color=yellow>[AnitCrash] replaced Shader " + shader.name + "</color>");
+                                    ReLogger.Msg("[AntiCrash] replaced Shader " + shader.name);
+                                    ReModCE_ARES.LogDebug("<color=yellow>[AntiCrash] replaced Shader " + shader.name + "</color>");
                                     shader = defaultShader;
                                 }
                             }
                         }
                     }
-                } catch { ReLogger.Msg("Skin mesh error"); }
+                }
+                catch { ReLogger.Msg("Skin mesh error"); }
                 try
                 {
                     MeshFilter[] array2 = avatar.GetComponentsInChildren<MeshFilter>(includeInactive: true);
@@ -340,8 +345,8 @@ namespace ReModCE_ARES.Components
                         if (!meshFilter.sharedMesh.isReadable)
                         {
                             UnityEngine.Object.DestroyImmediate(meshFilter, allowDestroyingAssets: true);
-                            ReLogger.Msg("[AnitCrash] deleted unreadable Mesh");
-                            ReModCE_ARES.LogDebug("<color=red>[AnitCrash] deleted unreadable Mesh</color>");
+                            ReLogger.Msg("[AntiCrash] deleted unreadable Mesh");
+                            ReModCE_ARES.LogDebug("<color=red>[AntiCrash] deleted unreadable Mesh</color>");
                             continue;
                         }
                         bool flag2 = false;
@@ -349,8 +354,8 @@ namespace ReModCE_ARES.Components
                         {
                             if (meshFilter.name.ToLower().Contains(meshList[num2]))
                             {
-                                ReLogger.Msg("[AnitCrash] deleted blackListed Mesh " + meshFilter.name);
-                                ReModCE_ARES.LogDebug("<color=red>[AnitCrash] deleted blackListed Mesh " + meshFilter.name + "</color>");
+                                ReLogger.Msg("[AntiCrash] deleted blackListed Mesh " + meshFilter.name);
+                                ReModCE_ARES.LogDebug("<color=red>[AntiCrash] deleted blackListed Mesh " + meshFilter.name + "</color>");
                                 UnityEngine.Object.DestroyImmediate(meshFilter, allowDestroyingAssets: true);
                                 flag2 = true;
                                 break;
@@ -367,8 +372,8 @@ namespace ReModCE_ARES.Components
                             if (num3 >= MaxPolys)
                             {
                                 UnityEngine.Object.DestroyImmediate(meshFilter, allowDestroyingAssets: true);
-                                ReLogger.Msg("[AnitCrash] deleted Mesh with too many polys");
-                                ReModCE_ARES.LogDebug("<color=red>[AnitCrash] deleted Mesh with too many polys</color>");
+                                ReLogger.Msg("[AntiCrash] deleted Mesh with too many polys");
+                                ReModCE_ARES.LogDebug("<color=red>[AntiCrash] deleted Mesh with too many polys</color>");
                                 flag2 = true;
                                 break;
                             }
@@ -382,8 +387,8 @@ namespace ReModCE_ARES.Components
                         if (array4.Length >= MaxMaterials)
                         {
                             UnityEngine.Object.DestroyImmediate(meshFilter, allowDestroyingAssets: true);
-                            ReLogger.Msg("[AnitCrash] deleted Mesh with " + array4.Length + " materials");
-                            ReModCE_ARES.LogDebug("<color=red>[AnitCrash] deleted Mesh with " + array4.Length + " materials</color>");
+                            ReLogger.Msg("[AntiCrash] deleted Mesh with " + array4.Length + " materials");
+                            ReModCE_ARES.LogDebug("<color=red>[AntiCrash] deleted Mesh with " + array4.Length + " materials</color>");
                             continue;
                         }
                         for (int num5 = 0; num5 < array4.Length; num5++)
@@ -393,15 +398,16 @@ namespace ReModCE_ARES.Components
                             {
                                 if (shader2.name.ToLower().Contains(shaderList[num6]))
                                 {
-                                    ReLogger.Msg("[AnitCrash] replaced Shader " + shader2.name);
-                                    ReModCE_ARES.LogDebug("<color=red>[AnitCrash] replaced Shader " + shader2.name + "</color>");
+                                    ReLogger.Msg("[AntiCrash] replaced Shader " + shader2.name);
+                                    ReModCE_ARES.LogDebug("<color=red>[AntiCrash] replaced Shader " + shader2.name + "</color>");
 
                                     shader2 = defaultShader;
                                 }
                             }
                         }
                     }
-                } catch { ReLogger.Msg("mesh filter error"); }
+                }
+                catch { ReLogger.Msg("mesh filter error"); }
                 try
                 {
                     AudioSource[] array5 = avatar.GetComponentsInChildren<AudioSource>();
@@ -411,10 +417,11 @@ namespace ReModCE_ARES.Components
                         {
                             UnityEngine.Object.DestroyImmediate(array5[num7].gameObject, allowDestroyingAssets: true);
                         }
-                        ReLogger.Msg("[AnitCrash] deleted " + MaxAudioSources + " AudioSources");
-                        ReModCE_ARES.LogDebug("<color=red>[AnitCrash] deleted " + MaxAudioSources + " AudioSources</color>");
+                        ReLogger.Msg("[AntiCrash] deleted " + MaxAudioSources + " AudioSources");
+                        ReModCE_ARES.LogDebug("<color=red>[AntiCrash] deleted " + MaxAudioSources + " AudioSources</color>");
                     }
-                } catch { ReLogger.Msg("error in Audio source"); }
+                }
+                catch { ReLogger.Msg("error in Audio source"); }
                 try
                 {
                     Light[] array6 = avatar.GetComponentsInChildren<Light>();
@@ -424,10 +431,11 @@ namespace ReModCE_ARES.Components
                         {
                             UnityEngine.Object.DestroyImmediate(array6[num8].gameObject, allowDestroyingAssets: true);
                         }
-                        ReLogger.Msg("[AnitCrash] deleted " + MaxLightSources + " Lights");
-                        ReModCE_ARES.LogDebug("<color=red>[AnitCrash] deleted " + MaxLightSources + " Lights </color>");
+                        ReLogger.Msg("[AntiCrash] deleted " + MaxLightSources + " Lights");
+                        ReModCE_ARES.LogDebug("<color=red>[AntiCrash] deleted " + MaxLightSources + " Lights </color>");
                     }
-                } catch { ReLogger.Msg("Error in light source"); }
+                }
+                catch { ReLogger.Msg("Error in light source"); }
                 try
                 {
                     Cloth[] array7 = avatar.GetComponentsInChildren<Cloth>();
@@ -437,10 +445,11 @@ namespace ReModCE_ARES.Components
                         {
                             UnityEngine.Object.DestroyImmediate(array7[num9].gameObject, allowDestroyingAssets: true);
                         }
-                        ReLogger.Msg("[AnitCrash] deleted " + MaxCloth + " Cloth");
-                        ReModCE_ARES.LogDebug("<color=red>[AnitCrash] deleted " + MaxCloth + " Cloth</color>");
+                        ReLogger.Msg("[AntiCrash] deleted " + MaxCloth + " Cloth");
+                        ReModCE_ARES.LogDebug("<color=red>[AntiCrash] deleted " + MaxCloth + " Cloth</color>");
                     }
-                } catch { ReLogger.Msg("Error in Cloth Source"); }
+                }
+                catch { ReLogger.Msg("Error in Cloth Source"); }
                 try
                 {
                     Collider[] array8 = avatar.GetComponentsInChildren<Collider>();
@@ -450,10 +459,11 @@ namespace ReModCE_ARES.Components
                         {
                             UnityEngine.Object.DestroyImmediate(array8[num10].gameObject, allowDestroyingAssets: true);
                         }
-                        ReLogger.Msg("[AnitCrash] deleted " + MaxColliders + " Colliders");
-                        ReModCE_ARES.LogDebug("<color=red>[AnitCrash] deleted " + MaxColliders + " Colliders</color>");
+                        ReLogger.Msg("[AntiCrash] deleted " + MaxColliders + " Colliders");
+                        ReModCE_ARES.LogDebug("<color=red>[AntiCrash] deleted " + MaxColliders + " Colliders</color>");
                     }
-                } catch { ReLogger.Msg("Error in collider source"); }
+                }
+                catch { ReLogger.Msg("Error in collider source"); }
                 //try
                 //{
                 //    DynamicBoneCollider[] array9 = avatar.GetComponentsInChildren<DynamicBoneCollider>();
@@ -463,7 +473,7 @@ namespace ReModCE_ARES.Components
                 //        {
                 //            UnityEngine.Object.DestroyImmediate(array9[num11].gameObject, allowDestroyingAssets: true);
                 //        }
-                //        ReLogger.Msg("[AnitCrash] deleted " + MaxDynamicBonesColliders + " DynamicBoneColliders");
+                //        ReLogger.Msg("[AntiCrash] deleted " + MaxDynamicBonesColliders + " DynamicBoneColliders");
                 //    }
                 //} catch { ReLogger.Msg("Error in Dynamic bones Collider"); }
                 return true;
