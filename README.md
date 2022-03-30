@@ -47,6 +47,8 @@ In case you want to update you can always grab the latest and even previous vers
 * VRCW Download
 * Teleport to mouse location (CTRL + Q)
 * Loud Microphone
+* Avatar Anti Crash
+* Debug Console
 
 ## Hotkeys
 * CTRL + F = Noclip
