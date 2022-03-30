@@ -156,6 +156,15 @@ namespace ReModCE_ARES.Components
                 CustomNameplateEnabled);
         }
 
+        public override void OnSceneWasInitialized(int buildIndex, string sceneName)
+        {
+            if(buildIndex == -1)
+            {
+                ReModCE_ARES.UpdateNamePlates();
+            }
+        }
+
+
         private void ToggleNameplates(bool value)
         {
             CustomNameplateEnabled.SetValue(value);

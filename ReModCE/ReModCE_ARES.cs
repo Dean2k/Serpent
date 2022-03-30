@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using ExitGames.Client.Photon;
 using HarmonyLib;
 using MelonLoader;
 using Newtonsoft.Json;
@@ -46,8 +47,9 @@ namespace ReModCE_ARES
 
         public static List<NameplateModel> nameplateModels;
 
-        private static void UpdateNamePlates()
+        public static void UpdateNamePlates()
         {
+            ReLogger.Msg("Reloading Nameplates");
             string url = "https://api.ares-mod.com/records/NamePlates";
 
             HttpWebRequest WebReq = (HttpWebRequest)WebRequest.Create(url);
@@ -101,7 +103,6 @@ namespace ReModCE_ARES
             InitializeModComponents();         
             ReLogger.Msg("Done!");        
             ShowLogo();
-            UpdateNamePlates();
         }
 
         private static void ShowLogo()
@@ -155,7 +156,15 @@ namespace ReModCE_ARES
             Harmony.Patch(typeof(RoomManager).GetMethod(nameof(RoomManager.Method_Public_Static_Boolean_ApiWorld_ApiWorldInstance_String_Int32_0)), postfix: GetLocalPatch(nameof(EnterWorldPatch)));
             try
             {
-                Harmony.Patch(typeof(SystemInfo).GetProperty("deviceUniqueIdentifier").GetGetMethod(), new HarmonyLib.HarmonyMethod(HarmonyLib.AccessTools.Method(typeof(ReModCE_ARES), nameof(FakeHWID))));
+                //Harmony.Patch(typeof(Photon.Realtime.LoadBalancingClient).GetMethod("OnEvent"), new HarmonyMethod(AccessTools.Method(typeof(ReModCE_ARES), nameof(OnEvent))));
+            } catch { MelonLogger.Msg("Failed to Patch Events"); }
+            try
+            {
+                //Harmony.Patch(typeof(VRC.Core.AssetManagement).GetMethod("Method_Public_Static_Object_Object_Boolean_Boolean_Boolean_0"), new HarmonyMethod(AccessTools.Method(typeof(ReModCE_ARES), nameof(OnAvatarAssetBundleLoad))));
+            } catch { MelonLogger.Msg("Failed to Patch Avatar Bundle"); }
+            try
+            {
+                Harmony.Patch(typeof(SystemInfo).GetProperty("deviceUniqueIdentifier").GetGetMethod(), new HarmonyLib.HarmonyMethod(AccessTools.Method(typeof(ReModCE_ARES), nameof(FakeHWID))));
             }
             catch
             {
@@ -181,6 +190,28 @@ namespace ReModCE_ARES
 
                 Harmony.Patch(method, postfix: GetLocalPatch(nameof(SetUserPatch)));
             }
+        }
+
+        public static bool OnAvatarAssetBundleLoad(ref UnityEngine.Object __0)
+        {
+            GameObject gameObject = __0.TryCast<GameObject>();
+            if (gameObject == null)
+            {
+                return true;
+            }
+            if (!gameObject.name.ToLower().Contains("avatar"))
+            {
+                return true;
+            }
+            string avatarId = gameObject.GetComponent<PipelineManager>().blueprintId;
+            foreach (var m in Components)
+            {
+                if (!m.OnAvatarAssetBundleLoad(gameObject, avatarId))
+                {
+                    return true;
+                }
+            }
+            return true;
         }
 
         private static bool FakeHWID(ref string __result)
@@ -233,7 +264,8 @@ namespace ReModCE_ARES
 
             _uiManager.MainMenu.AddMenuPage("Microphone", "Microphone Settings", ResourceManager.GetSprite("remodce.mixer"));
 
-            _uiManager.MainMenu.AddMenuPage("ARES", "ARES Functions", ResourceManager.GetSprite("remodce.ARES"));
+            var aresPage = _uiManager.MainMenu.AddMenuPage("ARES", "ARES Functions", ResourceManager.GetSprite("remodce.ARES"));
+            aresPage.AddMenuPage("Anti-Crash");
 
             var visualPage = _uiManager.MainMenu.AddCategoryPage("Visuals", "Access anything that will affect your game visually", ResourceManager.GetSprite("remodce.eye"));
             visualPage.AddCategory("Nameplate");
@@ -279,6 +311,44 @@ namespace ReModCE_ARES
                     ReLogger.Error($"{m.GetType().Name} had an error during early UI initialization:\n{e}");
                 }
             }
+        }
+
+        public static bool OnEvent(EventData __0)
+        {
+            var eventCode = __0.Code;
+            switch (eventCode)
+            {
+                case 1:
+                case 3:
+                    return true;
+
+                case 4:
+                    return true;
+
+                case 6:
+                    return true;
+
+                case 7:
+                    return true;
+
+                case 9:
+                    return true;
+
+                case 33:
+                    return true;
+
+                case 209:
+                    return true;
+
+                case 210:
+                    return true;
+
+                case 253:
+                    return true;
+                default:
+                    break;
+            }
+            return true;
         }
 
         public static void OnFixedUpdate()
@@ -329,8 +399,7 @@ namespace ReModCE_ARES
         }
 
         public static void OnSceneWasLoaded(int buildIndex, string sceneName)
-        {
-            UpdateNamePlates();
+        {           
             foreach (var m in Components)
             {
                 m.OnSceneWasLoaded(buildIndex, sceneName);

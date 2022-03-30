@@ -71,6 +71,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\3rdparty\ml\Managed\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Photon-DotNet">
+      <HintPath>..\3rdparty\ml\Managed\Photon-DotNet.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -211,6 +214,9 @@
       <HintPath>..\3rdparty\ml\Managed\VRC.Utility.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="VRCCore-Editor">
+      <HintPath>E:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRCCore-Editor.dll</HintPath>
+    </Reference>
     <Reference Include="VRCCore-Standalone, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <Private>false</Private>
       <SpecificVersion>False</SpecificVersion>
@@ -247,6 +253,7 @@
     <Compile Include="Components\EmojiBlocker.cs" />
     <Compile Include="Components\FlyComponent.cs" />
     <Compile Include="Components\HighlightsComponent.cs" />
+    <Compile Include="Components\AntiCrashComponent.cs" />
     <Compile Include="Components\InfoLogsComponent.cs" />
     <Compile Include="Components\InstanceDejavuComponent.cs" />
     <Compile Include="Components\InstanceHistoryComponent.cs" />
