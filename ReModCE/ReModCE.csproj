@@ -255,6 +255,7 @@
     <Compile Include="Components\HighlightsComponent.cs" />
     <Compile Include="Components\AntiCrashComponent.cs" />
     <Compile Include="Components\DebugMenuComponent.cs" />
+    <Compile Include="Components\RamCleanComponent.cs" />
     <Compile Include="Components\InfoLogsComponent.cs" />
     <Compile Include="Components\InstanceDejavuComponent.cs" />
     <Compile Include="Components\InstanceHistoryComponent.cs" />
