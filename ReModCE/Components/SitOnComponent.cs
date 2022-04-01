@@ -27,7 +27,11 @@ namespace ReModCE_ARES.Components
 
             var buttonContainer = userInfoTransform.Find("Buttons/RightSideButtons/RightUpperButtonColumn/");
 
-            _teleportTargetButton = targetMenu.AddButton("Sit On", "Sit on target.", TeleportTargetButtonOnClick, ResourceManager.GetSprite("remodce.teleport"));
+            _teleportTargetButton = targetMenu.AddButton("Sit On", "Sit on target (press jump to stop).", TeleportTargetButtonOnClick, ResourceManager.GetSprite("remodce.teleport"));
+
+            var menu = uiManager.MainMenu.GetMenuPage("ARES");
+            menu.AddButton("Stop Siton",
+                "Stop sitting on incase Jump doesn't work.", StopSit);
 
         }
 
@@ -41,6 +45,12 @@ namespace ReModCE_ARES.Components
             target = user;
             SetGravity();
             TeleportToIUser(user);
+        }
+
+        private void StopSit()
+        {
+            target = null;
+            RemoveSetGravity();
         }
 
         private void SetGravity()
