@@ -88,8 +88,6 @@ namespace ReModCE_ARES.Components
                 }
 
                 _playerLastPos = playerPosition;
-
-                VRCUiManagerEx.Instance.CloseUi();
             }
             catch { target = null; RemoveSetGravity(); }
         }
