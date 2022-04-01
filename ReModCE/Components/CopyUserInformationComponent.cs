@@ -11,7 +11,7 @@ namespace ReModCE_ARES.Components
 {
     internal sealed class CopyUserInformationComponent : ModComponent
     {
-        private static ReUiButton _copyAvatarIDButton;
+        //private static ReUiButton _copyAvatarIDButton;
 
         public override void OnUiManagerInit(UiManager uiManager)
         {

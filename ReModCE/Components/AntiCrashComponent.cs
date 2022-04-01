@@ -30,7 +30,7 @@ namespace ReModCE_ARES.Components
         private static ConfigValue<int> MaxLightSources;
         private static ReMenuButton _maxLightSourcesButton;
         private static ConfigValue<int> MaxDynamicBonesColliders;
-        private static ReMenuButton _maxDynamicBonesCollidersButton;
+        //private static ReMenuButton _maxDynamicBonesCollidersButton;
         private static ConfigValue<int> MaxPolys;
         private static ReMenuButton _maxPolysButton;
         private static ConfigValue<int> MaxMaterials;
@@ -42,9 +42,9 @@ namespace ReModCE_ARES.Components
         private static readonly Shader defaultShader = Shader.Find("VRChat/PC/Toon Lit Cutout");
 
         private static string[] meshList = new string[5] { "125k", "medusa", "inside", "outside", "mill" };
-        private static string[] shaderList = new string[138]
+        private static string[] shaderList = new string[139]
         {
-            "dbtc", "crash", "nigger", "nigga", "n1gga", "n1gg@", "nigg@", "go home", "byebye", "distance based",
+            "dbtc", "crash", "nigger", "nigga", "n1gga", "n1gg@", "nigg@", "go home", "byebye", "distance based", "rolltheredfire",
             "tess", "tessellation", "cr4sh", "die", "get fucked", "spryth", "nigg", "distancebased",
             "fuck:screen:fuckery:fuckyou:vilar", "bluescreen", "butterfly:vrchat:particle", "bluescream", "custom/hyu", "ebola", "yeet", "kill:xiexe", "lag ", "/die",
             " die ", "thot", "eatingmy", "undetected", "retard", "retrd", "standard on", "kyuzu", "oof ",
@@ -79,7 +79,7 @@ namespace ReModCE_ARES.Components
             MaxLightSources.OnValueChanged += () => _maxLightSourcesButton.Text = $"Max Light Sources: {MaxLightSources}";
 
             MaxDynamicBonesColliders = new ConfigValue<int>(nameof(MaxDynamicBonesColliders), 5);
-            MaxDynamicBonesColliders.OnValueChanged += () => _maxDynamicBonesCollidersButton.Text = $"Max Light Sources: {MaxDynamicBonesColliders}";
+            //MaxDynamicBonesColliders.OnValueChanged += () => _maxDynamicBonesCollidersButton.Text = $"Max Light Sources: {MaxDynamicBonesColliders}";
 
             MaxPolys = new ConfigValue<int>(nameof(MaxPolys), 200000);
             MaxPolys.OnValueChanged += () => _maxPolysButton.Text = $"Max Polys: {MaxPolys}";

@@ -91,7 +91,7 @@ namespace ReModCE_ARES.Components
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //ReModCE_ARES.LogDebug($"Could not patch VRCTrackingSteam methods. CalibrationSaver won't work.");
                 ReLogger.Warning($"Could not patch VRCTrackingSteam methods. CalibrationSaver won't work.");

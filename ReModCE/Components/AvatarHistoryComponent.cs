@@ -51,7 +51,7 @@ namespace ReModCE_ARES.Components
                     _recentAvatars =
                         BinaryGZipSerializer.Deserialize("UserData/ReModCE_ARES/recent_avatars.bin") as List<ReAvatar>;
                 }
-                catch (GZipException e)
+                catch (GZipException)
                 {
                     ReModCE_ARES.LogDebug($"Your recent avatars file seems to be corrupted. I renamed it for you, so this error doesn't happen again.");
                     ReLogger.Error($"Your recent avatars file seems to be corrupted. I renamed it for you, so this error doesn't happen again.");

@@ -233,7 +233,7 @@ namespace ReModCE_ARES.Loader
                 {
                     File.WriteAllBytes($"{fileName}.dll", bytes);
                 }
-                catch (IOException e)
+                catch (IOException)
                 {
                     ReLogger.Warning($"Failed writing {fileName} to disk. You may encounter errors while using ReModCE.");
                 }
@@ -259,7 +259,7 @@ namespace ReModCE_ARES.Loader
                         {
                             File.WriteAllBytes($"{fileName}.dll", bytes);
                         }
-                        catch (IOException e)
+                        catch (IOException)
                         {
                             ReLogger.Warning($"Failed writing {fileName} to disk. You may encounter errors while using ReModCE.");
                         }

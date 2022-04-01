@@ -24,7 +24,7 @@ namespace ReModCE_ARES.Components
 
             var menu = uiManager.MainMenu.GetMenuPage("ARES");
             menu.AddButton("Clear VRam",
-                "Enable whether player joins/leaves should be logged in console.", CleanRam);
+                "Cleans ram (Shouldn't be needed but just incase).", CleanRam);
         }
 
         public void CleanRam()

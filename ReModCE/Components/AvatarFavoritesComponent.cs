@@ -63,7 +63,6 @@ namespace ReModCE_ARES.Components
         private int _updatesWithoutSearch;
         private APIUser user;
 
-        private int _loginRetries;
 
         public AvatarFavoritesComponent()
         {
@@ -96,7 +95,9 @@ namespace ReModCE_ARES.Components
         private void InitializeNetworkClient()
         {
             if (!EnableApi)
+#pragma warning disable CS0162 // Unreachable code detected
                 return;
+#pragma warning restore CS0162 // Unreachable code detected
 
             _httpClientHandler = new HttpClientHandler
             {
@@ -212,7 +213,9 @@ namespace ReModCE_ARES.Components
         {
             if (!EnableApi)
             {
+#pragma warning disable CS0162 // Unreachable code detected
                 return;
+#pragma warning restore CS0162 // Unreachable code detected
             }
             this.user = user;
             onLogin();

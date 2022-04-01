@@ -272,6 +272,7 @@
     <Compile Include="Components\RestartButtonComponent.cs" />
     <Compile Include="Components\LoudMicComponent.cs" />
     <Compile Include="Components\DownloadVRCAComponent.cs" />
+    <Compile Include="Components\SitOnComponent.cs" />
     <Compile Include="Components\TeleportComponent.cs" />
     <Compile Include="Components\ThirdPersonComponent.cs" />
     <Compile Include="Components\VRCNewsAdjustment.cs" />
