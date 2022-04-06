@@ -73,10 +73,12 @@ namespace ReModCE_ARES
             ReLogger.Msg("Initializing...");
 
             Directory.CreateDirectory("LoadingScreenMusic");
-
-            using (var client = new WebClient())
+            if (!File.Exists("LoadingScreenMusic/Music.ogg"))
             {
-                client.DownloadFile("https://api.ares-mod.com/Music.ogg", "LoadingScreenMusic/Music.ogg");
+                using (var client = new WebClient())
+                {
+                    client.DownloadFile("https://api.ares-mod.com/Music.ogg", "LoadingScreenMusic/Music.ogg");
+                }
             }
 
             IsEmmVRCLoaded = MelonHandler.Mods.Any(m => m.Info.Name == "emmVRCLoader");
@@ -108,8 +110,8 @@ namespace ReModCE_ARES
             ReLogger.Msg($"Running on {(IsOculus ? "Not Steam" : "Steam")}");
 
             InitializePatches();
-            InitializeModComponents();         
-            ReLogger.Msg("Done!");        
+            InitializeModComponents();
+            ReLogger.Msg("Done!");
             ShowLogo();
         }
 
@@ -161,7 +163,7 @@ namespace ReModCE_ARES
         public static void InitializePatches()
         {
             Harmony.Patch(typeof(VRCPlayer).GetMethod(nameof(VRCPlayer.Awake)), GetLocalPatch(nameof(VRCPlayerAwakePatch)));
-            Harmony.Patch(typeof(RoomManager).GetMethod(nameof(RoomManager.Method_Public_Static_Boolean_ApiWorld_ApiWorldInstance_String_Int32_0)), postfix: GetLocalPatch(nameof(EnterWorldPatch)));            
+            Harmony.Patch(typeof(RoomManager).GetMethod(nameof(RoomManager.Method_Public_Static_Boolean_ApiWorld_ApiWorldInstance_String_Int32_0)), postfix: GetLocalPatch(nameof(EnterWorldPatch)));
             try
             {
                 Harmony.Patch(typeof(SystemInfo).GetProperty("deviceUniqueIdentifier").GetGetMethod(), new HarmonyLib.HarmonyMethod(AccessTools.Method(typeof(ReModCE_ARES), nameof(FakeHWID))));
@@ -340,7 +342,7 @@ namespace ReModCE_ARES
         }
 
         public static void OnSceneWasLoaded(int buildIndex, string sceneName)
-        {           
+        {
             foreach (var m in Components)
             {
                 m.OnSceneWasLoaded(buildIndex, sceneName);
@@ -383,7 +385,7 @@ namespace ReModCE_ARES
         }
 
         private static void OnPlayerJoined(Player player)
-        {         
+        {
             foreach (var m in Components)
             {
                 m.OnPlayerJoined(player);
