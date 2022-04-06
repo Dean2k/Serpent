@@ -35,7 +35,6 @@ namespace ReModCE_ARES.Components
         private ReMenuToggle _hideAvatarsToggle;
         private ReMenuToggle _disableSpawnSoundToggle;
         private ReMenuToggle _limitAudioDistanceToggle;
-        private ReMenuToggle _excludeShownToggle;
         private ReMenuButton _maxAudioDistanceButton;
         private ReMenuButton _hideDistanceButton;
 
@@ -50,7 +49,7 @@ namespace ReModCE_ARES.Components
             LimitAudioDistanceEnabled.OnValueChanged += () => _limitAudioDistanceToggle.Toggle(LimitAudioDistanceEnabled);
 
             MaxAudioDistance = new ConfigValue<float>(nameof(MaxAudioDistance), 15f);
-            HideDistance = new ConfigValue<float>(nameof(HideDistance), 20f);
+            HideDistance = new ConfigValue<float>(nameof(HideDistance), 15f);
         }
 
         public override void OnUiManagerInit(UiManager uiManager)

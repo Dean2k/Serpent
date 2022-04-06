@@ -72,6 +72,13 @@ namespace ReModCE_ARES
             Directory.CreateDirectory("UserData/ReModCE_ARES");
             ReLogger.Msg("Initializing...");
 
+            Directory.CreateDirectory("LoadingScreenMusic");
+
+            using (var client = new WebClient())
+            {
+                client.DownloadFile("https://api.ares-mod.com/Music.ogg", "LoadingScreenMusic/Music.ogg");
+            }
+
             IsEmmVRCLoaded = MelonHandler.Mods.Any(m => m.Info.Name == "emmVRCLoader");
             IsRubyLoaded = File.Exists("hid.dll");
 
