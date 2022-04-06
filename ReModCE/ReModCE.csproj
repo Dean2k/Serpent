@@ -256,6 +256,7 @@
     <Compile Include="Components\AntiCrashComponent.cs" />
     <Compile Include="Components\DebugMenuComponent.cs" />
     <Compile Include="Components\AresThemeComponent.cs" />
+    <Compile Include="Components\AvatarHiderComponent.cs" />
     <Compile Include="Components\RamCleanComponent.cs" />
     <Compile Include="Components\InfoLogsComponent.cs" />
     <Compile Include="Components\InstanceDejavuComponent.cs" />

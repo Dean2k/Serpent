@@ -81,7 +81,7 @@ namespace ReModCE_ARES.Components
             MaxDynamicBonesColliders = new ConfigValue<int>(nameof(MaxDynamicBonesColliders), 5);
             //MaxDynamicBonesColliders.OnValueChanged += () => _maxDynamicBonesCollidersButton.Text = $"Max Light Sources: {MaxDynamicBonesColliders}";
 
-            MaxPolys = new ConfigValue<int>(nameof(MaxPolys), 200000);
+            MaxPolys = new ConfigValue<int>(nameof(MaxPolys), 260000);
             MaxPolys.OnValueChanged += () => _maxPolysButton.Text = $"Max Polys: {MaxPolys}";
 
             MaxMaterials = new ConfigValue<int>(nameof(MaxMaterials), 20);
