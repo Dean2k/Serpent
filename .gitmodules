@@ -1,4 +1,0 @@
-[submodule "ReMod.Core"]
-	path = ReMod.Core
-	url = https://github.com/RequiDev/ReMod.Core.git
-	branch = master
