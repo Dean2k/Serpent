@@ -247,6 +247,7 @@ namespace ReModCE_ARES
 
             var aresPage = _uiManager.MainMenu.AddMenuPage("ARES", "ARES Functions", ResourceManager.GetSprite("remodce.ARES"));
             aresPage.AddMenuPage("Anti-Crash", "Anticrash settings" , ResourceManager.GetSprite("remodce.shield"));
+            aresPage.AddMenuPage("World Cheats", "World Cheats (exploits)", ResourceManager.GetSprite("remodce.admin"));
 
             var visualPage = _uiManager.MainMenu.AddCategoryPage("Visuals", "Access anything that will affect your game visually", ResourceManager.GetSprite("remodce.eye"));
             visualPage.AddCategory("Nameplate");

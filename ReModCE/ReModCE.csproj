@@ -257,6 +257,8 @@
     <Compile Include="Components\DownloadVRCWComponent.cs" />
     <Compile Include="Components\DynamicBonesComponent.cs" />
     <Compile Include="Components\EmojiBlocker.cs" />
+    <Compile Include="Components\ExploitJustBComponent.cs" />
+    <Compile Include="Components\ExploitMurder4Component.cs" />
     <Compile Include="Components\FlyComponent.cs" />
     <Compile Include="Components\HighlightsComponent.cs" />
     <Compile Include="Components\AntiCrashComponent.cs" />
@@ -264,6 +266,7 @@
     <Compile Include="Components\AresThemeComponent.cs" />
     <Compile Include="Components\AvatarHiderComponent.cs" />
     <Compile Include="Components\CustomLoadingMusicComponent.cs" />
+    <Compile Include="Components\ExploitAmongUsComponent.cs" />
     <Compile Include="Components\RamCleanComponent.cs" />
     <Compile Include="Components\InfoLogsComponent.cs" />
     <Compile Include="Components\InstanceDejavuComponent.cs" />
