@@ -119,7 +119,7 @@ namespace ReModCE_ARES
         {
             Console.Title = "ARES";
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine(@"=============================================================================================================");
             Console.WriteLine(@"                _____/\\\\\\\\\_______/\\\\\\\\\______/\\\\\\\\\\\\\\\_____/\\\\\\\\\\\___                   ");
             Console.WriteLine(@"                 ___/\\\\\\\\\\\\\___/\\\///////\\\___\/\\\///////////____/\\\/////////\\\_                  ");
@@ -246,7 +246,7 @@ namespace ReModCE_ARES
             _uiManager.MainMenu.AddMenuPage("Microphone", "Microphone Settings", ResourceManager.GetSprite("remodce.mixer"));
 
             var aresPage = _uiManager.MainMenu.AddMenuPage("ARES", "ARES Functions", ResourceManager.GetSprite("remodce.ARES"));
-            aresPage.AddMenuPage("Anti-Crash");
+            aresPage.AddMenuPage("Anti-Crash", "Anticrash settings" , ResourceManager.GetSprite("remodce.shield"));
 
             var visualPage = _uiManager.MainMenu.AddCategoryPage("Visuals", "Access anything that will affect your game visually", ResourceManager.GetSprite("remodce.eye"));
             visualPage.AddCategory("Nameplate");
