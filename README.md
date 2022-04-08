@@ -53,6 +53,12 @@ In case you want to update you can always grab the latest and even previous vers
 * Custom loading songs
 * World cheats
 * Avatar distance auto hider
+* portable mirror
+* comfy menu
+* max FPS settings
+* high priority mode
+* adaptive fps
+
 
 ## Hotkeys
 * CTRL + F = Noclip
