@@ -49,6 +49,10 @@ In case you want to update you can always grab the latest and even previous vers
 * Loud Microphone
 * Avatar Anti Crash
 * Debug Console
+* Custom background images
+* Custom loading songs
+* World cheats
+* Avatar distance auto hider
 
 ## Hotkeys
 * CTRL + F = Noclip
