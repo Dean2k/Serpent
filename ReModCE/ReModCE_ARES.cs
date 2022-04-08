@@ -245,7 +245,7 @@ namespace ReModCE_ARES
 
             _uiManager.MainMenu.AddMenuPage("Microphone", "Microphone Settings", ResourceManager.GetSprite("remodce.mixer"));
 
-            var aresPage = _uiManager.MainMenu.AddMenuPage("ARES", "ARES Functions", ResourceManager.GetSprite("remodce.ARES"));
+            var aresPage = _uiManager.MainMenu.AddMenuPage("ARES", "ARES Functions", ResourceManager.GetSprite("remodce.areslogo"));
             aresPage.AddMenuPage("Anti-Crash", "Anticrash settings" , ResourceManager.GetSprite("remodce.shield"));
             aresPage.AddMenuPage("World Cheats", "World Cheats (exploits)", ResourceManager.GetSprite("remodce.admin"));
 

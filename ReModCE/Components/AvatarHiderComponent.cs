@@ -59,7 +59,7 @@ namespace ReModCE_ARES.Components
             try
             {
                 var menu = uiManager.MainMenu.GetMenuPage("ARES");
-                var subMenu = menu.AddMenuPage("Avatar Hider");
+                var subMenu = menu.AddMenuPage("Avatar Hider", "hide avatars at a certain distance", ResourceManager.GetSprite("remodce.arms-up"));
                 _hideAvatarsToggle = subMenu.AddToggle("Hide Avatars",
                     "Enable avatar distance hiding", SetAvatarHidden,
                     HideAvatarsEnabled);

@@ -88,5 +88,15 @@ namespace ReModCE_ARES.Managers
         public static ModerationManager GetModerationManager() => ModerationManager.prop_ModerationManager_0;
 
         public static PlayerManager GetPlayerManager() => PlayerManager.prop_PlayerManager_0;
+
+        public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
+        {
+            T component = gameObject.GetComponent<T>();
+            if (component == null)
+            {
+                return gameObject.AddComponent<T>();
+            }
+            return component;
+        }
     }
 }

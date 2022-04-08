@@ -31,7 +31,7 @@ namespace ReModCE_ARES.Components
 
             var menu = uiManager.MainMenu.GetMenuPage("ARES");
             menu.AddButton("Stop Siton",
-                "Stop sitting on incase Jump doesn't work.", StopSit);
+                "Stop sitting on incase Jump doesn't work.", StopSit, ResourceManager.GetSprite("remodce.legs"));
 
         }
 

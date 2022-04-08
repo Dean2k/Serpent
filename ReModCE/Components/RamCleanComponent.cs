@@ -24,7 +24,7 @@ namespace ReModCE_ARES.Components
 
             var menu = uiManager.MainMenu.GetMenuPage("ARES");
             menu.AddButton("Clear VRam",
-                "Cleans ram (Shouldn't be needed but just incase).", CleanRam);
+                "Cleans ram (Shouldn't be needed but just incase).", CleanRam, ResourceManager.GetSprite("remodce.broom"));
         }
 
         public void CleanRam()

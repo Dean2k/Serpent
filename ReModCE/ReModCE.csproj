@@ -267,6 +267,9 @@
     <Compile Include="Components\AvatarHiderComponent.cs" />
     <Compile Include="Components\CustomLoadingMusicComponent.cs" />
     <Compile Include="Components\ExploitAmongUsComponent.cs" />
+    <Compile Include="Components\ComfyMenuComponent.cs" />
+    <Compile Include="Components\PerformanceComponent.cs" />
+    <Compile Include="Components\PortableMirrorComponent.cs" />
     <Compile Include="Components\RamCleanComponent.cs" />
     <Compile Include="Components\InfoLogsComponent.cs" />
     <Compile Include="Components\InstanceDejavuComponent.cs" />
@@ -315,10 +318,82 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\*.png" />
+    <EmbeddedResource Include="Resources\admin.png" />
+    <EmbeddedResource Include="Resources\arms-up.png" />
+    <EmbeddedResource Include="Resources\binoculars.png" />
+    <EmbeddedResource Include="Resources\blind.png" />
+    <EmbeddedResource Include="Resources\bone.png" />
+    <EmbeddedResource Include="Resources\box.png" />
+    <EmbeddedResource Include="Resources\cogwheel.png" />
+    <EmbeddedResource Include="Resources\copy.png" />
+    <EmbeddedResource Include="Resources\discord.png" />
+    <EmbeddedResource Include="Resources\dump.png" />
+    <EmbeddedResource Include="Resources\dust.png" />
+    <EmbeddedResource Include="Resources\exit-door.png" />
+    <EmbeddedResource Include="Resources\eye.png" />
+    <EmbeddedResource Include="Resources\flash.png" />
+    <EmbeddedResource Include="Resources\hanger.png" />
+    <EmbeddedResource Include="Resources\hidden.png" />
+    <EmbeddedResource Include="Resources\history.png" />
+    <EmbeddedResource Include="Resources\invite.png" />
+    <EmbeddedResource Include="Resources\keyboard.png" />
+    <EmbeddedResource Include="Resources\kick.png" />
+    <EmbeddedResource Include="Resources\knife.png" />
+    <EmbeddedResource Include="Resources\link.png" />
+    <EmbeddedResource Include="Resources\log.png" />
+    <EmbeddedResource Include="Resources\max.png" />
+    <EmbeddedResource Include="Resources\mixer.png" />
+    <EmbeddedResource Include="Resources\music.png" />
+    <EmbeddedResource Include="Resources\next.png" />
+    <EmbeddedResource Include="Resources\padlock.png" />
+    <EmbeddedResource Include="Resources\palette.png" />
+    <EmbeddedResource Include="Resources\pickup.png" />
+    <EmbeddedResource Include="Resources\play.png" />
+    <EmbeddedResource Include="Resources\portal.png" />
+    <EmbeddedResource Include="Resources\previous.png" />
+    <EmbeddedResource Include="Resources\radius.png" />
+    <EmbeddedResource Include="Resources\reload.png" />
+    <EmbeddedResource Include="Resources\remod.png" />
+    <EmbeddedResource Include="Resources\resolution.png" />
+    <EmbeddedResource Include="Resources\revolver.png" />
+    <EmbeddedResource Include="Resources\running.png" />
+    <EmbeddedResource Include="Resources\search.png" />
+    <EmbeddedResource Include="Resources\server.png" />
+    <EmbeddedResource Include="Resources\shader.png" />
+    <EmbeddedResource Include="Resources\shield.png" />
+    <EmbeddedResource Include="Resources\skull.png" />
+    <EmbeddedResource Include="Resources\smoke.png" />
+    <EmbeddedResource Include="Resources\speed.png" />
+    <EmbeddedResource Include="Resources\star.png" />
+    <EmbeddedResource Include="Resources\start.png" />
+    <EmbeddedResource Include="Resources\stop.png" />
+    <EmbeddedResource Include="Resources\stopgame.png" />
+    <EmbeddedResource Include="Resources\teleport.png" />
+    <EmbeddedResource Include="Resources\tools.png" />
+    <EmbeddedResource Include="Resources\udon.png" />
+    <EmbeddedResource Include="Resources\weapons.png" />
+    <EmbeddedResource Include="Resources\win.png" />
+    <EmbeddedResource Include="Resources\wireframe.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\ARES.png" />
+    <EmbeddedResource Include="Resources\areslogo.png" />
+    <Content Include="Resources\blind.png" />
+    <EmbeddedResource Include="Resources\broom.png" />
+    <EmbeddedResource Include="Resources\legs.png" />
+    <EmbeddedResource Include="Resources\meet.png" />
+    <EmbeddedResource Include="Resources\mirror.png" />
+    <EmbeddedResource Include="Resources\speedometer.png" />
+    <Content Include="Resources\stopgame.png" />
+    <Content Include="Resources\start.png" />
+    <Content Include="Resources\exit-door.png" />
+    <Content Include="Resources\pickup.png" />
+    <Content Include="Resources\skull.png" />
+    <Content Include="Resources\win.png" />
+    <Content Include="Resources\smoke.png" />
+    <Content Include="Resources\revolver.png" />
+    <Content Include="Resources\knife.png" />
+    <Content Include="Resources\weapons.png" />
+    <EmbeddedResource Include="Resources\world.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
