@@ -17,6 +17,8 @@ using VRC_AvatarPedestal = VRC.SDKBase.VRC_AvatarPedestal;
 using VRC_Pickup = VRC.SDKBase.VRC_Pickup;
 using VRC_UiShape = VRC.SDKBase.VRC_UiShape;
 using Object = UnityEngine.Object;
+using ActionMenuApi.Api;
+using ReModCE_ARES.Loader;
 
 // ReSharper disable InconsistentNaming
 namespace ReModCE_ARES.Components
@@ -83,6 +85,7 @@ namespace ReModCE_ARES.Components
             var movementMenu = uiManager.MainMenu.GetMenuPage("Movement");
             var hotkeyMenu = uiManager.MainMenu.GetMenuPage("Hotkeys");
 
+            VRCActionMenuPage.AddToggle(ActionMenuPage.Main, "Fly", false, ToggleFlyQuick, ResourceManager.GetTexture("remodce.arms-up"));
             _flyToggle = movementMenu.AddToggle("Fly", "Enable/Disable Fly", ToggleFly, _flyEnabled);
             _noclipToggle = movementMenu.AddToggle("Noclip", "Enable/Disable Noclip", ToggleNoclip, _noclipEnabled);
             _noclipWingToggle = ReModCE_ARES.WingMenu.AddToggle("Noclip", "Enable/Disable Noclip", b =>
@@ -131,6 +134,19 @@ namespace ReModCE_ARES.Components
             Il2CppType.Of<VRC_UiShape>(),
             Il2CppType.Of<VRCUiShape>()
         };
+
+        private void ToggleFlyQuick(bool value)
+        {
+            if (_flyEnabled)
+            {
+                ToggleFly(false);
+            }
+            else
+            {
+                ToggleFly(true);
+            }
+            
+        }
 
         private void ToggleNoclipObjects()
         {

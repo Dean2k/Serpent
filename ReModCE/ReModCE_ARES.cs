@@ -28,6 +28,9 @@ using VRC.Core;
 using VRC.DataModel;
 using VRC.UI.Elements.Menus;
 using ConfigManager = ReMod.Core.Managers.ConfigManager;
+using ActionMenuApi.Api;
+using ActionMenuApi.Pedals;
+using ActionMenuApi.Types;
 
 namespace ReModCE_ARES
 {
@@ -36,7 +39,6 @@ namespace ReModCE_ARES
         private static readonly List<ModComponent> Components = new List<ModComponent>();
         private static UiManager _uiManager;
         private static ConfigManager _configManager;
-
 
         public static ReMirroredWingMenu WingMenu;
         public static bool IsEmmVRCLoaded { get; private set; }
@@ -263,6 +265,7 @@ namespace ReModCE_ARES
 
             _uiManager.MainMenu.AddMenuPage("Logging", "Access logging related settings", ResourceManager.GetSprite("remodce.log"));
             _uiManager.MainMenu.AddMenuPage("Hotkeys", "Access hotkey related settings", ResourceManager.GetSprite("remodce.keyboard"));
+
 
             foreach (var m in Components)
             {

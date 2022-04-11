@@ -14,10 +14,16 @@ namespace ReModCE_ARES.Components
 {
     internal sealed class SitOnComponent : ModComponent
     {
-        private static ReMenuButton _teleportTargetButton;
+        private static ReMenuButton _teleportTargetHeadButton;
+        private static ReMenuButton _teleportTargetLeftHandButton;
+        private static ReMenuButton _teleportTargetRightHandButton;
+        private static ReMenuButton _teleportTargetRightLegButton;
+        private static ReMenuButton _teleportTargetLeftLegButton;
+        private static ReMenuButton _teleportTargetHipsButton;
         private static IUser target;
         private Vector3 _originalGravity;
         private Vector3 _playerLastPos;
+        public string bodyPart;
 
         public override void OnUiManagerInit(UiManager uiManager)
         {
@@ -27,7 +33,12 @@ namespace ReModCE_ARES.Components
 
             var buttonContainer = userInfoTransform.Find("Buttons/RightSideButtons/RightUpperButtonColumn/");
 
-            _teleportTargetButton = targetMenu.AddButton("Sit On", "Sit on target (press jump to stop).", TeleportTargetButtonOnClick, ResourceManager.GetSprite("remodce.teleport"));
+            _teleportTargetHeadButton = targetMenu.AddButton("Sit On Head", "Sit on target (press jump to stop).", TeleportTargetButtonOnClick, ResourceManager.GetSprite("remodce.legs"));
+            _teleportTargetLeftHandButton = targetMenu.AddButton("Sit On Left Hand", "Sit on target (press jump to stop).", TeleportTargetLeftHandButtonOnClick, ResourceManager.GetSprite("remodce.legs"));
+            _teleportTargetRightHandButton = targetMenu.AddButton("Sit On Right Hand", "Sit on target (press jump to stop).", TeleportTargetRightHandButtonOnClick, ResourceManager.GetSprite("remodce.legs"));
+            _teleportTargetRightLegButton = targetMenu.AddButton("Sit On Right Leg", "Sit on target (press jump to stop).", TeleportTargetRightLegButtonOnClick, ResourceManager.GetSprite("remodce.legs"));
+            _teleportTargetLeftLegButton = targetMenu.AddButton("Sit On Left Leg", "Sit on target (press jump to stop).", TeleportTargetLeftLegButtonOnClick, ResourceManager.GetSprite("remodce.legs"));
+            _teleportTargetLeftLegButton = targetMenu.AddButton("Sit On Hips", "Sit on target (press jump to stop).", TeleportTargetHipsButtonOnClick, ResourceManager.GetSprite("remodce.legs"));
 
             var menu = uiManager.MainMenu.GetMenuPage("ARES");
             menu.AddButton("Stop Siton",
@@ -35,8 +46,7 @@ namespace ReModCE_ARES.Components
 
         }
 
-
-        private void TeleportTargetButtonOnClick()
+        private void StandardSetup()
         {
             var user = QuickMenuEx.SelectedUserLocal.field_Private_IUser_0;
             if (user == null)
@@ -44,7 +54,44 @@ namespace ReModCE_ARES.Components
 
             target = user;
             SetGravity();
+
             TeleportToIUser(user);
+        }
+
+        private void TeleportTargetButtonOnClick()
+        {          
+            bodyPart = "Head";
+            StandardSetup();
+        }
+
+        private void TeleportTargetLeftHandButtonOnClick()
+        {
+            bodyPart = "LeftHand";
+            StandardSetup();
+        }
+
+        private void TeleportTargetRightHandButtonOnClick()
+        {
+            bodyPart = "RightHand";
+            StandardSetup();
+        }
+
+        private void TeleportTargetRightLegButtonOnClick()
+        {
+            bodyPart = "RightLeg";
+            StandardSetup();
+        }
+
+        private void TeleportTargetLeftLegButtonOnClick()
+        {
+            bodyPart = "LeftLeg";
+            StandardSetup();
+        }
+
+        private void TeleportTargetHipsButtonOnClick()
+        {
+            bodyPart = "Hips";
+            StandardSetup();
         }
 
         private void StopSit()
@@ -74,16 +121,37 @@ namespace ReModCE_ARES.Components
                 var player = PlayerManager.field_Private_Static_PlayerManager_0.GetPlayer(user.prop_String_0)._vrcplayer;
                 if (player == null)
                     return;
-
-                var transform = player.transform;
-                var playerPosition = transform.position;
-
+                Vector3 playerPosition = new Vector3();
+                if (bodyPart == "Head")
+                {
+                    playerPosition = player.field_Internal_Animator_0.GetBoneTransform(HumanBodyBones.Head).position + new Vector3(0, 0.1f, 0);
+                }
+                if(bodyPart == "LeftHand")
+                {
+                    playerPosition = player.field_Internal_Animator_0.GetBoneTransform(HumanBodyBones.LeftIndexProximal).position + new Vector3(0, 0.1f, 0);
+                }
+                if (bodyPart == "RightHand")
+                {
+                    playerPosition = player.field_Internal_Animator_0.GetBoneTransform(HumanBodyBones.RightIndexProximal).position + new Vector3(0, 0.1f, 0);
+                }
+                if (bodyPart == "RightLeg")
+                {
+                    playerPosition = player.field_Internal_Animator_0.GetBoneTransform(HumanBodyBones.RightFoot).position + new Vector3(0, 0.1f, 0);
+                }
+                if (bodyPart == "LeftLeg")
+                {
+                    playerPosition = player.field_Internal_Animator_0.GetBoneTransform(HumanBodyBones.LeftFoot).position + new Vector3(0, 0.1f, 0);
+                }
+                if (bodyPart == "Hips")
+                {
+                    playerPosition = player.field_Internal_Animator_0.GetBoneTransform(HumanBodyBones.Hips).position + new Vector3(0, 0.1f, 0);
+                }
                 var localTransform = VRCPlayer.field_Internal_Static_VRCPlayer_0.transform;
                 if (_playerLastPos != null)
                 {
                     if (_playerLastPos != localTransform.position)
                     {
-                        localTransform.position = playerPosition + new Vector3(0f, 2f);
+                        localTransform.position = playerPosition;
                     }
                 }
 
@@ -110,12 +178,6 @@ namespace ReModCE_ARES.Components
                 }
                 TeleportToIUser(target);
             }           
-        }
-
-        public override void OnSetupUserInfo(APIUser apiUser)
-        {
-            bool check = APIUser.CurrentUser.id != apiUser.id && PlayerManager.field_Private_Static_PlayerManager_0.GetPlayer(apiUser.id) != null;
-            _teleportTargetButton.Active = check;
         }
     }
 }

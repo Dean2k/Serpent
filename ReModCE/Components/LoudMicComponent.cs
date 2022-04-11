@@ -1,4 +1,5 @@
-﻿using ReMod.Core;
+﻿using ActionMenuApi.Api;
+using ReMod.Core;
 using ReMod.Core.Managers;
 using ReMod.Core.UI;
 using ReMod.Core.UI.QuickMenu;
@@ -32,6 +33,20 @@ namespace ReModCE_ARES.Components
             _loudMicEnabled = menu.AddToggle("Loud Mic",
                 "Ear Rape.", LoudMic,
                 LoudMicEnabled);
+            VRCActionMenuPage.AddToggle(ActionMenuPage.Main, "Mic Rape", LoudMicEnabled, ToggleMicQuick, ResourceManager.GetTexture("remodce.skull"));
+
+        }
+
+        private void ToggleMicQuick(bool value)
+        {
+            if (LoudMicEnabled)
+            {
+                LoudMic(false);
+            }
+            else
+            {
+                LoudMic(true);
+            }
         }
 
         private void LoudMic(bool enable)

@@ -219,8 +219,6 @@ namespace ReModCE_ARES.Components
             }
         }
 
-        private static bool _comfyVRMenu;
-
         private static MethodInfo _placeUi;
     }
 }

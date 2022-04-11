@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ReModCE_ARES</RootNamespace>
     <AssemblyName>ReModCE_ARES</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -307,6 +308,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ActionMenuApiDev\ActionMenuApi.csproj">
+      <Project>{d1b17b41-2213-4583-ac97-fef2cba7eed4}</Project>
+      <Name>ActionMenuApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ReModCE.Loader\ReModCE.Loader.csproj">
       <Project>{6e5e0e59-73d9-4d74-b734-d040d26710c4}</Project>
       <Name>ReModCE.Loader</Name>

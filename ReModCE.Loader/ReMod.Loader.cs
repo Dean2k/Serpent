@@ -53,6 +53,7 @@ namespace ReModCE_ARES.Loader
                 true);
 
             DownloadFromGitHub("ReMod.Core", out _);
+            DownloadFromGitHubModLocation("ActionMenuApi");
             DownloadFromGitHub("ReModCE_ARES", out var assembly);
 
             if (assembly == null)
@@ -278,6 +279,85 @@ namespace ReModCE_ARES.Loader
                 MelonLogger.Error($"Couldn't load specified image: {e}");
                 loadedAssembly = null;
             }
+        }
+
+        private void DownloadFromGitHubModLocation(string fileName)
+        {
+            using var sha256 = SHA256.Create();
+
+            byte[] bytes = null;
+            if (File.Exists($"/Mods/{fileName}.dll"))
+            {
+                bytes = File.ReadAllBytes($"/Mods/{fileName}.dll");
+            }
+
+            using var wc = new WebClient
+            {
+                Headers =
+                {
+                    ["User-Agent"] =
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0"
+                }
+            };
+
+            byte[] latestBytes = null;
+            try
+            {
+                latestBytes = wc.DownloadData($"https://github.com/{GitHubInfo.Author}/{GitHubInfo.Repository}/releases/latest/download/{fileName}.dll");
+            }
+            catch (WebException e)
+            {
+                MelonLogger.Error($"Unable to download latest version of ReModCE: {e}");
+            }
+
+            if (bytes == null)
+            {
+                if (latestBytes == null)
+                {
+                    MelonLogger.Error($"No local file exists and unable to download latest version from GitHub. {fileName} will not load!");
+                    return;
+                }
+                MelonLogger.Warning($"Couldn't find {fileName}.dll on disk. Saving latest version from GitHub.");
+                bytes = latestBytes;
+                try
+                {
+                    File.WriteAllBytes($"/Mods/{fileName}.dll", bytes);
+                }
+                catch (IOException)
+                {
+                    ReLogger.Warning($"Failed writing {fileName} to disk. You may encounter errors while using ReModCE.");
+                }
+            }
+
+#if !DEBUG
+            if (latestBytes != null)
+            {
+                var latestHash = ComputeHash(sha256, latestBytes);
+                var currentHash = ComputeHash(sha256, bytes);
+
+                if (latestHash != currentHash)
+                {
+                    if (_paranoidMode.Value)
+                    {
+                        MelonLogger.Msg(ConsoleColor.Cyan,
+                            $"There is a new version of ReModCE available. You can either delete the \"{fileName}.dll\" from your VRChat directory or go to https://github.com/{GitHubInfo.Author}/{GitHubInfo.Repository}/releases/latest/ and download the latest version.");
+                    }
+                    else
+                    {
+                        bytes = latestBytes;
+                        try
+                        {
+                            File.WriteAllBytes($"{fileName}.dll", bytes);
+                        }
+                        catch (IOException)
+                        {
+                            ReLogger.Warning($"Failed writing {fileName} to disk. You may encounter errors while using ReModCE.");
+                        }
+                        MelonLogger.Msg(ConsoleColor.Green, $"Updated {fileName} to latest version.");
+                    }
+                }
+            }
+#endif
         }
 
         private static string ComputeHash(HashAlgorithm sha256, byte[] data)
