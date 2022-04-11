@@ -110,7 +110,14 @@ namespace ReModCE_ARES.Components
 
                 try
                 {
-
+                    for (int i = 0; i < vrc_Pickups.Length; i++)
+                    {
+                        VRC_Pickup vrc_Pickup = vrc_Pickups[i];
+                        if (Networking.GetOwner(vrc_Pickup.gameObject) != Networking.LocalPlayer)
+                        {
+                            Networking.SetOwner(Networking.LocalPlayer, vrc_Pickup.gameObject);
+                        }
+                    }
                     vrc_Pickups[0].transform.position = new Vector3(playerPosition.x, playerPosition.y, playerPosition.z);
                     vrc_Pickups[1].transform.position = new Vector3(playerPosition.x, playerPosition.y + 0.5f, playerPosition.z);
                     vrc_Pickups[2].transform.position = new Vector3(playerPosition.x, playerPosition.y + 1f, playerPosition.z);
