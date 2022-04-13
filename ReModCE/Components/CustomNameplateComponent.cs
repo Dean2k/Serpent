@@ -98,7 +98,7 @@ namespace ReModCE_ARES.Components
         {
             try
             {
-                return ReModCE_ARES.nameplateModels.First(x => x.UserID == player.prop_APIUser_0.id && x.Active);
+                return ReModCE_ARES.NameplateModels.First(x => x.UserID == player.prop_APIUser_0.id && x.Active);
             }
             catch {
                 return null; 

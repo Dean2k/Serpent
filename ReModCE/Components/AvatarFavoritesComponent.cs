@@ -233,12 +233,12 @@ namespace ReModCE_ARES.Components
 
             if (!_searchBox.field_Public_Button_0.interactable)
             {
-                if (!ReModCE_ARES.IsEmmVRCLoaded || _updatesWithoutSearch >= 10)
+                if (!ReModCE_ARES.IsEmmVrcLoaded || _updatesWithoutSearch >= 10)
                 {
                     _searchBox.field_Public_Button_0.interactable = true;
                     _searchBox.field_Public_UnityAction_1_String_0 = _searchAvatarsAction;
                 }
-                else if (ReModCE_ARES.IsEmmVRCLoaded)
+                else if (ReModCE_ARES.IsEmmVrcLoaded)
                 {
                     ++_updatesWithoutSearch;
                 }
@@ -246,7 +246,7 @@ namespace ReModCE_ARES.Components
             }
             else
             {
-                if (ReModCE_ARES.IsEmmVRCLoaded && _updatesWithoutSearch < 10)
+                if (ReModCE_ARES.IsEmmVrcLoaded && _updatesWithoutSearch < 10)
                 {
                     if (_searchBox.field_Public_UnityAction_1_String_0 == null)
                         return;

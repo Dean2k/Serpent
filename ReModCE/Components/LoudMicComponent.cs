@@ -33,7 +33,10 @@ namespace ReModCE_ARES.Components
             _loudMicEnabled = menu.AddToggle("Loud Mic",
                 "Ear Rape.", LoudMic,
                 LoudMicEnabled);
-            VRCActionMenuPage.AddToggle(ActionMenuPage.Main, "Mic Rape", LoudMicEnabled, ToggleMicQuick, ResourceManager.GetTexture("remodce.skull"));
+            try
+            {
+                VRCActionMenuPage.AddToggle(ActionMenuPage.Main, "Mic Rape", LoudMicEnabled, ToggleMicQuick, ResourceManager.GetTexture("remodce.skull"));
+            } catch { }
 
         }
 

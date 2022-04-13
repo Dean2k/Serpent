@@ -85,7 +85,10 @@ namespace ReModCE_ARES.Components
             var movementMenu = uiManager.MainMenu.GetMenuPage("Movement");
             var hotkeyMenu = uiManager.MainMenu.GetMenuPage("Hotkeys");
 
-            VRCActionMenuPage.AddToggle(ActionMenuPage.Main, "Fly", false, ToggleFlyQuick, ResourceManager.GetTexture("remodce.arms-up"));
+            try
+            {
+                VRCActionMenuPage.AddToggle(ActionMenuPage.Main, "Fly", false, ToggleFlyQuick, ResourceManager.GetTexture("remodce.arms-up"));
+            } catch { }
             _flyToggle = movementMenu.AddToggle("Fly", "Enable/Disable Fly", ToggleFly, _flyEnabled);
             _noclipToggle = movementMenu.AddToggle("Noclip", "Enable/Disable Noclip", ToggleNoclip, _noclipEnabled);
             _noclipWingToggle = ReModCE_ARES.WingMenu.AddToggle("Noclip", "Enable/Disable Noclip", b =>

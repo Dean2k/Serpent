@@ -41,31 +41,31 @@ namespace ReModCE_ARES
         private static ConfigManager _configManager;
 
         public static ReMirroredWingMenu WingMenu;
-        public static bool IsEmmVRCLoaded { get; private set; }
+        public static bool IsEmmVrcLoaded { get; private set; }
         public static bool IsRubyLoaded { get; private set; }
         public static bool IsOculus { get; private set; }
         public static HarmonyLib.Harmony Harmony { get; private set; }
 
         private static string newHWID = "";
 
-        public static List<NameplateModel> nameplateModels;
+        public static List<NameplateModel> NameplateModels;
 
         public static void UpdateNamePlates()
         {
             ReLogger.Msg("Reloading Nameplates");
             string url = "https://api.ares-mod.com/records/NamePlates";
 
-            HttpWebRequest WebReq = (HttpWebRequest)WebRequest.Create(url);
-            WebReq.Method = "GET";
-            HttpWebResponse WebResp = (HttpWebResponse)WebReq.GetResponse();
+            HttpWebRequest webReq = (HttpWebRequest)WebRequest.Create(url);
+            webReq.Method = "GET";
+            HttpWebResponse webResp = (HttpWebResponse)webReq.GetResponse();
             string jsonString;
-            using (Stream stream = WebResp.GetResponseStream())   //modified from your code since the using statement disposes the stream automatically when done
+            using (Stream stream = webResp.GetResponseStream())   //modified from your code since the using statement disposes the stream automatically when done
             {
                 StreamReader reader = new StreamReader(stream, System.Text.Encoding.UTF8);
                 jsonString = reader.ReadToEnd();
             }
             NameplateModelList items = JsonConvert.DeserializeObject<NameplateModelList>(jsonString);
-            nameplateModels = items.records;
+            NameplateModels = items.records;
         }
 
         public static void OnApplicationStart()
@@ -83,7 +83,7 @@ namespace ReModCE_ARES
                 }
             }
 
-            IsEmmVRCLoaded = MelonHandler.Mods.Any(m => m.Info.Name == "emmVRCLoader");
+            IsEmmVrcLoaded = MelonHandler.Mods.Any(m => m.Info.Name == "emmVRCLoader");
             IsRubyLoaded = File.Exists("hid.dll");
 
             var ourAssembly = Assembly.GetExecutingAssembly();
