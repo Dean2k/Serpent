@@ -308,18 +308,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ActionMenuApiDev\ActionMenuApi.csproj">
-      <Project>{d1b17b41-2213-4583-ac97-fef2cba7eed4}</Project>
-      <Name>ActionMenuApi</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ReModCE.Loader\ReModCE.Loader.csproj">
       <Project>{6e5e0e59-73d9-4d74-b734-d040d26710c4}</Project>
       <Name>ReModCE.Loader</Name>
       <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\ReMod.Core\ReMod.Core.csproj">
-      <Project>{c87fe758-acb9-4fa2-af6f-10aa9aa0023c}</Project>
-      <Name>ReMod.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
