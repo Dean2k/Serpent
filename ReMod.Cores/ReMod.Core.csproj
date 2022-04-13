@@ -49,9 +49,21 @@
       <HintPath>$(SolutionDir)\3rdparty\ml\Managed\DataModel.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="DOTween, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\3rdparty\ml\Managed\DOTween.dll</HintPath>
+    </Reference>
+    <Reference Include="Facepunch.Steamworks.Win64, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\3rdparty\ml\Managed\Facepunch.Steamworks.Win64.dll</HintPath>
+    </Reference>
     <Reference Include="Il2Cppmscorlib">
       <HintPath>$(SolutionDir)\3rdparty\ml\Managed\Il2Cppmscorlib.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="Il2CppSystem, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\3rdparty\ml\Managed\Il2CppSystem.dll</HintPath>
     </Reference>
     <Reference Include="MelonLoader">
       <HintPath>$(SolutionDir)\3rdparty\ml\MelonLoader.dll</HintPath>
@@ -63,9 +75,17 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="Transmtn, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\3rdparty\ml\Managed\Transmtn.dll</HintPath>
+    </Reference>
     <Reference Include="UnhollowerBaseLib">
       <HintPath>$(SolutionDir)\3rdparty\ml\Managed\UnhollowerBaseLib.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="UniTask, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\3rdparty\ml\Managed\UniTask.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>$(SolutionDir)\3rdparty\ml\Managed\Unity.TextMeshPro.dll</HintPath>
@@ -75,6 +95,10 @@
       <HintPath>$(SolutionDir)\3rdparty\ml\Managed\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\3rdparty\ml\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>$(SolutionDir)\3rdparty\ml\Managed\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
@@ -82,6 +106,10 @@
     <Reference Include="UnityEngine.ImageConversionModule">
       <HintPath>$(SolutionDir)\3rdparty\ml\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\3rdparty\ml\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule">
       <HintPath>$(SolutionDir)\3rdparty\ml\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
@@ -91,6 +119,26 @@
       <HintPath>$(SolutionDir)\3rdparty\ml\Managed\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.UIModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\3rdparty\ml\Managed\UnityEngine.UIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\3rdparty\ml\Managed\UnityEngine.UnityWebRequestModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestWWWModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\3rdparty\ml\Managed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VRModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\3rdparty\ml\Managed\UnityEngine.VRModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.XRModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\3rdparty\ml\Managed\UnityEngine.XRModule.dll</HintPath>
+    </Reference>
     <Reference Include="VRC.UI.Core">
       <HintPath>$(SolutionDir)\3rdparty\ml\Managed\VRC.UI.Core.dll</HintPath>
       <Private>False</Private>
@@ -99,9 +147,21 @@
       <HintPath>$(SolutionDir)\3rdparty\ml\Managed\VRC.UI.Elements.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="VRCCore-Editor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\3rdparty\ml\Managed\VRCCore-Editor.dll</HintPath>
+    </Reference>
     <Reference Include="VRCCore-Standalone">
       <HintPath>$(SolutionDir)\3rdparty\ml\Managed\VRCCore-Standalone.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="VRCSDK2, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\3rdparty\ml\Managed\VRCSDK2.dll</HintPath>
+    </Reference>
+    <Reference Include="VRCSDK3A, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\3rdparty\ml\Managed\VRCSDK3A.dll</HintPath>
     </Reference>
     <Reference Include="VRCSDKBase">
       <HintPath>$(SolutionDir)\3rdparty\ml\Managed\VRCSDKBase.dll</HintPath>
@@ -109,6 +169,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionMenus.cs" />
     <Compile Include="Api\ActionMenuPage.cs" />
     <Compile Include="Api\AMUtils.cs" />
     <Compile Include="Api\CustomSubMenu.cs" />
@@ -131,7 +192,6 @@
     <Compile Include="Pedals\PedalSubMenu.cs" />
     <Compile Include="Pedals\PedalToggle.cs" />
     <Compile Include="Types\ActionMenuHand.cs" />
-    <Compile Include="Types\ActionMenuPageType.cs" />
     <Compile Include="Types\Insertion.cs" />
     <Compile Include="Types\PedalType.cs" />
     <Compile Include="UI\QuickMenu\IButtonPage.cs" />
@@ -172,6 +232,11 @@
     <Compile Include="VRChat\VRCUiManagerEx.cs" />
     <Compile Include="XrefUtils.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ReModCE.Loader\ReModCE.Loader.csproj">
+      <Project>{6E5E0E59-73D9-4D74-B734-D040D26710C4}</Project>
+      <Name>ReModCE.Loader</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

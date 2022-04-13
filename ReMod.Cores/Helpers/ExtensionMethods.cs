@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using ActionMenuApi.Managers;
 using MelonLoader;
+using ReMod.Core.Managers;
 using TMPro;
-using UnhollowerRuntimeLib;
 using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
 using ActionMenuPage = ActionMenu.Page; //Will this change?, ¯\_(ツ)_/¯x2
 using Object = UnityEngine.Object;
 
-namespace ActionMenuApi.Helpers
+namespace ReMod.Core.Helpers
 {
     internal static class ExtensionMethods
     {

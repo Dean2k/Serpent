@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -28,9 +29,8 @@ using VRC.Core;
 using VRC.DataModel;
 using VRC.UI.Elements.Menus;
 using ConfigManager = ReMod.Core.Managers.ConfigManager;
-using ActionMenuApi.Api;
-using ActionMenuApi.Pedals;
-using ActionMenuApi.Types;
+using ReMod.Core.Helpers;
+using ReMod.Core.Pedals;
 
 namespace ReModCE_ARES
 {
@@ -113,8 +113,18 @@ namespace ReModCE_ARES
 
             InitializePatches();
             InitializeModComponents();
+            MelonCoroutines.Start(WaitForActionMenuInitWheel());
             ReLogger.Msg("Done!");
             ShowLogo();
+        }
+
+        private static IEnumerator WaitForActionMenuInitWheel()
+        {
+            while (ActionMenuDriver.prop_ActionMenuDriver_0 == null) //VRCUIManager Init is too early 
+                yield return null;
+            ResourcesManager.InitLockGameObject();
+            RadialPuppetManager.Setup();
+            FourAxisPuppetManager.Setup();
         }
 
         private static void ShowLogo()
@@ -183,6 +193,7 @@ namespace ReModCE_ARES
                 MelonLogger.Msg("Failed to patch force cloning");
             }
 
+            ActionMenus.PatchAll(Harmony);
 
             foreach (var method in typeof(SelectedUserMenuQM).GetMethods())
             {
@@ -248,7 +259,7 @@ namespace ReModCE_ARES
             _uiManager.MainMenu.AddMenuPage("Microphone", "Microphone Settings", ResourceManager.GetSprite("remodce.mixer"));
 
             var aresPage = _uiManager.MainMenu.AddMenuPage("ARES", "ARES Functions", ResourceManager.GetSprite("remodce.areslogo"));
-            aresPage.AddMenuPage("Anti-Crash", "Anticrash settings" , ResourceManager.GetSprite("remodce.shield"));
+            aresPage.AddMenuPage("Anti-Crash", "Anticrash settings", ResourceManager.GetSprite("remodce.shield"));
             aresPage.AddMenuPage("World Cheats", "World Cheats (exploits)", ResourceManager.GetSprite("remodce.admin"));
 
             var visualPage = _uiManager.MainMenu.AddCategoryPage("Visuals", "Access anything that will affect your game visually", ResourceManager.GetSprite("remodce.eye"));
@@ -315,6 +326,9 @@ namespace ReModCE_ARES
                     Tele2MousePos();
                 }
             }
+
+            RadialPuppetManager.OnUpdate();
+            FourAxisPuppetManager.OnUpdate();
 
             foreach (var m in Components)
             {
@@ -531,5 +545,7 @@ namespace ReModCE_ARES
             DebugMenuComponent.debugLog.text.alignment = TMPro.TextAlignmentOptions.Left;
             DebugMenuComponent.debugLog.text.verticalAlignment = TMPro.VerticalAlignmentOptions.Top;
         }
+
+
     }
 }

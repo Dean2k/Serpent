@@ -1,6 +1,6 @@
-﻿namespace ActionMenuApi.Types
+﻿namespace ReMod.Core.Types
 {
-    internal enum ActionMenuHand
+    public enum ActionMenuHand
     {
         Invalid,
         Left,

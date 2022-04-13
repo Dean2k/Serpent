@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using ActionMenuApi.Pedals;
-using ActionMenuApi.Types;
 using HarmonyLib;
 using MelonLoader;
+using ReMod.Core.Pedals;
+using ReMod.Core.Types;
+using ReModCE_ARES.Loader;
 using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
-using UnityEngine.XR;
 using Object = UnityEngine.Object;
 
-namespace ActionMenuApi.Helpers
+namespace ReMod.Core.Helpers
 {
-    internal static class Utilities
+    public static class Utilities
     {
         private static RefreshAMDelegate refreshAMDelegate;
 
@@ -151,8 +151,7 @@ namespace ActionMenuApi.Helpers
         {
             return ActionMenuDriver.prop_ActionMenuDriver_0.field_Public_ExpressionIcons_0;
         }
-
-        // Didnt know what to name this function
+        
         public static ActionMenuHand GetActionMenuHand()
         {
             if (!ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener().isOpen() &&
@@ -235,7 +234,7 @@ namespace ActionMenuApi.Helpers
         {
             if (ActionMenuDriver.prop_ActionMenuDriver_0 == null)
             {
-                Logger.LogWarning("Refresh called before driver init");
+                ReLogger.Warning("Refresh called before driver init");
                 return;
             }
 
@@ -249,7 +248,7 @@ namespace ActionMenuApi.Helpers
         {
             if (ActionMenuDriver.prop_ActionMenuDriver_0 == null)
             {
-                Logger.LogWarning("Reset called before driver init");
+                ReLogger.Warning("Reset called before driver init");
                 return;
             }
 

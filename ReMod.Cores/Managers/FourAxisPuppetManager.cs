@@ -1,30 +1,30 @@
 ﻿using System;
-using ActionMenuApi.Helpers;
-using ActionMenuApi.Types;
 using MelonLoader;
+using ReMod.Core.Helpers;
+using ReMod.Core.Types;
 using UnityEngine;
 using UnityEngine.XR;
 
-namespace ActionMenuApi.Managers
+namespace ReMod.Core.Managers
 {
-    internal static class FourAxisPuppetManager
+    public static class FourAxisPuppetManager
     {
-        private static AxisPuppetMenu fourAxisPuppetMenuRight;
-        private static AxisPuppetMenu fourAxisPuppetMenuLeft;
-        private static ActionMenuHand hand;
+        private static AxisPuppetMenu _fourAxisPuppetMenuRight;
+        private static AxisPuppetMenu _fourAxisPuppetMenuLeft;
+        private static ActionMenuHand _hand;
         private static bool open;
-        public static AxisPuppetMenu current { get; private set; }
+        public static AxisPuppetMenu Current { get; private set; }
 
-        public static Vector2 fourAxisPuppetValue { get; set; }
+        public static Vector2 FourAxisPuppetValue { get; set; }
 
         public static Action<Vector2> onUpdate { get; set; }
 
         public static void Setup()
         {
-            fourAxisPuppetMenuLeft = Utilities
+            _fourAxisPuppetMenuLeft = Utilities
                 .CloneGameObject("UserInterface/ActionMenu/Container/MenuL/ActionMenu/AxisPuppetMenu",
                     "UserInterface/ActionMenu/Container/MenuL/ActionMenu").GetComponent<AxisPuppetMenu>();
-            fourAxisPuppetMenuRight = Utilities
+            _fourAxisPuppetMenuRight = Utilities
                 .CloneGameObject("UserInterface/ActionMenu/Container/MenuR/ActionMenu/AxisPuppetMenu",
                     "UserInterface/ActionMenu/Container/MenuR/ActionMenu").GetComponent<AxisPuppetMenu>();
         }
@@ -32,11 +32,11 @@ namespace ActionMenuApi.Managers
         public static void OnUpdate()
         {
             //Probably a better more efficient way to do all this
-            if (current != null && current.gameObject.gameObject.active)
+            if (Current != null && Current.gameObject.gameObject.active)
             {
                 if (XRDevice.isPresent)
                 {
-                    if (hand == ActionMenuHand.Right)
+                    if (_hand == ActionMenuHand.Right)
                     {
                         if (Input.GetAxis(Constants.RIGHT_TRIGGER) >= 0.4f)
                         {
@@ -44,7 +44,7 @@ namespace ActionMenuApi.Managers
                             return;
                         }
                     }
-                    else if (hand == ActionMenuHand.Left)
+                    else if (_hand == ActionMenuHand.Left)
                     {
                         if (Input.GetAxis(Constants.LEFT_TRIGGER) >= 0.4f)
                         {
@@ -59,29 +59,29 @@ namespace ActionMenuApi.Managers
                     return;
                 }
 
-                fourAxisPuppetValue = (hand == ActionMenuHand.Left ? InputManager.LeftInput : InputManager.RightInput) / 16;
-                var x = fourAxisPuppetValue.x;
-                var y = fourAxisPuppetValue.y;
+                FourAxisPuppetValue = (_hand == ActionMenuHand.Left ? InputManager.LeftInput : InputManager.RightInput) / 16;
+                var x = FourAxisPuppetValue.x;
+                var y = FourAxisPuppetValue.y;
                 if (x >= 0)
                 {
-                    current.GetFillLeft().SetAlpha(0);
-                    current.GetFillRight().SetAlpha(x);
+                    Current.GetFillLeft().SetAlpha(0);
+                    Current.GetFillRight().SetAlpha(x);
                 }
                 else
                 {
-                    current.GetFillLeft().SetAlpha(Math.Abs(x));
-                    current.GetFillRight().SetAlpha(0);
+                    Current.GetFillLeft().SetAlpha(Math.Abs(x));
+                    Current.GetFillRight().SetAlpha(0);
                 }
 
                 if (y >= 0)
                 {
-                    current.GetFillDown().SetAlpha(0);
-                    current.GetFillUp().SetAlpha(y);
+                    Current.GetFillDown().SetAlpha(0);
+                    Current.GetFillUp().SetAlpha(y);
                 }
                 else
                 {
-                    current.GetFillDown().SetAlpha(Math.Abs(y));
-                    current.GetFillUp().SetAlpha(0);
+                    Current.GetFillDown().SetAlpha(Math.Abs(y));
+                    Current.GetFillUp().SetAlpha(0);
                 }
 
                 UpdateMathStuff();
@@ -92,35 +92,35 @@ namespace ActionMenuApi.Managers
         public static void OpenFourAxisMenu(string title, Action<Vector2> update, PedalOption pedalOption)
         {
             if (open) return;
-            switch (hand = Utilities.GetActionMenuHand())
+            switch (_hand = Utilities.GetActionMenuHand())
             {
                 case ActionMenuHand.Invalid:
                     return;
                 case ActionMenuHand.Left:
-                    current = fourAxisPuppetMenuLeft;
+                    Current = _fourAxisPuppetMenuLeft;
                     open = true;
                     break;
                 case ActionMenuHand.Right:
-                    current = fourAxisPuppetMenuRight;
+                    Current = _fourAxisPuppetMenuRight;
                     open = true;
                     break;
             }
             Input.ResetInputAxes();
             InputManager.ResetMousePos();
             onUpdate = update;
-            current.gameObject.SetActive(true);
-            current.GetTitle().text = title;
+            Current.gameObject.SetActive(true);
+            Current.GetTitle().text = title;
             var actionMenu = Utilities.GetActionMenuOpener().GetActionMenu();
             actionMenu.DisableInput();
             actionMenu.SetMainMenuOpacity(0.5f);
-            current.transform.localPosition = pedalOption.GetActionButton().transform.localPosition;
+            Current.transform.localPosition = pedalOption.GetActionButton().transform.localPosition;
         }
 
         private static void CallUpdateAction()
         {
             try
             {
-                onUpdate?.Invoke(fourAxisPuppetValue);
+                onUpdate?.Invoke(FourAxisPuppetValue);
             }
             catch (Exception e)
             {
@@ -130,12 +130,12 @@ namespace ActionMenuApi.Managers
 
         public static void CloseFourAxisMenu()
         {
-            if (current == null) return;
+            if (Current == null) return;
             CallUpdateAction();
-            current.gameObject.SetActive(false);
-            current = null;
+            Current.gameObject.SetActive(false);
+            Current = null;
             open = false;
-            hand = ActionMenuHand.Invalid;
+            _hand = ActionMenuHand.Invalid;
             var actionMenu = Utilities.GetActionMenuOpener().GetActionMenu();
             actionMenu.SetMainMenuOpacity();
             actionMenu.EnableInput();
@@ -143,8 +143,8 @@ namespace ActionMenuApi.Managers
 
         private static void UpdateMathStuff()
         {
-            var mousePos = hand == ActionMenuHand.Left ? InputManager.LeftInput : InputManager.RightInput;
-            current.GetCursor().transform.localPosition = mousePos * 4;
+            var mousePos = _hand == ActionMenuHand.Left ? InputManager.LeftInput : InputManager.RightInput;
+            Current.GetCursor().transform.localPosition = mousePos * 4;
         }
     }
 }

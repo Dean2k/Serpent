@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
-using ActionMenuApi.Api;
-using ActionMenuApi.Helpers;
+using ReMod.Core.Api;
+using ReMod.Core.Helpers;
 
-namespace ActionMenuApi.Managers
+namespace ReMod.Core.Managers
 {
     internal static class ModsFolderManager
     {
         public static List<Action> mods = new();
-        public static List<List<Action>> splitMods;
+        public static List<List<Action>> SplitMods;
 
         private static readonly Action openFunc = () =>
         {
@@ -18,13 +18,13 @@ namespace ActionMenuApi.Managers
             }
             else
             {
-                if (splitMods == null) splitMods = mods.Split(Constants.MAX_PEDALS_PER_PAGE);
-                for (var i = 0; i < splitMods.Count && i < Constants.MAX_PEDALS_PER_PAGE; i++)
+                SplitMods ??= mods.Split(Constants.MAX_PEDALS_PER_PAGE);
+                for (var i = 0; i < SplitMods.Count && i < Constants.MAX_PEDALS_PER_PAGE; i++)
                 {
                     var index = i;
                     CustomSubMenu.AddSubMenu($"Page {i + 1}", () =>
                     {
-                        foreach (var action in splitMods[index]) action();
+                        foreach (var action in SplitMods[index]) action();
                     }, ResourcesManager.GetPageIcon(i + 1));
                 }
             }
@@ -35,10 +35,6 @@ namespace ActionMenuApi.Managers
             mods.Add(openingAction);
         }
 
-        /*public void RemoveMod(Action openingAction)
-        {
-            mods.Remove(openingAction);
-        }*/
 
         public static void AddMainPageButton()
         {

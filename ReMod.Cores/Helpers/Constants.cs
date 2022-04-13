@@ -1,4 +1,4 @@
-﻿namespace ActionMenuApi.Helpers
+﻿namespace ReMod.Core.Helpers
 {
     internal static class Constants
     {

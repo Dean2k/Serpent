@@ -1,10 +1,9 @@
 ﻿using System;
-using ActionMenuApi.Helpers;
-using ActionMenuApi.Types;
-using MelonLoader;
+using ReMod.Core.Helpers;
+using ReMod.Core.Types;
 using UnityEngine;
 
-namespace ActionMenuApi.Pedals
+namespace ReMod.Core.Pedals
 {
     public sealed class PedalSubMenu : PedalStruct
     {

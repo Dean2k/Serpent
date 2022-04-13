@@ -1,10 +1,10 @@
 ﻿using System;
-using ActionMenuApi.Helpers;
-using ActionMenuApi.Managers;
-using ActionMenuApi.Types;
+using ReMod.Core.Helpers;
+using ReMod.Core.Managers;
+using ReMod.Core.Types;
 using UnityEngine;
 
-namespace ActionMenuApi.Pedals
+namespace ReMod.Core.Pedals
 {
     public sealed class PedalFourAxis : PedalStruct
     {
@@ -16,10 +16,10 @@ namespace ActionMenuApi.Pedals
             triggerEvent = delegate
             {
                 FourAxisPuppetManager.OpenFourAxisMenu(text, onUpdate, pedal);
-                FourAxisPuppetManager.current.GetButtonUp().SetButtonText(topButtonText);
-                FourAxisPuppetManager.current.GetButtonRight().SetButtonText(rightButtonText);
-                FourAxisPuppetManager.current.GetButtonDown().SetButtonText(downButtonText);
-                FourAxisPuppetManager.current.GetButtonLeft().SetButtonText(leftButtonText);
+                FourAxisPuppetManager.Current.GetButtonUp().SetButtonText(topButtonText);
+                FourAxisPuppetManager.Current.GetButtonRight().SetButtonText(rightButtonText);
+                FourAxisPuppetManager.Current.GetButtonDown().SetButtonText(downButtonText);
+                FourAxisPuppetManager.Current.GetButtonLeft().SetButtonText(leftButtonText);
             };
             Type = PedalType.FourAxisPuppet;
             this.locked = locked;

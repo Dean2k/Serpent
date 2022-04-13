@@ -17,7 +17,7 @@ using VRC_AvatarPedestal = VRC.SDKBase.VRC_AvatarPedestal;
 using VRC_Pickup = VRC.SDKBase.VRC_Pickup;
 using VRC_UiShape = VRC.SDKBase.VRC_UiShape;
 using Object = UnityEngine.Object;
-using ActionMenuApi.Api;
+using ReMod.Core.Api;
 using ReModCE_ARES.Loader;
 
 // ReSharper disable InconsistentNaming

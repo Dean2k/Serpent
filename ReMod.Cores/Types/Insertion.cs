@@ -1,4 +1,4 @@
-﻿namespace ActionMenuApi.Types
+﻿namespace ReMod.Core.Types
 {
     /// <summary>
     ///     Whether your pedal on the vrchat pages should be placed before or after vrchat's pedals

@@ -1,10 +1,11 @@
 using System;
-using ActionMenuApi.Pedals;
-using ActionMenuApi.Types;
 using MelonLoader;
+using ReMod.Core.Pedals;
+using ReMod.Core.Types;
+using ReModCE_ARES.Loader;
 using UnityEngine;
 
-namespace ActionMenuApi.Api
+namespace ReMod.Core.Api
 {
     /// <summary>
     /// VRC Page specific things
@@ -152,63 +153,63 @@ namespace ActionMenuApi.Api
 
         internal static void AddPedalToList(ActionMenuPage pageType, PedalStruct customPedal, Insertion insertion)
         {
-            Logger.Log(
+            ReLogger.Msg(
                 $"Adding to page: {pageType.ToString()}, Text: {customPedal.text}, Locked: {customPedal.locked}");
             switch (pageType)
             {
                 case ActionMenuPage.SDK2Expression:
-                    if (insertion == Insertion.Pre) Patches.sdk2ExpressionPagePre.Add(customPedal);
-                    else if (insertion == Insertion.Post) Patches.sdk2ExpressionPagePost.Add(customPedal);
+                    if (insertion == Insertion.Pre) ActionMenus.sdk2ExpressionPagePre.Add(customPedal);
+                    else if (insertion == Insertion.Post) ActionMenus.sdk2ExpressionPagePost.Add(customPedal);
                     return;
                 case ActionMenuPage.Config:
-                    if (insertion == Insertion.Pre) Patches.configPagePre.Add(customPedal);
-                    else if (insertion == Insertion.Post) Patches.configPagePost.Add(customPedal);
+                    if (insertion == Insertion.Pre) ActionMenus.configPagePre.Add(customPedal);
+                    else if (insertion == Insertion.Post) ActionMenus.configPagePost.Add(customPedal);
                     return;
                 case ActionMenuPage.Emojis:
-                    if (insertion == Insertion.Pre) Patches.emojisPagePre.Add(customPedal);
-                    else if (insertion == Insertion.Post) Patches.emojisPagePost.Add(customPedal);
+                    if (insertion == Insertion.Pre) ActionMenus.emojisPagePre.Add(customPedal);
+                    else if (insertion == Insertion.Post) ActionMenus.emojisPagePost.Add(customPedal);
                     return;
                 case ActionMenuPage.Expression:
-                    if (insertion == Insertion.Pre) Patches.expressionPagePre.Add(customPedal);
-                    else if (insertion == Insertion.Post) Patches.expressionPagePost.Add(customPedal);
+                    if (insertion == Insertion.Pre) ActionMenus.expressionPagePre.Add(customPedal);
+                    else if (insertion == Insertion.Post) ActionMenus.expressionPagePost.Add(customPedal);
                     return;
                 case ActionMenuPage.Main:
-                    if (insertion == Insertion.Pre) Patches.mainPagePre.Add(customPedal);
-                    else if (insertion == Insertion.Post) Patches.mainPagePost.Add(customPedal);
+                    if (insertion == Insertion.Pre) ActionMenus.mainPagePre.Add(customPedal);
+                    else if (insertion == Insertion.Post) ActionMenus.mainPagePost.Add(customPedal);
                     return;
                 case ActionMenuPage.MenuOpacity:
-                    if (insertion == Insertion.Pre) Patches.menuOpacityPagePre.Add(customPedal);
-                    else if (insertion == Insertion.Post) Patches.menuOpacityPagePost.Add(customPedal);
+                    if (insertion == Insertion.Pre) ActionMenus.menuOpacityPagePre.Add(customPedal);
+                    else if (insertion == Insertion.Post) ActionMenus.menuOpacityPagePost.Add(customPedal);
                     return;
                 case ActionMenuPage.MenuSize:
                     MelonLogger.Warning(
                         "Adding to the MenuSize page hasn't been implemented yet. Please use a different page");
                     return;
-                    if (insertion == Insertion.Pre) Patches.menuSizePagePre.Add(customPedal);
-                    else if (insertion == Insertion.Post) Patches.menuSizePagePost.Add(customPedal);
+                    if (insertion == Insertion.Pre) ActionMenus.menuSizePagePre.Add(customPedal);
+                    else if (insertion == Insertion.Post) ActionMenus.menuSizePagePost.Add(customPedal);
                     return;
                 case ActionMenuPage.Nameplates:
-                    if (insertion == Insertion.Pre) Patches.nameplatesPagePre.Add(customPedal);
-                    else if (insertion == Insertion.Post) Patches.nameplatesPagePost.Add(customPedal);
+                    if (insertion == Insertion.Pre) ActionMenus.nameplatesPagePre.Add(customPedal);
+                    else if (insertion == Insertion.Post) ActionMenus.nameplatesPagePost.Add(customPedal);
                     return;
                 case ActionMenuPage.NameplatesOpacity:
-                    if (insertion == Insertion.Pre) Patches.nameplatesOpacityPagePre.Add(customPedal);
-                    else if (insertion == Insertion.Post) Patches.nameplatesOpacityPagePost.Add(customPedal);
+                    if (insertion == Insertion.Pre) ActionMenus.nameplatesOpacityPagePre.Add(customPedal);
+                    else if (insertion == Insertion.Post) ActionMenus.nameplatesOpacityPagePost.Add(customPedal);
                     return;
                 case ActionMenuPage.NameplatesSize:
                     MelonLogger.Warning(
                         "Adding to the Nameplates size page isn't supported currently. Please use a different page");
                     return;
-                    if (insertion == Insertion.Pre) Patches.nameplatesSizePagePre.Add(customPedal);
-                    else if (insertion == Insertion.Post) Patches.nameplatesSizePagePost.Add(customPedal);
+                    if (insertion == Insertion.Pre) ActionMenus.nameplatesSizePagePre.Add(customPedal);
+                    else if (insertion == Insertion.Post) ActionMenus.nameplatesSizePagePost.Add(customPedal);
                     return;
                 case ActionMenuPage.NameplatesVisibilty:
-                    if (insertion == Insertion.Pre) Patches.nameplatesVisibilityPagePre.Add(customPedal);
-                    else if (insertion == Insertion.Post) Patches.nameplatesVisibilityPagePost.Add(customPedal);
+                    if (insertion == Insertion.Pre) ActionMenus.nameplatesVisibilityPagePre.Add(customPedal);
+                    else if (insertion == Insertion.Post) ActionMenus.nameplatesVisibilityPagePost.Add(customPedal);
                     return;
                 case ActionMenuPage.Options:
-                    if (insertion == Insertion.Pre) Patches.optionsPagePre.Add(customPedal);
-                    else if (insertion == Insertion.Post) Patches.optionsPagePost.Add(customPedal);
+                    if (insertion == Insertion.Pre) ActionMenus.optionsPagePre.Add(customPedal);
+                    else if (insertion == Insertion.Post) ActionMenus.optionsPagePost.Add(customPedal);
                     return;
             }
         }

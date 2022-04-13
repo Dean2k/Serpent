@@ -42,7 +42,5 @@ namespace ActionMenuApi
             RadialPuppetManager.OnUpdate();
             FourAxisPuppetManager.OnUpdate();
         }
-
-        private static string ID = "gompo";
     }
 }

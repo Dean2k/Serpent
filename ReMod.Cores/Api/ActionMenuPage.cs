@@ -1,4 +1,4 @@
-namespace ActionMenuApi.Api
+namespace ReMod.Core.Api
 {
     /// <summary>
     ///     Supported existing vrchat pages that you can add pedals to

@@ -1,13 +1,11 @@
 using System;
-using ActionMenuApi.Helpers;
-using ActionMenuApi.Managers;
-using MelonLoader;
+using ReMod.Core.Helpers;
+using ReMod.Core.Managers;
 using UnityEngine;
-using VRC.SDK3.Avatars.ScriptableObjects;
 
 // ReSharper disable HeuristicUnreachableCode
 
-namespace ActionMenuApi.Api
+namespace ReMod.Core.Api
 {
     /// <summary>
     ///     Class for adding buttons,toggles,radial puppets inside of a custom submenu
@@ -149,10 +147,10 @@ namespace ActionMenuApi.Api
                     delegate
                     {
                         FourAxisPuppetManager.OpenFourAxisMenu(text, onUpdate, pedalOption);
-                        FourAxisPuppetManager.current.GetButtonUp().SetButtonText(topButtonText);
-                        FourAxisPuppetManager.current.GetButtonRight().SetButtonText(rightButtonText);
-                        FourAxisPuppetManager.current.GetButtonDown().SetButtonText(downButtonText);
-                        FourAxisPuppetManager.current.GetButtonLeft().SetButtonText(leftButtonText);
+                        FourAxisPuppetManager.Current.GetButtonUp().SetButtonText(topButtonText);
+                        FourAxisPuppetManager.Current.GetButtonRight().SetButtonText(rightButtonText);
+                        FourAxisPuppetManager.Current.GetButtonDown().SetButtonText(downButtonText);
+                        FourAxisPuppetManager.Current.GetButtonLeft().SetButtonText(leftButtonText);
                     }
                 );
             else pedalOption.Lock();

@@ -1,10 +1,10 @@
 ﻿using System;
-using ActionMenuApi.Helpers;
-using ActionMenuApi.Managers;
-using ActionMenuApi.Types;
+using ReMod.Core.Helpers;
+using ReMod.Core.Managers;
+using ReMod.Core.Types;
 using UnityEngine;
 
-namespace ActionMenuApi.Pedals
+namespace ReMod.Core.Pedals
 {
     public sealed class PedalRadial : PedalStruct
     {

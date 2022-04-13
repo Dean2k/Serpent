@@ -1,33 +1,31 @@
 ﻿using System;
-using ActionMenuApi.Helpers;
-using ActionMenuApi.Types;
 using MelonLoader;
-using UnhollowerBaseLib;
+using ReMod.Core.Helpers;
+using ReMod.Core.Types;
 using UnityEngine;
 using UnityEngine.XR;
-using VRC.SDK3.Avatars.ScriptableObjects;
 
-namespace ActionMenuApi.Managers
+namespace ReMod.Core.Managers
 {
-    internal static class RadialPuppetManager
+    public static class RadialPuppetManager
     {
-        private static RadialPuppetMenu radialPuppetMenuRight;
-        private static RadialPuppetMenu radialPuppetMenuLeft;
-        private static RadialPuppetMenu current;
-        private static ActionMenuHand hand;
+        private static RadialPuppetMenu _radialPuppetMenuRight;
+        private static RadialPuppetMenu _radialPuppetMenuLeft;
+        private static RadialPuppetMenu _current;
+        private static ActionMenuHand _hand;
         private static bool open;
-        private static bool restricted;
-        private static float currentValue;
+        private static bool _restricted;
+        private static float _currentValue;
 
-        public static float radialPuppetValue { get; set; }
+        public static float RadialPuppetValue { get; set; }
         public static Action<float> onUpdate { get; set; }
 
         public static void Setup()
         {
-            radialPuppetMenuLeft = Utilities
+            _radialPuppetMenuLeft = Utilities
                 .CloneGameObject("UserInterface/ActionMenu/Container/MenuL/ActionMenu/RadialPuppetMenu",
                     "UserInterface/ActionMenu/Container/MenuL/ActionMenu").GetComponent<RadialPuppetMenu>();
-            radialPuppetMenuRight = Utilities
+            _radialPuppetMenuRight = Utilities
                 .CloneGameObject("UserInterface/ActionMenu/Container/MenuR/ActionMenu/RadialPuppetMenu",
                     "UserInterface/ActionMenu/Container/MenuR/ActionMenu").GetComponent<RadialPuppetMenu>();
         }
@@ -35,11 +33,11 @@ namespace ActionMenuApi.Managers
         public static void OnUpdate()
         {
             //Probably a better more efficient way to do all this
-            if (current != null && current.gameObject.gameObject.active)
+            if (_current != null && _current.gameObject.gameObject.active)
             {
                 if (XRDevice.isPresent)
                 {
-                    if (hand == ActionMenuHand.Right)
+                    if (_hand == ActionMenuHand.Right)
                     {
                         if (Input.GetAxis(Constants.RIGHT_TRIGGER) >= 0.4f)
                         {
@@ -47,7 +45,7 @@ namespace ActionMenuApi.Managers
                             return;
                         }
                     }
-                    else if (hand == ActionMenuHand.Left)
+                    else if (_hand == ActionMenuHand.Left)
                     {
                         if (Input.GetAxis(Constants.LEFT_TRIGGER) >= 0.4f)
                         {
@@ -75,46 +73,46 @@ namespace ActionMenuApi.Managers
                 case ActionMenuHand.Invalid:
                     return;
                 case ActionMenuHand.Left:
-                    current = radialPuppetMenuLeft;
-                    hand = ActionMenuHand.Left;
+                    _current = _radialPuppetMenuLeft;
+                    _hand = ActionMenuHand.Left;
                     open = true;
                     break;
                 case ActionMenuHand.Right:
-                    current = radialPuppetMenuRight;
-                    hand = ActionMenuHand.Right;
+                    _current = _radialPuppetMenuRight;
+                    _hand = ActionMenuHand.Right;
                     open = true;
                     break;
                    
             }
 
-            RadialPuppetManager.restricted = restricted;
+            RadialPuppetManager._restricted = restricted;
             Input.ResetInputAxes();
             InputManager.ResetMousePos();
-            current.gameObject.SetActive(true);
-            current.GetFill().SetFillAngle(startingValue * 360); //Please dont break
+            _current.gameObject.SetActive(true);
+            _current.GetFill().SetFillAngle(startingValue * 360); //Please dont break
             RadialPuppetManager.onUpdate = onUpdate;
-            currentValue = startingValue;
+            _currentValue = startingValue;
             
-            current.GetTitle().text = title;
-            current.GetCenterText().text = $"{Mathf.Round(startingValue * 100f)}%";
-            current.GetFill().UpdateGeometry();
-            current.transform.localPosition = pedalOption.GetActionButton().transform.localPosition; //new Vector3(-256f, 0, 0); 
+            _current.GetTitle().text = title;
+            _current.GetCenterText().text = $"{Mathf.Round(startingValue * 100f)}%";
+            _current.GetFill().UpdateGeometry();
+            _current.transform.localPosition = pedalOption.GetActionButton().transform.localPosition; //new Vector3(-256f, 0, 0); 
             var angleOriginal = Utilities.ConvertFromEuler(startingValue * 360);
             var eulerAngle = Utilities.ConvertFromDegToEuler(angleOriginal);
             var actionMenu = Utilities.GetActionMenuOpener().GetActionMenu();
             actionMenu.DisableInput();
             actionMenu.SetMainMenuOpacity(0.5f);
-            current.UpdateArrow(angleOriginal, eulerAngle);
+            _current.UpdateArrow(angleOriginal, eulerAngle);
         }
 
         public static void CloseRadialMenu()
         {
-            if (current == null) return;
+            if (_current == null) return;
             CallUpdateAction();
-            current.gameObject.SetActive(false);
-            current = null;
+            _current.gameObject.SetActive(false);
+            _current = null;
             open = false;
-            hand = ActionMenuHand.Invalid;
+            _hand = ActionMenuHand.Invalid;
             var actionMenu = Utilities.GetActionMenuOpener().GetActionMenu();
             actionMenu.EnableInput();
             actionMenu.SetMainMenuOpacity();
@@ -124,7 +122,7 @@ namespace ActionMenuApi.Managers
         {
             try
             {
-                onUpdate?.Invoke(current.GetFill().GetFillAngle() / 360f);
+                onUpdate?.Invoke(_current.GetFill().GetFillAngle() / 360f);
             }
             catch (Exception e)
             {
@@ -134,50 +132,50 @@ namespace ActionMenuApi.Managers
 
         private static void UpdateMathStuff()
         {
-            var mousePos = hand == ActionMenuHand.Left ? InputManager.LeftInput : InputManager.RightInput;
-            radialPuppetMenuRight.GetCursor().transform.localPosition = mousePos * 4;
+            var mousePos = _hand == ActionMenuHand.Left ? InputManager.LeftInput : InputManager.RightInput;
+            _radialPuppetMenuRight.GetCursor().transform.localPosition = mousePos * 4;
 
             if (Vector2.Distance(mousePos, Vector2.zero) > 12)
             {
                 var angleOriginal = Mathf.Round(Mathf.Atan2(mousePos.y, mousePos.x) * Constants.RAD_TO_DEG);
                 var eulerAngle = Utilities.ConvertFromDegToEuler(angleOriginal);
                 var normalisedAngle = eulerAngle / 360f;
-                if (Math.Abs(normalisedAngle - currentValue) < 0.0001f) return;
-                if (!restricted)
+                if (Math.Abs(normalisedAngle - _currentValue) < 0.0001f) return;
+                if (!_restricted)
                 {
-                    current.SetAngle(eulerAngle);
-                    current.UpdateArrow(angleOriginal, eulerAngle);
+                    _current.SetAngle(eulerAngle);
+                    _current.UpdateArrow(angleOriginal, eulerAngle);
                 }
                 else
                 {
-                    if (currentValue > normalisedAngle)
+                    if (_currentValue > normalisedAngle)
                     {
-                        if (currentValue - normalisedAngle < 0.5f)
+                        if (_currentValue - normalisedAngle < 0.5f)
                         {
-                            current.SetAngle(eulerAngle);
-                            current.UpdateArrow(angleOriginal, eulerAngle);
-                            currentValue = normalisedAngle;
+                            _current.SetAngle(eulerAngle);
+                            _current.UpdateArrow(angleOriginal, eulerAngle);
+                            _currentValue = normalisedAngle;
                         }
                         else
                         {
-                            current.SetAngle(360);
-                            current.UpdateArrow(90, 360);
-                            currentValue = 1f;
+                            _current.SetAngle(360);
+                            _current.UpdateArrow(90, 360);
+                            _currentValue = 1f;
                         }
                     }
                     else
                     {
-                        if (normalisedAngle - currentValue < 0.5f)
+                        if (normalisedAngle - _currentValue < 0.5f)
                         {
-                            current.SetAngle(eulerAngle);
-                            current.UpdateArrow(angleOriginal, eulerAngle);
-                            currentValue = normalisedAngle;
+                            _current.SetAngle(eulerAngle);
+                            _current.UpdateArrow(angleOriginal, eulerAngle);
+                            _currentValue = normalisedAngle;
                         }
                         else
                         {
-                            current.SetAngle(0);
-                            current.UpdateArrow(90, 0);
-                            currentValue = 0;
+                            _current.SetAngle(0);
+                            _current.UpdateArrow(90, 0);
+                            _currentValue = 0;
                         }
                     }
                 }

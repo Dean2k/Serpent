@@ -1,25 +1,25 @@
 using System.IO;
 using System.Reflection;
-using ActionMenuApi.Helpers;
 using MelonLoader;
+using ReMod.Core.Helpers;
 using UnhollowerRuntimeLib;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ActionMenuApi.Managers
+namespace ReMod.Core.Managers
 {
-    internal static class ResourcesManager
+    public static class ResourcesManager
     {
-        private static GameObject lockPrefab;
-        private static Texture2D pageOne;
-        private static Texture2D pageTwo;
-        private static Texture2D pageThree;
-        private static Texture2D pageFour;
-        private static Texture2D pageFive;
-        private static Texture2D pageSix;
-        private static Texture2D pageSeven;
-        private static Texture2D locked;
-        private static Texture2D modsSectionIcon;
+        private static GameObject _lockPrefab;
+        private static Texture2D _pageOne;
+        private static Texture2D _pageTwo;
+        private static Texture2D _pageThree;
+        private static Texture2D _pageFour;
+        private static Texture2D _pageFive;
+        private static Texture2D _pageSix;
+        private static Texture2D _pageSeven;
+        private static Texture2D _locked;
+        private static Texture2D _modsSectionIcon;
 
         public static void LoadTextures()
         {
@@ -34,74 +34,66 @@ namespace ActionMenuApi.Managers
                 iconsAssetBundle.hideFlags |= HideFlags.DontUnloadUnusedAsset;
             }
 
-            modsSectionIcon = iconsAssetBundle
+            _modsSectionIcon = iconsAssetBundle
                 .LoadAsset_Internal("Assets/ActionMenuApi/vrcmg.png", Il2CppType.Of<Texture2D>()).Cast<Texture2D>();
-            modsSectionIcon.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageOne = iconsAssetBundle.LoadAsset_Internal("Assets/ActionMenuApi/1.png", Il2CppType.Of<Texture2D>())
+            _modsSectionIcon.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+            _pageOne = iconsAssetBundle.LoadAsset_Internal("Assets/ActionMenuApi/1.png", Il2CppType.Of<Texture2D>())
                 .Cast<Texture2D>();
-            pageOne.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageTwo = iconsAssetBundle.LoadAsset_Internal("Assets/ActionMenuApi/2.png", Il2CppType.Of<Texture2D>())
+            _pageOne.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+            _pageTwo = iconsAssetBundle.LoadAsset_Internal("Assets/ActionMenuApi/2.png", Il2CppType.Of<Texture2D>())
                 .Cast<Texture2D>();
-            pageTwo.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageThree = iconsAssetBundle.LoadAsset_Internal("Assets/ActionMenuApi/3.png", Il2CppType.Of<Texture2D>())
+            _pageTwo.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+            _pageThree = iconsAssetBundle.LoadAsset_Internal("Assets/ActionMenuApi/3.png", Il2CppType.Of<Texture2D>())
                 .Cast<Texture2D>();
-            pageThree.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageFour = iconsAssetBundle.LoadAsset_Internal("Assets/ActionMenuApi/4.png", Il2CppType.Of<Texture2D>())
+            _pageThree.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+            _pageFour = iconsAssetBundle.LoadAsset_Internal("Assets/ActionMenuApi/4.png", Il2CppType.Of<Texture2D>())
                 .Cast<Texture2D>();
-            pageFour.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageFive = iconsAssetBundle.LoadAsset_Internal("Assets/ActionMenuApi/5.png", Il2CppType.Of<Texture2D>())
+            _pageFour.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+            _pageFive = iconsAssetBundle.LoadAsset_Internal("Assets/ActionMenuApi/5.png", Il2CppType.Of<Texture2D>())
                 .Cast<Texture2D>();
-            pageFive.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageSix = iconsAssetBundle.LoadAsset_Internal("Assets/ActionMenuApi/6.png", Il2CppType.Of<Texture2D>())
+            _pageFive.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+            _pageSix = iconsAssetBundle.LoadAsset_Internal("Assets/ActionMenuApi/6.png", Il2CppType.Of<Texture2D>())
                 .Cast<Texture2D>();
-            pageSix.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageSeven = iconsAssetBundle.LoadAsset_Internal("Assets/ActionMenuApi/7.png", Il2CppType.Of<Texture2D>())
+            _pageSix.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+            _pageSeven = iconsAssetBundle.LoadAsset_Internal("Assets/ActionMenuApi/7.png", Il2CppType.Of<Texture2D>())
                 .Cast<Texture2D>();
-            pageSeven.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            locked = iconsAssetBundle.LoadAsset_Internal("Assets/ActionMenuApi/locked.png", Il2CppType.Of<Texture2D>())
+            _pageSeven.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+            _locked = iconsAssetBundle.LoadAsset_Internal("Assets/ActionMenuApi/locked.png", Il2CppType.Of<Texture2D>())
                 .Cast<Texture2D>();
-            locked.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+            _locked.hideFlags |= HideFlags.DontUnloadUnusedAsset;
             MelonLogger.Msg("Loaded textures");
         }
 
         public static void InitLockGameObject()
         {
-            lockPrefab = Object.Instantiate(ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener().GetActionMenu()
+            _lockPrefab = Object.Instantiate(ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener().GetActionMenu()
                 .GetPedalOptionPrefab().GetComponent<PedalOption>().GetActionButton().gameObject.GetChild("Inner")
                 .GetChild("Folder Icon"));
-            Object.DontDestroyOnLoad(lockPrefab);
-            lockPrefab.active = false;
-            lockPrefab.gameObject.name = Constants.LOCKED_PEDAL_OVERLAY_GAMEOBJECT_NAME;
-            lockPrefab.GetComponent<RawImage>().texture = locked;
+            Object.DontDestroyOnLoad(_lockPrefab);
+            _lockPrefab.active = false;
+            _lockPrefab.gameObject.name = Constants.LOCKED_PEDAL_OVERLAY_GAMEOBJECT_NAME;
+            _lockPrefab.GetComponent<RawImage>().texture = _locked;
             MelonLogger.Msg("Created lock gameobject");
         }
 
         public static Texture2D GetPageIcon(int pageIndex)
         {
-            switch (pageIndex)
+            return pageIndex switch
             {
-                case 1:
-                    return pageOne;
-                case 2:
-                    return pageTwo;
-                case 3:
-                    return pageThree;
-                case 4:
-                    return pageFour;
-                case 5:
-                    return pageFive;
-                case 6:
-                    return pageSix;
-                case 7:
-                    return pageSeven;
-                default:
-                    return null;
-            }
+                1 => _pageOne,
+                2 => _pageTwo,
+                3 => _pageThree,
+                4 => _pageFour,
+                5 => _pageFive,
+                6 => _pageSix,
+                7 => _pageSeven,
+                _ => null
+            };
         }
 
         public static void AddLockChildIcon(GameObject parent)
         {
-            var lockedGameObject = Object.Instantiate(lockPrefab, parent.transform, false);
+            var lockedGameObject = Object.Instantiate(_lockPrefab, parent.transform, false);
             lockedGameObject.SetActive(true);
             lockedGameObject.transform.localPosition = new Vector3(50, -25, 0);
             lockedGameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
@@ -109,7 +101,7 @@ namespace ActionMenuApi.Managers
 
         public static Texture2D GetModsSectionIcon()
         {
-            return modsSectionIcon;
+            return _modsSectionIcon;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace ActionMenuApi.Types
+﻿namespace ReMod.Core.Types
 {
     public enum PedalType
     {

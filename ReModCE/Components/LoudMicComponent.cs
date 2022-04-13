@@ -1,5 +1,5 @@
-﻿using ActionMenuApi.Api;
-using ReMod.Core;
+﻿using ReMod.Core;
+using ReMod.Core.Api;
 using ReMod.Core.Managers;
 using ReMod.Core.UI;
 using ReMod.Core.UI.QuickMenu;

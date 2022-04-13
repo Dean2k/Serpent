@@ -14,11 +14,10 @@ namespace ReMod.Core.Managers
             MainMenu = new ReMenuPage(menuName, true);
             ReTabButton.Create(menuName, $"Open the {menuName} menu.", menuName, menuSprite);
 
-            if (createTargetMenu)
-            {
-                var localMenu = new ReCategoryPage(QuickMenuEx.SelectedUserLocal.transform);
-                TargetMenu = localMenu.AddCategory($"{menuName}");
-            }
+            if (!createTargetMenu) return;
+
+            var localMenu = new ReCategoryPage(QuickMenuEx.SelectedUserLocal.transform);
+            TargetMenu = localMenu.AddCategory($"{menuName}");
         }
     }
 }
