@@ -1,12 +1,12 @@
 ﻿using Newtonsoft.Json;
-using ReMod.Core;
-using ReMod.Core.Managers;
-using ReMod.Core.UI;
+using ReModAres.Core;
+using ReModAres.Core.Managers;
+using ReModAres.Core.UI;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using ReMod.Core.UI.QuickMenu;
+using ReModAres.Core.UI.QuickMenu;
 using UnityEngine;
 using VRC.Core;
 using VRC.SDKBase;

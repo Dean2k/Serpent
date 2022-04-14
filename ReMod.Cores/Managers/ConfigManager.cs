@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ReMod.Core.Managers
+namespace ReModAres.Core.Managers
 {
     public class ConfigManager
     {

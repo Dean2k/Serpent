@@ -1,4 +1,4 @@
-﻿using ReMod.Core.VRChat;
+﻿using ReModAres.Core.VRChat;
 using System;
 using System.Collections.Generic;
 using System.Linq;

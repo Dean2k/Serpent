@@ -6,11 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using HarmonyLib;
 using MelonLoader;
-using ReMod.Core.Helpers;
-using ReMod.Core.Managers;
-using ReMod.Core.Pedals;
+using ReModAres.Core.Helpers;
+using ReModAres.Core.Managers;
+using ReModAres.Core.Pedals;
 
-namespace ReMod.Core
+namespace ReModAres.Core
 {
     public class ActionMenus
     {

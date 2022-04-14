@@ -1,5 +1,5 @@
 ﻿using System;
-using ReMod.Core;
+using ReModAres.Core;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;

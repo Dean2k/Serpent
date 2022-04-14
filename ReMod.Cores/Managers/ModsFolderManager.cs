@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using ReMod.Core.Api;
-using ReMod.Core.Helpers;
+using ReModAres.Core.Api;
+using ReModAres.Core.Helpers;
 
-namespace ReMod.Core.Managers
+namespace ReModAres.Core.Managers
 {
     internal static class ModsFolderManager
     {

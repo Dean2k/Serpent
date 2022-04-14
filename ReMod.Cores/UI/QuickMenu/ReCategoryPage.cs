@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
-using ReMod.Core.Unity;
-using ReMod.Core.VRChat;
+using ReModAres.Core.Unity;
+using ReModAres.Core.VRChat;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +9,7 @@ using VRC.UI.Elements;
 using VRC.UI.Elements.Menus;
 using Object = UnityEngine.Object;
 
-namespace ReMod.Core.UI.QuickMenu
+namespace ReModAres.Core.UI.QuickMenu
 {
     public class ReCategoryPage : UiElement
     {

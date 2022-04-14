@@ -7,8 +7,8 @@
     <ProjectGuid>{C87FE758-ACB9-4FA2-AF6F-10AA9AA0023C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ReMod.Core</RootNamespace>
-    <AssemblyName>ReMod.Core</AssemblyName>
+    <RootNamespace>ReModAres.Core</RootNamespace>
+    <AssemblyName>ReModAres.Core</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -52,10 +52,12 @@
     <Reference Include="DOTween, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\3rdparty\ml\Managed\DOTween.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Facepunch.Steamworks.Win64, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\3rdparty\ml\Managed\Facepunch.Steamworks.Win64.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Il2Cppmscorlib">
       <HintPath>$(SolutionDir)\3rdparty\ml\Managed\Il2Cppmscorlib.dll</HintPath>
@@ -64,6 +66,7 @@
     <Reference Include="Il2CppSystem, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\3rdparty\ml\Managed\Il2CppSystem.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="MelonLoader">
       <HintPath>$(SolutionDir)\3rdparty\ml\MelonLoader.dll</HintPath>
@@ -78,6 +81,7 @@
     <Reference Include="Transmtn, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\3rdparty\ml\Managed\Transmtn.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnhollowerBaseLib">
       <HintPath>$(SolutionDir)\3rdparty\ml\Managed\UnhollowerBaseLib.dll</HintPath>
@@ -86,6 +90,7 @@
     <Reference Include="UniTask, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\3rdparty\ml\Managed\UniTask.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>$(SolutionDir)\3rdparty\ml\Managed\Unity.TextMeshPro.dll</HintPath>
@@ -98,6 +103,7 @@
     <Reference Include="UnityEngine.AssetBundleModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\3rdparty\ml\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>$(SolutionDir)\3rdparty\ml\Managed\UnityEngine.CoreModule.dll</HintPath>
@@ -110,6 +116,7 @@
     <Reference Include="UnityEngine.InputLegacyModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\3rdparty\ml\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule">
       <HintPath>$(SolutionDir)\3rdparty\ml\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
@@ -122,22 +129,27 @@
     <Reference Include="UnityEngine.UIModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\3rdparty\ml\Managed\UnityEngine.UIModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\3rdparty\ml\Managed\UnityEngine.UnityWebRequestModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestWWWModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\3rdparty\ml\Managed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.VRModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\3rdparty\ml\Managed\UnityEngine.VRModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.XRModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\3rdparty\ml\Managed\UnityEngine.XRModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="VRC.UI.Core">
       <HintPath>$(SolutionDir)\3rdparty\ml\Managed\VRC.UI.Core.dll</HintPath>
@@ -150,6 +162,7 @@
     <Reference Include="VRCCore-Editor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\3rdparty\ml\Managed\VRCCore-Editor.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="VRCCore-Standalone">
       <HintPath>$(SolutionDir)\3rdparty\ml\Managed\VRCCore-Standalone.dll</HintPath>
@@ -158,10 +171,12 @@
     <Reference Include="VRCSDK2, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\3rdparty\ml\Managed\VRCSDK2.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="VRCSDK3A, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\3rdparty\ml\Managed\VRCSDK3A.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="VRCSDKBase">
       <HintPath>$(SolutionDir)\3rdparty\ml\Managed\VRCSDKBase.dll</HintPath>

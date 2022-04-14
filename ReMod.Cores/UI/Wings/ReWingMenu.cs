@@ -1,12 +1,12 @@
 ﻿using System;
-using ReMod.Core.VRChat;
+using ReModAres.Core.VRChat;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.UI.Elements;
 using Object = UnityEngine.Object;
 
-namespace ReMod.Core.UI.Wings
+namespace ReModAres.Core.UI.Wings
 {
     [Flags]
     public enum WingSide

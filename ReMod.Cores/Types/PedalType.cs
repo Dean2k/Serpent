@@ -1,4 +1,4 @@
-﻿namespace ReMod.Core.Types
+﻿namespace ReModAres.Core.Types
 {
     public enum PedalType
     {

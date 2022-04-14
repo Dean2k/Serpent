@@ -1,13 +1,13 @@
-﻿using ReMod.Core;
-using ReMod.Core.Managers;
+﻿using ReModAres.Core;
+using ReModAres.Core.Managers;
 using System;
 using System.Collections;
 using System.IO;
 using System.Linq;
 using MelonLoader;
-using ReMod.Core.UI.QuickMenu;
-using ReMod.Core.Unity;
-using ReMod.Core.VRChat;
+using ReModAres.Core.UI.QuickMenu;
+using ReModAres.Core.Unity;
+using ReModAres.Core.VRChat;
 using UnityEngine;
 using VRC.Core;
 

@@ -74,12 +74,14 @@
     </Reference>
     <Reference Include="Photon-DotNet">
       <HintPath>..\3rdparty\ml\Managed\Photon-DotNet.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
       <HintPath>..\3rdparty\ml\Managed\System.Windows.Forms.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -185,9 +187,11 @@
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestModule">
       <HintPath>..\3rdparty\ml\Managed\UnityEngine.UnityWebRequestModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestWWWModule">
       <HintPath>..\3rdparty\ml\Managed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.VRModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <Private>false</Private>
@@ -201,9 +205,11 @@
     </Reference>
     <Reference Include="VRC.Udon">
       <HintPath>E:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.Udon.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="VRC.Udon.Common">
       <HintPath>E:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.Udon.Common.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="VRC.UI.Core">
       <HintPath>..\3rdparty\ml\Managed\VRC.UI.Core.dll</HintPath>
@@ -223,6 +229,7 @@
     </Reference>
     <Reference Include="VRCCore-Editor">
       <HintPath>E:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRCCore-Editor.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="VRCCore-Standalone, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <Private>false</Private>
@@ -308,9 +315,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ReMod.Cores\ReMod.Core.csproj">
+    <ProjectReference Include="..\ReMod.Cores\ReModAres.Core.csproj">
       <Project>{C87FE758-ACB9-4FA2-AF6F-10AA9AA0023C}</Project>
-      <Name>ReMod.Core</Name>
+      <Name>ReModAres.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\ReModCE.Loader\ReModCE.Loader.csproj">
       <Project>{6e5e0e59-73d9-4d74-b734-d040d26710c4}</Project>

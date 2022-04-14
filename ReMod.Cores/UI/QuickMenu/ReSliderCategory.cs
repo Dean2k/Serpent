@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ReMod.Core.VRChat;
+using ReModAres.Core.VRChat;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.UI.Elements;
 using Object = UnityEngine.Object;
 
-namespace ReMod.Core.UI.QuickMenu
+namespace ReModAres.Core.UI.QuickMenu
 {
     public class ReMenuSliderContainer : UiElement
     {

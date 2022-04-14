@@ -1,9 +1,9 @@
-﻿using ReMod.Core;
-using ReMod.Core.VRChat;
+﻿using ReModAres.Core;
+using ReModAres.Core.VRChat;
 using System.Linq;
 using System.Reflection;
-using ReMod.Core.Managers;
-using ReMod.Core.UI.QuickMenu;
+using ReModAres.Core.Managers;
+using ReModAres.Core.UI.QuickMenu;
 using UnhollowerRuntimeLib.XrefScans;
 
 namespace ReModCE_ARES.Components

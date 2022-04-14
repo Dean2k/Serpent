@@ -1,4 +1,4 @@
-﻿namespace ReMod.Core.Helpers
+﻿namespace ReModAres.Core.Helpers
 {
     internal static class Constants
     {

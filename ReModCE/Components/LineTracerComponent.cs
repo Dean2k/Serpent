@@ -5,11 +5,11 @@
 
     using global::ReModCE_ARES.Managers;
 
-    using ReMod.Core;
-    using ReMod.Core.Managers;
-    using ReMod.Core.UI.QuickMenu;
-    using ReMod.Core.Unity;
-    using ReMod.Core.VRChat;
+    using ReModAres.Core;
+    using ReModAres.Core.Managers;
+    using ReModAres.Core.UI.QuickMenu;
+    using ReModAres.Core.Unity;
+    using ReModAres.Core.VRChat;
 
     using UnityEngine;
     using UnityEngine.XR;

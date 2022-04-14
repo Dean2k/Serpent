@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ReMod.Core;
-using ReMod.Core.Managers;
-using ReMod.Core.UI.QuickMenu;
-using ReMod.Core.UI.Wings;
-using ReMod.Core.VRChat;
+using ReModAres.Core;
+using ReModAres.Core.Managers;
+using ReModAres.Core.UI.QuickMenu;
+using ReModAres.Core.UI.Wings;
+using ReModAres.Core.VRChat;
 using ReModCE_ARES.Managers;
 using UnhollowerRuntimeLib;
 using UnityEngine;
@@ -17,7 +17,7 @@ using VRC_AvatarPedestal = VRC.SDKBase.VRC_AvatarPedestal;
 using VRC_Pickup = VRC.SDKBase.VRC_Pickup;
 using VRC_UiShape = VRC.SDKBase.VRC_UiShape;
 using Object = UnityEngine.Object;
-using ReMod.Core.Api;
+using ReModAres.Core.Api;
 using ReModCE_ARES.Loader;
 
 // ReSharper disable InconsistentNaming

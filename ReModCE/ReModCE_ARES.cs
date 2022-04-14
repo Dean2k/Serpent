@@ -13,10 +13,10 @@ using ExitGames.Client.Photon;
 using HarmonyLib;
 using MelonLoader;
 using Newtonsoft.Json;
-using ReMod.Core;
-using ReMod.Core.Managers;
-using ReMod.Core.UI.Wings;
-using ReMod.Core.Unity;
+using ReModAres.Core;
+using ReModAres.Core.Managers;
+using ReModAres.Core.UI.Wings;
+using ReModAres.Core.Unity;
 using ReModCE_ARES.Components;
 using ReModCE_ARES.Core;
 using ReModCE_ARES.Loader;
@@ -28,9 +28,9 @@ using VRC;
 using VRC.Core;
 using VRC.DataModel;
 using VRC.UI.Elements.Menus;
-using ConfigManager = ReMod.Core.Managers.ConfigManager;
-using ReMod.Core.Helpers;
-using ReMod.Core.Pedals;
+using ConfigManager = ReModAres.Core.Managers.ConfigManager;
+using ReModAres.Core.Helpers;
+using ReModAres.Core.Pedals;
 
 namespace ReModCE_ARES
 {

@@ -1,8 +1,8 @@
-﻿using ReMod.Core.Helpers;
+﻿using ReModAres.Core.Helpers;
 using UnityEngine;
 using UnityEngine.XR;
 
-namespace ReMod.Core.Managers
+namespace ReModAres.Core.Managers
 {
     internal static class InputManager
     {

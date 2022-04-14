@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ReMod.Core
+namespace ReModAres.Core
 {
     internal static class AssemblyExtensions
     {

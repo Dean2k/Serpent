@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ReMod.Core.VRChat
+namespace ReModAres.Core.VRChat
 {
     public class VRCConfig
     {

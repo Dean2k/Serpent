@@ -52,7 +52,7 @@ namespace ReModCE_ARES.Loader
                 "If enabled ReModCE will not automatically download the latest version from GitHub. Manual update will be required.",
                 true);
 
-            DownloadFromGitHub("ReMod.Core", out _);
+            DownloadFromGitHub("ReModAres.Core", out _);
             DownloadFromGitHub("ReModCE_ARES", out var assembly);
 
             if (assembly == null)

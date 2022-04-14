@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
-using ReMod.Core;
-using ReMod.Core.Managers;
-using ReMod.Core.UI.QuickMenu;
-using ReMod.Core.VRChat;
+using ReModAres.Core;
+using ReModAres.Core.Managers;
+using ReModAres.Core.UI.QuickMenu;
+using ReModAres.Core.VRChat;
 using ReModCE_ARES.Core;
 using ReModCE_ARES.Loader;
 using ReModCE_ARES.Managers;

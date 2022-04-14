@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ReMod.Core.Managers
+namespace ReModAres.Core.Managers
 {
     public static class ResourceManager
     {

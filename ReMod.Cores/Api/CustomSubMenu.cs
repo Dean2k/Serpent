@@ -1,11 +1,11 @@
 using System;
-using ReMod.Core.Helpers;
-using ReMod.Core.Managers;
+using ReModAres.Core.Helpers;
+using ReModAres.Core.Managers;
 using UnityEngine;
 
 // ReSharper disable HeuristicUnreachableCode
 
-namespace ReMod.Core.Api
+namespace ReModAres.Core.Api
 {
     /// <summary>
     ///     Class for adding buttons,toggles,radial puppets inside of a custom submenu

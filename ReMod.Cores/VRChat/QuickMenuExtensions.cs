@@ -5,7 +5,7 @@ using UnhollowerRuntimeLib.XrefScans;
 using VRC.UI;
 using VRC.UI.Elements;
 
-namespace ReMod.Core.VRChat
+namespace ReModAres.Core.VRChat
 {
     public static class QuickMenuExtensions
     {

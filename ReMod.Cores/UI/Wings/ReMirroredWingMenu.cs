@@ -1,8 +1,8 @@
 ﻿using System;
-using ReMod.Core.VRChat;
+using ReModAres.Core.VRChat;
 using UnityEngine;
 
-namespace ReMod.Core.UI.Wings
+namespace ReModAres.Core.UI.Wings
 {
     public class ReMirroredWingMenu
     {

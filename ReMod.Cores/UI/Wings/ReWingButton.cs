@@ -1,11 +1,11 @@
 ﻿using System;
-using ReMod.Core.VRChat;
+using ReModAres.Core.VRChat;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.UI.Core.Styles;
 
-namespace ReMod.Core.UI.Wings
+namespace ReModAres.Core.UI.Wings
 {
     public class ReWingButton : UiElement
     {

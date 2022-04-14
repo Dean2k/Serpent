@@ -1,10 +1,10 @@
-﻿using System;
-using ReMod.Core;
-using ReMod.Core.Managers;
-using ReMod.Core.UI.QuickMenu;
+﻿using ReModAres.Core;
+using ReModAres.Core.Managers;
+using ReModAres.Core.UI.QuickMenu;
 using ReModCE_ARES.Loader;
+using System;
+using System.Diagnostics;
 using UnityEngine;
-using VRC;
 
 namespace ReModCE_ARES.Components
 {
@@ -67,13 +67,13 @@ namespace ReModCE_ARES.Components
         private void SetFPS240(bool value)
         {
             FPS240Enabled.SetValue(value);
-           
+
             if (value)
             {
                 Application.targetFrameRate = 240;
                 _fps144Toggle.Toggle(false);
             }
-            if(!FPS144Enabled && !value)
+            if (!FPS144Enabled && !value)
             {
                 Application.targetFrameRate = 90;
             }
@@ -82,7 +82,7 @@ namespace ReModCE_ARES.Components
         private void SetFPS144(bool value)
         {
             FPS144Enabled.SetValue(value);
-            
+
             if (value)
             {
                 Application.targetFrameRate = 144;
@@ -100,6 +100,28 @@ namespace ReModCE_ARES.Components
             if (value)
             {
                 System.Diagnostics.Process.GetCurrentProcess().PriorityClass = System.Diagnostics.ProcessPriorityClass.High;
+
+                Process[] processes = Process.GetProcessesByName("vrserver");
+                foreach (Process proc in processes)
+                {
+                    Console.WriteLine("Changing Priority for: " + proc.Id + " To RealTime");
+                    proc.PriorityClass = ProcessPriorityClass.High;
+                    if (proc.PriorityClass == ProcessPriorityClass.High)
+                    {
+                        Console.WriteLine("Worked");
+                    }
+                }
+
+                Process[] processes2 = Process.GetProcessesByName("OVRServer_x64");
+                foreach (Process proc in processes2)
+                {
+                    Console.WriteLine("Changing Priority for: " + proc.Id + " To RealTime");
+                    proc.PriorityClass = ProcessPriorityClass.High;
+                    if (proc.PriorityClass == ProcessPriorityClass.High)
+                    {
+                        Console.WriteLine("Worked");
+                    }
+                }
             }
         }
 
@@ -111,7 +133,7 @@ namespace ReModCE_ARES.Components
         public static float Average = 0f;
         public static float FPS = 0f;
         private static float RefreshRate = 0f;
-        private static string lastMessage ="";
+        private static string lastMessage = "";
         public override void OnUpdate()
         {
             if (AdaptiveGraphicsEnabled)

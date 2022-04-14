@@ -1,8 +1,8 @@
-﻿using ReMod.Core.UI.QuickMenu;
-using ReMod.Core.VRChat;
+﻿using ReModAres.Core.UI.QuickMenu;
+using ReModAres.Core.VRChat;
 using UnityEngine;
 
-namespace ReMod.Core.Managers
+namespace ReModAres.Core.Managers
 {
     public class UiManager
     {

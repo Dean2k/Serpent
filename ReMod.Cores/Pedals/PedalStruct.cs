@@ -1,8 +1,8 @@
 ﻿using System;
-using ReMod.Core.Types;
+using ReModAres.Core.Types;
 using UnityEngine;
 
-namespace ReMod.Core.Pedals
+namespace ReModAres.Core.Pedals
 {
     public abstract class PedalStruct
     {

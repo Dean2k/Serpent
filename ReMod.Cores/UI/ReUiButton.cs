@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-namespace ReMod.Core.UI
+namespace ReModAres.Core.UI
 {
     public class ReUiButton : UiElement
     {

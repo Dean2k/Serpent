@@ -8,7 +8,7 @@ using VRC.DataModel;
 using VRC.SDKBase;
 using VRC.UI;
 
-namespace ReMod.Core.VRChat
+namespace ReModAres.Core.VRChat
 {
     public static class PlayerExtensions
     {

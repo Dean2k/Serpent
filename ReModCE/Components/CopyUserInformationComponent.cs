@@ -1,7 +1,7 @@
-﻿using ReMod.Core;
-using ReMod.Core.Managers;
-using ReMod.Core.UI;
-using ReMod.Core.VRChat;
+﻿using ReModAres.Core;
+using ReModAres.Core.Managers;
+using ReModAres.Core.UI;
+using ReModAres.Core.VRChat;
 using UnityEngine;
 using VRC;
 using VRC.Core;

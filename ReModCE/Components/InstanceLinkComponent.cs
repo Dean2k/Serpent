@@ -1,6 +1,6 @@
-﻿using ReMod.Core;
-using ReMod.Core.UI;
-using ReMod.Core.VRChat;
+﻿using ReModAres.Core;
+using ReModAres.Core.UI;
+using ReModAres.Core.VRChat;
 using ReModCE_ARES.Loader;
 using UnityEngine;
 using UnityEngine.UI;

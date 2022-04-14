@@ -1,11 +1,11 @@
 ﻿using System;
 using MelonLoader;
-using ReMod.Core.Helpers;
-using ReMod.Core.Types;
+using ReModAres.Core.Helpers;
+using ReModAres.Core.Types;
 using UnityEngine;
 using UnityEngine.XR;
 
-namespace ReMod.Core.Managers
+namespace ReModAres.Core.Managers
 {
     public static class FourAxisPuppetManager
     {

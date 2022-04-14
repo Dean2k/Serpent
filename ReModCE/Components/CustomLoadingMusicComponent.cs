@@ -2,9 +2,9 @@
 using System.Collections;
 using System.IO;
 using MelonLoader;
-using ReMod.Core;
-using ReMod.Core.Managers;
-using ReMod.Core.UI.QuickMenu;
+using ReModAres.Core;
+using ReModAres.Core.Managers;
+using ReModAres.Core.UI.QuickMenu;
 using ReModCE_ARES.Loader;
 using UnityEngine;
 using UnityEngine.Networking;

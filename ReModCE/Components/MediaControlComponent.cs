@@ -1,6 +1,6 @@
-﻿using ReMod.Core;
-using ReMod.Core.Managers;
-using ReMod.Core.VRChat;
+﻿using ReModAres.Core;
+using ReModAres.Core.Managers;
+using ReModAres.Core.VRChat;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using ReMod.Core.UI.QuickMenu;
+using ReModAres.Core.UI.QuickMenu;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

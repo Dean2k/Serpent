@@ -1,12 +1,12 @@
 ﻿using System;
-using ReMod.Core.Unity;
-using ReMod.Core.VRChat;
+using ReModAres.Core.Unity;
+using ReModAres.Core.VRChat;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC;
 using AvatarList = Il2CppSystem.Collections.Generic.List<VRC.Core.ApiAvatar>;
 
-namespace ReMod.Core.UI
+namespace ReModAres.Core.UI
 {
     public interface IAvatarListOwner
     {

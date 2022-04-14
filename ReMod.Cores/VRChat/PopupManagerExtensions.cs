@@ -3,13 +3,13 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using ReMod.Core.UI.QuickMenu;
-using ReMod.Core.Unity;
+using ReModAres.Core.UI.QuickMenu;
+using ReModAres.Core.Unity;
 using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ReMod.Core.VRChat
+namespace ReModAres.Core.VRChat
 {
     public static class PopupManagerExtensions
     {

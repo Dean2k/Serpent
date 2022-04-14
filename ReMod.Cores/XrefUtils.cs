@@ -4,7 +4,7 @@ using HarmonyLib;
 using MelonLoader;
 using UnhollowerRuntimeLib.XrefScans;
 
-namespace ReMod.Core
+namespace ReModAres.Core
 {
     public static class XrefUtils
     {

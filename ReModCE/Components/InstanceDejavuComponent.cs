@@ -1,5 +1,5 @@
-﻿using ReMod.Core;
-using ReMod.Core.Managers;
+﻿using ReModAres.Core;
+using ReModAres.Core.Managers;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;

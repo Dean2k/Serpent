@@ -1,9 +1,9 @@
 ﻿using System;
-using ReMod.Core.Helpers;
-using ReMod.Core.Types;
+using ReModAres.Core.Helpers;
+using ReModAres.Core.Types;
 using UnityEngine;
 
-namespace ReMod.Core.Pedals
+namespace ReModAres.Core.Pedals
 {
     public sealed class PedalToggle : PedalStruct
     {

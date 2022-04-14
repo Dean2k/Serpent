@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ReMod.Core
+namespace ReModAres.Core
 {
     public static class EnumExtensions
     {

@@ -1,10 +1,10 @@
 using System;
 using MelonLoader;
-using ReMod.Core.Helpers;
-using ReMod.Core.Managers;
+using ReModAres.Core.Helpers;
+using ReModAres.Core.Managers;
 using UnityEngine;
 
-namespace ReMod.Core.Api
+namespace ReModAres.Core.Api
 {
     /// <summary>
     /// General Action Menu Things

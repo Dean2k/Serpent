@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace ReMod.Core.UI.Wings
+namespace ReModAres.Core.UI.Wings
 {
     public class ReMirroredWingToggle
     {

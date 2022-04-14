@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using VRC.UI.Elements;
 using VRC.UI.Elements.Menus;
 
-namespace ReMod.Core.VRChat
+namespace ReModAres.Core.VRChat
 {
     public static class QuickMenuEx
     {

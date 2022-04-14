@@ -1,9 +1,9 @@
 ﻿using System;
-using ReMod.Core.VRChat;
+using ReModAres.Core.VRChat;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ReMod.Core.UI.Wings
+namespace ReModAres.Core.UI.Wings
 {
     public class ReWingToggle
     {

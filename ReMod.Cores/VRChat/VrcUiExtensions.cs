@@ -7,7 +7,7 @@ using VRC.UI.Core;
 using VRC.UI.Elements;
 using VRC.UI.Elements.Controls;
 
-namespace ReMod.Core.VRChat
+namespace ReModAres.Core.VRChat
 {
     public static class VrcUiExtensions
     {

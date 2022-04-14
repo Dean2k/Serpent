@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Il2CppSystem.Reflection;
 using MelonLoader;
-using ReMod.Core.Unity;
-using ReMod.Core.VRChat;
+using ReModAres.Core.Unity;
+using ReModAres.Core.VRChat;
 using TMPro;
 using UnhollowerBaseLib.Attributes;
 using UnhollowerRuntimeLib;
@@ -12,7 +12,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-namespace ReMod.Core.UI.QuickMenu
+namespace ReModAres.Core.UI.QuickMenu
 {
     public class ReMenuToggle : UiElement
     {
