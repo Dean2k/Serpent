@@ -41,6 +41,9 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\3rdparty\ml\0Harmony.dll</HintPath>
+    </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>$(SolutionDir)\3rdparty\ml\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>

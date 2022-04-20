@@ -79,7 +79,17 @@ namespace ReModCE_ARES.Components
                 {
                     target = new GameObject();
                 }
-                var player = PlayerManager.field_Private_Static_PlayerManager_0.GetPlayer(targetPlayer.prop_String_0)._vrcplayer;
+
+                VRCPlayer player = null;
+                try
+                {
+                    player = PlayerManager.field_Private_Static_PlayerManager_0.GetPlayer(targetPlayer.prop_String_0)
+                        ._vrcplayer;
+                }
+                catch
+                {
+                    ItemOrbit();
+                }
                 if (player == null)
                     return;
 
@@ -100,10 +110,16 @@ namespace ReModCE_ARES.Components
             }
             if (ItemOrbitSwastikaPlayerEnabled)
             {
-
-                var player = PlayerManager.field_Private_Static_PlayerManager_0.GetPlayer(targetPlayer.prop_String_0)._vrcplayer;
-                if (player == null)
-                    return;
+                VRCPlayer player = null;
+                try
+                {
+                    player = PlayerManager.field_Private_Static_PlayerManager_0.GetPlayer(targetPlayer.prop_String_0)
+                        ._vrcplayer;
+                }
+                catch
+                {
+                    ItemSwastika();
+                }
 
                 var transform = player.transform;
                 var playerPosition = transform.position;

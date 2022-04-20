@@ -104,23 +104,13 @@ namespace ReModCE_ARES.Components
                 Process[] processes = Process.GetProcessesByName("vrserver");
                 foreach (Process proc in processes)
                 {
-                    Console.WriteLine("Changing Priority for: " + proc.Id + " To RealTime");
                     proc.PriorityClass = ProcessPriorityClass.High;
-                    if (proc.PriorityClass == ProcessPriorityClass.High)
-                    {
-                        Console.WriteLine("Worked");
-                    }
                 }
 
                 Process[] processes2 = Process.GetProcessesByName("OVRServer_x64");
                 foreach (Process proc in processes2)
                 {
-                    Console.WriteLine("Changing Priority for: " + proc.Id + " To RealTime");
                     proc.PriorityClass = ProcessPriorityClass.High;
-                    if (proc.PriorityClass == ProcessPriorityClass.High)
-                    {
-                        Console.WriteLine("Worked");
-                    }
                 }
             }
         }

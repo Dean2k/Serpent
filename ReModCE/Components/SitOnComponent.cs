@@ -32,13 +32,15 @@ namespace ReModCE_ARES.Components
             var userInfoTransform = VRCUiManagerEx.Instance.MenuContent().transform.Find("Screens/UserInfo");
 
             var buttonContainer = userInfoTransform.Find("Buttons/RightSideButtons/RightUpperButtonColumn/");
+            var submenu = targetMenu.AddMenuPage("Sit On", "Sit on x body part",
+                ResourceManager.GetSprite("remodce.legs"));
 
-            _teleportTargetHeadButton = targetMenu.AddButton("Sit On Head", "Sit on target (press jump to stop).", TeleportTargetButtonOnClick, ResourceManager.GetSprite("remodce.legs"));
-            _teleportTargetLeftHandButton = targetMenu.AddButton("Sit On Left Hand", "Sit on target (press jump to stop).", TeleportTargetLeftHandButtonOnClick, ResourceManager.GetSprite("remodce.legs"));
-            _teleportTargetRightHandButton = targetMenu.AddButton("Sit On Right Hand", "Sit on target (press jump to stop).", TeleportTargetRightHandButtonOnClick, ResourceManager.GetSprite("remodce.legs"));
-            _teleportTargetRightLegButton = targetMenu.AddButton("Sit On Right Leg", "Sit on target (press jump to stop).", TeleportTargetRightLegButtonOnClick, ResourceManager.GetSprite("remodce.legs"));
-            _teleportTargetLeftLegButton = targetMenu.AddButton("Sit On Left Leg", "Sit on target (press jump to stop).", TeleportTargetLeftLegButtonOnClick, ResourceManager.GetSprite("remodce.legs"));
-            _teleportTargetLeftLegButton = targetMenu.AddButton("Sit On Hips", "Sit on target (press jump to stop).", TeleportTargetHipsButtonOnClick, ResourceManager.GetSprite("remodce.legs"));
+            _teleportTargetHeadButton = submenu.AddButton("Sit On Head", "Sit on target (press jump to stop).", TeleportTargetButtonOnClick, ResourceManager.GetSprite("remodce.legs"));
+            _teleportTargetLeftHandButton = submenu.AddButton("Sit On Left Hand", "Sit on target (press jump to stop).", TeleportTargetLeftHandButtonOnClick, ResourceManager.GetSprite("remodce.legs"));
+            _teleportTargetRightHandButton = submenu.AddButton("Sit On Right Hand", "Sit on target (press jump to stop).", TeleportTargetRightHandButtonOnClick, ResourceManager.GetSprite("remodce.legs"));
+            _teleportTargetRightLegButton = submenu.AddButton("Sit On Right Leg", "Sit on target (press jump to stop).", TeleportTargetRightLegButtonOnClick, ResourceManager.GetSprite("remodce.legs"));
+            _teleportTargetLeftLegButton = submenu.AddButton("Sit On Left Leg", "Sit on target (press jump to stop).", TeleportTargetLeftLegButtonOnClick, ResourceManager.GetSprite("remodce.legs"));
+            _teleportTargetLeftLegButton = submenu.AddButton("Sit On Hips", "Sit on target (press jump to stop).", TeleportTargetHipsButtonOnClick, ResourceManager.GetSprite("remodce.legs"));
 
             var menu = uiManager.MainMenu.GetMenuPage("ARES");
             menu.AddButton("Stop Siton",
