@@ -63,7 +63,7 @@ namespace ReModCE_ARES.Components
         {
             ReLogger.Msg("patching OnEvent");
 
-            ReModCE_ARES.Harmony.Patch(typeof(Photon.Realtime.LoadBalancingClient).GetMethod("OnEvent"), new HarmonyMethod(AccessTools.Method(typeof(AntiCrashComponent), nameof(OnEvent))));
+           
             ReModCE_ARES.Harmony.Patch(typeof(VRC.Core.AssetManagement).GetMethod("Method_Public_Static_Object_Object_Boolean_Boolean_Boolean_0"), new HarmonyMethod(AccessTools.Method(typeof(AntiCrashComponent), nameof(OnAvatarAssetBundleLoad))));
 
 
@@ -202,43 +202,7 @@ namespace ReModCE_ARES.Components
 
         }
 
-        private static bool OnEvent(EventData __0)
-        {
-            var eventCode = __0.Code;
-            switch (eventCode)
-            {
-                case 1:
-                case 3:
-                    return true;
 
-                case 4:
-                    return true;
-
-                case 6:
-                    return true;
-
-                case 7:
-                    return true;
-
-                case 9:
-                    return true;
-
-                case 33:
-                    return true;
-
-                case 209:
-                    return true;
-
-                case 210:
-                    return true;
-
-                case 253:
-                    return true;
-                default:
-                    break;
-            }
-            return true;
-        }
 
         private static bool OnAvatarAssetBundleLoad(ref UnityEngine.Object __0)
         {

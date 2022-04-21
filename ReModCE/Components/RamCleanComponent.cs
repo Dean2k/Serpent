@@ -56,5 +56,10 @@ namespace ReModCE_ARES.Components
 
             Resources.UnloadUnusedAssets();
         }
+
+        //public override void OnUpdate()
+        //{
+        //    GC.Collect();
+        //}
     }
 }

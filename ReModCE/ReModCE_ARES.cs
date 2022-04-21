@@ -1,4 +1,14 @@
-﻿using System;
+﻿using HarmonyLib;
+using MelonLoader;
+using Newtonsoft.Json;
+using ReModAres.Core;
+using ReModAres.Core.Managers;
+using ReModAres.Core.UI.Wings;
+using ReModAres.Core.Unity;
+using ReModCE_ARES.Components;
+using ReModCE_ARES.Core;
+using ReModCE_ARES.Loader;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,28 +19,13 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using ExitGames.Client.Photon;
-using HarmonyLib;
-using MelonLoader;
-using Newtonsoft.Json;
-using ReModAres.Core;
-using ReModAres.Core.Managers;
-using ReModAres.Core.UI.Wings;
-using ReModAres.Core.Unity;
-using ReModCE_ARES.Components;
-using ReModCE_ARES.Core;
-using ReModCE_ARES.Loader;
-using ReModCE_ARES.Managers;
 using UnhollowerRuntimeLib;
 using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
 using VRC;
 using VRC.Core;
 using VRC.DataModel;
-using VRC.UI.Elements.Menus;
 using ConfigManager = ReModAres.Core.Managers.ConfigManager;
-using ReModAres.Core.Helpers;
-using ReModAres.Core.Pedals;
 
 namespace ReModCE_ARES
 {
@@ -195,16 +190,16 @@ namespace ReModCE_ARES
 
             ActionMenus.PatchAll(Harmony);
 
-            foreach (var method in typeof(SelectedUserMenuQM).GetMethods())
-            {
-                if (!method.Name.StartsWith("Method_Private_Void_IUser_PDM_"))
-                    continue;
+            //foreach (var method in typeof(SelectedUserMenuQM).GetMethods())
+            //{
+            //    if (!method.Name.StartsWith("Method_Private_Void_IUser_PDM_"))
+            //        continue;
 
-                if (XrefScanner.XrefScan(method).Count() < 3)
-                    continue;
+            //    if (XrefScanner.XrefScan(method).Count() < 3)
+            //        continue;
 
-                Harmony.Patch(method, postfix: GetLocalPatch(nameof(SetUserPatch)));
-            }
+            //    Harmony.Patch(method, postfix: GetLocalPatch(nameof(SetUserPatch)));
+            //}
         }
 
 
@@ -506,16 +501,16 @@ namespace ReModCE_ARES
                 }
             }));
         }
-        private static void SetUserPatch(SelectedUserMenuQM __instance, IUser __0)
-        {
-            if (__0 == null)
-                return;
+        //private static void SetUserPatch(SelectedUserMenuQM __instance, IUser __0)
+        //{
+        //    if (__0 == null)
+        //        return;
 
-            foreach (var m in Components)
-            {
-                m.OnSelectUser(__0, __instance.field_Public_Boolean_0);
-            }
-        }
+        //    foreach (var m in Components)
+        //    {
+        //        m.OnSelectUser(__0, __instance.field_Public_Boolean_0);
+        //    }
+        //}
 
         private static List<string> DebugLogs = new List<string>();
         private static int duplicateCount = 1;
