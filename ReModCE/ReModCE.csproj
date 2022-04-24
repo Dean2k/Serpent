@@ -261,12 +261,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\AntiBlockComponent.cs" />
     <Compile Include="Components\AvatarFavoritesComponent.cs" />
     <Compile Include="Components\CalibrationSavingComponent.cs" />
     <Compile Include="Components\CopyUserInformationComponent.cs" />
     <Compile Include="Components\DisableChairComponent.cs" />
     <Compile Include="Components\DownloadVRCWComponent.cs" />
-    <Compile Include="Components\DynamicBonesComponent.cs" />
     <Compile Include="Components\EmojiBlocker.cs" />
     <Compile Include="Components\ExploitJustBComponent.cs" />
     <Compile Include="Components\ExploitMurder4Component.cs" />
@@ -279,6 +279,8 @@
     <Compile Include="Components\CustomLoadingMusicComponent.cs" />
     <Compile Include="Components\ExploitAmongUsComponent.cs" />
     <Compile Include="Components\ComfyMenuComponent.cs" />
+    <Compile Include="Components\UdonLoggerComponent.cs" />
+    <Compile Include="Components\JoinNotifyComponent.cs" />
     <Compile Include="Components\PerformanceComponent.cs" />
     <Compile Include="Components\PortableMirrorComponent.cs" />
     <Compile Include="Components\RamCleanComponent.cs" />
@@ -308,6 +310,7 @@
     <Compile Include="Components\CustomNameplateComponent.cs" />
     <Compile Include="Core\DynamicContractResolver.cs" />
     <Compile Include="Core\NameplateModel.cs" />
+    <Compile Include="Core\PlayerDetails.cs" />
     <Compile Include="Core\ReAvatar.cs" />
     <Compile Include="Core\TaskExtensions.cs" />
     <Compile Include="extension.cs" />

@@ -19,6 +19,7 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using ReModCE_ARES.Managers;
 using UnhollowerRuntimeLib;
 using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
@@ -363,6 +364,7 @@ namespace ReModCE_ARES
 
         public static void OnSceneWasInitialized(int buildIndex, string sceneName)
         {
+            Wrapper.playerList.Clear();
             foreach (var m in Components)
             {
                 m.OnSceneWasInitialized(buildIndex, sceneName);
@@ -402,6 +404,27 @@ namespace ReModCE_ARES
             {
                 m.OnPlayerJoined(player);
             }
+            bool isLocalPlayer = player.prop_APIUser_0.id == APIUser.CurrentUser.id;
+            PlayerDetails info = new PlayerDetails
+            {
+                id = player.prop_APIUser_0.id,
+                displayName = player.prop_APIUser_0.displayName,
+                isLocalPlayer = isLocalPlayer,
+                isInstanceMaster = player.prop_VRCPlayerApi_0.isMaster,
+                isVRUser = player.prop_VRCPlayerApi_0.IsUserInVR(),
+                isQuestUser = player.prop_APIUser_0.last_platform != "standalonewindows",
+                blockedLocalPlayer = false,
+
+                player = player,
+                playerApi = player.prop_VRCPlayerApi_0,
+                vrcPlayer = player.prop_VRCPlayer_0,
+                apiUser = player.prop_APIUser_0,
+                networkBehaviour = player.prop_VRCPlayer_0,
+            };
+            if (!Wrapper.playerList.ContainsKey(info.displayName))
+            {
+                Wrapper.playerList.Add(info.displayName, info);
+            }
         }
 
         private static void OnPlayerLeft(Player player)
@@ -409,6 +432,10 @@ namespace ReModCE_ARES
             foreach (var m in Components)
             {
                 m.OnPlayerLeft(player);
+            }
+            if (Wrapper.playerList.ContainsKey(Player.prop_Player_0.prop_VRCPlayerApi_0.displayName))
+            {
+                Wrapper.playerList.Remove(Player.prop_Player_0.prop_VRCPlayerApi_0.displayName);
             }
         }
 

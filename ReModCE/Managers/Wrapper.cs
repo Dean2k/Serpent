@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ReModCE_ARES.Core;
 using UnityEngine;
 using VRC;
 using VRC.Core;
@@ -88,6 +89,21 @@ namespace ReModCE_ARES.Managers
         public static ModerationManager GetModerationManager() => ModerationManager.prop_ModerationManager_0;
 
         public static PlayerManager GetPlayerManager() => PlayerManager.prop_PlayerManager_0;
+
+        public static readonly Dictionary<string, PlayerDetails> playerList = new Dictionary<string, PlayerDetails>();
+
+        public static PlayerDetails GetPlayerInformationByID(int index)
+        {
+            foreach (KeyValuePair<string, PlayerDetails> playerInfo in playerList.ToList())
+            {
+                if (playerInfo.Value.networkBehaviour.prop_Int32_0 == index)
+                {
+                    return playerInfo.Value;
+                }
+            }
+
+            return null;
+        }
 
         public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
         {
