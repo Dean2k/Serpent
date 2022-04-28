@@ -13,7 +13,7 @@ using VRC.SDKBase;
 
 namespace ReModCE_ARES.Managers
 {
-    static class Wrapper
+    public static class Wrapper
     {
 
         public static float GetFrames(this Player player) => (player._playerNet.prop_Byte_0 != 0) ? Mathf.Floor(1000f / (float)player._playerNet.prop_Byte_0) : -1f;
@@ -90,9 +90,9 @@ namespace ReModCE_ARES.Managers
 
         public static PlayerManager GetPlayerManager() => PlayerManager.prop_PlayerManager_0;
 
-        public static readonly Dictionary<string, PlayerDetails> playerList = new Dictionary<string, PlayerDetails>();
+        public static Dictionary<string, PlayerDetails> playerList = new Dictionary<string, PlayerDetails>();
 
-        public static PlayerDetails GetPlayerInformationByID(int index)
+        public static PlayerDetails GetPlayerInformationById(int index)
         {
             foreach (KeyValuePair<string, PlayerDetails> playerInfo in playerList.ToList())
             {
@@ -104,6 +104,8 @@ namespace ReModCE_ARES.Managers
 
             return null;
         }
+
+        
 
         public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
         {

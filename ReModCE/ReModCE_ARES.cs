@@ -364,7 +364,6 @@ namespace ReModCE_ARES
 
         public static void OnSceneWasInitialized(int buildIndex, string sceneName)
         {
-            Wrapper.playerList.Clear();
             foreach (var m in Components)
             {
                 m.OnSceneWasInitialized(buildIndex, sceneName);
@@ -404,27 +403,6 @@ namespace ReModCE_ARES
             {
                 m.OnPlayerJoined(player);
             }
-            bool isLocalPlayer = player.prop_APIUser_0.id == APIUser.CurrentUser.id;
-            PlayerDetails info = new PlayerDetails
-            {
-                id = player.prop_APIUser_0.id,
-                displayName = player.prop_APIUser_0.displayName,
-                isLocalPlayer = isLocalPlayer,
-                isInstanceMaster = player.prop_VRCPlayerApi_0.isMaster,
-                isVRUser = player.prop_VRCPlayerApi_0.IsUserInVR(),
-                isQuestUser = player.prop_APIUser_0.last_platform != "standalonewindows",
-                blockedLocalPlayer = false,
-
-                player = player,
-                playerApi = player.prop_VRCPlayerApi_0,
-                vrcPlayer = player.prop_VRCPlayer_0,
-                apiUser = player.prop_APIUser_0,
-                networkBehaviour = player.prop_VRCPlayer_0,
-            };
-            if (!Wrapper.playerList.ContainsKey(info.displayName))
-            {
-                Wrapper.playerList.Add(info.displayName, info);
-            }
         }
 
         private static void OnPlayerLeft(Player player)
@@ -432,10 +410,6 @@ namespace ReModCE_ARES
             foreach (var m in Components)
             {
                 m.OnPlayerLeft(player);
-            }
-            if (Wrapper.playerList.ContainsKey(Player.prop_Player_0.prop_VRCPlayerApi_0.displayName))
-            {
-                Wrapper.playerList.Remove(Player.prop_Player_0.prop_VRCPlayerApi_0.displayName);
             }
         }
 
@@ -543,30 +517,35 @@ namespace ReModCE_ARES
         private static string lastMsg = "";
         public static void LogDebug(string message)
         {
-            if (message == lastMsg)
+            try
             {
-                DebugLogs.RemoveAt(DebugLogs.Count - 1);
-                duplicateCount++;
-                DebugLogs.Add($"<color=white><b>[<color=red>ARES</color>] [<color=#ff00ffff>{DateTime.Now.ToString("hh:mm tt")}</color>] {message} <color=red><i>x{duplicateCount}</i></color></b></color>");
-            }
-            else
-            {
-                lastMsg = message;
-                duplicateCount = 1;
-                DebugLogs.Add($"<color=white><b>[<color=red>ARES</color>] [<color=#ff00ffff>{DateTime.Now.ToString("hh:mm tt")}</color>] {message}</b></color>");
-                if (DebugLogs.Count == 25)
+                if (message == lastMsg)
                 {
-                    DebugLogs.RemoveAt(0);
+                    DebugLogs.RemoveAt(DebugLogs.Count - 1);
+                    duplicateCount++;
+                    DebugLogs.Add(
+                        $"<color=white><b>[<color=red>ARES</color>] [<color=#ff00ffff>{DateTime.Now.ToString("hh:mm tt")}</color>] {message} <color=red><i>x{duplicateCount}</i></color></b></color>");
                 }
+                else
+                {
+                    lastMsg = message;
+                    duplicateCount = 1;
+                    DebugLogs.Add(
+                        $"<color=white><b>[<color=red>ARES</color>] [<color=#ff00ffff>{DateTime.Now.ToString("hh:mm tt")}</color>] {message}</b></color>");
+                    if (DebugLogs.Count == 25)
+                    {
+                        DebugLogs.RemoveAt(0);
+                    }
+                }
+
+                DebugMenuComponent.debugLog.text.text = string.Join("\n", DebugLogs.Take(25));
+                DebugMenuComponent.debugLog.text.enableWordWrapping = false;
+                DebugMenuComponent.debugLog.text.fontSizeMin = 25;
+                DebugMenuComponent.debugLog.text.fontSizeMax = 30;
+                DebugMenuComponent.debugLog.text.alignment = TMPro.TextAlignmentOptions.Left;
+                DebugMenuComponent.debugLog.text.verticalAlignment = TMPro.VerticalAlignmentOptions.Top;
             }
-            DebugMenuComponent.debugLog.text.text = string.Join("\n", DebugLogs.Take(25));
-            DebugMenuComponent.debugLog.text.enableWordWrapping = false;
-            DebugMenuComponent.debugLog.text.fontSizeMin = 25;
-            DebugMenuComponent.debugLog.text.fontSizeMax = 30;
-            DebugMenuComponent.debugLog.text.alignment = TMPro.TextAlignmentOptions.Left;
-            DebugMenuComponent.debugLog.text.verticalAlignment = TMPro.VerticalAlignmentOptions.Top;
+            catch { }
         }
-
-
     }
 }

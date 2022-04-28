@@ -10,7 +10,7 @@ using VRC.SDKBase;
 
 namespace ReModCE_ARES.Core
 {
-    internal class PlayerDetails
+    public class PlayerDetails
     {
         internal string id;
         internal string displayName;

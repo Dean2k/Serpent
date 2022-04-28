@@ -64,8 +64,9 @@ namespace ReModCE_ARES.Components
                             if (moderationData.ContainsKey(1) == true)
                             {
                                 bool isBlocked = moderationData[10].Unbox<bool>();
+                                PlayerDetails playerDetails = Wrapper.GetPlayerInformationById(moderationData[1].Unbox<int>());
+                                
 
-                                PlayerDetails playerDetails = Wrapper.GetPlayerInformationByID(moderationData[1].Unbox<int>());
 
                                 if (playerDetails != null)
                                 {
@@ -82,9 +83,15 @@ namespace ReModCE_ARES.Components
                                     }
                                     else
                                     {
-                                        VRCUiManagerEx.Instance.QueueHudMessage(playerDetails.displayName + " has unblocked you.", Color.green);
-                                        ReLogger.Msg(playerDetails.displayName + " has unblocked you.", Color.green);
-                                        ReModCE_ARES.LogDebug(playerDetails.displayName + " has unblocked you.");
+                                        if (playerDetails.displayName !=
+                                            Wrapper.GetLocalVRCPlayer().prop_VRCPlayerApi_0.displayName)
+                                        {
+                                            VRCUiManagerEx.Instance.QueueHudMessage(
+                                                playerDetails.displayName + " has unblocked or unmuted you.", Color.green);
+                                            ReLogger.Msg(playerDetails.displayName + " has unblocked or unmuted you.",
+                                                Color.green);
+                                            ReModCE_ARES.LogDebug(playerDetails.displayName + " has unblocked or unmuted you.");
+                                        }
                                     }
                                 }
                             }
@@ -97,5 +104,48 @@ namespace ReModCE_ARES.Components
             return true;
         }
 
+        public override void OnPlayerLeft(Player player)
+        {
+            if (player == null) return;
+            if (player.field_Private_APIUser_0 == null) return;
+            if (Wrapper.playerList == null) return;
+            try
+            {
+                if (Wrapper.playerList.ContainsKey(player.prop_VRCPlayerApi_0.displayName))
+                {
+                    Wrapper.playerList.Remove(player.prop_VRCPlayerApi_0.displayName);
+                }
+            } catch {}
+        }
+
+        public override void OnPlayerJoined(Player player)
+        {
+            bool isLocalPlayer = player.prop_APIUser_0.id == APIUser.CurrentUser.id;
+            PlayerDetails info = new PlayerDetails
+            {
+                id = player.prop_APIUser_0.id,
+                displayName = player.prop_APIUser_0.displayName,
+                isLocalPlayer = isLocalPlayer,
+                isInstanceMaster = player.prop_VRCPlayerApi_0.isMaster,
+                isVRUser = player.prop_VRCPlayerApi_0.IsUserInVR(),
+                isQuestUser = player.prop_APIUser_0.last_platform != "standalonewindows",
+                blockedLocalPlayer = false,
+
+                player = player,
+                playerApi = player.prop_VRCPlayerApi_0,
+                vrcPlayer = player.prop_VRCPlayer_0,
+                apiUser = player.prop_APIUser_0,
+                networkBehaviour = player.prop_VRCPlayer_0,
+            };
+            if (!Wrapper.playerList.ContainsKey(info.displayName))
+            {
+                Wrapper.playerList.Add(info.displayName, info);
+            }
+        }
+
+        public override void OnEnterWorld(ApiWorld world, ApiWorldInstance instance)
+        {
+            Wrapper.playerList.Clear();
+        }
     }
 }
