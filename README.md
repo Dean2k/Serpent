@@ -3,7 +3,7 @@
 ![ReModCE Logo](https://github.com/RequiDev/ReModCE/raw/master/remod_ce_logo.png)
 
 ReMod Community Edition - A All-in-One VRChat mod to suit all your needs using [MelonLoader](https://github.com/LavaGang/MelonLoader)
-# **You need at least MelonLoader v0.5.3 since VRChat Build 1169!**
+# **You need at least MelonLoader v0.5.4**
 
 ## Description
 ReModCE but with a few tweak and modified to use the ARES API
@@ -45,7 +45,7 @@ In case you want to update you can always grab the latest and even previous vers
 * VRCA Download
 * VRCW Download
 * Teleport to mouse location (CTRL + Q)
-* Loud Microphone
+* Loud Microphone (temp disabled)
 * Avatar Anti Crash
 * Debug Console
 * Custom background images
