@@ -19,7 +19,10 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using ReModAres.Core.Api;
+using ReModAres.Core.Pedals;
 using ReModCE_ARES.Managers;
+using TMPro;
 using UnhollowerRuntimeLib;
 using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
@@ -39,6 +42,7 @@ namespace ReModCE_ARES
         public static ReMirroredWingMenu WingMenu;
         public static bool IsEmmVrcLoaded { get; private set; }
         public static bool IsRubyLoaded { get; private set; }
+        public static PedalSubMenu MenuPage { get; set; }
         public static bool IsOculus { get; private set; }
         public static HarmonyLib.Harmony Harmony { get; private set; }
 
@@ -271,6 +275,7 @@ namespace ReModCE_ARES
 
             _uiManager.MainMenu.AddMenuPage("Logging", "Access logging related settings", ResourceManager.GetSprite("remodce.log"));
             _uiManager.MainMenu.AddMenuPage("Hotkeys", "Access hotkey related settings", ResourceManager.GetSprite("remodce.keyboard"));
+
 
 
             foreach (var m in Components)
@@ -524,26 +529,24 @@ namespace ReModCE_ARES
                     DebugLogs.RemoveAt(DebugLogs.Count - 1);
                     duplicateCount++;
                     DebugLogs.Add(
-                        $"<color=white><b>[<color=red>ARES</color>] [<color=#ff00ffff>{DateTime.Now.ToString("hh:mm tt")}</color>] {message} <color=red><i>x{duplicateCount}</i></color></b></color>");
+                        $"<color=white><b>[<color=#ff00ffff>{DateTime.Now.ToString("hh:mm tt")}</color>] {message} <color=red><i>x{duplicateCount}</i></color></b></color>");
                 }
                 else
                 {
                     lastMsg = message;
                     duplicateCount = 1;
                     DebugLogs.Add(
-                        $"<color=white><b>[<color=red>ARES</color>] [<color=#ff00ffff>{DateTime.Now.ToString("hh:mm tt")}</color>] {message}</b></color>");
+                        $"<color=white><b>[<color=#ff00ffff>{DateTime.Now.ToString("hh:mm tt")}</color>] {message}</b></color>");
                     if (DebugLogs.Count == 25)
                     {
                         DebugLogs.RemoveAt(0);
                     }
                 }
 
-                DebugMenuComponent.debugLog.text.text = string.Join("\n", DebugLogs.Take(25));
-                DebugMenuComponent.debugLog.text.enableWordWrapping = false;
-                DebugMenuComponent.debugLog.text.fontSizeMin = 25;
-                DebugMenuComponent.debugLog.text.fontSizeMax = 30;
-                DebugMenuComponent.debugLog.text.alignment = TMPro.TextAlignmentOptions.Left;
-                DebugMenuComponent.debugLog.text.verticalAlignment = TMPro.VerticalAlignmentOptions.Top;
+                DebugMenuComponent.debugLog.textText.text = string.Join("\n", DebugLogs.Take(25));
+                DebugMenuComponent.debugLog.textText.enableWordWrapping = false;
+                DebugMenuComponent.debugLog.textText.fontSizeMin = 25;
+                DebugMenuComponent.debugLog.textText.fontSizeMax = 30;
             }
             catch { }
         }

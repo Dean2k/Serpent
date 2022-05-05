@@ -47,14 +47,13 @@ namespace ReModCE_ARES.Components
             if (DebugMenuEnabled)
             {
                 debugLog.lable.SetActive(true);
-
-                debugLog.lable.transform.localPosition = new Vector3(609.902f, 457.9203f, 0);
-                debugLog.text.enableWordWrapping = false;
-                debugLog.text.fontSizeMin = 30;
-                debugLog.text.fontSizeMax = 30;
-                debugLog.text.alignment = TMPro.TextAlignmentOptions.Left;
-                debugLog.text.verticalAlignment = TMPro.VerticalAlignmentOptions.Top;
-                debugLog.text.color = Color.white;
+                //debugLog.lable.transform.localPosition = new Vector3(609.902f, 457.9203f, 0);
+                //debugLog.text.enableWordWrapping = false;
+                //debugLog.text.fontSizeMin = 30;
+                //debugLog.text.fontSizeMax = 30;
+                //debugLog.text.alignment = TMPro.TextAlignmentOptions.Left;
+                //debugLog.text.verticalAlignment = TMPro.VerticalAlignmentOptions.Top;
+                //debugLog.text.color = Color.white;
             }
             else
             {
