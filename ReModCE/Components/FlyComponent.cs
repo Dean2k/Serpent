@@ -18,12 +18,11 @@ using VRC_Pickup = VRC.SDKBase.VRC_Pickup;
 using VRC_UiShape = VRC.SDKBase.VRC_UiShape;
 using Object = UnityEngine.Object;
 using ReModAres.Core.Api;
-using ReModCE_ARES.Loader;
 
 // ReSharper disable InconsistentNaming
 namespace ReModCE_ARES.Components
 {
-    internal class FlyComponent : ModComponent
+    public class FlyComponent : ModComponent
     {
         private bool _noclipEnabled;
         private readonly List<int> _disabledColliders = new List<int>();
@@ -161,6 +160,11 @@ namespace ReModCE_ARES.Components
 
         private void ToggleFlyQuick(bool value)
         {
+            if (ReModCE_ARES.RotatorEnabled)
+            {
+                ToggleFly(false);
+                return;
+            }
             if (_flyEnabled)
             {
                 ToggleFly(false);
@@ -204,6 +208,12 @@ namespace ReModCE_ARES.Components
 
         private void ToggleFly(bool value)
         {
+            if (ReModCE_ARES.RotatorEnabled)
+            {
+                _flyEnabled = false;
+                _flyToggle?.Toggle(false);
+                return;
+            }
             _flyEnabled = value;
             _flyToggle?.Toggle(value);
 
@@ -230,6 +240,12 @@ namespace ReModCE_ARES.Components
 
         private void ToggleNoclip(bool value)
         {
+            if (ReModCE_ARES.RotatorEnabled)
+            {
+                _noclipEnabled = false;
+                _noclipToggle?.Toggle(false);
+                return;
+            }
             _noclipEnabled = value;
             _noclipToggle?.Toggle(value);
             if (_noclipEnabled && !_flyEnabled)
@@ -259,9 +275,10 @@ namespace ReModCE_ARES.Components
 
         public override void OnUpdate()
         {
-            if (!RiskyFunctionsManager.Instance.RiskyFunctionAllowed)
-                return;
-
+            if (ReModCE_ARES.RotatorEnabled)
+            {
+                ToggleFly(false);
+            }
             HandleHotkeys();
             HandleFly();
         }

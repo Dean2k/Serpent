@@ -279,6 +279,8 @@
     <Compile Include="Components\CustomLoadingMusicComponent.cs" />
     <Compile Include="Components\ExploitAmongUsComponent.cs" />
     <Compile Include="Components\ComfyMenuComponent.cs" />
+    <Compile Include="Components\PlayersListComponent.cs" />
+    <Compile Include="Components\SpeedComponent.cs" />
     <Compile Include="Components\RotatorComponent.cs" />
     <Compile Include="Components\UdonLoggerComponent.cs" />
     <Compile Include="Components\JoinNotifyComponent.cs" />

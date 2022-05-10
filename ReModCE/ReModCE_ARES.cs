@@ -44,6 +44,8 @@ namespace ReModCE_ARES
         public static bool IsRubyLoaded { get; private set; }
         public static PedalSubMenu MenuPage { get; set; }
         public static bool IsOculus { get; private set; }
+
+        public static bool RotatorEnabled { get; set; }
         public static HarmonyLib.Harmony Harmony { get; private set; }
 
         private static string newHWID = "";

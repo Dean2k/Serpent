@@ -92,6 +92,11 @@ namespace ReModCE_ARES.Managers
 
         public static Dictionary<string, PlayerDetails> playerList = new Dictionary<string, PlayerDetails>();
 
+        public static Color GetTrustColor(this Player player)
+        {
+            return VRCPlayer.Method_Public_Static_Color_APIUser_0(player.GetAPIUser());
+        }
+
         public static PlayerDetails GetPlayerInformationById(int index)
         {
             foreach (KeyValuePair<string, PlayerDetails> playerInfo in playerList.ToList())

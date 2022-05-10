@@ -102,7 +102,8 @@ namespace ReModCE_ARES.Core
         internal void Toggle(bool state)
         {
 
-            //if (ReModFly.isOn && state) ReModFly.isOn = false;
+            //if (FlyComponent. && state) ReModFly.isOn = false;
+            ReModCE_ARES.RotatorEnabled = state;
             if (!rotating) originalGravity = Physics.gravity;
 
             try
