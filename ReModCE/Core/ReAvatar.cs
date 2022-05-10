@@ -23,6 +23,7 @@ namespace ReModCE_ARES.Core
         public string ThumbnailURL { get; set; }
         public string UserId { get; set; }
         public string Pin { get; set; }
+        public string Category { get; set; }
 
         public ReAvatar()
         {
@@ -40,6 +41,7 @@ namespace ReModCE_ARES.Core
             PCAssetURL = apiAvatar.assetUrl;
             ImageURL = "None";
             ThumbnailURL = apiAvatar.thumbnailImageUrl;
+            Category = "0";
         }
 
         public ApiAvatar AsApiAvatar()
