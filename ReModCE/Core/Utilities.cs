@@ -92,23 +92,6 @@ namespace ReModCE_ARES.Core
 
         internal delegate void AlignTrackingToPlayerDelegate();
 
-        // VRChat related
-        static VRC.UI.Elements.QuickMenu ms_quickMenu = null;
-        public static VRC.Player GetPlayerQM() // Thanks, now I hate this new menu
-        {
-            VRC.Player l_result = null;
-            if (ms_quickMenu == null)
-                ms_quickMenu = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)").GetComponent<VRC.UI.Elements.QuickMenu>();
-            if ((ms_quickMenu != null) && (ms_quickMenu.field_Private_UIPage_1 != null) && ms_quickMenu.field_Private_UIPage_1.isActiveAndEnabled)
-            {
-                var l_selectedUserQM = ms_quickMenu.field_Private_UIPage_1.TryCast<VRC.UI.Elements.Menus.SelectedUserMenuQM>();
-                if ((l_selectedUserQM != null) && (l_selectedUserQM.field_Private_IUser_0 != null))
-                {
-                    l_result = GetPlayerWithId(l_selectedUserQM.field_Private_IUser_0.prop_String_0);
-                }
-            }
-            return l_result;
-        }
         public static VRC.Player GetLocalPlayer() => VRC.Player.prop_Player_0;
 
         public static bool IsFriend(VRC.Player p_player)
@@ -123,10 +106,6 @@ namespace ReModCE_ARES.Core
 
         public static Il2CppSystem.Collections.Generic.List<VRC.Player> GetPlayers() => VRC.PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0;
 
-        public static VRC.Player GetPlayerWithId(string p_id)
-        {
-            return (VRC.Player)MethodsResolver.GetPlayerById?.Invoke(null, new object[] { p_id });
-        }
 
         public static System.Collections.Generic.List<VRC.Player> GetFriendsInInstance()
         {

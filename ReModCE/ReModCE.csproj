@@ -279,7 +279,6 @@
     <Compile Include="Components\CustomLoadingMusicComponent.cs" />
     <Compile Include="Components\ExploitAmongUsComponent.cs" />
     <Compile Include="Components\ComfyMenuComponent.cs" />
-    <Compile Include="Components\LimbGrabberComponent.cs" />
     <Compile Include="Components\RotatorComponent.cs" />
     <Compile Include="Components\UdonLoggerComponent.cs" />
     <Compile Include="Components\JoinNotifyComponent.cs" />
@@ -315,9 +314,6 @@
     <Compile Include="Components\CustomNameplateComponent.cs" />
     <Compile Include="Core\DynamicContractResolver.cs" />
     <Compile Include="Core\InputAxis.cs" />
-    <Compile Include="Core\LiftedPlayer.cs" />
-    <Compile Include="Core\LifterPlayer.cs" />
-    <Compile Include="Core\MethodsResolver.cs" />
     <Compile Include="Core\NameplateModel.cs" />
     <Compile Include="Core\PlayerDetails.cs" />
     <Compile Include="Core\ReAvatar.cs" />
