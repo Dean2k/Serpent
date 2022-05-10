@@ -279,6 +279,8 @@
     <Compile Include="Components\CustomLoadingMusicComponent.cs" />
     <Compile Include="Components\ExploitAmongUsComponent.cs" />
     <Compile Include="Components\ComfyMenuComponent.cs" />
+    <Compile Include="Components\LimbGrabberComponent.cs" />
+    <Compile Include="Components\RotatorComponent.cs" />
     <Compile Include="Components\UdonLoggerComponent.cs" />
     <Compile Include="Components\JoinNotifyComponent.cs" />
     <Compile Include="Components\PerformanceComponent.cs" />
@@ -304,15 +306,25 @@
     <Compile Include="Components\ThirdPersonComponent.cs" />
     <Compile Include="Components\VRCNewsAdjustment.cs" />
     <Compile Include="Components\WireframeComponent.cs" />
+    <Compile Include="ControlSchemes\DefaultControlScheme.cs" />
+    <Compile Include="ControlSchemes\Interface\IControlScheme.cs" />
+    <Compile Include="ControlSchemes\JanNyaaControlScheme.cs" />
     <Compile Include="Core\ApiError.cs" />
     <Compile Include="Core\BasicFunctions.cs" />
     <Compile Include="Core\BinaryGZipSerializer.cs" />
     <Compile Include="Components\CustomNameplateComponent.cs" />
     <Compile Include="Core\DynamicContractResolver.cs" />
+    <Compile Include="Core\InputAxis.cs" />
+    <Compile Include="Core\LiftedPlayer.cs" />
+    <Compile Include="Core\LifterPlayer.cs" />
+    <Compile Include="Core\MethodsResolver.cs" />
     <Compile Include="Core\NameplateModel.cs" />
     <Compile Include="Core\PlayerDetails.cs" />
     <Compile Include="Core\ReAvatar.cs" />
+    <Compile Include="Core\RotationSystem.cs" />
+    <Compile Include="Core\RotatorPatches.cs" />
     <Compile Include="Core\TaskExtensions.cs" />
+    <Compile Include="Core\Utilities.cs" />
     <Compile Include="extension.cs" />
     <Compile Include="Managers\QMLabel.cs" />
     <Compile Include="Managers\RiskyFunctionsManager.cs" />
@@ -410,6 +422,7 @@
     <Content Include="Resources\weapons.png" />
     <EmbeddedResource Include="Resources\world.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /Y $(TargetFileName) S:\Games\steamapps\common\VRChat\$(TargetFileName)

@@ -41,6 +41,9 @@ namespace ReModCE_ARES.Components
         private ReMenuToggle _hotkeyToggle;
         private ReMenuToggle _viewpointFlyingToggle;
 
+        private ConfigValue<bool> ActionMenuFlyEnabled;
+        private ReMenuToggle _actionMenuFlyEnabled;
+
         private Transform _cameraTransform;
 
         public FlyComponent()
@@ -49,6 +52,11 @@ namespace ReModCE_ARES.Components
             FlySpeed.OnValueChanged += () => _flySpeedButton.Text = $"Fly Speed: {FlySpeed}";
             EnableFlyHotkey = new ConfigValue<bool>(nameof(EnableFlyHotkey), true);
             EnableFlyHotkey.OnValueChanged += () => _hotkeyToggle.Toggle(EnableFlyHotkey);
+
+
+
+            ActionMenuFlyEnabled = new ConfigValue<bool>(nameof(ActionMenuFlyEnabled), true);
+            ActionMenuFlyEnabled.OnValueChanged += () => _actionMenuFlyEnabled.Toggle(ActionMenuFlyEnabled);
 
             FlyViewpointBased = new ConfigValue<bool>(
                 nameof(FlyViewpointBased),
@@ -80,14 +88,27 @@ namespace ReModCE_ARES.Components
             };
         }
 
+        private void ToggleMenu(bool value)
+        {
+            ActionMenuFlyEnabled.SetValue(value);
+        }
+
         public override void OnUiManagerInit(UiManager uiManager)
         {
             var movementMenu = uiManager.MainMenu.GetMenuPage("Movement");
             var hotkeyMenu = uiManager.MainMenu.GetMenuPage("Hotkeys");
 
+            _actionMenuFlyEnabled = movementMenu.AddToggle("Action Menu Toggle",
+                "Enable the action menu quick toggle (restart required).", ToggleMenu,
+                ActionMenuFlyEnabled);
+
             try
             {
-                VRCActionMenuPage.AddToggle(ActionMenuPage.Main, "Fly", false, ToggleFlyQuick, ResourceManager.GetTexture("remodce.arms-up"));
+                if (ActionMenuFlyEnabled)
+                {
+                    VRCActionMenuPage.AddToggle(ActionMenuPage.Main, "Fly", false, ToggleFlyQuick,
+                        ResourceManager.GetTexture("remodce.arms-up"));
+                }
             } catch { }
             _flyToggle = movementMenu.AddToggle("Fly", "Enable/Disable Fly", ToggleFly, _flyEnabled);
             _noclipToggle = movementMenu.AddToggle("Noclip", "Enable/Disable Noclip", ToggleNoclip, _noclipEnabled);

@@ -110,7 +110,7 @@ namespace ReModCE_ARES
             SetIsOculus();
 
             ReLogger.Msg($"Running on {(IsOculus ? "Not Steam" : "Steam")}");
-
+            
             InitializePatches();
             InitializeModComponents();
             MelonCoroutines.Start(WaitForActionMenuInitWheel());

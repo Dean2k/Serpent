@@ -19,10 +19,16 @@ namespace ReModCE_ARES.Components
         private ConfigValue<bool> LoudMicEnabled;
         private ReMenuToggle _loudMicEnabled;
 
+        private ConfigValue<bool> ActionMenuMicroPhoneEnabled;
+        private ReMenuToggle _actionMenuMicroPhoneEnabled;
+
         public LoudMicComponent()
         {
             LoudMicEnabled = new ConfigValue<bool>(nameof(LoudMicEnabled), false);
             LoudMicEnabled.OnValueChanged += () => _loudMicEnabled.Toggle(LoudMicEnabled);
+
+            ActionMenuMicroPhoneEnabled = new ConfigValue<bool>(nameof(ActionMenuMicroPhoneEnabled), true);
+            ActionMenuMicroPhoneEnabled.OnValueChanged += () => _actionMenuMicroPhoneEnabled.Toggle(ActionMenuMicroPhoneEnabled);
         }
 
         public override void OnUiManagerInit(UiManager uiManager)
@@ -33,12 +39,27 @@ namespace ReModCE_ARES.Components
             _loudMicEnabled = menu.AddToggle("Loud Mic",
                 "Ear Rape.", LoudMic,
                 LoudMicEnabled);
+
+            _actionMenuMicroPhoneEnabled = menu.AddToggle("Action Menu Toggle",
+                "Enable the action menu quick toggle (restart required).", ToggleMenu,
+                ActionMenuMicroPhoneEnabled);
+
             try
             {
-                VRCActionMenuPage.AddToggle(ActionMenuPage.Main, "Mic Rape", LoudMicEnabled, ToggleMicQuick, ResourceManager.GetTexture("remodce.skull"));
+                if (ActionMenuMicroPhoneEnabled)
+                {
+                    VRCActionMenuPage.AddToggle(ActionMenuPage.Main, "Mic Rape", LoudMicEnabled, ToggleMicQuick,
+                        ResourceManager.GetTexture("remodce.skull"));
+                }
             }
             catch { }
 
+        }
+
+
+        private void ToggleMenu(bool value)
+        {
+            ActionMenuMicroPhoneEnabled.SetValue(value);
         }
 
         private void ToggleMicQuick(bool value)

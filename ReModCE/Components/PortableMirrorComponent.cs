@@ -59,7 +59,7 @@ namespace ReModCE_ARES.Components
                 CanPickupMirror);
 
             _mirrorScaleX = subMenu.AddButton($"Mirror Scale X: {MirrorScaleX}",
-                    "Set the maximum audio distance (Meters)",
+                    "Set the mirror scale X",
                     () =>
                     {
                         VRCUiPopupManager.prop_VRCUiPopupManager_0.ShowInputPopupWithCancel("Mirror Scale X",
@@ -76,8 +76,8 @@ namespace ReModCE_ARES.Components
                             }, null);
                     }, ResourceManager.GetSprite("remodce.max"));
 
-            _mirrorScaleY = subMenu.AddButton($"Mirror Scale X: {MirrorScaleY}",
-                   "Set the maximum audio distance (Meters)",
+            _mirrorScaleY = subMenu.AddButton($"Mirror Scale Y: {MirrorScaleY}",
+                   "Set the mirror scale Y",
                    () =>
                    {
                        VRCUiPopupManager.prop_VRCUiPopupManager_0.ShowInputPopupWithCancel("Mirror Scale Y",
