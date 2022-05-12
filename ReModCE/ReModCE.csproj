@@ -269,6 +269,7 @@
     <Compile Include="Components\DownloadVRCWComponent.cs" />
     <Compile Include="Components\EmojiBlocker.cs" />
     <Compile Include="Components\ExploitJustBComponent.cs" />
+    <Compile Include="Components\ExploitPrisonComponent.cs" />
     <Compile Include="Components\ExploitMurder4Component.cs" />
     <Compile Include="Components\FlyComponent.cs" />
     <Compile Include="Components\HighlightsComponent.cs" />

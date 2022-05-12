@@ -1,4 +1,6 @@
 ﻿using System;
+using Il2CppSystem.Collections.Generic;
+using Il2CppSystem.IO;
 using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
@@ -13,6 +15,7 @@ namespace ReModCE_ARES.Components
     internal class UdonLoggerComponent : ModComponent
     {
         private ReMenuButton _udonLog;
+        private ReMenuButton _itemLog;
 
         public UdonLoggerComponent()
         {
@@ -25,6 +28,8 @@ namespace ReModCE_ARES.Components
             var menu = uiManager.MainMenu.GetMenuPage("ARES");
             _udonLog = menu.AddButton("Log all Udon Events in world",
                 "Gets all udon events and logs them to console", LogUdon);
+            _itemLog = menu.AddButton("Log all item names in world",
+                "Gets all item names and logs them to console", LogItems);
         }
 
         public void LogUdon()
@@ -36,6 +41,16 @@ namespace ReModCE_ARES.Components
                     Console.WriteLine(table.Key);
                 }
             }
+        }
+
+        public void LogItems()
+        {
+            string itemList = null;
+            foreach (GameObject item in Resources.FindObjectsOfTypeAll<GameObject>())
+            {
+                itemList = itemList + Environment.NewLine + item.name;
+            }
+            File.WriteAllText("Items.txt", itemList);
         }
     }
 }
