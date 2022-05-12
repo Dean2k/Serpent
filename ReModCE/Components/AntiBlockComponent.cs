@@ -45,8 +45,11 @@ namespace ReModCE_ARES.Components
             _antiblockToggle = subMenu.AddToggle("Anti-Block",
                 "Enable / Disable the anti-block", AntiBlockEnabled.SetValue,
                 AntiBlockEnabled);
-
-            ReModCE_ARES.Harmony.Patch(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.OnEvent)), GetLocalPatch(nameof(OnEventPatch)), null);
+            try
+            {
+                ReModCE_ARES.Harmony.Patch(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.OnEvent)),
+                    GetLocalPatch(nameof(OnEventPatch)), null);
+            } catch {ReModCE_ARES.LogDebug("Error on patching AntiBlock");}
         }
 
         private static bool OnEventPatch(ref EventData __0)

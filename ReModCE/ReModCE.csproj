@@ -280,6 +280,7 @@
     <Compile Include="Components\CustomLoadingMusicComponent.cs" />
     <Compile Include="Components\ExploitAmongUsComponent.cs" />
     <Compile Include="Components\ComfyMenuComponent.cs" />
+    <Compile Include="Components\SoftCloneComponent.cs" />
     <Compile Include="Components\PlayersListComponent.cs" />
     <Compile Include="Components\SpeedComponent.cs" />
     <Compile Include="Components\RotatorComponent.cs" />
