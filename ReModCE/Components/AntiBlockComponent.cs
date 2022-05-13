@@ -1,6 +1,4 @@
-﻿using System;
-using ExitGames.Client.Photon;
-using HarmonyLib;
+﻿using ExitGames.Client.Photon;
 using Il2CppSystem.Collections.Generic;
 using Photon.Realtime;
 using ReModAres.Core;
@@ -12,8 +10,6 @@ using ReModCE_ARES.Loader;
 using ReModCE_ARES.Managers;
 using UnityEngine;
 using VRC.Core;
-using VRC.Management;
-using Object = UnityEngine.Object;
 using Player = VRC.Player;
 
 namespace ReModCE_ARES.Components
@@ -104,6 +100,17 @@ namespace ReModCE_ARES.Components
                 }
             }
 
+
+            PlayerDetails playerDetails2 = Wrapper.GetPlayerInformationById(__0.Sender);
+            if ((__0.Code == 6 || __0.Code == 9 || __0.Code == 209 || __0.Code == 210) && playerDetails2 != null)
+            {
+                if (playerDetails2.player.IsBot())
+                {
+                    ReLogger.Msg("Anti Bot: " + playerDetails2.displayName);
+                    ReModCE_ARES.LogDebug("Anti Bot: " + playerDetails2.displayName);
+                    return false;
+                }
+            }
             return true;
         }
 

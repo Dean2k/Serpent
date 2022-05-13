@@ -7,10 +7,12 @@ using VRC.DataModel;
 using System.Linq;
 using Harmony;
 using Il2CppSystem;
+using Newtonsoft.Json;
 using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
+using ReModCE_ARES.Core;
 using UnhollowerRuntimeLib.XrefScans;
 using VRC;
 
@@ -60,25 +62,10 @@ namespace ReModCE_ARES.Components
                 && __0.Sender == Player.prop_Player_0.field_Private_VRCPlayerApi_0.playerId
                )
             {
-                int blah = 0;
                 try
                 {
                     __0.Parameters[245].Cast<Il2CppSystem.Collections.Hashtable>()["avatarDict"] = AvatarDictCache;
                 } catch (System.Exception ex) { ReModCE_ARES.LogDebug(ex.Message); }
-
-                for (byte i = 0; i < 255; i++)
-                {
-                    try
-                    {
-                        if (__0.Parameters[i] != null)
-                        {
-                            ReModCE_ARES.LogDebug(blah.ToString());
-                        }
-                    }
-                    catch { }
-
-                    blah++;
-                }
 
                 if (_sentTwice)
                 {
@@ -109,15 +96,19 @@ namespace ReModCE_ARES.Components
 
             AvatarDictCache = null;
             string target = UserSelectionManager.field_Private_Static_UserSelectionManager_0.field_Private_APIUser_1.id;
+
+            ReModCE_ARES.LogDebug(target);
+
             _state = true;
+
             AvatarDictCache = PlayerManager.prop_PlayerManager_0
                 .field_Private_List_1_Player_0
                 .ToArray()
                 .FirstOrDefault(a => a.field_Private_APIUser_0.id == target)
                 ?.prop_Player_1.field_Private_Hashtable_0["avatarDict"];
-
             _loadAvatarMethod.Invoke(VRCPlayer.field_Internal_Static_VRCPlayer_0, new object[] { true });
         }
+        
 
     }
 }

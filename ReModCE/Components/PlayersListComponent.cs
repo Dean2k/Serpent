@@ -82,6 +82,7 @@ namespace ReModCE_ARES.Components
                     {
                         text += " [<color=#FFB300>H</color>]";
                     }
+                    text = text + " [" + player.GetAvatarStatus() + "]";
                     text = text + " [" + player.GetPlatform() + "]";
                     text = text + " [<color=#FFB300>P</color>] " + player.GetPingColord();
                     text = text + " [<color=#FFB300>F</color>] " + player.GetFramesColord();

@@ -61,9 +61,6 @@ namespace ReModCE_ARES.Components
 
         public AntiCrashComponent()
         {
-            ReLogger.Msg("patching OnEvent");
-
-           
             ReModCE_ARES.Harmony.Patch(typeof(VRC.Core.AssetManagement).GetMethod("Method_Public_Static_Object_Object_Boolean_Boolean_Boolean_0"), new HarmonyMethod(AccessTools.Method(typeof(AntiCrashComponent), nameof(OnAvatarAssetBundleLoad))));
 
 

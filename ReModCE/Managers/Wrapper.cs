@@ -23,6 +23,15 @@ namespace ReModCE_ARES.Managers
         public static VRCPlayerApi GetVRCPlayerApi(this Player Instance) => Instance?.prop_VRCPlayerApi_0;
         public static ApiAvatar GetAvatarInfo(this Player Instance) => Instance?.prop_ApiAvatar_0;
 
+        public static bool IsBot(this Player player)
+        {
+            if ((player.GetPing() > 0 || !(player.GetFrames() <= 0f)) && !(player.GetFrames() <= -1f))
+            {
+                return player.transform.position == Vector3.zero;
+            }
+            return true;
+        }
+
         public static string GetAvatarStatus(this Player player)
         {
             string status = player.GetAvatarInfo().releaseStatus.ToLower();
@@ -109,8 +118,6 @@ namespace ReModCE_ARES.Managers
 
             return null;
         }
-
-        
 
         public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
         {
