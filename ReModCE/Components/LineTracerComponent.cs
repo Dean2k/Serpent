@@ -37,16 +37,18 @@
         private static Material lineMaterial;
 
         private static RenderObjectListener renderObjectListener;
+        private static RenderObjectListener renderObjectDesktopListener;
 
         private readonly List<Player> cachedPlayers = new();
 
         private ConfigValue<bool> lineTracerEnabled;
+        private ConfigValue<bool> lineTracerDesktopEnabled;
 
         private bool materialSetup;
 
         private Transform originTransform;
-
-        private bool riskyFunctionsAllowed;
+        private Transform originDesktopTransform;
+        
 
         public LineTracerComponent()
         {
@@ -56,11 +58,15 @@
                 nameof(lineTracerEnabled),
                 false,
                 "Enable Line Tracer (Right Trigger)");
-            
+
+            lineTracerDesktopEnabled = new ConfigValue<bool>(
+                nameof(lineTracerDesktopEnabled),
+                false,
+                "Enable Line Tracer");
+
             FriendsColor = new ConfigValue<Color>(nameof(FriendsColor), Color.yellow);
             OthersColor = new ConfigValue<Color>(nameof(OthersColor), Color.magenta);
             
-            RiskyFunctionsManager.Instance.OnRiskyFunctionsChanged += b => riskyFunctionsAllowed = b;
         }
 
         public override void OnEnterWorld(ApiWorld world, ApiWorldInstance instance)
@@ -88,11 +94,21 @@
                 "Hold Right Trigger to draw lines to each players from your hand",
                 lineTracerEnabled);
 
+            espMenu.AddToggle(
+                "Desktop Line Tracer (Not finished)",
+                "Draw lines to each players from your hand",
+                lineTracerDesktopEnabled);
+
             // Late enough that the camera is on now
             renderObjectListener = VRCVrCamera.field_Private_Static_VRCVrCamera_0.field_Public_Camera_0.gameObject
                                               .AddComponent<RenderObjectListener>();
             renderObjectListener.hideFlags = HideFlags.HideAndDontSave;
             renderObjectListener.RenderObject += OnRenderObject;
+
+            renderObjectDesktopListener = VRCVrCamera.field_Private_Static_VRCVrCamera_0.field_Public_Camera_0.gameObject
+                .AddComponent<RenderObjectListener>();
+            renderObjectDesktopListener.hideFlags = HideFlags.HideAndDontSave;
+            renderObjectDesktopListener.RenderObject += OnRenderObjectDesktop;
         }
 
         private static Transform GetOriginTransform()
@@ -111,13 +127,24 @@
                    ?? localAnimator.GetBoneTransform(HumanBodyBones.RightHand);
         }
 
+        private static Transform GetOriginTransformDesktop()
+        {
+            VRCPlayer localPlayer = VRCPlayer.field_Internal_Static_VRCPlayer_0;
+            if (!localPlayer) return null;
+
+            Animator localAnimator = localPlayer.GetAvatarObject()?.GetComponent<Animator>();
+            if (localAnimator == null
+                || !localAnimator.isHuman) return null;
+            
+            return localAnimator.GetBoneTransform(HumanBodyBones.Hips);
+        }
+
         private new void OnRenderObject()
         {
             // In World/Room
             if (!RoomManager.field_Private_Static_Boolean_0) return;
 
             if (!lineTracerEnabled
-                || !riskyFunctionsAllowed
                 || !XRDevice.isPresent) return;
 
             if (Input.GetAxis(RightTrigger) < 0.4f) return;
@@ -139,6 +166,37 @@
                 GL.Color(
                     player.GetAPIUser().isFriend ? FriendsColor.Value : OthersColor.Value);
                 GL.Vertex(originTransform.position);
+                GL.Vertex(player.transform.position);
+            }
+
+            // End GL
+            GL.End();
+        }
+
+        private new void OnRenderObjectDesktop()
+        {
+            // In World/Room
+            if (!RoomManager.field_Private_Static_Boolean_0) return;
+
+            if (!lineTracerDesktopEnabled) return;
+
+            if (!materialSetup) SetupMaterial();
+
+            // local player
+            if (!originDesktopTransform) originDesktopTransform = GetOriginTransformDesktop();
+            if (originDesktopTransform == null) return;
+
+            // Initialize GL
+            GL.Begin(1); // Lines
+            lineMaterial.SetPass(0);
+
+            // goes way faster to re-use the cached players
+            foreach (Player player in cachedPlayers)
+            {
+                if (!player) continue;
+                GL.Color(
+                    player.GetAPIUser().isFriend ? FriendsColor.Value : OthersColor.Value);
+                GL.Vertex(originDesktopTransform.position);
                 GL.Vertex(player.transform.position);
             }
 

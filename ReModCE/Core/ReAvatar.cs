@@ -23,7 +23,8 @@ namespace ReModCE_ARES.Core
         public string ThumbnailURL { get; set; }
         public string UserId { get; set; }
         public string Pin { get; set; }
-        public string Category { get; set; }
+        public string Category { get; set; } 
+        public string Quest { get; set; }
 
         public ReAvatar()
         {
@@ -46,6 +47,13 @@ namespace ReModCE_ARES.Core
 
         public ApiAvatar AsApiAvatar()
         {
+            ApiModel.SupportedPlatforms supported = ApiModel.SupportedPlatforms.StandaloneWindows;
+
+            if(Quest == "true")
+            {
+               supported = ApiModel.SupportedPlatforms.All;
+            }
+
             return new ApiAvatar
             {
                 id = AvatarID,
@@ -63,7 +71,7 @@ namespace ReModCE_ARES.Core
                 Populated = false,
                 assetVersion = new AssetVersion("2019.4.31f1", 0),
                 tags = new Il2CppSystem.Collections.Generic.List<string>(0),
-                supportedPlatforms = ApiModel.SupportedPlatforms.StandaloneWindows,
+                supportedPlatforms = supported,
             };
         }
 

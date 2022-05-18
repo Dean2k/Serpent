@@ -1,4 +1,5 @@
-﻿using ExitGames.Client.Photon;
+﻿using System.Linq.Expressions;
+using ExitGames.Client.Photon;
 using Il2CppSystem.Collections.Generic;
 using Photon.Realtime;
 using ReModAres.Core;
@@ -52,26 +53,32 @@ namespace ReModCE_ARES.Components
         {
             if (__0.Code == 33)
             {
-                Dictionary<byte, Il2CppSystem.Object> moderationData = __0.Parameters[__0.CustomDataKey].Cast<Dictionary<byte, Il2CppSystem.Object>>();
-
-                byte moderationType = moderationData[0].Unbox<byte>();
-
-                switch (moderationType)
+                try
                 {
-                    case 21:
+                    Dictionary<byte, Il2CppSystem.Object> moderationData =
+                        __0.Parameters[__0.CustomDataKey].Cast<Dictionary<byte, Il2CppSystem.Object>>();
+
+                    byte moderationType = moderationData[0].Unbox<byte>();
+
+                    switch (moderationType)
+                    {
+
+                        case 21:
                         {
                             if (moderationData.ContainsKey(1) == true)
                             {
                                 bool isBlocked = moderationData[10].Unbox<bool>();
-                                PlayerDetails playerDetails = Wrapper.GetPlayerInformationById(moderationData[1].Unbox<int>());
-                                
+                                PlayerDetails playerDetails =
+                                    Wrapper.GetPlayerInformationById(moderationData[1].Unbox<int>());
+
 
 
                                 if (playerDetails != null)
                                 {
                                     if (isBlocked)
                                     {
-                                        VRCUiManagerEx.Instance.QueueHudMessage(playerDetails.displayName + " has blocked you.", Color.red);
+                                        VRCUiManagerEx.Instance.QueueHudMessage(
+                                            playerDetails.displayName + " has blocked you.", Color.red);
                                         ReLogger.Msg(playerDetails.displayName + " has blocked you.", Color.red);
                                         ReModCE_ARES.LogDebug(playerDetails.displayName + " has blocked you.");
 
@@ -86,10 +93,12 @@ namespace ReModCE_ARES.Components
                                             Wrapper.GetLocalVRCPlayer().prop_VRCPlayerApi_0.displayName)
                                         {
                                             VRCUiManagerEx.Instance.QueueHudMessage(
-                                                playerDetails.displayName + " has unblocked or unmuted you.", Color.green);
+                                                playerDetails.displayName + " has unblocked or unmuted you.",
+                                                Color.green);
                                             ReLogger.Msg(playerDetails.displayName + " has unblocked or unmuted you.",
                                                 Color.green);
-                                            ReModCE_ARES.LogDebug(playerDetails.displayName + " has unblocked or unmuted you.");
+                                            ReModCE_ARES.LogDebug(playerDetails.displayName +
+                                                                  " has unblocked or unmuted you.");
                                         }
                                     }
                                 }
@@ -97,11 +106,16 @@ namespace ReModCE_ARES.Components
 
                             break;
                         }
-                }
+                    }
+                } catch {}
             }
 
+            PlayerDetails playerDetails2 = null;
+            try
+            {
+                playerDetails2 = Wrapper.GetPlayerInformationById(__0.Sender);
+            } catch {}
 
-            PlayerDetails playerDetails2 = Wrapper.GetPlayerInformationById(__0.Sender);
             if ((__0.Code == 6 || __0.Code == 9 || __0.Code == 209 || __0.Code == 210) && playerDetails2 != null)
             {
                 if (playerDetails2.player.IsBot())

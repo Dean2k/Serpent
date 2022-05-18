@@ -445,7 +445,7 @@ namespace ReModCE_ARES.Components
             }
 
 
-            var request = new HttpRequestMessage(HttpMethod.Get, $"{ApiUrl}/records/Avatars?include=AvatarID,AvatarName,AvatarDescription,AuthorID,AuthorName,PCAssetURL,ImageURL,ThumbnailURL&size=10000&filter=AvatarName,cs,{searchTerm}&filter=Releasestatus,cs,Public");
+            var request = new HttpRequestMessage(HttpMethod.Get, $"{ApiUrl}/records/Avatars?include=AvatarID,AvatarName,AvatarDescription,AuthorID,AuthorName,PCAssetURL,ImageURL,ThumbnailURL,Quest&size=10000&filter=AvatarName,cs,{searchTerm}&filter=Releasestatus,cs,Public");
 
             _httpClient.SendAsync(request).ContinueWith(rsp =>
             {
