@@ -29,7 +29,10 @@ using UnityEngine;
 using VRC;
 using VRC.Core;
 using VRC.DataModel;
+using ExitGames.Client.Photon;
 using ConfigManager = ReModAres.Core.Managers.ConfigManager;
+using ReModAres.Core.VRChat;
+using Photon.Realtime;
 
 namespace ReModCE_ARES
 {
@@ -112,7 +115,7 @@ namespace ReModCE_ARES
             SetIsOculus();
 
             ReLogger.Msg($"Running on {(IsOculus ? "Not Steam" : "Steam")}");
-            
+
             InitializePatches();
             InitializeModComponents();
             MelonCoroutines.Start(WaitForActionMenuInitWheel());
@@ -195,6 +198,8 @@ namespace ReModCE_ARES
                 MelonLogger.Msg("Failed to patch force cloning");
             }
 
+            
+
             ActionMenus.PatchAll(Harmony);
 
             //foreach (var method in typeof(SelectedUserMenuQM).GetMethods())
@@ -238,12 +243,12 @@ namespace ReModCE_ARES
         {
             var playerJoinedDelegate = NetworkManager.field_Internal_Static_NetworkManager_0.field_Internal_VRCEventDelegate_1_Player_0;
             var playerLeftDelegate = NetworkManager.field_Internal_Static_NetworkManager_0.field_Internal_VRCEventDelegate_1_Player_1;
-            playerJoinedDelegate.field_Private_HashSet_1_UnityAction_1_T_0.Add(new Action<Player>(p =>
+            playerJoinedDelegate.field_Private_HashSet_1_UnityAction_1_T_0.Add(new Action<VRC.Player>(p =>
             {
                 if (p != null) OnPlayerJoined(p);
             }));
 
-            playerLeftDelegate.field_Private_HashSet_1_UnityAction_1_T_0.Add(new Action<Player>(p =>
+            playerLeftDelegate.field_Private_HashSet_1_UnityAction_1_T_0.Add(new Action<VRC.Player>(p =>
             {
                 if (p != null) OnPlayerLeft(p);
             }));
@@ -292,6 +297,8 @@ namespace ReModCE_ARES
                 }
             }
         }
+
+
         public static void OnUiManagerInitEarly()
         {
             ReLogger.Msg("Initializing early UI...");
@@ -404,7 +411,7 @@ namespace ReModCE_ARES
             }
         }
 
-        private static void OnPlayerJoined(Player player)
+        private static void OnPlayerJoined(VRC.Player player)
         {
             foreach (var m in Components)
             {
@@ -412,7 +419,7 @@ namespace ReModCE_ARES
             }
         }
 
-        private static void OnPlayerLeft(Player player)
+        private static void OnPlayerLeft(VRC.Player player)
         {
             foreach (var m in Components)
             {

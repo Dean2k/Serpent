@@ -27,8 +27,6 @@ namespace ReModCE_ARES.Components
         private static ReMenuButton _maxAudioSourcesButton;
         private static ConfigValue<int> _maxLightSources;
         private static ReMenuButton _maxLightSourcesButton;
-        private static ConfigValue<int> _maxDynamicBonesColliders;
-        //private static ReMenuButton _maxDynamicBonesCollidersButton;
         private static ConfigValue<int> _maxPolys;
         private static ReMenuButton _maxPolysButton;
         private static ConfigValue<int> _maxMaterials;
@@ -61,7 +59,7 @@ namespace ReModCE_ARES.Components
 
         public AntiCrashComponent()
         {
-            ReModCE_ARES.Harmony.Patch(typeof(VRC.Core.AssetManagement).GetMethod("Method_Public_Static_Object_Object_Boolean_Boolean_Boolean_0"), new HarmonyMethod(AccessTools.Method(typeof(AntiCrashComponent), nameof(OnAvatarAssetBundleLoad))));
+            ReModCE_ARES.Harmony.Patch(typeof(VRC.Core.AssetManagement).GetMethod(nameof(VRC.Core.AssetManagement.Method_Public_Static_Object_Object_Boolean_Boolean_Boolean_0)), new HarmonyMethod(AccessTools.Method(typeof(AntiCrashComponent), nameof(OnAvatarAssetBundleLoad))));
 
 
             _antiAvatarCrashEnabled = new ConfigValue<bool>(nameof(_antiAvatarCrashEnabled), true);
@@ -72,9 +70,6 @@ namespace ReModCE_ARES.Components
 
             _maxLightSources = new ConfigValue<int>(nameof(_maxLightSources), 0);
             _maxLightSources.OnValueChanged += () => _maxLightSourcesButton.Text = $"Max Light Sources: {_maxLightSources}";
-
-            _maxDynamicBonesColliders = new ConfigValue<int>(nameof(_maxDynamicBonesColliders), 5);
-            //MaxDynamicBonesColliders.OnValueChanged += () => _maxDynamicBonesCollidersButton.Text = $"Max Light Sources: {MaxDynamicBonesColliders}";
 
             _maxPolys = new ConfigValue<int>(nameof(_maxPolys), 260000);
             _maxPolys.OnValueChanged += () => _maxPolysButton.Text = $"Max Polys: {_maxPolys}";
@@ -112,6 +107,7 @@ namespace ReModCE_ARES.Components
                         _maxAudioSources.SetValue(maxSources);
                     }, null);
             }, ResourceManager.GetSprite("remodce.shield"));
+
             _maxLightSourcesButton = aresMenu.AddButton($"Max Light Sources: {_maxLightSources}", "Limit Avatar Light Sources", () =>
             {
                 VRCUiPopupManager.prop_VRCUiPopupManager_0.ShowInputPopupWithCancel("Set Max Light Sources", _maxLightSources.ToString(), InputField.InputType.Standard, false, "Submit",
@@ -126,20 +122,7 @@ namespace ReModCE_ARES.Components
                         _maxLightSources.SetValue(maxSources);
                     }, null);
             }, ResourceManager.GetSprite("remodce.shield"));
-            //_maxDynamicBonesCollidersButton = aresMenu.AddButton($"Max Dynamic Bone Colliders: {MaxDynamicBonesColliders}", "Limit Dynamic Bone Colliders", () =>
-            //{
-            //    VRCUiPopupManager.prop_VRCUiPopupManager_0.ShowInputPopupWithCancel("Set Max Dynamic Bone Colliders", MaxDynamicBonesColliders.ToString(), InputField.InputType.Standard, false, "Submit",
-            //        (s, k, t) =>
-            //        {
-            //            if (string.IsNullOrEmpty(s))
-            //                return;
 
-            //            if (!int.TryParse(s, out var maxSources))
-            //                return;
-
-            //            MaxDynamicBonesColliders.SetValue(maxSources);
-            //        }, null);
-            //}, ResourceManager.GetSprite("remodce.shield"));
             _maxPolysButton = aresMenu.AddButton($"Max Polys: {_maxPolys}", "Limit Poly count", () =>
             {
                 VRCUiPopupManager.prop_VRCUiPopupManager_0.ShowInputPopupWithCancel("Set Max Polys", _maxPolys.ToString(), InputField.InputType.Standard, false, "Submit",
@@ -154,6 +137,7 @@ namespace ReModCE_ARES.Components
                         _maxPolys.SetValue(maxSources);
                     }, null);
             }, ResourceManager.GetSprite("remodce.shield"));
+
             _maxMaterialsButton = aresMenu.AddButton($"Max Materials: {_maxMaterials}", "Limit material count", () =>
             {
                 VRCUiPopupManager.prop_VRCUiPopupManager_0.ShowInputPopupWithCancel("Set Max material", _maxMaterials.ToString(), InputField.InputType.Standard, false, "Submit",
@@ -168,6 +152,7 @@ namespace ReModCE_ARES.Components
                         _maxMaterials.SetValue(maxSources);
                     }, null);
             }, ResourceManager.GetSprite("remodce.shield"));
+
             _maxClothButton = aresMenu.AddButton($"Max Cloth: {_maxCloth}", "Limit Cloth count", () =>
             {
                 VRCUiPopupManager.prop_VRCUiPopupManager_0.ShowInputPopupWithCancel("Set Max Cloth", _maxCloth.ToString(), InputField.InputType.Standard, false, "Submit",
@@ -182,6 +167,7 @@ namespace ReModCE_ARES.Components
                         _maxCloth.SetValue(maxSources);
                     }, null);
             }, ResourceManager.GetSprite("remodce.shield"));
+
             _maxCollidersButton = aresMenu.AddButton($"Max Colliders: {_maxColliders}", "Limit Colliders count", () =>
             {
                 VRCUiPopupManager.prop_VRCUiPopupManager_0.ShowInputPopupWithCancel("Set Max material", _maxColliders.ToString(), InputField.InputType.Standard, false, "Submit",

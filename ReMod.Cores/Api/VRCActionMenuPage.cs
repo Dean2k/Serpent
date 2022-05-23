@@ -185,9 +185,9 @@ namespace ReModAres.Core.Api
                     MelonLogger.Warning(
                         "Adding to the MenuSize page hasn't been implemented yet. Please use a different page");
                     return;
-                    if (insertion == Insertion.Pre) ActionMenus.menuSizePagePre.Add(customPedal);
-                    else if (insertion == Insertion.Post) ActionMenus.menuSizePagePost.Add(customPedal);
-                    return;
+                    //if (insertion == Insertion.Pre) ActionMenus.menuSizePagePre.Add(customPedal);
+                    //else if (insertion == Insertion.Post) ActionMenus.menuSizePagePost.Add(customPedal);
+                    //return;
                 case ActionMenuPage.Nameplates:
                     if (insertion == Insertion.Pre) ActionMenus.nameplatesPagePre.Add(customPedal);
                     else if (insertion == Insertion.Post) ActionMenus.nameplatesPagePost.Add(customPedal);
@@ -200,9 +200,9 @@ namespace ReModAres.Core.Api
                     MelonLogger.Warning(
                         "Adding to the Nameplates size page isn't supported currently. Please use a different page");
                     return;
-                    if (insertion == Insertion.Pre) ActionMenus.nameplatesSizePagePre.Add(customPedal);
-                    else if (insertion == Insertion.Post) ActionMenus.nameplatesSizePagePost.Add(customPedal);
-                    return;
+                    //if (insertion == Insertion.Pre) ActionMenus.nameplatesSizePagePre.Add(customPedal);
+                    //else if (insertion == Insertion.Post) ActionMenus.nameplatesSizePagePost.Add(customPedal);
+                    //return;
                 case ActionMenuPage.NameplatesVisibilty:
                     if (insertion == Insertion.Pre) ActionMenus.nameplatesVisibilityPagePre.Add(customPedal);
                     else if (insertion == Insertion.Post) ActionMenus.nameplatesVisibilityPagePost.Add(customPedal);

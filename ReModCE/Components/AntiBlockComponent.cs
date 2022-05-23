@@ -120,7 +120,7 @@ namespace ReModCE_ARES.Components
             {
                 if (playerDetails2.player.IsBot())
                 {
-                    ReLogger.Msg("Anti Bot: " + playerDetails2.displayName);
+                    //ReLogger.Msg("Anti Bot: " + playerDetails2.displayName);
                     ReModCE_ARES.LogDebug("Anti Bot: " + playerDetails2.displayName);
                     return false;
                 }

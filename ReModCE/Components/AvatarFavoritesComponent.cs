@@ -48,6 +48,7 @@ namespace ReModCE_ARES.Components
 
         private const bool EnableApi = true;
         private const string ApiUrl = "https://api.ares-mod.com";
+        private const string ApiUnlockedUrl = "https://unlocked.ares-mod.com";
         private string _userAgent = "";
         private HttpClient _httpClient;
         private HttpClientHandler _httpClientHandler;
@@ -55,11 +56,13 @@ namespace ReModCE_ARES.Components
         private const string PinPath = "UserData/ReModCE_ARES/pin";
         private int _pinCode;
         private ReMenuButton _enterPinButton;
+        private ReMenuButton _apiKeyButton;
 
         private ConfigValue<bool> AvatarFavoritesEnabled;
         private ConfigValue<bool> AvatarFavoritesEnabled1;
         private ConfigValue<bool> AvatarFavoritesEnabled2;
         private ConfigValue<bool> AvatarFavoritesEnabled3;
+        private ConfigValue<string> ApiKey;
         private static PageUserInfo _userInfoPage;
         private ReMenuToggle _enabledToggle;
         private ReMenuToggle _enabledToggle1;
@@ -132,6 +135,8 @@ namespace ReModCE_ARES.Components
                 _favoriteAvatarList2.SetMaxAvatarsPerPage(MaxAvatarsPerPage);
                 _favoriteAvatarList3.SetMaxAvatarsPerPage(MaxAvatarsPerPage);
             };
+
+            ApiKey = new ConfigValue<string>(nameof(ApiKey), "");
 
             _savedAvatars = new List<ReAvatar>();
             _savedAvatars1 = new List<ReAvatar>();
@@ -257,7 +262,7 @@ namespace ReModCE_ARES.Components
             if (user == null)
                 return;
             var player = PlayerManager.field_Private_Static_PlayerManager_0.GetPlayer(user.prop_String_0)._vrcplayer;
-            FavoriteAvatar(player.field_Private_ApiAvatar_0,0, true);
+            FavoriteAvatar(player.field_Private_ApiAvatar_0, 0, true);
         }
 
         private void FavoriteAvatar1()
@@ -329,31 +334,44 @@ namespace ReModCE_ARES.Components
                             _maxAvatarsPerPageButton.Text = $"Max Avatars Per Page: {MaxAvatarsPerPage}";
                         }, null);
                 }, ResourceManager.GetSprite("remodce.max"));
-            
-                _enterPinButton = menu.AddButton("Set/Enter Pin", "Set or enter your pin for the ARES API", () =>
-                {
-                    VRCUiPopupManager.prop_VRCUiPopupManager_0.ShowInputPopupWithCancel("Enter pin",
-                        "", InputField.InputType.Standard, true, "Submit",
-                        (s, k, t) =>
-                        {
-                            if (string.IsNullOrEmpty(s))
-                                return;
 
-                            if (!int.TryParse(s, out var pinCode))
-                                return;
+            _enterPinButton = menu.AddButton("Set/Enter Pin", "Set or enter your pin for the ARES API", () =>
+            {
+                VRCUiPopupManager.prop_VRCUiPopupManager_0.ShowInputPopupWithCancel("Enter pin",
+                    "", InputField.InputType.Standard, true, "Submit",
+                    (s, k, t) =>
+                    {
+                        if (string.IsNullOrEmpty(s))
+                            return;
 
-                            _pinCode = pinCode;
-                            File.WriteAllText(PinPath, _pinCode.ToString());
+                        if (!int.TryParse(s, out var pinCode))
+                            return;
 
-                            InitializeNetworkClient();
+                        _pinCode = pinCode;
+                        File.WriteAllText(PinPath, _pinCode.ToString());
 
-                            LoginToAPI(APIUser.CurrentUser, FetchAvatars);
-                            LoginToAPI(APIUser.CurrentUser, FetchAvatars1);
-                            LoginToAPI(APIUser.CurrentUser, FetchAvatars2);
-                            LoginToAPI(APIUser.CurrentUser, FetchAvatars3);
-                        }, null);
-                }, ResourceManager.GetSprite("remodce.padlock"));
-            
+                        InitializeNetworkClient();
+
+                        LoginToAPI(APIUser.CurrentUser, FetchAvatars);
+                        LoginToAPI(APIUser.CurrentUser, FetchAvatars1);
+                        LoginToAPI(APIUser.CurrentUser, FetchAvatars2);
+                        LoginToAPI(APIUser.CurrentUser, FetchAvatars3);
+                    }, null);
+            }, ResourceManager.GetSprite("remodce.padlock"));
+
+            _apiKeyButton = menu.AddButton("Enter Api Key", "Set or enter your key for the ARES API", () =>
+            {
+                VRCUiPopupManager.prop_VRCUiPopupManager_0.ShowInputPopupWithCancel("Enter key",
+                    "", InputField.InputType.Standard, false, "Submit",
+                    (s, k, t) =>
+                    {
+                        if (string.IsNullOrEmpty(s))
+                            return;
+
+                        ApiKey.SetValue(s);
+                    }, null);
+            }, ResourceManager.GetSprite("remodce.padlock"));
+
         }
 
         private void LoginToAPI(APIUser user, Action onLogin)
@@ -444,8 +462,19 @@ namespace ReModCE_ARES.Components
                 return;
             }
 
+            string apiKeyCode = ApiUrl;
 
-            var request = new HttpRequestMessage(HttpMethod.Get, $"{ApiUrl}/records/Avatars?include=AvatarID,AvatarName,AvatarDescription,AuthorID,AuthorName,PCAssetURL,ImageURL,ThumbnailURL,Quest&size=10000&filter=AvatarName,cs,{searchTerm}&filter=Releasestatus,cs,Public");
+            if (ApiKey != "")
+            {
+                apiKeyCode = ApiUnlockedUrl;
+            }
+
+            var request = new HttpRequestMessage(HttpMethod.Get, $"{apiKeyCode}/records/Avatars?include=AvatarID,AvatarName,AvatarDescription,AuthorID,AuthorName,PCAssetURL,ImageURL,ThumbnailURL,Quest&size=10000&filter=AvatarName,cs,{searchTerm}&filter=Releasestatus,cs,Public");
+
+            if (ApiKey != "")
+            {
+                request.Headers.Add("X-API-Key", ApiKey);
+            }
 
             _httpClient.SendAsync(request).ContinueWith(rsp =>
             {
@@ -951,7 +980,7 @@ namespace ReModCE_ARES.Components
 
             return null;
         }
-        
+
 
         public void Clear(ReAvatarList avatarList)
         {
