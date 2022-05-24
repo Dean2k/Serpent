@@ -33,6 +33,10 @@ using ExitGames.Client.Photon;
 using ConfigManager = ReModAres.Core.Managers.ConfigManager;
 using ReModAres.Core.VRChat;
 using Photon.Realtime;
+using UnhollowerBaseLib;
+using System.Runtime.InteropServices;
+using ReModCE_ARES.Config;
+using ReModCE_ARES.SDK;
 
 namespace ReModCE_ARES
 {
@@ -47,6 +51,12 @@ namespace ReModCE_ARES
         public static bool IsRubyLoaded { get; private set; }
         public static PedalSubMenu MenuPage { get; set; }
         public static bool IsOculus { get; private set; }
+
+        private delegate IntPtr OnAvatarDownloadStartDelegate(IntPtr thisPtr, IntPtr apiAvatar, IntPtr downloadContainer, bool unknownBool, IntPtr nativeMethodPointer);
+        private static OnAvatarDownloadStartDelegate onAvatarDownloadStart;
+
+        // this prevents some garbage collection bullshit
+        private static List<object> ourPinnedDelegates = new List<object>();
 
         public static bool RotatorEnabled { get; set; }
         public static HarmonyLib.Harmony Harmony { get; private set; }
@@ -198,7 +208,19 @@ namespace ReModCE_ARES
                 MelonLogger.Msg("Failed to patch force cloning");
             }
 
-            
+            unsafe
+            {
+                MethodInfo method = (from m in typeof(Downloader).GetMethods()
+                                     where m.Name.StartsWith("Method_Internal_Static_UniTask_1_InterfacePublicAbstractIDisposable") && m.Name.Contains("ApiAvatar")
+                                     select m).First();
+                IntPtr ptr = *(IntPtr*)(void*)(IntPtr)UnhollowerUtils.GetIl2CppMethodInfoPointerFieldForGeneratedMethod(method).GetValue(null);
+                OnAvatarDownloadStartDelegate onAvatarDownloadStartDelegate = (IntPtr thisPtr, IntPtr apiAvatar, IntPtr downloadContainer, bool unknownBool, IntPtr nativeMethodPointer) => OnAvatarDownloadStartPatch(thisPtr, apiAvatar, downloadContainer, unknownBool, nativeMethodPointer);
+                ourPinnedDelegates.Add(onAvatarDownloadStartDelegate);
+                MelonUtils.NativeHookAttach((IntPtr)(&ptr), Marshal.GetFunctionPointerForDelegate(onAvatarDownloadStartDelegate));
+                onAvatarDownloadStart = Marshal.GetDelegateForFunctionPointer<OnAvatarDownloadStartDelegate>(ptr);
+            }
+
+
 
             ActionMenus.PatchAll(Harmony);
 
@@ -212,6 +234,40 @@ namespace ReModCE_ARES
 
             //    Harmony.Patch(method, postfix: GetLocalPatch(nameof(SetUserPatch)));
             //}
+        }
+
+        private static IntPtr OnAvatarDownloadStartPatch(IntPtr thisPtr, IntPtr apiAvatar, IntPtr downloadContainer,
+            bool unknownBool, IntPtr nativeMethodPointer)
+        {
+            try
+            {
+                var category = MelonPreferences.GetCategory("ReModCE");
+
+                ApiAvatar apiAvatar2 = ((apiAvatar != IntPtr.Zero) ? new ApiAvatar(apiAvatar) : null);
+                if (apiAvatar2 == null)
+                {
+                    return onAvatarDownloadStart(thisPtr, apiAvatar, downloadContainer, unknownBool, nativeMethodPointer);
+                }
+
+                if (Configuration.GetAvatarProtectionsConfig().WhitelistedAvatars.ContainsKey(apiAvatar2.id))
+                {
+                    ReLogger.Msg("Downloading whitelisted avatar: " + apiAvatar2.id + " (" + apiAvatar2.name + ") | " + apiAvatar2.authorId + " (" + apiAvatar2.authorName + ")", ConsoleColor.Cyan);
+                    return onAvatarDownloadStart(thisPtr, apiAvatar, downloadContainer, unknownBool, nativeMethodPointer);
+                }
+
+                if (Configuration.GetAvatarProtectionsConfig().BlacklistedAvatars.ContainsKey(apiAvatar2.id))
+                {
+                    ReLogger.Msg("Prevented blacklisted avatar from loading: " + apiAvatar2.id + " (" + apiAvatar2.name + ") | " + apiAvatar2.authorId + " (" + apiAvatar2.authorName + ")", ConsoleColor.Cyan);
+                    return onAvatarDownloadStart(thisPtr, GeneralUtils.robotAvatar.Pointer, downloadContainer, unknownBool, nativeMethodPointer);
+                }
+                ReLogger.Msg("Downloading avatar: " + apiAvatar2.id + " (" + apiAvatar2.name + ") | " + apiAvatar2.authorId + " (" + apiAvatar2.authorName + ")");
+                
+            }
+            catch (Exception e)
+            {
+                ReLogger.Error("Download avatar patch had an error! Exception:" + e.Message, e);
+            }
+            return onAvatarDownloadStart(thisPtr, apiAvatar, downloadContainer, unknownBool, nativeMethodPointer);
         }
 
 
