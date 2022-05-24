@@ -158,6 +158,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\3rdparty\ml\Managed\UnityEngine.InputModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule">
+      <HintPath>..\3rdparty\ml\Managed\UnityEngine.ParticleSystemModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <Private>false</Private>
       <SpecificVersion>False</SpecificVersion>
@@ -261,6 +264,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AvatarPostProcess\AntiCrashClothPostProcess.cs" />
+    <Compile Include="AvatarPostProcess\AntiCrashDynamicBoneColliderPostProcess.cs" />
+    <Compile Include="AvatarPostProcess\AntiCrashDynamicBonePostProcess.cs" />
+    <Compile Include="AvatarPostProcess\AntiCrashLightSourcePostProcess.cs" />
+    <Compile Include="AvatarPostProcess\AntiCrashMaterialPostProcess.cs" />
+    <Compile Include="AvatarPostProcess\AntiCrashParticleSystemPostProcess.cs" />
+    <Compile Include="AvatarPostProcess\AntiCrashRendererPostProcess.cs" />
+    <Compile Include="AvatarPostProcess\AntiCrashShaderPostProcess.cs" />
+    <Compile Include="Components\AntiAvatarCrashComponent.cs" />
     <Compile Include="Components\AntiBlockComponent.cs" />
     <Compile Include="Components\AvatarFavoritesComponent.cs" />
     <Compile Include="Components\CalibrationSavingComponent.cs" />
@@ -273,7 +285,6 @@
     <Compile Include="Components\ExploitMurder4Component.cs" />
     <Compile Include="Components\FlyComponent.cs" />
     <Compile Include="Components\HighlightsComponent.cs" />
-    <Compile Include="Components\AntiCrashComponent.cs" />
     <Compile Include="Components\DebugMenuComponent.cs" />
     <Compile Include="Components\AresThemeComponent.cs" />
     <Compile Include="Components\AvatarHiderComponent.cs" />
@@ -310,9 +321,12 @@
     <Compile Include="Components\ThirdPersonComponent.cs" />
     <Compile Include="Components\VRCNewsAdjustment.cs" />
     <Compile Include="Components\WireframeComponent.cs" />
+    <Compile Include="Config\AvatarProtectionConfig.cs" />
+    <Compile Include="Config\Config.cs" />
     <Compile Include="ControlSchemes\DefaultControlScheme.cs" />
     <Compile Include="ControlSchemes\Interface\IControlScheme.cs" />
     <Compile Include="ControlSchemes\JanNyaaControlScheme.cs" />
+    <Compile Include="Core\AntiCrashUtils.cs" />
     <Compile Include="Core\ApiError.cs" />
     <Compile Include="Core\BasicFunctions.cs" />
     <Compile Include="Core\BinaryGZipSerializer.cs" />
@@ -324,7 +338,10 @@
     <Compile Include="Core\ReAvatar.cs" />
     <Compile Include="Core\RotationSystem.cs" />
     <Compile Include="Core\RotatorPatches.cs" />
+    <Compile Include="Core\ShaderProxy.cs" />
+    <Compile Include="Core\ShaderUtils.cs" />
     <Compile Include="Core\TaskExtensions.cs" />
+    <Compile Include="Core\TSAC.cs" />
     <Compile Include="Core\Utilities.cs" />
     <Compile Include="extension.cs" />
     <Compile Include="Managers\QMLabel.cs" />
@@ -332,6 +349,10 @@
     <Compile Include="Managers\Wrapper.cs" />
     <Compile Include="ReModCE_ARES.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SDK\GeneralWrapper.cs" />
+    <Compile Include="SDK\PlayerWrapper.cs" />
+    <Compile Include="SDK\Utils\FastMethodInfo.cs" />
+    <Compile Include="SDK\Utils\GeneralUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ReMod.Cores\ReModAres.Core.csproj">
