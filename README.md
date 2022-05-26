@@ -45,7 +45,7 @@ In case you want to update you can always grab the latest and even previous vers
 * VRCA Download
 * VRCW Download
 * Teleport to mouse location (CTRL + Q)
-* Loud Microphone (temp disabled)
+* Loud Microphone
 * Avatar Anti Crash
 * Debug Console
 * Custom background images
