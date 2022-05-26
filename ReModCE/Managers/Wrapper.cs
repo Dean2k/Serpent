@@ -89,7 +89,7 @@ namespace ReModCE_ARES.Managers
 
         public static GameObject GetAvatarObject(this Player p) => p.prop_VRCPlayer_0.prop_VRCAvatarManager_0.prop_GameObject_0;
 
-        public static System.Collections.Generic.List<Player> GetAllPlayers() => GetPlayerManager()?.field_Private_List_1_Player_0.ToArray().ToList();
+        public static Il2CppSystem.Collections.Generic.List<Player> GetAllPlayers() => GetPlayerManager()?.field_Private_List_1_Player_0;
 
         public static bool IsMe(this Player p) => p.name == GetLocalVRCPlayer().name;
 

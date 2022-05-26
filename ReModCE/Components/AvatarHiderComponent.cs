@@ -158,7 +158,7 @@ namespace ReModCE_ARES.Components
             {
                 if (HideAvatarsEnabled && Wrapper.GetLocalVRCPlayer() != null)
                 {
-                    foreach (VRC.Player player in Wrapper.GetAllPlayers().Where(p => p != null && !p.IsMe() && p.prop_APIUser_0 != null))
+                    foreach (VRC.Player player in Wrapper.GetAllPlayers().ToArray().Where(p => p != null && !p.IsMe() && p.prop_APIUser_0 != null))
                     {
                         try
                         {
