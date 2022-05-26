@@ -90,7 +90,7 @@ namespace ReModCE_ARES.Core
 
                 if (loaded == IntPtr.Zero)
                 {
-                    ReLogger.Error("Module load failed");
+                    ReLogger.Error("Module load failed: " + module.ModuleName);
                     return;
                 }
 

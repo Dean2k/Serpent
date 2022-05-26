@@ -162,6 +162,9 @@
       <HintPath>$(SolutionDir)\3rdparty\ml\Managed\VRC.UI.Elements.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="VRC.UI.Shared">
+      <HintPath>..\3rdparty\ml\Managed\VRC.UI.Shared.dll</HintPath>
+    </Reference>
     <Reference Include="VRCCore-Editor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\3rdparty\ml\Managed\VRCCore-Editor.dll</HintPath>

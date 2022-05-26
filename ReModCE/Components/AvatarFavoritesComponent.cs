@@ -181,7 +181,7 @@ namespace ReModCE_ARES.Components
             InitializeNetworkClient();
 
             _favoriteAvatarList3 = new ReAvatarList("ARES Favorites 3", this, false);
-            _favoriteAvatarList3.AvatarPedestal.field_Internal_Action_3_String_GameObject_AvatarPerformanceStats_0 = new Action<string, GameObject, AvatarPerformanceStats>(OnAvatarInstantiated3);
+            _favoriteAvatarList3.AvatarPedestal.field_Internal_Action_4_String_GameObject_AvatarPerformanceStats_ObjectPublicBoBoBoBoBoBoBoBoBoBoUnique_0 = new Action<string, GameObject, AvatarPerformanceStats, ObjectPublicBoBoBoBoBoBoBoBoBoBoUnique>(OnAvatarInstantiated3);
             _favoriteAvatarList3.OnEnable += () =>
             {
                 // make sure it stays off if it should be off.
@@ -189,7 +189,7 @@ namespace ReModCE_ARES.Components
             };
 
             _favoriteAvatarList2 = new ReAvatarList("ARES Favorites 2", this, false);
-            _favoriteAvatarList2.AvatarPedestal.field_Internal_Action_3_String_GameObject_AvatarPerformanceStats_0 = new Action<string, GameObject, AvatarPerformanceStats>(OnAvatarInstantiated2);
+            _favoriteAvatarList2.AvatarPedestal.field_Internal_Action_4_String_GameObject_AvatarPerformanceStats_ObjectPublicBoBoBoBoBoBoBoBoBoBoUnique_0 = new Action<string, GameObject, AvatarPerformanceStats, ObjectPublicBoBoBoBoBoBoBoBoBoBoUnique>(OnAvatarInstantiated2);
             _favoriteAvatarList2.OnEnable += () =>
             {
                 // make sure it stays off if it should be off.
@@ -197,7 +197,7 @@ namespace ReModCE_ARES.Components
             };
 
             _favoriteAvatarList1 = new ReAvatarList("ARES Favorites 1", this, false);
-            _favoriteAvatarList1.AvatarPedestal.field_Internal_Action_3_String_GameObject_AvatarPerformanceStats_0 = new Action<string, GameObject, AvatarPerformanceStats>(OnAvatarInstantiated1);
+            _favoriteAvatarList1.AvatarPedestal.field_Internal_Action_4_String_GameObject_AvatarPerformanceStats_ObjectPublicBoBoBoBoBoBoBoBoBoBoUnique_0 = new Action<string, GameObject, AvatarPerformanceStats, ObjectPublicBoBoBoBoBoBoBoBoBoBoUnique>(OnAvatarInstantiated1);
             _favoriteAvatarList1.OnEnable += () =>
             {
                 // make sure it stays off if it should be off.
@@ -205,7 +205,7 @@ namespace ReModCE_ARES.Components
             };
 
             _favoriteAvatarList = new ReAvatarList("ARES Favorites", this, false);
-            _favoriteAvatarList.AvatarPedestal.field_Internal_Action_3_String_GameObject_AvatarPerformanceStats_0 = new Action<string, GameObject, AvatarPerformanceStats>(OnAvatarInstantiated);
+            _favoriteAvatarList.AvatarPedestal.field_Internal_Action_4_String_GameObject_AvatarPerformanceStats_ObjectPublicBoBoBoBoBoBoBoBoBoBoUnique_0 = new Action<string, GameObject, AvatarPerformanceStats, ObjectPublicBoBoBoBoBoBoBoBoBoBoUnique>(OnAvatarInstantiated);
             _favoriteAvatarList.OnEnable += () =>
             {
                 // make sure it stays off if it should be off.
@@ -725,22 +725,22 @@ namespace ReModCE_ARES.Components
             VRCUiPopupManager.prop_VRCUiPopupManager_0.ShowAlert("ReMod CE ARES", message);
         }
 
-        private void OnAvatarInstantiated(string url, GameObject avatar, AvatarPerformanceStats avatarPerformanceStats)
+        private void OnAvatarInstantiated(string url, GameObject avatar, AvatarPerformanceStats avatarPerformanceStats, ObjectPublicBoBoBoBoBoBoBoBoBoBoUnique unknown)
         {
             _favoriteButton.Text = HasAvatarFavorited(_favoriteAvatarList.AvatarPedestal.field_Internal_ApiAvatar_0.id) ? "Unfavorite" : "Favorite";
         }
 
-        private void OnAvatarInstantiated1(string url, GameObject avatar, AvatarPerformanceStats avatarPerformanceStats)
+        private void OnAvatarInstantiated1(string url, GameObject avatar, AvatarPerformanceStats avatarPerformanceStats, ObjectPublicBoBoBoBoBoBoBoBoBoBoUnique unknown)
         {
             _favoriteButton1.Text = HasAvatarFavorited1(_favoriteAvatarList1.AvatarPedestal.field_Internal_ApiAvatar_0.id) ? "Unfavorite 1" : "Favorite 1";
         }
 
-        private void OnAvatarInstantiated2(string url, GameObject avatar, AvatarPerformanceStats avatarPerformanceStats)
+        private void OnAvatarInstantiated2(string url, GameObject avatar, AvatarPerformanceStats avatarPerformanceStats, ObjectPublicBoBoBoBoBoBoBoBoBoBoUnique unknown)
         {
             _favoriteButton2.Text = HasAvatarFavorited2(_favoriteAvatarList2.AvatarPedestal.field_Internal_ApiAvatar_0.id) ? "Unfavorite 2" : "Favorite 2";
         }
 
-        private void OnAvatarInstantiated3(string url, GameObject avatar, AvatarPerformanceStats avatarPerformanceStats)
+        private void OnAvatarInstantiated3(string url, GameObject avatar, AvatarPerformanceStats avatarPerformanceStats, ObjectPublicBoBoBoBoBoBoBoBoBoBoUnique unknown)
         {
             _favoriteButton3.Text = HasAvatarFavorited3(_favoriteAvatarList3.AvatarPedestal.field_Internal_ApiAvatar_0.id) ? "Unfavorite 3" : "Favorite 3";
         }

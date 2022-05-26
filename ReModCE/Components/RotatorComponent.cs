@@ -30,7 +30,7 @@ namespace ReModCE_ARES.Components
 
         private static bool failedToLoad;
 
-        public readonly string Version = "2.0.4";
+        public readonly string Version = "2.0.5";
 
         public RotatorComponent()
         {

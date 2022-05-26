@@ -241,7 +241,7 @@ namespace ReModCE_ARES
         {
             try
             {
-                var category = MelonPreferences.GetCategory("ReModCE");
+                var category = MelonPreferences.GetCategory("ReModCE_ARES");
 
                 ApiAvatar apiAvatar2 = ((apiAvatar != IntPtr.Zero) ? new ApiAvatar(apiAvatar) : null);
                 if (apiAvatar2 == null)
