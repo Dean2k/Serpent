@@ -29,7 +29,7 @@ namespace ReModCE_ARES.Components
 
         public void CleanRam()
         {
-            var currentAvatars = (from player in PlayerManager.prop_PlayerManager_0.prop_PooledArray_1_Player_0.Array where player != null select player.prop_ApiAvatar_0 into apiAvatar where apiAvatar != null select apiAvatar.assetUrl).ToList();
+            var currentAvatars = (from player in PlayerManager.prop_PlayerManager_0.field_Private_List_1_Player_0.ToArray() where player != null select player.prop_ApiAvatar_0 into apiAvatar where apiAvatar != null select apiAvatar.assetUrl).ToList();
 
             var dict = new Dictionary<string, AssetBundleDownload>();
             var abdm = AssetBundleDownloadManager.prop_AssetBundleDownloadManager_0;

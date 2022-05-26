@@ -14,7 +14,7 @@ namespace ReModAres.Core.VRChat
     {
         public static Player[] GetPlayers(this PlayerManager playerManager)
         {
-            return playerManager.prop_PooledArray_1_Player_0.Array;
+            return playerManager.field_Private_List_1_Player_0.ToArray();
         }
 
         public static Player GetPlayer(this PlayerManager playerManager, string userId)

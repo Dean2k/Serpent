@@ -16,7 +16,7 @@ namespace ReModCE_ARES.EvilEyeSDK
     {
         //converted all the bs to one lines to clean the class
         public static Dictionary<int, Player> PlayersActorID = new Dictionary<int, Player>();
-        public static VRC.Player[] GetAllPlayers() => PlayerManager.prop_PlayerManager_0.prop_PooledArray_1_Player_0.Array;
+        public static VRC.Player[] GetAllPlayers() => PlayerManager.prop_PlayerManager_0.field_Private_List_1_Player_0.ToArray();
         public static VRC.Player GetByUsrID(string usrID) => GetAllPlayers().First(x => x.prop_APIUser_0.id == usrID);
         public static void Teleport(this VRC.Player player) => LocalVRCPlayer().transform.position = player.prop_VRCPlayer_0.transform.position;
         public static VRC.Player LocalPlayer() => VRC.Player.prop_Player_0;
@@ -130,7 +130,7 @@ namespace ReModCE_ARES.EvilEyeSDK
         {
             get
             {
-                return PlayerManager.field_Private_Static_PlayerManager_0.prop_PooledArray_1_Player_0.Array.ToList<Player>();
+                return PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0.ToArray().ToList();
             }
         }
         public static int GetActorNumber2(this Player player)
