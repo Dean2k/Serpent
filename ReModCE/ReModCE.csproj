@@ -284,6 +284,7 @@
     <Compile Include="Components\ExploitPrisonComponent.cs" />
     <Compile Include="Components\ExploitMurder4Component.cs" />
     <Compile Include="Components\FlyComponent.cs" />
+    <Compile Include="Components\HideSelfComponent.cs" />
     <Compile Include="Components\HighlightsComponent.cs" />
     <Compile Include="Components\DebugMenuComponent.cs" />
     <Compile Include="Components\AresThemeComponent.cs" />
@@ -291,6 +292,7 @@
     <Compile Include="Components\CustomLoadingMusicComponent.cs" />
     <Compile Include="Components\ExploitAmongUsComponent.cs" />
     <Compile Include="Components\ComfyMenuComponent.cs" />
+    <Compile Include="Components\ItemLaggerComponent.cs" />
     <Compile Include="Components\StopSpinComponent.cs" />
     <Compile Include="Components\SoftCloneComponent.cs" />
     <Compile Include="Components\PlayersListComponent.cs" />
@@ -334,6 +336,9 @@
     <Compile Include="Core\DynamicContractResolver.cs" />
     <Compile Include="Core\InputAxis.cs" />
     <Compile Include="Core\NameplateModel.cs" />
+    <Compile Include="Page\Categories\Utilties.cs" />
+    <Compile Include="Page\Categories\Visuals.cs" />
+    <Compile Include="Page\PageNames.cs" />
     <Compile Include="Core\PlayerDetails.cs" />
     <Compile Include="Core\ReAvatar.cs" />
     <Compile Include="Core\RotationSystem.cs" />
@@ -426,12 +431,14 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\areslogo.png" />
     <EmbeddedResource Include="Resources\ares_panel.png" />
+    <EmbeddedResource Include="Resources\DxbcShaderFilter.dll" />
     <Content Include="Resources\blind.png" />
     <EmbeddedResource Include="Resources\broom.png" />
     <EmbeddedResource Include="Resources\legs.png" />
     <EmbeddedResource Include="Resources\meet.png" />
     <EmbeddedResource Include="Resources\mirror.png" />
     <EmbeddedResource Include="Resources\speedometer.png" />
+    <EmbeddedResource Include="Resources\Monkey.png" />
     <Content Include="Resources\stopgame.png" />
     <Content Include="Resources\start.png" />
     <Content Include="Resources\exit-door.png" />

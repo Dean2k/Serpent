@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections;
-using MelonLoader;
+﻿using MelonLoader;
 using ReModCE_ARES.Components;
 using ReModCE_ARES.ControlSchemes.Interface;
+using System;
+using System.Collections;
 using UnhollowerRuntimeLib;
 using UnityEngine;
 using UnityEngine.UI;

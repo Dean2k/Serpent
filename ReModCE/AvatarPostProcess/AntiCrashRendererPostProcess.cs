@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ReModCE_ARES.AvatarPostProcess
+﻿namespace ReModCE_ARES.AvatarPostProcess
 {
     internal class AntiCrashRendererPostProcess
     {
@@ -23,5 +17,5 @@ namespace ReModCE_ARES.AvatarPostProcess
         internal int shaderCount;
 
         internal bool removedBlendshapeKeys;
-	}
+    }
 }

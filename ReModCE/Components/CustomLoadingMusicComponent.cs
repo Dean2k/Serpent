@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections;
-using System.IO;
-using MelonLoader;
+﻿using MelonLoader;
 using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
-using ReModCE_ARES.Loader;
+using System;
+using System.Collections;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
-using VRC;
 
 namespace ReModCE_ARES.Components
 {
@@ -27,7 +25,7 @@ namespace ReModCE_ARES.Components
         {
             base.OnUiManagerInit(uiManager);
 
-            var menu = uiManager.MainMenu.GetMenuPage("ARES");
+            var menu = uiManager.MainMenu.GetMenuPage(Page.PageNames.Theme);
             _customMusicEnabledToggle = menu.AddToggle("Custom Loading Music",
                 "Enable The custom loading music.", CustomMusicEnabled.SetValue,
                 CustomMusicEnabled);

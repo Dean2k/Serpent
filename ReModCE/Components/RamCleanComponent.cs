@@ -1,10 +1,7 @@
-﻿using System;
+﻿using ReModAres.Core;
+using ReModAres.Core.Managers;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using MelonLoader;
-using ReModAres.Core;
-using ReModAres.Core.Managers;
 using UnityEngine;
 using VRC;
 using Object = UnityEngine.Object;
@@ -22,7 +19,7 @@ namespace ReModCE_ARES.Components
         {
             base.OnUiManagerInit(uiManager);
 
-            var menu = uiManager.MainMenu.GetMenuPage("ARES");
+            var menu = uiManager.MainMenu.GetMenuPage(Page.PageNames.Optimisation);
             menu.AddButton("Clear VRam",
                 "Cleans ram (Shouldn't be needed but just incase).", CleanRam, ResourceManager.GetSprite("remodce.broom"));
         }

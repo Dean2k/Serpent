@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ReModCE_ARES.ControlSchemes.Interface;
-using UnityEngine;
+﻿using ReModCE_ARES.ControlSchemes.Interface;
 using ReModCE_ARES.Core;
+using UnityEngine;
 
 namespace ReModCE_ARES.ControlSchemes
 {

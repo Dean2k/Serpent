@@ -1,14 +1,10 @@
 ﻿using ReModAres.Core;
 using ReModAres.Core.Managers;
-using ReModAres.Core.UI;
 using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
-using ReModCE_ARES.Managers;
 using UnityEngine;
 using VRC;
-using VRC.Core;
 using VRC.DataModel;
-using VRC.UI;
 
 namespace ReModCE_ARES.Components
 {
@@ -41,9 +37,7 @@ namespace ReModCE_ARES.Components
             _teleportTargetRightLegButton = submenu.AddButton("Sit On Right Leg", "Sit on target (press jump to stop).", TeleportTargetRightLegButtonOnClick, ResourceManager.GetSprite("remodce.legs"));
             _teleportTargetLeftLegButton = submenu.AddButton("Sit On Left Leg", "Sit on target (press jump to stop).", TeleportTargetLeftLegButtonOnClick, ResourceManager.GetSprite("remodce.legs"));
             _teleportTargetLeftLegButton = submenu.AddButton("Sit On Hips", "Sit on target (press jump to stop).", TeleportTargetHipsButtonOnClick, ResourceManager.GetSprite("remodce.legs"));
-
-            var menu = uiManager.MainMenu.GetMenuPage("ARES");
-            menu.AddButton("Stop Siton",
+            uiManager.MainMenu.AddButton("Stop Siton",
                 "Stop sitting on incase Jump doesn't work.", StopSit, ResourceManager.GetSprite("remodce.legs"));
 
         }
@@ -61,7 +55,7 @@ namespace ReModCE_ARES.Components
         }
 
         private void TeleportTargetButtonOnClick()
-        {          
+        {
             bodyPart = "Head";
             StandardSetup();
         }
@@ -128,7 +122,7 @@ namespace ReModCE_ARES.Components
                 {
                     playerPosition = player.field_Internal_Animator_0.GetBoneTransform(HumanBodyBones.Head).position + new Vector3(0, 0.1f, 0);
                 }
-                if(bodyPart == "LeftHand")
+                if (bodyPart == "LeftHand")
                 {
                     playerPosition = player.field_Internal_Animator_0.GetBoneTransform(HumanBodyBones.LeftIndexProximal).position + new Vector3(0, 0.1f, 0);
                 }
@@ -179,7 +173,7 @@ namespace ReModCE_ARES.Components
                     return;
                 }
                 TeleportToIUser(target);
-            }           
+            }
         }
     }
 }

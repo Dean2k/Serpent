@@ -1,19 +1,10 @@
 ﻿using ReModAres.Core;
 using ReModAres.Core.Managers;
-using ReModAres.Core.UI;
-using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
-using ReModCE_ARES.Loader;
-using ReModCE_ARES.Managers;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using VRC;
-using VRC.Core;
 using VRC.DataModel;
 using VRC.SDKBase;
-using VRC.Udon;
-using VRC.UI;
 
 namespace ReModCE_ARES.Components
 {
@@ -49,7 +40,7 @@ namespace ReModCE_ARES.Components
                 {
                     ItemOrbitSwastikaPlayerEnabled = false;
                     ItemOrbitPlayerEnabled = true;
-                }                
+                }
             }
         }
 

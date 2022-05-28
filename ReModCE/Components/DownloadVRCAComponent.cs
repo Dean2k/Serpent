@@ -11,7 +11,6 @@ using System.Net;
 using System.Threading.Tasks;
 using UnityEngine;
 using VRC;
-using VRC.Core;
 using VRC.DataModel;
 using VRC.UI;
 

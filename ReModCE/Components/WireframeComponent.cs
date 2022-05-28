@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections;
-using MelonLoader;
+﻿using MelonLoader;
 using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
 using ReModCE_ARES.Managers;
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
@@ -122,7 +122,7 @@ namespace ReModCE_ARES.Components
 
         public override void OnUiManagerInit(UiManager uiManager)
         {
-            var menu = uiManager.MainMenu.GetCategoryPage("Visuals").GetCategory("Wireframe").AddMenuPage("Wireframe", "Access wireframe settings", ResourceManager.GetSprite("remodce.wireframe"));
+            var menu = uiManager.MainMenu.GetCategoryPage(Page.PageNames.Visuals).GetCategory(Page.Categories.Visuals.Wireframe).AddMenuPage("Wireframe", "Access wireframe settings", ResourceManager.GetSprite("remodce.wireframe"));
             _wireframeToggle = menu.AddToggle("Enable", "Highlight objects using wireframe.", ToggleWireframe, _wireframeEnabled);
 
             _rangeButton = menu.AddButton($"Range: {WireframeRange}",

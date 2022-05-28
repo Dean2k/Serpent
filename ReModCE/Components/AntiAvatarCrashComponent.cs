@@ -1,15 +1,15 @@
-﻿using System;
+﻿using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
-using ReModCE_ARES.Loader;
-using UnityEngine.UI;
-using VRC.Core;
-using UnityEngine;
-using ReModAres.Core;
 using ReModCE_ARES.Config;
 using ReModCE_ARES.Core;
+using ReModCE_ARES.Loader;
 using ReModCE_ARES.SDK;
+using System;
+using UnityEngine;
+using UnityEngine.UI;
+using VRC.Core;
 
 namespace ReModCE_ARES.Components
 {
@@ -91,7 +91,7 @@ namespace ReModCE_ARES.Components
 
         public override void OnUiManagerInit(UiManager uiManager)
         {
-            var mainmenu = uiManager.MainMenu.GetMenuPage("ARES").GetMenuPage("Anti-Crash");
+            var mainmenu = uiManager.MainMenu.GetMenuPage(Page.PageNames.Protections).GetMenuPage(Page.PageNames.AntiCrash);
 
             AntiShaderCrashToggled = mainmenu.AddToggle("Shader Crash", "Prevents malicious shaders from crashing you.",
                 b => { AntiShaderCrashEnabled.SetValue(b); ToggleShader(b); }, AntiShaderCrashEnabled);

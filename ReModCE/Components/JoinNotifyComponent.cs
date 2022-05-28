@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using ReModAres.Core;
+﻿using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
-using ReModCE_ARES.Core;
-using ReModCE_ARES.Loader;
-using UnityEngine;
-using VRC;
 
 namespace ReModCE_ARES.Components
 {
@@ -25,7 +19,7 @@ namespace ReModCE_ARES.Components
         {
             base.OnUiManagerInit(uiManager);
 
-            var menu = uiManager.MainMenu.GetMenuPage("ARES");
+            var menu = uiManager.MainMenu.GetCategoryPage(Page.PageNames.Visuals).AddCategory("Join Notify");
             _joinNotifyToggle = menu.AddToggle("Join Notifier",
                 "Enable whether player joins/leaves a message displays on your hud", JoinNotifyEnabled.SetValue,
                 JoinNotifyEnabled);

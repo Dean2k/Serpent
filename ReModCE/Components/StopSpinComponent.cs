@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using ReModAres.Core;
+﻿using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
-using ReModCE_ARES.Core;
-using ReModCE_ARES.Loader;
+using System;
+using System.Linq;
 using UnhollowerRuntimeLib;
 using UnityEngine;
 using UnityEngine.UI;
-using VRC;
 
 namespace ReModCE_ARES.Components
 {
@@ -28,7 +24,7 @@ namespace ReModCE_ARES.Components
         {
             base.OnUiManagerInit(uiManager);
 
-            var menu = uiManager.MainMenu.GetMenuPage("Avatars");
+            var menu = uiManager.MainMenu.GetMenuPage(Page.PageNames.Avatars);
             _stopAvatarSpinToggle = menu.AddToggle("Stop Avatar Spin",
                 "Stops Avatar Spinning", ToggleSpin,
                 StopAvatarSpinEnabled);

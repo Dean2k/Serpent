@@ -3,11 +3,15 @@ using MelonLoader;
 using Newtonsoft.Json;
 using ReModAres.Core;
 using ReModAres.Core.Managers;
+using ReModAres.Core.Pedals;
 using ReModAres.Core.UI.Wings;
 using ReModAres.Core.Unity;
 using ReModCE_ARES.Components;
+using ReModCE_ARES.Config;
 using ReModCE_ARES.Core;
 using ReModCE_ARES.Loader;
+using ReModCE_ARES.Page;
+using ReModCE_ARES.SDK;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,27 +20,15 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using ReModAres.Core.Api;
-using ReModAres.Core.Pedals;
-using ReModCE_ARES.Managers;
-using TMPro;
-using UnhollowerRuntimeLib;
-using UnhollowerRuntimeLib.XrefScans;
-using UnityEngine;
-using VRC;
-using VRC.Core;
-using VRC.DataModel;
-using ExitGames.Client.Photon;
-using ConfigManager = ReModAres.Core.Managers.ConfigManager;
-using ReModAres.Core.VRChat;
-using Photon.Realtime;
 using UnhollowerBaseLib;
-using System.Runtime.InteropServices;
-using ReModCE_ARES.Config;
-using ReModCE_ARES.SDK;
+using UnhollowerRuntimeLib;
+using UnityEngine;
+using VRC.Core;
+using ConfigManager = ReModAres.Core.Managers.ConfigManager;
 
 namespace ReModCE_ARES
 {
@@ -53,6 +45,7 @@ namespace ReModCE_ARES
         public static bool IsOculus { get; private set; }
 
         private delegate IntPtr OnAvatarDownloadStartDelegate(IntPtr thisPtr, IntPtr apiAvatar, IntPtr downloadContainer, bool unknownBool, IntPtr nativeMethodPointer);
+
         private static OnAvatarDownloadStartDelegate onAvatarDownloadStart;
 
         // this prevents some garbage collection bullshit
@@ -135,7 +128,7 @@ namespace ReModCE_ARES
 
         private static IEnumerator WaitForActionMenuInitWheel()
         {
-            while (ActionMenuDriver.prop_ActionMenuDriver_0 == null) //VRCUIManager Init is too early 
+            while (ActionMenuDriver.prop_ActionMenuDriver_0 == null) //VRCUIManager Init is too early
                 yield return null;
             ResourcesManager.InitLockGameObject();
             RadialPuppetManager.Setup();
@@ -186,7 +179,9 @@ namespace ReModCE_ARES
         {
             return typeof(ReModCE_ARES).GetMethod(name, BindingFlags.NonPublic | BindingFlags.Static).ToNewHarmonyMethod();
         }
+
         private static void ForceClone(ref bool __0) => __0 = true;
+
         public static void InitializePatches()
         {
             Harmony.Patch(typeof(VRCPlayer).GetMethod(nameof(VRCPlayer.Awake)), GetLocalPatch(nameof(VRCPlayerAwakePatch)));
@@ -219,8 +214,6 @@ namespace ReModCE_ARES
                 MelonUtils.NativeHookAttach((IntPtr)(&ptr), Marshal.GetFunctionPointerForDelegate(onAvatarDownloadStartDelegate));
                 onAvatarDownloadStart = Marshal.GetDelegateForFunctionPointer<OnAvatarDownloadStartDelegate>(ptr);
             }
-
-
 
             ActionMenus.PatchAll(Harmony);
 
@@ -261,7 +254,6 @@ namespace ReModCE_ARES
                     return onAvatarDownloadStart(thisPtr, GeneralUtils.robotAvatar.Pointer, downloadContainer, unknownBool, nativeMethodPointer);
                 }
                 ReLogger.Msg("Downloading avatar: " + apiAvatar2.id + " (" + apiAvatar2.name + ") | " + apiAvatar2.authorId + " (" + apiAvatar2.authorName + ")");
-                
             }
             catch (Exception e)
             {
@@ -269,7 +261,6 @@ namespace ReModCE_ARES
             }
             return onAvatarDownloadStart(thisPtr, apiAvatar, downloadContainer, unknownBool, nativeMethodPointer);
         }
-
 
         private static bool FakeHWID(ref string __result)
         {
@@ -314,32 +305,29 @@ namespace ReModCE_ARES
         {
             ReLogger.Msg("Initializing UI...");
 
-            _uiManager = new UiManager("ReMod <color=#00ff00>CE</color>", ResourceManager.GetSprite("remodce.remod"));
-            WingMenu = ReMirroredWingMenu.Create("ReModCE-ARES", "Open the RemodCE menu", ResourceManager.GetSprite("remodce.remod"));
+            _uiManager = new UiManager(PageNames.ARES, ResourceManager.GetSprite("remodce.areslogo"));
+            WingMenu = ReMirroredWingMenu.Create(PageNames.ARES, "Open the ARES menu", ResourceManager.GetSprite("remodce.remod"));
+            _uiManager.MainMenu.AddMenuPage(PageNames.Movement, "Access movement related settings", ResourceManager.GetSprite("remodce.running"));
+            _uiManager.MainMenu.AddMenuPage(PageNames.Microphone, "Microphone Settings", ResourceManager.GetSprite("remodce.mixer"));
+            var protect = _uiManager.MainMenu.AddMenuPage(PageNames.Protections, "Microphone Settings", ResourceManager.GetSprite("remodce.shield"));
+            protect.AddMenuPage(PageNames.AntiCrash, "Anticrash settings", ResourceManager.GetSprite("remodce.shield"));
+            _uiManager.MainMenu.AddMenuPage(PageNames.WorldCheats, "World Cheats (exploits)", ResourceManager.GetSprite("remodce.admin"));
+            _uiManager.MainMenu.AddMenuPage(PageNames.Optimisation, "Access settings related to performance", ResourceManager.GetSprite("remodce.running"));
+            _uiManager.MainMenu.AddCategoryPage(PageNames.Monkey, "Access features that are monkey like.", ResourceManager.GetSprite("remodce.Monkey"));
+            var visualPage = _uiManager.MainMenu.AddCategoryPage(PageNames.Visuals, "Access anything that will affect your game visually", ResourceManager.GetSprite("remodce.eye"));
+            _uiManager.MainMenu.AddMenuPage(Page.PageNames.Theme, "Theme settings", ResourceManager.GetSprite("remodce.mixer"));
+            visualPage.AddCategory(Page.Categories.Visuals.Nameplate);
+            visualPage.AddCategory(Page.Categories.Visuals.EspHighlights);
+            visualPage.AddCategory(Page.Categories.Visuals.Wireframe);
 
-            _uiManager.MainMenu.AddMenuPage("Movement", "Access movement related settings", ResourceManager.GetSprite("remodce.running"));
+            _uiManager.MainMenu.AddMenuPage(PageNames.Avatars, "Access avatar related settings", ResourceManager.GetSprite("remodce.hanger"));
 
-            _uiManager.MainMenu.AddMenuPage("Microphone", "Microphone Settings", ResourceManager.GetSprite("remodce.mixer"));
+            var utilityPage = _uiManager.MainMenu.AddCategoryPage(PageNames.Utility, "Access miscellaneous settings", ResourceManager.GetSprite("remodce.tools"));
+            utilityPage.AddCategory(Page.Categories.Utilties.QualityOfLife);
+            utilityPage.AddCategory(Page.Categories.Utilties.VRChatNews);
 
-            var aresPage = _uiManager.MainMenu.AddMenuPage("ARES", "ARES Functions", ResourceManager.GetSprite("remodce.areslogo"));
-            aresPage.AddMenuPage("Anti-Crash", "Anticrash settings", ResourceManager.GetSprite("remodce.shield"));
-            aresPage.AddMenuPage("World Cheats", "World Cheats (exploits)", ResourceManager.GetSprite("remodce.admin"));
-
-            var visualPage = _uiManager.MainMenu.AddCategoryPage("Visuals", "Access anything that will affect your game visually", ResourceManager.GetSprite("remodce.eye"));
-            visualPage.AddCategory("Nameplate");
-            visualPage.AddCategory("ESP/Highlights");
-            visualPage.AddCategory("Wireframe");
-
-            _uiManager.MainMenu.AddMenuPage("Avatars", "Access avatar related settings", ResourceManager.GetSprite("remodce.hanger"));
-
-            var utilityPage = _uiManager.MainMenu.AddCategoryPage("Utility", "Access miscellaneous settings", ResourceManager.GetSprite("remodce.tools"));
-            utilityPage.AddCategory("Quality of Life");
-            utilityPage.AddCategory("VRChat News");
-
-            _uiManager.MainMenu.AddMenuPage("Logging", "Access logging related settings", ResourceManager.GetSprite("remodce.log"));
-            _uiManager.MainMenu.AddMenuPage("Hotkeys", "Access hotkey related settings", ResourceManager.GetSprite("remodce.keyboard"));
-
-
+            _uiManager.MainMenu.AddMenuPage(PageNames.Logging, "Access logging related settings", ResourceManager.GetSprite("remodce.log"));
+            _uiManager.MainMenu.AddMenuPage(PageNames.Hotkeys, "Access hotkey related settings", ResourceManager.GetSprite("remodce.keyboard"));
 
             foreach (var m in Components)
             {
@@ -353,7 +341,6 @@ namespace ReModCE_ARES
                 }
             }
         }
-
 
         public static void OnUiManagerInitEarly()
         {
@@ -403,7 +390,7 @@ namespace ReModCE_ARES
 
         public static void Tele2MousePos()
         {
-            Ray posF = new Ray(Camera.main.transform.position, Camera.main.transform.forward); //pos, directon 
+            Ray posF = new Ray(Camera.main.transform.position, Camera.main.transform.forward); //pos, directon
             RaycastHit[] PosData = Physics.RaycastAll(posF);
             if (PosData.Length > 0) { RaycastHit pos = PosData[0]; VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.position = pos.point; }
         }
@@ -571,6 +558,7 @@ namespace ReModCE_ARES
                 }
             }));
         }
+
         //private static void SetUserPatch(SelectedUserMenuQM __instance, IUser __0)
         //{
         //    if (__0 == null)
@@ -585,6 +573,7 @@ namespace ReModCE_ARES
         private static List<string> DebugLogs = new List<string>();
         private static int duplicateCount = 1;
         private static string lastMsg = "";
+
         public static void LogDebug(string message)
         {
             try

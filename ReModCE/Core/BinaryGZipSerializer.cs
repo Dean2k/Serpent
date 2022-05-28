@@ -1,6 +1,6 @@
-﻿using System.IO;
+﻿using MelonLoader.ICSharpCode.SharpZipLib.GZip;
+using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using MelonLoader.ICSharpCode.SharpZipLib.GZip;
 
 namespace ReModCE_ARES.Core
 {
@@ -18,7 +18,7 @@ namespace ReModCE_ARES.Core
                 }
             }
         }
-        
+
         public static object Deserialize(string path)
         {
             var formatter = new BinaryFormatter();

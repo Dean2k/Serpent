@@ -1,26 +1,15 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using MelonLoader;
+﻿using MelonLoader;
 using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
-using ReModCE_ARES.Core;
 using ReModCE_ARES.Loader;
 using ReModCE_ARES.Managers;
+using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using VRC;
 using VRC.Core;
-using VRC.Management;
-
-using HarmonyLib;
-using Il2CppSystem.Collections;
-using VRC.UI;
-using VRC.UI.Elements;
 
 namespace ReModCE_ARES.Components
 {
@@ -58,7 +47,7 @@ namespace ReModCE_ARES.Components
 
             try
             {
-                var menu = uiManager.MainMenu.GetMenuPage("ARES");
+                var menu = uiManager.MainMenu.GetMenuPage(Page.PageNames.Protections);
                 var subMenu = menu.AddMenuPage("Avatar Hider", "hide avatars at a certain distance", ResourceManager.GetSprite("remodce.arms-up"));
                 _hideAvatarsToggle = subMenu.AddToggle("Hide Avatars",
                     "Enable avatar distance hiding", SetAvatarHidden,
@@ -103,7 +92,8 @@ namespace ReModCE_ARES.Components
                                 _hideDistanceButton.Text = $"Max Avatar Distance: {HideDistance}";
                             }, null);
                     }, ResourceManager.GetSprite("remodce.max"));
-            } catch
+            }
+            catch
             {
                 ReLogger.Msg("Menu set error");
             }

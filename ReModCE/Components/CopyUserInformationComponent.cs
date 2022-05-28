@@ -1,11 +1,9 @@
 ﻿using ReModAres.Core;
 using ReModAres.Core.Managers;
-using ReModAres.Core.UI;
 using ReModAres.Core.VRChat;
 using UnityEngine;
 using VRC;
 using VRC.Core;
-using VRC.UI;
 
 namespace ReModCE_ARES.Components
 {

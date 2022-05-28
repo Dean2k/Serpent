@@ -1,5 +1,6 @@
 ﻿using ReModAres.Core;
 using ReModAres.Core.Managers;
+using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
 using System;
 using System.Diagnostics;
@@ -8,7 +9,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using ReModAres.Core.UI.QuickMenu;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -137,7 +137,7 @@ namespace ReModCE_ARES.Components
             _mediaControlCategory.AddButton("Next", "Next song.", NextTrack, ResourceManager.GetSprite("remodce.next"));
 
             _mediaControlCategory.Active = MediaControlsEnabled;
-            var subMenu = uiManager.MainMenu.GetCategoryPage("Utility").AddCategory("Media Controls");
+            var subMenu = uiManager.MainMenu.GetCategoryPage(Page.PageNames.Utility).AddCategory("Media Controls");
 
             subMenu.AddToggle("Enable Controls", "Enable/Disable media controls in your quick menu", MediaControlsEnabled);
             subMenu.AddToggle("Enable Song Preview", "Enable/Disable preview of song that's currently playing", SongPreviewEnabled);

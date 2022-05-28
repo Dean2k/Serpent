@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using MelonLoader.ICSharpCode.SharpZipLib.GZip;
+﻿using MelonLoader.ICSharpCode.SharpZipLib.GZip;
 using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI;
@@ -10,6 +6,10 @@ using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
 using ReModCE_ARES.Core;
 using ReModCE_ARES.Loader;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.Core;
@@ -93,10 +93,10 @@ namespace ReModCE_ARES.Components
                         switch (updatedAvatar.releaseStatus)
                         {
                             case "private" when updatedAvatar.authorId != APIUser.CurrentUser.id:
-                                VRCUiPopupManager.prop_VRCUiPopupManager_0.ShowAlert("ReMod CE", "This avatar is private and you don't own it. You can't switch into it.");
+                                VRCUiPopupManager.prop_VRCUiPopupManager_0.ShowAlert("ARES", "This avatar is private and you don't own it. You can't switch into it.");
                                 break;
                             case "unavailable":
-                                VRCUiPopupManager.prop_VRCUiPopupManager_0.ShowAlert("ReMod CE", "This avatar has been deleted. You can't switch into it.");
+                                VRCUiPopupManager.prop_VRCUiPopupManager_0.ShowAlert("ARES", "This avatar has been deleted. You can't switch into it.");
                                 _recentAvatars.RemoveAll(a => a.AvatarID == currentAvatar.id);
                                 _avatarList.RefreshAvatars();
                                 break;
@@ -106,7 +106,7 @@ namespace ReModCE_ARES.Components
                         }
                     }), new Action<ApiContainer>(ac =>
                     {
-                        VRCUiPopupManager.prop_VRCUiPopupManager_0.ShowAlert("ReMod CE", "This avatar has been deleted. You can't switch into it.");
+                        VRCUiPopupManager.prop_VRCUiPopupManager_0.ShowAlert("ARES", "This avatar has been deleted. You can't switch into it.");
                         _recentAvatars.RemoveAll(a => a.AvatarID == currentAvatar.id);
                     }));
                 }));
@@ -115,7 +115,7 @@ namespace ReModCE_ARES.Components
 
         public override void OnUiManagerInit(UiManager uiManager)
         {
-            var menu = uiManager.MainMenu.GetMenuPage("Avatars");
+            var menu = uiManager.MainMenu.GetMenuPage(Page.PageNames.Avatars);
             _enabledToggle = menu.AddToggle("Avatar History", "Enable/Disable avatar history",
                 AvatarHistoryEnabled.SetValue, AvatarHistoryEnabled);
             _excludeOwnToggle = menu.AddToggle("Exclude own avatars", "Exclude own avatars for avatar history",

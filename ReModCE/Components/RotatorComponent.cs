@@ -1,13 +1,13 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using VRC;
-using ReModAres.Core;
+﻿using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
 using ReModCE_ARES.ControlSchemes;
 using ReModCE_ARES.Core;
 using ReModCE_ARES.Loader;
+using UnityEngine;
+using UnityEngine.UI;
+using VRC;
 using VRC.Core;
 
 namespace ReModCE_ARES.Components
@@ -68,10 +68,9 @@ namespace ReModCE_ARES.Components
         public override void OnUiManagerInit(UiManager uiManager)
         {
 
-            var rotator = uiManager.MainMenu.AddMenuPage("HotKeys Ares", "Access hotkey related settings", ResourceManager.GetSprite("remodce.keyboard"));
+            var rotator = uiManager.MainMenu.AddMenuPage("Rotator Mod", "Access Rotator mod related settings", ResourceManager.GetSprite("remodce.keyboard"));
 
-            var menu = uiManager.MainMenu.GetMenuPage("ARES");
-            var hotkeys = menu.AddMenuPage("Rotator Mod", "Theme settings", ResourceManager.GetSprite("remodce.mixer"));
+            var hotkeys = rotator.AddMenuPage("Rotator Mod", "Theme settings", ResourceManager.GetSprite("remodce.mixer"));
 
             _rotationToggle = rotator.AddToggle("Enable", "Enable/Disable Rotation", RotationSystem.Instance.Toggle, false);
             _rotationLockToggle = rotator.AddToggle("Lock\nRotation", "Lock Rotation", (state) => RotationSystem.LockRotation = state, false);

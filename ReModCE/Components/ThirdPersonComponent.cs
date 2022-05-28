@@ -1,8 +1,8 @@
-﻿using System;
-using ReModAres.Core;
+﻿using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 using ReModCE_ARES.Managers;
+using System;
 using UnityEngine;
 
 namespace ReModCE_ARES.Components

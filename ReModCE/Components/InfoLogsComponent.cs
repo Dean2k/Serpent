@@ -1,8 +1,8 @@
-﻿using System;
-using ReModAres.Core;
+﻿using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 using ReModCE_ARES.Loader;
+using System;
 using VRC;
 
 namespace ReModCE_ARES.Components
@@ -22,7 +22,7 @@ namespace ReModCE_ARES.Components
         {
             base.OnUiManagerInit(uiManager);
 
-            var menu = uiManager.MainMenu.GetMenuPage("Logging");
+            var menu = uiManager.MainMenu.GetMenuPage(Page.PageNames.Logging);
             _joinLeaveLogsToggle = menu.AddToggle("Join/Leave Logs",
                 "Enable whether player joins/leaves should be logged in console.", JoinLeaveLogsEnabled.SetValue,
                 JoinLeaveLogsEnabled);

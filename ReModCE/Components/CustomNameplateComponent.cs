@@ -1,17 +1,11 @@
-﻿using Newtonsoft.Json;
-using ReModAres.Core;
+﻿using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
-using ReModAres.Core.VRChat;
 using ReModCE_ARES.Core;
 using ReModCE_ARES.Loader;
 using ReModCE_ARES.Managers;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using TMPro;
 using UnityEngine;
 using VRC;
@@ -32,11 +26,11 @@ namespace ReModCE_ARES.Components
         public CustomNameplate(IntPtr ptr) : base(ptr)
         {
         }
-        void Start()
+
+        private void Start()
         {
             if (Enabled)
             {
-
                 Transform stats = UnityEngine.Object.Instantiate<Transform>(this.gameObject.transform.Find("Contents/Quick Stats"), this.gameObject.transform.Find("Contents"));
                 stats.parent = this.gameObject.transform.Find("Contents");
                 stats.name = "Nameplate";
@@ -47,12 +41,11 @@ namespace ReModCE_ARES.Components
                 if (OverRender && Enabled)
                 {
                     statsText.isOverlay = true;
-                } else
+                }
+                else
                 {
                     statsText.isOverlay = false;
                 }
-
-
 
                 stats.Find("Trust Icon").gameObject.SetActive(false);
                 stats.Find("Performance Icon").gameObject.SetActive(false);
@@ -83,14 +76,9 @@ namespace ReModCE_ARES.Components
                     customStats.Find("Performance Text").gameObject.SetActive(false);
                     customStats.Find("Friend Anchor Stats").gameObject.SetActive(false);
                 }
-                
-
-                
 
                 frames = player._playerNet.field_Private_Byte_0;
                 ping = player._playerNet.field_Private_Byte_1;
-
-
             }
         }
 
@@ -100,14 +88,13 @@ namespace ReModCE_ARES.Components
             {
                 return ReModCE_ARES.NameplateModels.First(x => x.UserID == player.prop_APIUser_0.id && x.Active);
             }
-            catch {
-                return null; 
+            catch
+            {
+                return null;
             }
         }
 
-
-
-        void Update()
+        private void Update()
         {
             if (Enabled)
             {
@@ -134,6 +121,7 @@ namespace ReModCE_ARES.Components
                 }
             }
         }
+
         public void Dispose()
         {
             Enabled = false;
@@ -141,7 +129,6 @@ namespace ReModCE_ARES.Components
             customText.gameObject.SetActive(false);
             statsText.text = null;
             customText.text = null;
-              
         }
     }
 
@@ -175,7 +162,7 @@ namespace ReModCE_ARES.Components
         public override void OnUiManagerInit(UiManager uiManager)
         {
             base.OnUiManagerInit(uiManager);
-            var menu = uiManager.MainMenu.GetCategoryPage("Visuals").GetCategory("Nameplate");
+            var menu = uiManager.MainMenu.GetCategoryPage(Page.PageNames.Visuals).GetCategory(Page.Categories.Visuals.Nameplate);
             _CustomNameplateEnabled = menu.AddToggle("Custom Nameplates", "Enable/Disable custom nameplates (reload world to fully unload)", ToggleNameplates,
                 CustomNameplateEnabled);
             _namePlateOverRenderEnabled = menu.AddToggle("Nameplate Over render", "Enable/Disable the over render of nameplates (reload world to fully unload)", NamePlateOverRenderEnabled.SetValue,
@@ -184,12 +171,11 @@ namespace ReModCE_ARES.Components
 
         public override void OnSceneWasInitialized(int buildIndex, string sceneName)
         {
-            if(buildIndex == -1)
+            if (buildIndex == -1)
             {
                 ReModCE_ARES.UpdateNamePlates();
             }
         }
-
 
         private void ToggleNameplates(bool value)
         {
@@ -202,11 +188,9 @@ namespace ReModCE_ARES.Components
                     {
                         foreach (Player player in UnityEngine.Object.FindObjectsOfType<Player>())
                         {
-
                             CustomNameplate nameplate = player.transform.Find("Player Nameplate/Canvas/Nameplate").gameObject.AddComponent<CustomNameplate>();
                             nameplate.player = player;
                             nameplate.OverRender = NamePlateOverRenderEnabled;
-
                         }
                     }
                     catch { }
@@ -220,7 +204,7 @@ namespace ReModCE_ARES.Components
                     }
                 }
             }
-            catch(Exception ex) { ReLogger.Msg(ex.Message); }
+            catch (Exception ex) { ReLogger.Msg(ex.Message); }
         }
     }
 }

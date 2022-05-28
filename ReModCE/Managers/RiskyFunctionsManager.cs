@@ -1,11 +1,9 @@
-﻿using System;
+﻿using MelonLoader;
+using ReModAres.Core;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using MelonLoader;
-using ReModAres.Core;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace ReModCE_ARES.Managers
 {
@@ -24,7 +22,7 @@ namespace ReModCE_ARES.Managers
         {
             Instance = this;
         }
-        
+
         public override void OnSceneWasInitialized(int buildIndex, string sceneName)
         {
             if (buildIndex == -1) // custom scene

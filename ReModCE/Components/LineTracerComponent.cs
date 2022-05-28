@@ -1,22 +1,18 @@
 ﻿namespace ReModCE_ARES.Components
 {
 
-    using System.Collections.Generic;
-
     using global::ReModCE_ARES.Managers;
-
     using ReModAres.Core;
     using ReModAres.Core.Managers;
     using ReModAres.Core.UI.QuickMenu;
     using ReModAres.Core.Unity;
     using ReModAres.Core.VRChat;
-
+    using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.XR;
-
     using VRC;
     using VRC.Core;
-    
+
     public sealed class LineTracerComponent : ModComponent
     {
 
@@ -29,7 +25,7 @@
         private static readonly int SrcBlend = Shader.PropertyToID("_SrcBlend");
 
         private static readonly int ZWrite = Shader.PropertyToID("_ZWrite");
-        
+
         // Requi told me no, do this
         private ConfigValue<Color> FriendsColor;
         private ConfigValue<Color> OthersColor;
@@ -48,7 +44,7 @@
 
         private Transform originTransform;
         private Transform originDesktopTransform;
-        
+
 
         public LineTracerComponent()
         {
@@ -66,7 +62,7 @@
 
             FriendsColor = new ConfigValue<Color>(nameof(FriendsColor), Color.yellow);
             OthersColor = new ConfigValue<Color>(nameof(OthersColor), Color.magenta);
-            
+
         }
 
         public override void OnEnterWorld(ApiWorld world, ApiWorldInstance instance)
@@ -87,7 +83,7 @@
 
         public override void OnUiManagerInit(UiManager uiManager)
         {
-            ReMenuCategory espMenu = uiManager.MainMenu.GetCategoryPage("Visuals").GetCategory("ESP/Highlights");
+            ReMenuCategory espMenu = uiManager.MainMenu.GetCategoryPage(Page.PageNames.Visuals).GetCategory(Page.Categories.Visuals.EspHighlights);
 
             espMenu.AddToggle(
                 "[VR] Line Tracer",
@@ -135,7 +131,7 @@
             Animator localAnimator = localPlayer.GetAvatarObject()?.GetComponent<Animator>();
             if (localAnimator == null
                 || !localAnimator.isHuman) return null;
-            
+
             return localAnimator.GetBoneTransform(HumanBodyBones.Hips);
         }
 

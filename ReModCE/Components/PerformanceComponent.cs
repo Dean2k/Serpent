@@ -2,7 +2,6 @@
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 using ReModCE_ARES.Loader;
-using System;
 using System.Diagnostics;
 using UnityEngine;
 
@@ -19,8 +18,26 @@ namespace ReModCE_ARES.Components
         private ConfigValue<bool> FPS240Enabled;
         private ReMenuToggle _fps240Toggle;
 
+        private ConfigValue<bool> FPS999Enabled;
+        private ReMenuToggle _fps999Toggle;
+
         private ConfigValue<bool> AdaptiveGraphicsEnabled;
         private ReMenuToggle _adaptiveGraphicsToggle;
+
+        private ConfigValue<bool> GfxUltraLowEnabled;
+        private ReMenuToggle _gfxUltraLowToggle;
+
+        private ConfigValue<bool> GfxLowEnabled;
+        private ReMenuToggle _gfxLowToggle;
+
+        private ConfigValue<bool> GfxMedEnabled;
+        private ReMenuToggle _gfxMedToggle;
+
+        private ConfigValue<bool> GfxHighEnabled;
+        private ReMenuToggle _gfxHighToggle;
+
+        private ConfigValue<bool> GfxUltraEnabled;
+        private ReMenuToggle _gfxUltraToggle;
 
         public PerformanceComponent()
         {
@@ -33,15 +50,33 @@ namespace ReModCE_ARES.Components
             FPS240Enabled = new ConfigValue<bool>(nameof(FPS240Enabled), false);
             FPS240Enabled.OnValueChanged += () => _fps240Toggle.Toggle(FPS240Enabled);
 
+            FPS999Enabled = new ConfigValue<bool>(nameof(FPS999Enabled), false);
+            FPS999Enabled.OnValueChanged += () => _fps999Toggle.Toggle(FPS999Enabled);
+
             AdaptiveGraphicsEnabled = new ConfigValue<bool>(nameof(AdaptiveGraphicsEnabled), true);
             AdaptiveGraphicsEnabled.OnValueChanged += () => _adaptiveGraphicsToggle.Toggle(AdaptiveGraphicsEnabled);
+
+            GfxUltraLowEnabled = new ConfigValue<bool>(nameof(GfxUltraLowEnabled), false);
+            GfxUltraLowEnabled.OnValueChanged += () => _gfxUltraLowToggle.Toggle(GfxUltraLowEnabled);
+
+            GfxLowEnabled = new ConfigValue<bool>(nameof(GfxLowEnabled), false);
+            GfxLowEnabled.OnValueChanged += () => _gfxLowToggle.Toggle(GfxLowEnabled);
+
+            GfxMedEnabled = new ConfigValue<bool>(nameof(GfxMedEnabled), false);
+            GfxMedEnabled.OnValueChanged += () => _gfxMedToggle.Toggle(GfxMedEnabled);
+
+            GfxHighEnabled = new ConfigValue<bool>(nameof(GfxHighEnabled), false);
+            GfxHighEnabled.OnValueChanged += () => _gfxHighToggle.Toggle(GfxHighEnabled);
+
+            GfxUltraEnabled = new ConfigValue<bool>(nameof(GfxUltraEnabled), false);
+            GfxUltraEnabled.OnValueChanged += () => _gfxUltraToggle.Toggle(GfxUltraEnabled);
         }
 
         public override void OnUiManagerInit(UiManager uiManager)
         {
             base.OnUiManagerInit(uiManager);
 
-            var menu = uiManager.MainMenu.GetMenuPage("ARES");
+            var menu = uiManager.MainMenu.GetMenuPage(Page.PageNames.Optimisation);
             var subMenu = menu.AddMenuPage("Performance", "Performance related settings", ResourceManager.GetSprite("remodce.speedometer"));
             _highPriorityToggle = subMenu.AddToggle("High Priority",
                 "Enable whether player joins/leaves should be logged in console.", SetHighPriority,
@@ -55,13 +90,98 @@ namespace ReModCE_ARES.Components
                 "Sets FPS limit to 240", SetFPS240,
                 FPS240Enabled);
 
+            _fps999Toggle = subMenu.AddToggle("FPS 999 Max",
+                "Sets FPS limit to 999", SetFPS999,
+                FPS999Enabled);
+
             _adaptiveGraphicsToggle = subMenu.AddToggle("Adaptive Graphics",
                 "Auto Adjust Graphics depending on FPS", AdjustGraphics,
                 AdaptiveGraphicsEnabled);
 
+            _gfxUltraLowToggle = subMenu.AddToggle("Ultra Low Graphics",
+                "Ultra Low Graphics setting", AdjustGraphicsUltraLow,
+                GfxUltraLowEnabled);
+
+            _gfxLowToggle = subMenu.AddToggle("Low Graphics",
+                "Low Graphics setting", AdjustGraphicsLow,
+                GfxLowEnabled);
+
+            _gfxMedToggle = subMenu.AddToggle("Med Graphics",
+                "Med Graphics setting", AdjustGraphicsMed,
+                GfxMedEnabled);
+
+            _gfxHighToggle = subMenu.AddToggle("High Graphics",
+                "High Graphics setting", AdjustGraphicsHigh,
+                GfxHighEnabled);
+
+            _gfxUltraToggle = subMenu.AddToggle("Ultra Graphics",
+                "Ultra Graphics setting", AdjustGraphicsUltra,
+                GfxUltraEnabled);
+
             SetHighPriority(HighPriorityEnabled);
+            AdjustGraphicsUltraLow(GfxUltraLowEnabled);
+            AdjustGraphicsLow(GfxLowEnabled);
+            AdjustGraphicsMed(GfxMedEnabled);
+            AdjustGraphicsHigh(GfxHighEnabled);
+            AdjustGraphicsUltra(GfxUltraEnabled);
             SetFPS144(FPS144Enabled);
             SetFPS240(FPS240Enabled);
+            SetFPS999(FPS999Enabled);
+        }
+
+        private void AdjustGraphicsUltraLow(bool value)
+        {
+            GfxUltraLowEnabled.SetValue(value);
+            if (!value) { return; }
+            _gfxLowToggle.Toggle(false);
+            _gfxMedToggle.Toggle(false);
+            _gfxHighToggle.Toggle(false);
+            _gfxUltraToggle.Toggle(false);
+            ultraLow();
+        }
+
+        private void AdjustGraphicsLow(bool value)
+        {
+            GfxLowEnabled.SetValue(value);
+            if (!value) { return; }
+            low();
+            _gfxUltraLowToggle.Toggle(false);
+            _gfxMedToggle.Toggle(false);
+            _gfxHighToggle.Toggle(false);
+            _gfxUltraToggle.Toggle(false);
+        }
+
+        private void AdjustGraphicsMed(bool value)
+        {
+            GfxMedEnabled.SetValue(value);
+            if (!value) { return; }
+            medium();
+            _gfxLowToggle.Toggle(false);
+            _gfxUltraLowToggle.Toggle(false);
+            _gfxHighToggle.Toggle(false);
+            _gfxUltraToggle.Toggle(false);
+        }
+
+        private void AdjustGraphicsHigh(bool value)
+        {
+            GfxHighEnabled.SetValue(value);
+            if (!value) { return; }
+            high();
+            _gfxLowToggle.Toggle(false);
+            _gfxMedToggle.Toggle(false);
+            _gfxUltraLowToggle.Toggle(false);
+            _gfxUltraToggle.Toggle(false);
+        }
+
+        private void AdjustGraphicsUltra(bool value)
+        {
+            GfxUltraEnabled.SetValue(value);
+            if (!value) { return; }
+            ultra();
+            _gfxLowToggle.Toggle(false);
+            _gfxMedToggle.Toggle(false);
+            _gfxHighToggle.Toggle(false);
+            _gfxUltraLowToggle.Toggle(false);
         }
 
         private void SetFPS240(bool value)
@@ -72,8 +192,25 @@ namespace ReModCE_ARES.Components
             {
                 Application.targetFrameRate = 240;
                 _fps144Toggle.Toggle(false);
+                _fps999Toggle.Toggle(false);
             }
-            if (!FPS144Enabled && !value)
+            if (!FPS144Enabled && !value && !FPS999Enabled)
+            {
+                Application.targetFrameRate = 90;
+            }
+        }
+
+        private void SetFPS999(bool value)
+        {
+            FPS999Enabled.SetValue(value);
+
+            if (value)
+            {
+                Application.targetFrameRate = 999;
+                _fps144Toggle.Toggle(false);
+                _fps240Toggle.Toggle(false);
+            }
+            if (!FPS144Enabled && !value && !FPS240Enabled)
             {
                 Application.targetFrameRate = 90;
             }
@@ -87,8 +224,9 @@ namespace ReModCE_ARES.Components
             {
                 Application.targetFrameRate = 144;
                 _fps240Toggle.Toggle(false);
+                _fps999Toggle.Toggle(false);
             }
-            if (!FPS240Enabled && !value)
+            if (!FPS240Enabled && !value && !FPS999Enabled)
             {
                 Application.targetFrameRate = 90;
             }
@@ -155,6 +293,10 @@ namespace ReModCE_ARES.Components
                 {
                     ultraLow();
                 }
+            }
+            if (AdaptiveGraphicsEnabled && (GfxLowEnabled))
+            {
+                AdaptiveGraphicsEnabled.SetValue(false);
             }
         }
 

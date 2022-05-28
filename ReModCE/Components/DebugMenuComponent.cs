@@ -1,12 +1,8 @@
-﻿using System;
-using ReModAres.Core;
+﻿using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
-using ReModCE_ARES.Loader;
 using ReModCE_ARES.Managers;
-using UnityEngine;
-using VRC;
 
 namespace ReModCE_ARES.Components
 {
@@ -26,7 +22,7 @@ namespace ReModCE_ARES.Components
         {
             base.OnUiManagerInit(uiManager);
 
-            var menu = uiManager.MainMenu.GetMenuPage("ARES");
+            var menu = uiManager.MainMenu.GetCategoryPage(Page.PageNames.Utility).AddCategory("Debug");
             _debugMenuToggle = menu.AddToggle("Debug Console",
                 "Enable whether player joins/leaves should be logged in console. (right hand wing)", ToggleDebugRight,
                 DebugMenuEnabled);

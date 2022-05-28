@@ -1,13 +1,13 @@
-﻿using ReModAres.Core;
+﻿using MelonLoader;
+using ReModAres.Core;
 using ReModAres.Core.Managers;
+using ReModAres.Core.UI.QuickMenu;
+using ReModAres.Core.Unity;
+using ReModAres.Core.VRChat;
 using System;
 using System.Collections;
 using System.IO;
 using System.Linq;
-using MelonLoader;
-using ReModAres.Core.UI.QuickMenu;
-using ReModAres.Core.Unity;
-using ReModAres.Core.VRChat;
 using UnityEngine;
 using VRC.Core;
 
@@ -33,7 +33,7 @@ namespace ReModCE_ARES.Components
         private Vector3 _toRotateTo;
 
         private bool _isVR = false;
-        
+
         public RestartButtonComponent()
         {
             ShouldRejoin = new ConfigValue<bool>(nameof(ShouldRejoin), false);
@@ -44,7 +44,7 @@ namespace ReModCE_ARES.Components
 
             ShouldConfirm = new ConfigValue<bool>(nameof(ShouldConfirm), true);
             ShouldConfirm.OnValueChanged += () => _shouldConfirmToggle?.Toggle(ShouldConfirm);
-            
+
             ParseCommandLine();
         }
 
@@ -52,7 +52,7 @@ namespace ReModCE_ARES.Components
         {
             var checkForVR = Array.Find(Environment.GetCommandLineArgs(), m => m.Contains("--no-vr"));
             _isVR = string.IsNullOrEmpty(checkForVR);
-            
+
             var origPosCommand = Array.Find(Environment.GetCommandLineArgs(), m => m.Contains("-origpos"));
             if (string.IsNullOrEmpty(origPosCommand)) return;
 
@@ -88,11 +88,11 @@ namespace ReModCE_ARES.Components
 
         public override void OnUiManagerInit(UiManager uiManager)
         {
-            var utilityPage = uiManager.MainMenu.GetCategoryPage("Utility").AddCategory("Application");
+            var utilityPage = uiManager.MainMenu.GetCategoryPage(Page.PageNames.Utility).AddCategory("Application");
             var template = $"Restart in {(_isVR ? "Desktop" : "VR")} mode";
 
             utilityPage.AddButton("Restart", "Restart the game.", () => Restart(false), ResourceManager.GetSprite("remodce.reload"));
-            utilityPage.AddButton(template, template+".", () => Restart(true), ResourceManager.GetSprite("remodce.reload"));
+            utilityPage.AddButton(template, template + ".", () => Restart(true), ResourceManager.GetSprite("remodce.reload"));
 
             ReModCE_ARES.WingMenu.AddButton("Restart", "Restart the game.", RestartConfirm, ResourceManager.GetSprite("remodce.reload"), false);
 
@@ -115,7 +115,7 @@ namespace ReModCE_ARES.Components
 
             throw new ArgumentException("Input string did not contain floats.");
         }
-        
+
         private void RestartConfirm()
         {
             if (ShouldConfirm)
@@ -126,8 +126,8 @@ namespace ReModCE_ARES.Components
                     template,
                     "Restart",
                     "Cancel",
-                    ()=>Restart(true),
-                    ()=>Restart(),
+                    () => Restart(true),
+                    () => Restart(),
                     null);
             }
             else

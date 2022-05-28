@@ -52,7 +52,7 @@ namespace ReModCE_ARES.Components
             UpdateSelectedWorldVisited(pageWorldInfo.field_Private_ApiWorld_0,
                 pageWorldInfo.field_Public_ApiWorldInstance_0);
         }
-        
+
         private void InitializeVisitedIcon()
         {
             var worldInfoScreen = GameObject.Find("UserInterface/MenuContent/Screens/WorldInfo/").transform;
@@ -77,7 +77,7 @@ namespace ReModCE_ARES.Components
                 newIcon.name = "iconVisitedBefore";
                 var img = newIcon.GetComponent<Image>();
                 img.sprite = ResourceManager.GetSprite("remodce.history");
-                img.color = new Color(0.4157f,0.8902f,0.9765f,1f);
+                img.color = new Color(0.4157f, 0.8902f, 0.9765f, 1f);
                 newIcon.SetActive(false);
                 _visitedButton = newIcon;
                 return newIcon.transform;
@@ -103,9 +103,9 @@ namespace ReModCE_ARES.Components
             {
                 icon = GenerateIcon(__0).gameObject;
             }
-            
+
             var instanceId = __1.instanceId;
-            
+
             if (_visitedWorldHashSet.Contains(
                 $"{_uiWorldInstanceListInstance.field_Public_ApiWorld_0.name}-{instanceId}"))
             {

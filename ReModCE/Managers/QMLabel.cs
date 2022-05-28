@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using ReModAres.Core.Managers;
+﻿using ReModAres.Core.Managers;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -42,7 +42,7 @@ namespace ReModCE_ARES.Managers
 
             textText.transform.SetParent(lable.transform, false);
 
-            
+
 
             lable.gameObject.SetActive(false);
         }

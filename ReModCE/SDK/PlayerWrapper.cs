@@ -10,7 +10,7 @@ using VRC.SDKBase;
 using VRC.UI;
 using VRC.UI.Elements.Menus;
 
-namespace ReModCE_ARES.EvilEyeSDK
+namespace ReModCE_ARES.SDK
 {
     static class PlayerWrapper
     {
@@ -140,8 +140,8 @@ namespace ReModCE_ARES.EvilEyeSDK
         public static Player GetPlayer(int ActorNumber)
         {
             return (from p in PlayerWrapper.AllPlayers
-                where p.GetActorNumber2() == ActorNumber
-                select p).FirstOrDefault<Player>();
+                    where p.GetActorNumber2() == ActorNumber
+                    select p).FirstOrDefault<Player>();
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MelonLoader;
+using ReModAres.Core;
+using ReModCE_ARES.Loader;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -6,11 +9,7 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
-using MelonLoader;
-using ReModAres.Core;
-using ReModCE_ARES.Loader;
 using UnityEngine.SceneManagement;
-using VRC.Core;
 
 namespace ReModCE_ARES.Core
 {

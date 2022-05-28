@@ -1,13 +1,9 @@
-﻿using System;
-using Il2CppSystem.Collections.Generic;
-using Il2CppSystem.IO;
+﻿using Il2CppSystem.IO;
 using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
-using ReModCE_ARES.Core;
-using ReModCE_ARES.Loader;
+using System;
 using UnityEngine;
-using VRC;
 using VRC.Udon;
 
 namespace ReModCE_ARES.Components
@@ -25,7 +21,7 @@ namespace ReModCE_ARES.Components
         {
             base.OnUiManagerInit(uiManager);
 
-            var menu = uiManager.MainMenu.GetMenuPage("ARES");
+            var menu = uiManager.MainMenu.GetMenuPage(Page.PageNames.WorldCheats);
             _udonLog = menu.AddButton("Log all Udon Events in world",
                 "Gets all udon events and logs them to console", LogUdon);
             _itemLog = menu.AddButton("Log all item names in world",

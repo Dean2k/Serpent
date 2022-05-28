@@ -1,15 +1,13 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
-using ReModAres.Core;
+﻿using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 using ReModCE_ARES.Loader;
+using System.Linq;
+using System.Reflection;
 using UnhollowerRuntimeLib;
 using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
 using UnityEngine.XR;
-using VRC;
 
 namespace ReModCE_ARES.Components
 {
@@ -28,7 +26,7 @@ namespace ReModCE_ARES.Components
         {
             base.OnUiManagerInit(uiManager);
 
-            var menu = uiManager.MainMenu.GetMenuPage("ARES");
+            var menu = uiManager.MainMenu.GetCategoryPage(Page.PageNames.Utility).GetCategory(Page.Categories.Utilties.QualityOfLife);
             _comfyMenuToggle = menu.AddToggle("Comfy Menu",
                 "Open directly in front of your viewpoint when you are in VR, instead of down in it's default position. (must restart game)", ComfyMenuEnabled.SetValue,
                 ComfyMenuEnabled);

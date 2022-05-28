@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using MelonLoader;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
-using MelonLoader;
 
 namespace ReModCE_ARES.SDK.Utils
 {
-	// stolen from old munchen source
-	[PatchShield]
+    // stolen from old munchen source
+    [PatchShield]
     internal class FastMethodInfo
     {
         private delegate object ReturnValueDelegate(object instance, object[] arguments);

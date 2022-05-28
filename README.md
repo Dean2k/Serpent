@@ -1,4 +1,4 @@
-# ReMod CE ARES
+# ARES
 
 ![ReModCE Logo](https://github.com/RequiDev/ReModCE/raw/master/remod_ce_logo.png)
 
@@ -6,11 +6,9 @@ ReMod Community Edition - A All-in-One VRChat mod to suit all your needs using [
 # **You need at least MelonLoader v0.5.4**
 
 ## Description
-ReModCE but with a few tweak and modified to use the ARES API
+ReModCE but with a loads of new features and modified to use the ARES API
 
 If you want a feature or have a bug report, head over to the issues page and create an issue for it!  
-
-**Powered by [ReMod.Core](https://github.com/RequiDev/ReMod.Core/)**
 
 ## Installation & Usage
 Grab the latest loader from [here](https://github.com/Dean2k/ReModCE/releases/latest/ReModCE_ARES.Loader.dll) and put it in your Mods directory.  
@@ -65,7 +63,4 @@ In case you want to update you can always grab the latest and even previous vers
 
 ## Credits
 [knah](https://github.com/knah) - For his usage of GitHub Action which I've looked at to figure out on how to do CI on GitHub
-[Requi](https://github.com/RequiDev) - For well... ReMod CE
-
-## Notable Mentions
-[emmVRC](https://github.com/emmVRC) - They inspired me to create this project in the first place. This would not exist without them  
+[Requi](https://github.com/RequiDev) - For well... ReModCE

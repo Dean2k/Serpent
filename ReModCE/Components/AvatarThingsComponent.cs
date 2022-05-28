@@ -2,18 +2,11 @@
 using MelonLoader;
 using ReModAres.Core;
 using ReModAres.Core.Managers;
-using ReModAres.Core.UI;
-using ReModAres.Core.UI.QuickMenu;
-using ReModAres.Core.VRChat;
-using ReModCE_ARES.Loader;
-using ReModCE_ARES.Managers;
 using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using UnityEngine;
-using VRC;
 using VRC.Core;
-using VRC.DataModel;
 using VRC.UI;
 
 namespace ReModCE_ARES.Components
@@ -33,14 +26,14 @@ namespace ReModCE_ARES.Components
 
         public AvatarThingsComponent()
         {
-            
+
         }
 
         public override void OnUiManagerInit(UiManager uiManager)
         {
             base.OnUiManagerInit(uiManager);
 
-            var menu = uiManager.MainMenu.GetMenuPage("Avatars");
+            var menu = uiManager.MainMenu.GetMenuPage(Page.PageNames.Avatars);
             menu.AddButton("Clone by ID",
                 "Clone avatar by Avatar ID", CloneID);
         }
@@ -65,6 +58,6 @@ namespace ReModCE_ARES.Components
             }
 
         }
-        
+
     }
 }

@@ -2,11 +2,11 @@
 using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI;
+using ReModAres.Core.UI.QuickMenu;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using ReModAres.Core.UI.QuickMenu;
 using UnityEngine;
 using VRC.Core;
 using VRC.SDKBase;
@@ -29,7 +29,7 @@ namespace ReModCE_ARES.Components
         private ReCategoryPage _instanceMenu;
         private ReMenuCategory _instanceHistoryMenu;
         private ReMenuCategory _instanceSettingsMenu;
-        
+
         private ConfigValue<bool> InstanceHistoryDescendingEnabled;
         private ReMenuToggle _instanceSettingsDescendingToggle;
 
@@ -132,7 +132,7 @@ namespace ReModCE_ARES.Components
             }
 
             _instanceHistory.Clear();
-            
+
             _instanceHistory.Add(_currentSavedWorld);
             AddInstanceButton(_currentSavedWorld);
 

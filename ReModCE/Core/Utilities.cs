@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using MelonLoader;
 using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
 

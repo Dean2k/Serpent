@@ -1,40 +1,35 @@
-﻿using System;
-using MelonLoader;
-using ReModAres.Core;
+﻿using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
-using ReModCE_ARES.Loader;
 using ReModCE_ARES.Managers;
 using TMPro;
 using UnityEngine;
-using VRC;
 
 namespace ReModCE_ARES.Components
 {
-	internal class PlayersListComponent : ModComponent
-	{
-		private ConfigValue<bool> PlayerListEnabled;
-		private ReMenuToggle _playerListToggle;
-		private QMLablePlayer playerList;
+    internal class PlayersListComponent : ModComponent
+    {
+        private ConfigValue<bool> PlayerListEnabled;
+        private ReMenuToggle _playerListToggle;
+        private QMLablePlayer playerList;
 
-		public PlayersListComponent()
-		{
+        public PlayersListComponent()
+        {
             PlayerListEnabled = new ConfigValue<bool>(nameof(PlayerListEnabled), true);
             PlayerListEnabled.OnValueChanged += () => _playerListToggle.Toggle(PlayerListEnabled);
-		}
+        }
 
-		public override void OnUiManagerInit(UiManager uiManager)
-		{
-			base.OnUiManagerInit(uiManager);
+        public override void OnUiManagerInit(UiManager uiManager)
+        {
+            base.OnUiManagerInit(uiManager);
 
-			var menu = uiManager.MainMenu.GetMenuPage("ARES");
+            var menu = uiManager.MainMenu.GetCategoryPage(Page.PageNames.Utility).AddCategory("Players");
             _playerListToggle = menu.AddToggle("Player List",
-				"Enable/Disable player List", TogglePlayerList,
+                "Enable/Disable player List", TogglePlayerList,
                 PlayerListEnabled);
 
-
-			playerList = new QMLablePlayer(QuickMenuEx.LeftWing.field_Public_Button_0.transform, 609.902f, 457.9203f, "PlayerList");
+            playerList = new QMLablePlayer(QuickMenuEx.LeftWing.field_Public_Button_0.transform, 609.902f, 457.9203f, "PlayerList");
             drawOverlay();
         }
 
@@ -63,17 +58,16 @@ namespace ReModCE_ARES.Components
             }
         }
 
-		public void TogglePlayerList(bool value)
-		{
+        public void TogglePlayerList(bool value)
+        {
             PlayerListEnabled.SetValue(value);
-			drawOverlay();
-		}
-
+            drawOverlay();
+        }
 
         public override void OnUpdate()
         {
-			try
-			{
+            try
+            {
                 string text = "";
                 for (int i = 0; i < Wrapper.GetAllPlayers().Count; i++)
                 {
@@ -93,7 +87,6 @@ namespace ReModCE_ARES.Components
             catch
             {
             }
-		}
-        
+        }
     }
 }

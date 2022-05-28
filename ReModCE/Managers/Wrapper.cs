@@ -1,10 +1,7 @@
 ﻿using ReModAres.Core.VRChat;
-using System;
+using ReModCE_ARES.Core;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ReModCE_ARES.Core;
 using UnityEngine;
 using VRC;
 using VRC.Core;

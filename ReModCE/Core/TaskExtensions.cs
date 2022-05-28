@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using ReModCE_ARES.Loader;
+﻿using ReModCE_ARES.Loader;
+using System.Threading.Tasks;
 
 namespace ReModCE_ARES.Core
 {

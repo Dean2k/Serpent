@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using ReModAres.Core;
+﻿using ReModAres.Core;
+using ReModAres.Core.Api;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.UI.Wings;
 using ReModAres.Core.VRChat;
 using ReModCE_ARES.Managers;
+using System.Collections.Generic;
+using System.Linq;
 using UnhollowerRuntimeLib;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,11 +14,10 @@ using UnityEngine.XR;
 using VRC.Animation;
 using VRC.SDK3.Components;
 using VRCSDK2;
+using Object = UnityEngine.Object;
 using VRC_AvatarPedestal = VRC.SDKBase.VRC_AvatarPedestal;
 using VRC_Pickup = VRC.SDKBase.VRC_Pickup;
 using VRC_UiShape = VRC.SDKBase.VRC_UiShape;
-using Object = UnityEngine.Object;
-using ReModAres.Core.Api;
 
 // ReSharper disable InconsistentNaming
 namespace ReModCE_ARES.Components
@@ -94,8 +94,8 @@ namespace ReModCE_ARES.Components
 
         public override void OnUiManagerInit(UiManager uiManager)
         {
-            var movementMenu = uiManager.MainMenu.GetMenuPage("Movement");
-            var hotkeyMenu = uiManager.MainMenu.GetMenuPage("Hotkeys");
+            var movementMenu = uiManager.MainMenu.GetMenuPage(Page.PageNames.Movement);
+            var hotkeyMenu = uiManager.MainMenu.GetMenuPage(Page.PageNames.Hotkeys);
 
             _actionMenuFlyEnabled = movementMenu.AddToggle("Action Menu Toggle",
                 "Enable the action menu quick toggle (restart required).", ToggleMenu,
@@ -108,7 +108,8 @@ namespace ReModCE_ARES.Components
                     VRCActionMenuPage.AddToggle(ActionMenuPage.Main, "Fly", false, ToggleFlyQuick,
                         ResourceManager.GetTexture("remodce.arms-up"));
                 }
-            } catch { }
+            }
+            catch { }
             _flyToggle = movementMenu.AddToggle("Fly", "Enable/Disable Fly", ToggleFly, _flyEnabled);
             _noclipToggle = movementMenu.AddToggle("Noclip", "Enable/Disable Noclip", ToggleNoclip, _noclipEnabled);
             _noclipWingToggle = ReModCE_ARES.WingMenu.AddToggle("Noclip", "Enable/Disable Noclip", b =>
@@ -122,7 +123,7 @@ namespace ReModCE_ARES.Components
                     ToggleFly(false);
                 }
             }, _noclipEnabled);
-            
+
             _hotkeyToggle = hotkeyMenu.AddToggle("Fly Hotkey", "Enable/Disable fly hotkey",
                 EnableFlyHotkey.SetValue, EnableFlyHotkey);
 
@@ -173,7 +174,7 @@ namespace ReModCE_ARES.Components
             {
                 ToggleFly(true);
             }
-            
+
         }
 
         private void ToggleNoclipObjects()
@@ -194,7 +195,7 @@ namespace ReModCE_ARES.Components
 
                 if (collider == ownCollider)
                     continue;
-                
+
                 if (!(_noclipEnabled && collider.enabled || !_noclipEnabled && _disabledColliders.Contains(collider.GetInstanceID())))
                     continue;
 
@@ -223,7 +224,7 @@ namespace ReModCE_ARES.Components
             if (_flyEnabled)
             {
                 if (Physics.gravity == Vector3.zero) return;
-                
+
                 _originalGravity = Physics.gravity;
                 Physics.gravity = Vector3.zero;
             }
@@ -304,7 +305,7 @@ namespace ReModCE_ARES.Components
             if (XRDevice.isPresent && ActionMenuDriver.field_Public_Static_ActionMenuDriver_0.IsOpen())
                 return;
 
-            
+
             var playerTransform = player.transform;
             var flyingTransform = FlyViewpointBased ? _cameraTransform : playerTransform;
             if (XRDevice.isPresent)
@@ -333,7 +334,7 @@ namespace ReModCE_ARES.Components
                     playerTransform.position += new Vector3(0f, Time.deltaTime * speed, 0f);
                 }
             }
-            
+
             _motionState?.Reset();
         }
     }

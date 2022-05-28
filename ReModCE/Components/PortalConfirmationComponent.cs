@@ -1,9 +1,9 @@
 ﻿using ReModAres.Core;
+using ReModAres.Core.Managers;
+using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
 using System.Linq;
 using System.Reflection;
-using ReModAres.Core.Managers;
-using ReModAres.Core.UI.QuickMenu;
 using UnhollowerRuntimeLib.XrefScans;
 
 namespace ReModCE_ARES.Components
@@ -47,7 +47,7 @@ namespace ReModCE_ARES.Components
             _portalConfirmationToggle = menu.AddToggle("Portal Confirmation", "Toggle Portal Confirmation", PortalConfirmationEnabled);
         }
 
-        
+
         private static bool EnterConfirm(PortalInternal __instance, MethodBase __originalMethod)
         {
             if (!PortalConfirmationEnabled)
@@ -64,9 +64,9 @@ namespace ReModCE_ARES.Components
                             _bypassPortals = true;
                             __originalMethod.Invoke(__instance, null);
                         },
-                        "No", ()=>VRCUiManagerEx.Instance.HideScreen("POPUP"),null
+                        "No", () => VRCUiManagerEx.Instance.HideScreen("POPUP"), null
                     );
-                        
+
                 }
 
                 return false;

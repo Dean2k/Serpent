@@ -1,20 +1,15 @@
 ﻿using ExitGames.Client.Photon;
 using MelonLoader;
-using System.Reflection;
-using UnityEngine;
-using VRC.Core;
-using VRC.DataModel;
-using System.Linq;
-using Harmony;
-using Il2CppSystem;
-using Newtonsoft.Json;
 using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
-using ReModCE_ARES.Core;
+using System.Linq;
+using System.Reflection;
 using UnhollowerRuntimeLib.XrefScans;
 using VRC;
+using VRC.Core;
+using VRC.DataModel;
 
 namespace ReModCE_ARES.Components
 {
@@ -38,7 +33,8 @@ namespace ReModCE_ARES.Components
                     typeof(SoftCloneComponent).GetMethod(nameof(Detour), BindingFlags.NonPublic | BindingFlags.Static)
                         .ToNewHarmonyMethod()
                 );
-            } catch {ReModCE_ARES.LogDebug("Failed to patch softclone");}
+            }
+            catch { ReModCE_ARES.LogDebug("Failed to patch softclone"); }
 
             _loadAvatarMethod =
                 typeof(VRCPlayer).GetMethods()
@@ -51,12 +47,12 @@ namespace ReModCE_ARES.Components
                                              && instance.TryResolve() != null
                                              && instance.TryResolve().Name == "ReloadAvatarNetworkedRPC"));
 
-           
+
         }
 
         private static void Detour(ref EventData __0)
         {
-            if (_state 
+            if (_state
                 && __0.Code == 42
                 && AvatarDictCache != null
                 && __0.Sender == Player.prop_Player_0.field_Private_VRCPlayerApi_0.playerId
@@ -65,7 +61,8 @@ namespace ReModCE_ARES.Components
                 try
                 {
                     __0.Parameters[245].Cast<Il2CppSystem.Collections.Hashtable>()["avatarDict"] = AvatarDictCache;
-                } catch (System.Exception ex) { ReModCE_ARES.LogDebug(ex.Message); }
+                }
+                catch (System.Exception ex) { ReModCE_ARES.LogDebug(ex.Message); }
 
                 if (_sentTwice)
                 {
@@ -108,7 +105,7 @@ namespace ReModCE_ARES.Components
                 ?.prop_Player_1.field_Private_Hashtable_0["avatarDict"];
             _loadAvatarMethod.Invoke(VRCPlayer.field_Internal_Static_VRCPlayer_0, new object[] { true });
         }
-        
+
 
     }
 }

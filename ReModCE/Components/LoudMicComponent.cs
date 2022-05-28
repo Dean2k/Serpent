@@ -1,16 +1,7 @@
 ﻿using ReModAres.Core;
 using ReModAres.Core.Api;
 using ReModAres.Core.Managers;
-using ReModAres.Core.UI;
 using ReModAres.Core.UI.QuickMenu;
-using ReModAres.Core.VRChat;
-using ReModCE_ARES.Loader;
-using ReModCE_ARES.Managers;
-using UnityEngine;
-using VRC;
-using VRC.Core;
-using VRC.DataModel;
-using VRC.UI;
 
 namespace ReModCE_ARES.Components
 {
@@ -35,7 +26,7 @@ namespace ReModCE_ARES.Components
         {
             base.OnUiManagerInit(uiManager);
 
-            var menu = uiManager.MainMenu.GetMenuPage("Microphone");
+            var menu = uiManager.MainMenu.GetMenuPage(Page.PageNames.Microphone);
             _loudMicEnabled = menu.AddToggle("Loud Mic",
                 "Ear Rape.", LoudMic,
                 LoudMicEnabled);

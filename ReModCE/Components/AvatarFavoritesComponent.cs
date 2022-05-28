@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Web;
-using MelonLoader;
+﻿using MelonLoader;
 using Newtonsoft.Json;
 using ReModAres.Core;
 using ReModAres.Core.Managers;
@@ -16,6 +7,14 @@ using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
 using ReModCE_ARES.Core;
 using ReModCE_ARES.Loader;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web;
 using UnhollowerRuntimeLib;
 using UnityEngine;
 using UnityEngine.Events;
@@ -311,7 +310,7 @@ namespace ReModCE_ARES.Components
             _vrcaTargetButton2 = targetMenu.AddButton("Favorite 2", "Favorite selected users avatar. (not fully working)", FavoriteAvatar2, ResourceManager.GetSprite("remodce.star"));
             _vrcaTargetButton3 = targetMenu.AddButton("Favorite 3", "Favorite selected users avatar. (not fully working)", FavoriteAvatar3, ResourceManager.GetSprite("remodce.star"));
 
-            var menu = uiManager.MainMenu.GetMenuPage("Avatars");
+            var menu = uiManager.MainMenu.GetMenuPage(Page.PageNames.Avatars);
             _enabledToggle = menu.AddToggle("Avatar Favorites", "Enable/Disable avatar favorites", AvatarFavoritesEnabled);
             _enabledToggle1 = menu.AddToggle("Avatar Favorites 1", "Enable/Disable avatar favorites", AvatarFavoritesEnabled1);
             _enabledToggle2 = menu.AddToggle("Avatar Favorites 2", "Enable/Disable avatar favorites", AvatarFavoritesEnabled2);
@@ -722,7 +721,7 @@ namespace ReModCE_ARES.Components
 
             yield return new WaitForSeconds(seconds);
 
-            VRCUiPopupManager.prop_VRCUiPopupManager_0.ShowAlert("ReMod CE ARES", message);
+            VRCUiPopupManager.prop_VRCUiPopupManager_0.ShowAlert("ARES ARES", message);
         }
 
         private void OnAvatarInstantiated(string url, GameObject avatar, AvatarPerformanceStats avatarPerformanceStats, ObjectPublicBoBoBoBoBoBoBoBoBoBoUnique unknown)

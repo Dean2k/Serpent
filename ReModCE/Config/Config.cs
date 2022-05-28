@@ -1,14 +1,11 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using Newtonsoft.Json;
-using UnityEngine;
-using UnityEngine.Rendering;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System.Collections.Generic;
-using System.Linq;
 using ReModAres.Core;
 using ReModCE_ARES.Loader;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace ReModCE_ARES.Config
 {
@@ -56,7 +53,7 @@ namespace ReModCE_ARES.Config
             {
                 ReLogger.Error("Corrupt AvatarProtection config! Settings will be their default values.");
             }
-		}
+        }
 
         internal static void CreateAvatarProtectionsConfig()
         {

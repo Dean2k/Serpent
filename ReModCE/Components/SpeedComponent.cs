@@ -1,11 +1,9 @@
-﻿using System;
-using ReModAres.Core;
+﻿using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
-using ReModCE_ARES.Loader;
 using UnityEngine.UI;
-using VRC;
+using VRC.Core;
 using VRC.SDKBase;
 
 namespace ReModCE_ARES.Components
@@ -33,13 +31,11 @@ namespace ReModCE_ARES.Components
         {
             base.OnUiManagerInit(uiManager);
 
-            var menu = uiManager.MainMenu.GetMenuPage("ARES");
-            var subMenu = menu.AddMenuPage("Speed Hack", "Movement speed settings",
-                ResourceManager.GetSprite("remodce.speed"));
-            _speedToggle = subMenu.AddToggle("Speedhack Enabled",
+            var menu = uiManager.MainMenu.GetMenuPage(Page.PageNames.Movement);
+            _speedToggle = menu.AddToggle("Speedhack Enabled",
                 "Enable / disable the speedhack.", EnableSpeed,
                 false);
-            _movementSpeedButton = subMenu.AddButton($"Movement Speed: {MovementSpeed}", "Adjust your speed",
+            _movementSpeedButton = menu.AddButton($"Movement Speed: {MovementSpeed}", "Adjust your speed",
                 () =>
                 {
                     VRCUiPopupManager.prop_VRCUiPopupManager_0.ShowInputPopupWithCancel("Set Movement speed",
@@ -53,6 +49,8 @@ namespace ReModCE_ARES.Components
                                 return;
 
                             MovementSpeed.SetValue(movementSpeed);
+                            OnDisable();
+                            OnEnable();
                         }, null);
                 }, ResourceManager.GetSprite("remodce.speed"));
         }

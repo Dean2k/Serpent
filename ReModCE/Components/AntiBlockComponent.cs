@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using ExitGames.Client.Photon;
+﻿using ExitGames.Client.Photon;
 using Il2CppSystem.Collections.Generic;
 using Photon.Realtime;
 using ReModAres.Core;
@@ -36,17 +35,17 @@ namespace ReModCE_ARES.Components
         {
             base.OnUiManagerInit(uiManager);
 
-            var menu = uiManager.MainMenu.GetMenuPage("ARES");
-            var subMenu = menu.AddMenuPage("Anti-Block", "", ResourceManager.GetSprite("remodce.shield"));
+            var menu = uiManager.MainMenu.GetMenuPage(Page.PageNames.Protections);
 
-            _antiblockToggle = subMenu.AddToggle("Anti-Block",
+            _antiblockToggle = menu.AddToggle("Anti-Block",
                 "Enable / Disable the anti-block", AntiBlockEnabled.SetValue,
                 AntiBlockEnabled);
             try
             {
                 ReModCE_ARES.Harmony.Patch(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.OnEvent)),
                     GetLocalPatch(nameof(OnEventPatch)), null);
-            } catch {ReModCE_ARES.LogDebug("Error on patching AntiBlock");}
+            }
+            catch { ReModCE_ARES.LogDebug("Error on patching AntiBlock"); }
         }
 
         private static bool OnEventPatch(ref EventData __0)
@@ -64,66 +63,72 @@ namespace ReModCE_ARES.Components
                     {
 
                         case 21:
-                        {
-                            if (moderationData.ContainsKey(1) == true)
                             {
-                                bool isBlocked = moderationData[10].Unbox<bool>();
-                                PlayerDetails playerDetails =
-                                    Wrapper.GetPlayerInformationById(moderationData[1].Unbox<int>());
-
-
-
-                                if (playerDetails != null)
+                                if (moderationData.ContainsKey(1) == true)
                                 {
-                                    if (isBlocked)
-                                    {
-                                        VRCUiManagerEx.Instance.QueueHudMessage(
-                                            playerDetails.displayName + " has blocked you.", Color.red);
-                                        ReLogger.Msg(playerDetails.displayName + " has blocked you.", Color.red);
-                                        ReModCE_ARES.LogDebug(playerDetails.displayName + " has blocked you.");
+                                    bool isBlocked = moderationData[10].Unbox<bool>();
+                                    PlayerDetails playerDetails =
+                                        Wrapper.GetPlayerInformationById(moderationData[1].Unbox<int>());
 
-                                        if (AntiBlockEnabled)
-                                        {
-                                            return false;
-                                        }
-                                    }
-                                    else
+
+
+                                    if (playerDetails != null)
                                     {
-                                        if (playerDetails.displayName !=
-                                            Wrapper.GetLocalVRCPlayer().prop_VRCPlayerApi_0.displayName)
+                                        if (isBlocked)
                                         {
                                             VRCUiManagerEx.Instance.QueueHudMessage(
-                                                playerDetails.displayName + " has unblocked or unmuted you.",
-                                                Color.green);
-                                            ReLogger.Msg(playerDetails.displayName + " has unblocked or unmuted you.",
-                                                Color.green);
-                                            ReModCE_ARES.LogDebug(playerDetails.displayName +
+                                                playerDetails.displayName + " has blocked you.", Color.red);
+                                            ReLogger.Msg(playerDetails.displayName + " has blocked you.", Color.red);
+                                            ReModCE_ARES.LogDebug(playerDetails.displayName + " has blocked you.");
+
+                                            if (AntiBlockEnabled)
+                                            {
+                                                return false;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (playerDetails.displayName !=
+                                                Wrapper.GetLocalVRCPlayer().prop_VRCPlayerApi_0.displayName)
+                                            {
+                                                // bugged atm so get rid of overlay message
+                                                //VRCUiManagerEx.Instance.QueueHudMessage(
+                                                //    playerDetails.displayName + " has unblocked or unmuted you.",
+                                                //    Color.green);
+                                                ReLogger.Msg(playerDetails.displayName + " has unblocked or unmuted you.",
+                                                    Color.green);
+                                                ReModCE_ARES.LogDebug(playerDetails.displayName +
                                                                   " has unblocked or unmuted you.");
+                                            }
                                         }
                                     }
                                 }
-                            }
 
-                            break;
-                        }
+                                break;
+                            }
                     }
-                } catch {}
+                }
+                catch { }
             }
 
             PlayerDetails playerDetails2 = null;
             try
             {
                 playerDetails2 = Wrapper.GetPlayerInformationById(__0.Sender);
-            } catch {}
+            }
+            catch { }
 
             if ((__0.Code == 6 || __0.Code == 9 || __0.Code == 209 || __0.Code == 210) && playerDetails2 != null)
             {
-                if (playerDetails2.player.IsBot())
+                try
                 {
-                    //ReLogger.Msg("Anti Bot: " + playerDetails2.displayName);
-                    ReModCE_ARES.LogDebug("Anti Bot: " + playerDetails2.displayName);
-                    return false;
-                }
+                    if (playerDetails2.player.IsBot())
+                    {
+                        //ReLogger.Msg("Anti Bot: " + playerDetails2.displayName);
+                        ReModCE_ARES.LogDebug("Anti Bot: " + playerDetails2.displayName);
+                        return false;
+                    }
+                } catch { }
             }
             return true;
         }
@@ -139,7 +144,8 @@ namespace ReModCE_ARES.Components
                 {
                     Wrapper.playerList.Remove(player.prop_VRCPlayerApi_0.displayName);
                 }
-            } catch {}
+            }
+            catch { }
         }
 
         public override void OnPlayerJoined(Player player)

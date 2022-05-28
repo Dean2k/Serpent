@@ -1,13 +1,12 @@
-﻿using System;
-using ReModAres.Core;
+﻿using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
 using ReModCE_ARES.Loader;
 using ReModCE_ARES.Managers;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
-using VRC;
 using VRCSDK2;
 
 namespace ReModCE_ARES.Components
@@ -44,7 +43,7 @@ namespace ReModCE_ARES.Components
         {
             base.OnUiManagerInit(uiManager);
 
-            var menu = uiManager.MainMenu.GetMenuPage("ARES");
+            var menu = uiManager.MainMenu.GetCategoryPage(Page.PageNames.Utility).GetCategory(Page.Categories.Utilties.QualityOfLife);
             var subMenu = menu.AddMenuPage("Portable Mirror", "spawn a portable mirror", ResourceManager.GetSprite("remodce.mirror"));
             _portableMirrorToggle = subMenu.AddToggle("Portable Mirror",
                 "Portable Mirror", ButtonToggleMirror,

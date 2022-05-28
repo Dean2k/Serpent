@@ -1,18 +1,13 @@
 ﻿using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI;
-using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
 using ReModCE_ARES.Loader;
-using ReModCE_ARES.Managers;
 using System;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using UnityEngine;
-using VRC;
-using VRC.Core;
-using VRC.DataModel;
 using VRC.UI;
 
 namespace ReModCE_ARES.Components
@@ -30,7 +25,7 @@ namespace ReModCE_ARES.Components
 
             var buttonContainer = userInfoTransform.Find("WorldButtons/GoButton").GetParent();
 
-            new ReUiButton("Download VRCW", new Vector2(250f,-10f), new Vector2(0.90f, 1.9f), DownloadVRCW, buttonContainer);
+            new ReUiButton("Download VRCW", new Vector2(250f, -10f), new Vector2(0.90f, 1.9f), DownloadVRCW, buttonContainer);
 
         }
 
