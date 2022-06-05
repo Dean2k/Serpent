@@ -3,7 +3,6 @@ using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
 using UnityEngine.UI;
-using VRC.Core;
 using VRC.SDKBase;
 
 namespace ReModCE_ARES.Components

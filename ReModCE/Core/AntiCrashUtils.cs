@@ -2,7 +2,6 @@
 using ReModAres.Core.VRChat;
 using ReModCE_ARES.AvatarPostProcess;
 using ReModCE_ARES.Config;
-using ReModCE_ARES.SDK;
 using ReModCE_ARES.Loader;
 using ReModCE_ARES.SDK;
 using System;

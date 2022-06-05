@@ -128,7 +128,8 @@ namespace ReModCE_ARES.Components
                         ReModCE_ARES.LogDebug("Anti Bot: " + playerDetails2.displayName);
                         return false;
                     }
-                } catch { }
+                }
+                catch { }
             }
             return true;
         }
