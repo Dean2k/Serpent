@@ -280,6 +280,7 @@
     <Compile Include="Components\DisableChairComponent.cs" />
     <Compile Include="Components\DownloadVRCWComponent.cs" />
     <Compile Include="Components\EmojiBlocker.cs" />
+    <Compile Include="Components\ExploitJustHComponent.cs" />
     <Compile Include="Components\ExploitJustBComponent.cs" />
     <Compile Include="Components\ExploitPrisonComponent.cs" />
     <Compile Include="Components\ExploitMurder4Component.cs" />
