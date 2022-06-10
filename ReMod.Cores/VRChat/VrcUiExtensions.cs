@@ -36,6 +36,8 @@ namespace ReModAres.Core.VRChat
         {
             uiManager.field_Public_Text_0.color = color; // DisplayTextColor
             uiManager.field_Public_Text_0.text = string.Empty;
+            uiManager.field_Public_Text_0.alignment = TextAnchor.UpperCenter;
+            uiManager.field_Public_Text_0.transform.localPosition = new Vector3(0f, 400f, 0f);
             uiManager.field_Private_Single_0 = 0f; // HudMessageDisplayTime
             uiManager.field_Private_Single_1 = duration; // HudMessageDisplayDuration
             uiManager.field_Private_Single_2 = delay; // DelayBeforeHudMessage

@@ -10,6 +10,7 @@ using UnityEngine;
 using VRC.Core;
 using VRC.DataModel;
 using VRC.SDKBase;
+using VRC.Udon;
 using Player = VRC.Player;
 
 namespace ReModAres.Core
@@ -30,6 +31,8 @@ namespace ReModAres.Core
         public virtual void OnUiManagerInit(UiManager uiManager){}
         public virtual void OnFixedUpdate(){}
         public virtual void OnUpdate(){}
+        public virtual bool OnEventPatch(ref EventData __0) { return true; }
+        public virtual bool OnUdonPatch(UdonBehaviour __instance, string __0) { return true; }
         public virtual void OnLateUpdate(){}
         public virtual void OnGUI(){}
         public virtual void OnSceneWasLoaded(int buildIndex, string sceneName){}

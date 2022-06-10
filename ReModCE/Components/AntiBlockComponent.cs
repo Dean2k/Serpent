@@ -40,15 +40,9 @@ namespace ReModCE_ARES.Components
             _antiblockToggle = menu.AddToggle("Anti-Block",
                 "Enable / Disable the anti-block", AntiBlockEnabled.SetValue,
                 AntiBlockEnabled);
-            try
-            {
-                ReModCE_ARES.Harmony.Patch(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.OnEvent)),
-                    GetLocalPatch(nameof(OnEventPatch)), null);
-            }
-            catch { ReModCE_ARES.LogDebug("Error on patching AntiBlock"); }
         }
 
-        private static bool OnEventPatch(ref EventData __0)
+        public override bool OnEventPatch(ref EventData __0)
         {
             if (__0.Code == 33)
             {
@@ -111,26 +105,6 @@ namespace ReModCE_ARES.Components
                 catch { }
             }
 
-            PlayerDetails playerDetails2 = null;
-            try
-            {
-                playerDetails2 = Wrapper.GetPlayerInformationById(__0.Sender);
-            }
-            catch { }
-
-            if ((__0.Code == 6 || __0.Code == 9 || __0.Code == 209 || __0.Code == 210) && playerDetails2 != null)
-            {
-                try
-                {
-                    if (playerDetails2.player.IsBot())
-                    {
-                        //ReLogger.Msg("Anti Bot: " + playerDetails2.displayName);
-                        ReModCE_ARES.LogDebug("Anti Bot: " + playerDetails2.displayName);
-                        return false;
-                    }
-                }
-                catch { }
-            }
             return true;
         }
 

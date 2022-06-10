@@ -55,7 +55,8 @@ In case you want to update you can always grab the latest and even previous vers
 * max FPS settings
 * high priority mode
 * adaptive fps
-
+* Just H
+* FBT Heaven (Thanks Killer_Bigpoint for Udon Patch method)
 
 ## Hotkeys
 * CTRL + F = Noclip

@@ -1,6 +1,8 @@
-﻿using HarmonyLib;
+﻿using ExitGames.Client.Photon;
+using HarmonyLib;
 using MelonLoader;
 using Newtonsoft.Json;
+using Photon.Realtime;
 using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.Pedals;
@@ -28,6 +30,7 @@ using UnhollowerBaseLib;
 using UnhollowerRuntimeLib;
 using UnityEngine;
 using VRC.Core;
+using VRC.Udon;
 using ConfigManager = ReModAres.Core.Managers.ConfigManager;
 
 namespace ReModCE_ARES
@@ -180,12 +183,24 @@ namespace ReModCE_ARES
             return typeof(ReModCE_ARES).GetMethod(name, BindingFlags.NonPublic | BindingFlags.Static).ToNewHarmonyMethod();
         }
 
+        private static HarmonyMethod GetLocalPublicPatch(string name)
+        {
+            return typeof(ReModCE_ARES).GetMethod(name, BindingFlags.Public | BindingFlags.Static).ToNewHarmonyMethod();
+        }
+
         private static void ForceClone(ref bool __0) => __0 = true;
 
         public static void InitializePatches()
         {
             Harmony.Patch(typeof(VRCPlayer).GetMethod(nameof(VRCPlayer.Awake)), GetLocalPatch(nameof(VRCPlayerAwakePatch)));
             Harmony.Patch(typeof(RoomManager).GetMethod(nameof(RoomManager.Method_Public_Static_Boolean_ApiWorld_ApiWorldInstance_String_Int32_0)), postfix: GetLocalPatch(nameof(EnterWorldPatch)));
+            Harmony.Patch(typeof(UdonBehaviour).GetMethods().Where(m => m.Name.Equals(nameof(UdonBehaviour.RunProgram)) && m.GetParameters()[0].ParameterType == typeof(string)).First(), GetLocalPublicPatch(nameof(OnUdonPatch)));
+            try
+            {
+                Harmony.Patch(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.OnEvent)),
+                    GetLocalPublicPatch(nameof(OnEventPatch)), null);
+            }
+            catch { ReModCE_ARES.LogDebug("Error on patching AntiBlock"); }
             try
             {
                 Harmony.Patch(typeof(SystemInfo).GetProperty("deviceUniqueIdentifier").GetGetMethod(), new HarmonyLib.HarmonyMethod(AccessTools.Method(typeof(ReModCE_ARES), nameof(FakeHWID))));
@@ -227,6 +242,19 @@ namespace ReModCE_ARES
 
             //    Harmony.Patch(method, postfix: GetLocalPatch(nameof(SetUserPatch)));
             //}
+        }
+
+        public static bool OnEventPatch(ref EventData __0)
+        {
+            foreach (var m in Components)
+            {
+                bool check = m.OnEventPatch(ref __0);
+                if (!check)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         private static IntPtr OnAvatarDownloadStartPatch(IntPtr thisPtr, IntPtr apiAvatar, IntPtr downloadContainer,
@@ -393,6 +421,19 @@ namespace ReModCE_ARES
             Ray posF = new Ray(Camera.main.transform.position, Camera.main.transform.forward); //pos, directon
             RaycastHit[] PosData = Physics.RaycastAll(posF);
             if (PosData.Length > 0) { RaycastHit pos = PosData[0]; VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.position = pos.point; }
+        }
+
+        public static bool OnUdonPatch(UdonBehaviour __instance, string __0)
+        {
+            foreach (var m in Components)
+            {
+                bool check = m.OnUdonPatch(__instance, __0);
+                if (!check)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public static void OnLateUpdate()

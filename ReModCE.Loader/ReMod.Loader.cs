@@ -15,7 +15,7 @@ namespace ReModCE_ARES.Loader
     public static class BuildInfo
     {
         public const string Name = "ReModCE_ARES";
-        public const string Author = "ShrekamusChrist, Requi, FenrixTheFox, Xaiver, Potato, Psychloor";
+        public const string Author = "ShrekamusChrist, Requi, FenrixTheFox, Xaiver, Potato, Psychloor, Killer_Bigpoint";
         public const string Company = null;
         public const string Version = "1.0.0.0";
         public const string DownloadLink = "https://github.com/Dean2k/ReModCE/releases/latest/";

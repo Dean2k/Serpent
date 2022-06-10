@@ -1,4 +1,5 @@
-﻿using ReModAres.Core;
+﻿using ExitGames.Client.Photon;
+using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
@@ -334,6 +335,31 @@ namespace ReModCE_ARES.Components
                 ReLogger.Msg("Whitelist failed with error: " + x.Error);
                 GeneralWrapper.AlertPopup("Whitelist", "Whitelist failed with error: " + x.Error);
             });
+        }
+
+        public override bool OnEventPatch(ref EventData __0)
+        {
+            PlayerDetails playerDetails2 = null;
+            try
+            {
+                playerDetails2 = Managers.Wrapper.GetPlayerInformationById(__0.Sender);
+            }
+            catch { }
+
+            if ((__0.Code == 6 || __0.Code == 9 || __0.Code == 209 || __0.Code == 210) && playerDetails2 != null)
+            {
+                try
+                {
+                    if (playerDetails2.player.IsBot())
+                    {
+                        //ReLogger.Msg("Anti Bot: " + playerDetails2.displayName);
+                        ReModCE_ARES.LogDebug("Anti Bot: " + playerDetails2.displayName);
+                        return false;
+                    }
+                }
+                catch { }
+            }
+            return true;
         }
     }
 }
