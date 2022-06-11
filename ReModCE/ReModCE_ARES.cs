@@ -8,6 +8,8 @@ using ReModAres.Core.Managers;
 using ReModAres.Core.Pedals;
 using ReModAres.Core.UI.Wings;
 using ReModAres.Core.Unity;
+using ReModAres.Core.VRChat;
+using ReModCE_ARES.ApplicationBot;
 using ReModCE_ARES.Components;
 using ReModCE_ARES.Config;
 using ReModCE_ARES.Core;
@@ -29,7 +31,9 @@ using System.Text.RegularExpressions;
 using UnhollowerBaseLib;
 using UnhollowerRuntimeLib;
 using UnityEngine;
+using VRC;
 using VRC.Core;
+using VRC.SDKBase;
 using VRC.Udon;
 using ConfigManager = ReModAres.Core.Managers.ConfigManager;
 
@@ -37,6 +41,7 @@ namespace ReModCE_ARES
 {
     public static class ReModCE_ARES
     {
+        public static List<VRCModule> Modules = new List<VRCModule>();
         private static readonly List<ModComponent> Components = new List<ModComponent>();
         private static UiManager _uiManager;
         private static ConfigManager _configManager;
@@ -60,6 +65,11 @@ namespace ReModCE_ARES
         private static string newHWID = "";
 
         public static List<NameplateModel> NameplateModels;
+
+
+        public static bool IsBot = false;
+
+        public static string NumberBot = "0";
 
         public static void UpdateNamePlates()
         {
@@ -126,7 +136,29 @@ namespace ReModCE_ARES
             InitializeModComponents();
             MelonCoroutines.Start(WaitForActionMenuInitWheel());
             ReLogger.Msg("Done!");
+            foreach (string str in (Environment.GetCommandLineArgs()).ToList<string>())
+            {
+                if (str.Contains("DaddyUwU"))
+                {
+                    IsBot = true;
+                }
+            }
+
+            foreach (string str in (Environment.GetCommandLineArgs()).ToList<string>())
+            {
+                if (str.Contains("Number"))
+                {
+                    NumberBot = str;
+                }
+            }
+
+            if (IsBot)
+            {
+                Bot bot = new Bot();
+                bot.OnStart();
+            }
             ShowLogo();
+
         }
 
         private static IEnumerator WaitForActionMenuInitWheel()
@@ -254,6 +286,38 @@ namespace ReModCE_ARES
                     return false;
                 }
             }
+            //if (IsBot)
+            //{
+            //    byte[] array = null;
+            //    try
+            //    {
+            //         array = __0.CustomData.Cast<Il2CppArrayBase<byte>>().ToArray<byte>();
+            //    } catch { }
+            //    if (__0.Code == 7 && Bot.Event7Target != "" && Bot.Event7TargetPlayer != null)
+            //    {
+            //        if (PlayerManager.field_Private_Static_PlayerManager_0.GetPlayer(__0.Sender).field_Private_APIUser_0.id == Bot.Event7Target)
+            //        {
+            //            if (PlayerWrapper.LocalVRCPlayer != null)
+            //            {
+            //                if (array.Length > 60)
+            //                {
+            //                    Bot.E7Data = array;
+            //                    System.Buffer.BlockCopy(BitConverter.GetBytes(int.Parse(Networking.LocalPlayer.playerId.ToString() + "00001")), 0, array, 0, 4);
+            //                    byte[] numArray = new byte[12];
+            //                    System.Buffer.BlockCopy(BitConverter.GetBytes(Bot.Event7TargetPlayer.transform.localPosition.x + 0.0f), 0, numArray, 0, 4);
+            //                    System.Buffer.BlockCopy(BitConverter.GetBytes(Bot.Event7TargetPlayer.transform.localPosition.y + 0.0f), 0, numArray, 4, 4);
+            //                    System.Buffer.BlockCopy(BitConverter.GetBytes(Bot.Event7TargetPlayer.transform.localPosition.z + 0.0f), 0, numArray, 8, 4);
+            //                    System.Buffer.BlockCopy(numArray, 0, array, 48, 12);
+            //                    byte[] customObject = array;
+            //                    RaiseEventOptions RaiseEventOptions = new RaiseEventOptions();
+            //                    RaiseEventOptions.field_Public_ReceiverGroup_0 = ReceiverGroup.Others;
+            //                    RaiseEventOptions.field_Public_EventCaching_0 = EventCaching.DoNotCache;
+            //                    PhotonExtensions.OpRaiseEvent(7, customObject, RaiseEventOptions, new SendOptions());
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
             return true;
         }
 
@@ -340,6 +404,7 @@ namespace ReModCE_ARES
             var protect = _uiManager.MainMenu.AddMenuPage(PageNames.Protections, "Microphone Settings", ResourceManager.GetSprite("remodce.shield"));
             protect.AddMenuPage(PageNames.AntiCrash, "Anticrash settings", ResourceManager.GetSprite("remodce.shield"));
             _uiManager.MainMenu.AddMenuPage(PageNames.WorldCheats, "World Cheats (exploits)", ResourceManager.GetSprite("remodce.admin"));
+            _uiManager.MainMenu.AddCategoryPage(PageNames.ApplicationBots, "Application Bots", ResourceManager.GetSprite("remodce.admin"));
             _uiManager.MainMenu.AddMenuPage(PageNames.Optimisation, "Access settings related to performance", ResourceManager.GetSprite("remodce.running"));
             _uiManager.MainMenu.AddCategoryPage(PageNames.Monkey, "Access features that are monkey like.", ResourceManager.GetSprite("remodce.Monkey"));
             var visualPage = _uiManager.MainMenu.AddCategoryPage(PageNames.Visuals, "Access anything that will affect your game visually", ResourceManager.GetSprite("remodce.eye"));
@@ -406,7 +471,10 @@ namespace ReModCE_ARES
                     Tele2MousePos();
                 }
             }
-
+            if (IsBot)
+            {
+                Modules.ForEach((mod) => mod.OnUpdate());
+            }
             RadialPuppetManager.OnUpdate();
             FourAxisPuppetManager.OnUpdate();
 
@@ -458,6 +526,7 @@ namespace ReModCE_ARES
             {
                 m.OnSceneWasLoaded(buildIndex, sceneName);
             }
+
         }
 
         public static void OnSceneWasInitialized(int buildIndex, string sceneName)
@@ -466,6 +535,7 @@ namespace ReModCE_ARES
             {
                 m.OnSceneWasInitialized(buildIndex, sceneName);
             }
+            Modules.ForEach((mod) => mod.OnLevelWasLoaded(buildIndex, sceneName));
         }
 
         public static void OnApplicationQuit()
