@@ -11,7 +11,7 @@ ReModCE but with a loads of new features and modified to use the ARES API
 If you want a feature or have a bug report, head over to the issues page and create an issue for it!  
 
 ## Installation & Usage
-Grab the latest loader from [here](https://github.com/Dean2k/ReModCE/releases/latest/ReModCE_ARES.Loader.dll) and put it in your Mods directory.  
+Grab the latest loader from [here](https://github.com/Dean2k/ReModCE/releases/latest/ReModCE_ARES.Loader.dll) and put it in your Mods directory.
 
 By default the loader will attempt to load the mod from your VRChat directory using the filename 'ReModCE.dll'. If it doesn't exist, it will attempt to download the latest Version from GitHub.  
 If there is a newer version available on GitHub it will automatically update to that version.  
