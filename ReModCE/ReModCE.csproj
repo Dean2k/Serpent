@@ -286,6 +286,7 @@
     <Compile Include="Components\DisableChairComponent.cs" />
     <Compile Include="Components\DownloadVRCWComponent.cs" />
     <Compile Include="Components\EmojiBlocker.cs" />
+    <Compile Include="Components\ExploitGenericComponent.cs" />
     <Compile Include="Components\ExploitFBTComponent.cs" />
     <Compile Include="Components\ExploitJustHComponent.cs" />
     <Compile Include="Components\ExploitJustBComponent.cs" />

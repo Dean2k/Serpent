@@ -33,8 +33,8 @@ namespace ReModCE_ARES.Components
             if (!JoinLeaveLogsEnabled) return;
             if (player == null) return;
             if (player.field_Private_APIUser_0 == null) return;
-            ReLogger.Msg(ConsoleColor.Cyan, $"{player.field_Private_APIUser_0.displayName} joined the instance.");
-            ReModCE_ARES.LogDebug($"<color=green>{player.field_Private_APIUser_0.displayName} joined the instance.</color>");
+            ReLogger.Msg(ConsoleColor.Cyan, $"{player.field_Private_APIUser_0.displayName ?? string.Empty} joined the instance.");
+            ReModCE_ARES.LogDebug($"<color=green>{player.field_Private_APIUser_0.displayName ?? string.Empty} joined the instance.</color>");
         }
 
         public override void OnPlayerLeft(Player player)
@@ -42,9 +42,9 @@ namespace ReModCE_ARES.Components
             if (!JoinLeaveLogsEnabled) return;
             if (player == null) return;
             if (player.field_Private_APIUser_0 == null) return;
-            ReLogger.Msg(ConsoleColor.White, $"{player.field_Private_APIUser_0.displayName} left the instance.");
+            ReLogger.Msg(ConsoleColor.White, $"{player.field_Private_APIUser_0.displayName ?? string.Empty} left the instance.");
             ReModCE_ARES.LogDebug(
-                $"<color=#fc4903>{player.field_Private_APIUser_0.displayName} left the instance.</color>");
+                $"<color=#fc4903>{player.field_Private_APIUser_0.displayName ?? string.Empty} left the instance.</color>");
         }
     }
 }

@@ -48,8 +48,7 @@ namespace ReModCE_ARES.Components
             {
                 try
                 {
-                    Dictionary<byte, Il2CppSystem.Object> moderationData =
-                        __0.Parameters[__0.CustomDataKey].Cast<Dictionary<byte, Il2CppSystem.Object>>();
+                    Dictionary<byte, Il2CppSystem.Object> moderationData = __0.Parameters[__0.CustomDataKey].Cast<Dictionary<byte, Il2CppSystem.Object>>();
 
                     byte moderationType = moderationData[0].Unbox<byte>();
 
@@ -61,10 +60,7 @@ namespace ReModCE_ARES.Components
                                 if (moderationData.ContainsKey(1) == true)
                                 {
                                     bool isBlocked = moderationData[10].Unbox<bool>();
-                                    PlayerDetails playerDetails =
-                                        Wrapper.GetPlayerInformationById(moderationData[1].Unbox<int>());
-
-
+                                    PlayerDetails playerDetails = Wrapper.GetPlayerInformationById(moderationData[1].Unbox<int>());
 
                                     if (playerDetails != null)
                                     {

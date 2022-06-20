@@ -8,7 +8,9 @@ using System.Diagnostics;
 using System.IO;
 using UnityEngine;
 using VRC;
+using VRC.Core;
 using VRC.SDKBase;
+using VRC.UI;
 
 namespace ReModCE_ARES.ApplicationBot
 {
@@ -24,8 +26,19 @@ namespace ReModCE_ARES.ApplicationBot
             }
             else
             {
-                Process.Start(Directory.GetCurrentDirectory() + "\\VRChat.exe", $"--profile={Profile} --fps=25 --no-vr -batchmode -DaddyUwU -Number{Profile} -noUpm -nographics -disable-gpu-skinning -no-stereo-rendering -nolog %2");
+                Process.Start(Directory.GetCurrentDirectory() + "\\VRChat.exe", $"--profile={Profile} --fps=25 --no-vr -batchmode -DaddyUwU -Number{Profile} -nographics -no-stereo-rendering -nolog %2");
             }
+        }
+
+        private static GameObject _socialMenuInstance;
+
+        public static GameObject GetSocialMenuInstance()
+        {
+            if (_socialMenuInstance == null)
+            {
+                _socialMenuInstance = GameObject.Find("UserInterface/MenuContent/Screens");
+            }
+            return _socialMenuInstance;
         }
 
         private static Dictionary<string, Action<string>> Commands = new Dictionary<string, Action<string>>()
@@ -36,25 +49,21 @@ namespace ReModCE_ARES.ApplicationBot
                     Networking.GoToRoom(WorldID);
             } },
 
-            //{
-            //"Mimic",(UserID =>
-            //    {
-            //      Event7Target = UserID == string.Empty ? string.Empty : UserID;
-            //      if (UserID != string.Empty)
-            //      {
-            //        foreach (Player allPlayer in PlayerWrapper.GetAllPlayers())
-            //        {
-            //          if (allPlayer.field_Private_APIUser_0.id == UserID)
-            //                {
-            //            Event7TargetPlayer = allPlayer;
-            //                }
-            //        }
-            //      }
-            //      else
-            //        Event7TargetPlayer = null;
-            //      ReLogger.Msg("Copy Target Set To " + Event7TargetPlayer.field_Private_APIUser_0.displayName, ConsoleColor.DarkBlue);
-            //    })
-            //},
+            {
+            "Follow",(UserID =>
+                {
+                  if (UserID != string.Empty)
+                  {
+                    foreach (Player player in PlayerWrapper.GetAllPlayers())
+                    {
+                      if (player.field_Private_APIUser_0.id == UserID){
+                        FollowTargetPlayer = player;
+                      }
+                    }
+                  }
+                  ReLogger.Msg("Copy Target Set To " + FollowTargetPlayer.field_Private_APIUser_0.displayName, ConsoleColor.DarkBlue);
+                })
+            },
 
             { "Kill", (Number) => {
                  if (ReModCE_ARES.NumberBot.Contains(Number))
@@ -70,7 +79,7 @@ namespace ReModCE_ARES.ApplicationBot
                     _sitOn = false;
                 }
                 OrbitTarget = null;
-                Event7TargetPlayer = null;
+                FollowTargetPlayer = null;
             } },
 
             { "SitOn", (UserID) => {
@@ -97,9 +106,14 @@ namespace ReModCE_ARES.ApplicationBot
             } },
 
             { "SetAvatar", (AvatarID) => {
-                if (PlayerExtensions.LocalVRCPlayer != null) {
-                    PlayerExtensions.ChangeAvatar(AvatarID);
-                }
+                new ApiAvatar { id = AvatarID }.Get(new Action<ApiContainer>(x =>
+                {
+                    GetSocialMenuInstance().transform.Find("Avatar").GetComponent<PageAvatar>().field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = x.Model.Cast<ApiAvatar>();
+                    GetSocialMenuInstance().transform.Find("Avatar").GetComponent<PageAvatar>().ChangeToSelectedAvatar();
+                }), new Action<ApiContainer>(x =>
+                {
+                    MelonLogger.Msg($"Failed to change to avatar: {AvatarID} | Error Message: {x.Error}");
+                }));
             } },
 
             { "RotateY", (Y) => {
@@ -118,6 +132,14 @@ namespace ReModCE_ARES.ApplicationBot
 
             { "SpinbotSpeed", (Speed) => {
                 SpinbotSpeed = int.Parse(Speed);
+            } },
+
+            { "MoveUp", (Empty) => {
+                MovePlayer(Camera.transform.up * MoveSpeed);
+            } },
+
+            { "MoveDown", (Empty) => {
+                MovePlayer(Camera.transform.up * -MoveSpeed);
             } },
 
             { "MoveForwards", (Empty) => {
@@ -159,7 +181,6 @@ namespace ReModCE_ARES.ApplicationBot
             var Index = Command.IndexOf(" ");
             var CMD = Command.Substring(0, Index); // Grabbing the command
             var Parameters = Command.Substring(Index + 1); // Grabbing the parameters
-            ReLogger.Msg(CMD + " parms: " + Parameters);
             HandleActionOnMainThread(() => { Commands[CMD].Invoke(Parameters); }); // Calling the Action<string> related to the command
         }
 
@@ -192,8 +213,8 @@ namespace ReModCE_ARES.ApplicationBot
             for (; ; )
             {
                 yield return new WaitForSeconds(5f);
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
+                System.GC.Collect();
+                System.GC.WaitForPendingFinalizers();
             }
         }
 
@@ -345,9 +366,6 @@ namespace ReModCE_ARES.ApplicationBot
             }
             catch { target = null; RemoveSetGravity(); }
         }
-
-        public static byte[] E7Data;
-        public static string Event7Target = "";
-        public static VRC.Player Event7TargetPlayer = null;
+        public static VRC.Player FollowTargetPlayer = null;
     }
 }

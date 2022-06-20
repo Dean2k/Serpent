@@ -45,16 +45,19 @@ namespace ReModCE_ARES.Components
             botFunny.AddButton($"Sit on yourself", "Make bots sit on you.", delegate { SocketConnection.SendCommandToClients($"SitOn {PlayerWrapper.LocalPlayer().field_Private_APIUser_0.id}"); }, ResourceManager.GetSprite("remodce.exit-door"));
             botFunny.AddButton($"Spin bot", "Make bots spin.", delegate { SocketConnection.SendCommandToClients($"SpinbotToggle true"); }, ResourceManager.GetSprite("remodce.exit-door"));
             botFunny.AddButton($"Change avatar", "Change avatar by ID", delegate { if (CloneID()) { SocketConnection.SendCommandToClients($"SetAvatar {Clipboard.GetText()}"); } }, ResourceManager.GetSprite("remodce.exit-door"));
+            botFunny.AddButton($"Follow yourself", "Make bots follow you.", delegate { SocketConnection.SendCommandToClients($"Follow {PlayerWrapper.LocalPlayer().field_Private_APIUser_0.id}"); }, ResourceManager.GetSprite("remodce.exit-door"));
+
 
             botMovement.AddButton($"Move forward", "move bot.", delegate { SocketConnection.SendCommandToClients($"MoveForwards "); }, ResourceManager.GetSprite("remodce.exit-door"));
             botMovement.AddButton($"Move back", "Rotate bot.", delegate { SocketConnection.SendCommandToClients($"MoveBackwards "); }, ResourceManager.GetSprite("remodce.exit-door"));
             botMovement.AddButton($"Move left", "Rotate bot.", delegate { SocketConnection.SendCommandToClients($"MoveLeft "); }, ResourceManager.GetSprite("remodce.exit-door"));
             botMovement.AddButton($"Move right", "Rotate bot.", delegate { SocketConnection.SendCommandToClients($"MoveRight "); }, ResourceManager.GetSprite("remodce.exit-door"));
+            botMovement.AddButton($"Move Up", "Rotate bot.", delegate { SocketConnection.SendCommandToClients($"MoveUp "); }, ResourceManager.GetSprite("remodce.exit-door"));
+            botMovement.AddButton($"Move Down", "Rotate bot.", delegate { SocketConnection.SendCommandToClients($"MoveDown "); }, ResourceManager.GetSprite("remodce.exit-door"));
             botMovement.AddButton($"Rotate Left", "Rotate bot.", delegate { SocketConnection.SendCommandToClients("RotateY -20"); }, ResourceManager.GetSprite("remodce.exit-door"));
             botMovement.AddButton($"Rotate right", "Rotate bot.", delegate { SocketConnection.SendCommandToClients("RotateY 20"); }, ResourceManager.GetSprite("remodce.exit-door"));
 
 
-            //menu.AddButton($"Mimic yourself", "Make bots mimic you.", delegate { SocketConnection.SendCommandToClients($"Mimic {PlayerWrapper.LocalPlayer().field_Private_APIUser_0.id}"); }, ResourceManager.GetSprite("remodce.exit-door"));
             botControls.AddButton($"Stop Following things", "Make bots stop orbiting and sitting on.", delegate { SocketConnection.SendCommandToClients($"StopFollow ok"); }, ResourceManager.GetSprite("remodce.exit-door"));
             botControls.AddButton($"Stop spin", "Make bots stop orbiting and sitting on.", delegate { SocketConnection.SendCommandToClients($"SpinbotToggle "); }, ResourceManager.GetSprite("remodce.exit-door"));
         }

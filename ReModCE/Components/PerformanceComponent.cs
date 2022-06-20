@@ -2,6 +2,7 @@
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 using ReModCE_ARES.Loader;
+using System.Collections;
 using System.Diagnostics;
 using UnityEngine;
 
@@ -20,6 +21,10 @@ namespace ReModCE_ARES.Components
 
         private ConfigValue<bool> FPS999Enabled;
         private ReMenuToggle _fps999Toggle;
+
+        private ConfigValue<bool> RamClearEnable;
+        private ReMenuToggle _ramClearEnable;
+
 
         private ConfigValue<bool> AdaptiveGraphicsEnabled;
         private ReMenuToggle _adaptiveGraphicsToggle;
@@ -52,6 +57,9 @@ namespace ReModCE_ARES.Components
 
             FPS999Enabled = new ConfigValue<bool>(nameof(FPS999Enabled), false);
             FPS999Enabled.OnValueChanged += () => _fps999Toggle.Toggle(FPS999Enabled);
+
+            RamClearEnable = new ConfigValue<bool>(nameof(RamClearEnable), false);
+            RamClearEnable.OnValueChanged += () => _ramClearEnable.Toggle(RamClearEnable);
 
             AdaptiveGraphicsEnabled = new ConfigValue<bool>(nameof(AdaptiveGraphicsEnabled), true);
             AdaptiveGraphicsEnabled.OnValueChanged += () => _adaptiveGraphicsToggle.Toggle(AdaptiveGraphicsEnabled);
@@ -94,6 +102,10 @@ namespace ReModCE_ARES.Components
                 "Sets FPS limit to 999", SetFPS999,
                 FPS999Enabled);
 
+            _ramClearEnable = subMenu.AddToggle("Ram Clear Loop",
+                "Keep cleaning Ram (This may cause stutters)", ToggleRamClear,
+                RamClearEnable);
+
             _adaptiveGraphicsToggle = subMenu.AddToggle("Adaptive Graphics",
                 "Auto Adjust Graphics depending on FPS", AdjustGraphics,
                 AdaptiveGraphicsEnabled);
@@ -118,15 +130,34 @@ namespace ReModCE_ARES.Components
                 "Ultra Graphics setting", AdjustGraphicsUltra,
                 GfxUltraEnabled);
 
-            SetHighPriority(HighPriorityEnabled);
-            AdjustGraphicsUltraLow(GfxUltraLowEnabled);
-            AdjustGraphicsLow(GfxLowEnabled);
-            AdjustGraphicsMed(GfxMedEnabled);
-            AdjustGraphicsHigh(GfxHighEnabled);
-            AdjustGraphicsUltra(GfxUltraEnabled);
-            SetFPS144(FPS144Enabled);
-            SetFPS240(FPS240Enabled);
-            SetFPS999(FPS999Enabled);
+            if (!ReModCE_ARES.IsBot)
+            {
+                SetHighPriority(HighPriorityEnabled);
+                AdjustGraphicsUltraLow(GfxUltraLowEnabled);
+                AdjustGraphicsLow(GfxLowEnabled);
+                AdjustGraphicsMed(GfxMedEnabled);
+                AdjustGraphicsHigh(GfxHighEnabled);
+                AdjustGraphicsUltra(GfxUltraEnabled);
+                ToggleRamClear(RamClearEnable);
+                SetFPS144(FPS144Enabled);
+                SetFPS240(FPS240Enabled);
+                SetFPS999(FPS999Enabled);
+            }
+        }
+
+        private static bool EscapeLoop = false;
+
+        private void ToggleRamClear(bool value)
+        {
+            RamClearEnable.SetValue(value);
+            if (value)
+            {
+                EscapeLoop = false;
+                RamClearLoop().Start();
+            } else
+            {
+                EscapeLoop = true;
+            }
         }
 
         private void AdjustGraphicsUltraLow(bool value)
@@ -297,6 +328,20 @@ namespace ReModCE_ARES.Components
             if (AdaptiveGraphicsEnabled && (GfxLowEnabled))
             {
                 AdaptiveGraphicsEnabled.SetValue(false);
+            }
+        }
+
+        private static IEnumerator RamClearLoop()
+        {
+            for (; ; )
+            {
+                if (EscapeLoop)
+                {
+                    break;
+                }
+                yield return new WaitForSeconds(5f);
+                System.GC.Collect();
+                System.GC.WaitForPendingFinalizers();
             }
         }
 

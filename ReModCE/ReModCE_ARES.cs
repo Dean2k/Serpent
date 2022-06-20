@@ -156,9 +156,20 @@ namespace ReModCE_ARES
             {
                 Bot bot = new Bot();
                 bot.OnStart();
+                //MuteApplication();
             }
             ShowLogo();
 
+        }
+
+        [DllImport("winmm.dll")]
+        private static extern int waveOutSetVolume(IntPtr hwo, uint dwVolume);
+
+        public static void MuteApplication()
+        {
+            int num = 100;
+            uint dwVolume = (uint)(num & (int)ushort.MaxValue | num << 16);
+            waveOutSetVolume(IntPtr.Zero, dwVolume);
         }
 
         private static IEnumerator WaitForActionMenuInitWheel()
@@ -229,10 +240,12 @@ namespace ReModCE_ARES
             Harmony.Patch(typeof(UdonBehaviour).GetMethods().Where(m => m.Name.Equals(nameof(UdonBehaviour.RunProgram)) && m.GetParameters()[0].ParameterType == typeof(string)).First(), GetLocalPublicPatch(nameof(OnUdonPatch)));
             try
             {
-                Harmony.Patch(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.OnEvent)),
+                Harmony.Patch(typeof(VRCNetworkingClient).GetMethod(nameof(VRCNetworkingClient.OnEvent)),
                     GetLocalPublicPatch(nameof(OnEventPatch)), null);
             }
-            catch { ReModCE_ARES.LogDebug("Error on patching AntiBlock"); }
+            catch {
+                MelonLogger.Msg("Error on patching AntiBlock"); 
+            }
             try
             {
                 Harmony.Patch(typeof(SystemInfo).GetProperty("deviceUniqueIdentifier").GetGetMethod(), new HarmonyLib.HarmonyMethod(AccessTools.Method(typeof(ReModCE_ARES), nameof(FakeHWID))));
@@ -285,39 +298,7 @@ namespace ReModCE_ARES
                 {
                     return false;
                 }
-            }
-            //if (IsBot)
-            //{
-            //    byte[] array = null;
-            //    try
-            //    {
-            //         array = __0.CustomData.Cast<Il2CppArrayBase<byte>>().ToArray<byte>();
-            //    } catch { }
-            //    if (__0.Code == 7 && Bot.Event7Target != "" && Bot.Event7TargetPlayer != null)
-            //    {
-            //        if (PlayerManager.field_Private_Static_PlayerManager_0.GetPlayer(__0.Sender).field_Private_APIUser_0.id == Bot.Event7Target)
-            //        {
-            //            if (PlayerWrapper.LocalVRCPlayer != null)
-            //            {
-            //                if (array.Length > 60)
-            //                {
-            //                    Bot.E7Data = array;
-            //                    System.Buffer.BlockCopy(BitConverter.GetBytes(int.Parse(Networking.LocalPlayer.playerId.ToString() + "00001")), 0, array, 0, 4);
-            //                    byte[] numArray = new byte[12];
-            //                    System.Buffer.BlockCopy(BitConverter.GetBytes(Bot.Event7TargetPlayer.transform.localPosition.x + 0.0f), 0, numArray, 0, 4);
-            //                    System.Buffer.BlockCopy(BitConverter.GetBytes(Bot.Event7TargetPlayer.transform.localPosition.y + 0.0f), 0, numArray, 4, 4);
-            //                    System.Buffer.BlockCopy(BitConverter.GetBytes(Bot.Event7TargetPlayer.transform.localPosition.z + 0.0f), 0, numArray, 8, 4);
-            //                    System.Buffer.BlockCopy(numArray, 0, array, 48, 12);
-            //                    byte[] customObject = array;
-            //                    RaiseEventOptions RaiseEventOptions = new RaiseEventOptions();
-            //                    RaiseEventOptions.field_Public_ReceiverGroup_0 = ReceiverGroup.Others;
-            //                    RaiseEventOptions.field_Public_EventCaching_0 = EventCaching.DoNotCache;
-            //                    PhotonExtensions.OpRaiseEvent(7, customObject, RaiseEventOptions, new SendOptions());
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
+            }            
             return true;
         }
 
@@ -473,7 +454,16 @@ namespace ReModCE_ARES
             }
             if (IsBot)
             {
-                Modules.ForEach((mod) => mod.OnUpdate());
+                try
+                {
+                    Modules.ForEach((mod) => mod.OnUpdate());
+                }
+                catch { }
+                if (Bot.FollowTargetPlayer != null)
+                {
+                    PlayerWrapper.LocalPlayer().transform.position = Bot.FollowTargetPlayer.transform.position + new Vector3(1.0f, 0.0f, 0.0f);
+                }
+
             }
             RadialPuppetManager.OnUpdate();
             FourAxisPuppetManager.OnUpdate();
@@ -571,10 +561,17 @@ namespace ReModCE_ARES
             {
                 m.OnPlayerJoined(player);
             }
+
+            if (IsBot)
+            {
+                player.SetVolume(0.0f);
+            }
         }
 
         private static void OnPlayerLeft(VRC.Player player)
         {
+            if (player == null)
+                return;
             foreach (var m in Components)
             {
                 m.OnPlayerLeft(player);
