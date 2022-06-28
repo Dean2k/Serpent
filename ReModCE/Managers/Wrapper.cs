@@ -65,14 +65,6 @@ namespace ReModCE_ARES.Managers
                 return "<color=green>" + ping + "</color>";
         }
 
-        public static string GetVRamActive(this Player player)
-        {
-            SizeModel sizes = VRAMCheckerInternal.GetSizeForGameObject(player._vrcplayer.field_Internal_GameObject_0);
-            return VRAMCheckerInternal.ToByteString(sizes.sizeOnlyActive);
-        }
-
-
-
         public static string GetPlatform(this Player player)
         {
             if (player.GetAPIUser().IsOnMobile)

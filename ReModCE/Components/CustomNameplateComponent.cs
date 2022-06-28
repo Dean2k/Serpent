@@ -22,7 +22,6 @@ namespace ReModCE_ARES.Components
         private TextMeshProUGUI statsText;
         private TextMeshProUGUI customText;
         public bool OverRender;
-        public bool VRam;
         public bool Enabled = true;
 
         public CustomNameplate(IntPtr ptr) : base(ptr)
@@ -95,14 +94,6 @@ namespace ReModCE_ARES.Components
                 return null;
             }
         }
-        private string avatarStats = "";
-        private string avatarId = "";
-        private bool avatarLoaded = false;
-        private bool wasPrevious = false;
-        private bool avatarHidden = false;
-        private bool wasPreviousHidden = false;
-        private bool avatarShown = false;
-        private bool wasPreviousShown = false;
         private int skipX = 0;
 
         private void Update()
@@ -120,41 +111,21 @@ namespace ReModCE_ARES.Components
                 frames = player._playerNet.field_Private_Byte_0;
                 ping = player._playerNet.field_Private_Byte_1;
                 if (skipX >= 50)
-                {                  
-                    if (VRam)
-                    {
-                        avatarLoaded = player.GetAvatarObject().active;
-                        avatarHidden = ModerationManagerExtension.GetAvatarHidden(player.field_Private_APIUser_0.id);
-                        avatarShown = ModerationManagerExtension.GetAvatarShow(player.field_Private_APIUser_0.id);
-                        if ((avatarId != player.prop_ApiAvatar_0.id) || (avatarLoaded != wasPrevious) || (avatarHidden != wasPreviousHidden) || (avatarShown != wasPreviousShown) || avatarStats == "1.40 MB")
-                        {
-                            avatarStats = player.GetVRamActive();
-                            avatarId = player.prop_ApiAvatar_0.id;
-                        }
-                    }
-                   
+                {
                     string text = "<color=green>Stable</color>";
                     if (noUpdateCount > 30)
                         text = "<color=yellow>Lagging</color>";
                     if (noUpdateCount > 150)
                         text = "<color=red>Crashed</color>";
-                    if (VRam)
-                    {
-                        statsText.text = $"[{player.GetPlatform()}] |" + $" [{player.GetAvatarStatus()}] |" + $"{(player.GetIsMaster() ? " | [<color=#0352ff>HOST</color>] |" : "")}" + $" [{text}] |" + $" [FPS: {player.GetFramesColord()}] |" + $" [Ping: {player.GetPingColord()}] " + $" [VRAM: {avatarStats}] " + $" {(player.ClientDetect() ? " | [<color=red>ClientUser</color>]" : "")}";
-                    } else
-                    {
-                        statsText.text = $"[{player.GetPlatform()}] |" + $" [{player.GetAvatarStatus()}] |" + $"{(player.GetIsMaster() ? " | [<color=#0352ff>HOST</color>] |" : "")}" + $" [{text}] |" + $" [FPS: {player.GetFramesColord()}] |" + $" [Ping: {player.GetPingColord()}] " + $" {(player.ClientDetect() ? " | [<color=red>ClientUser</color>]" : "")}";
-                    }
+                    statsText.text = $"[{player.GetPlatform()}] |" + $" [{player.GetAvatarStatus()}] |" + $"{(player.GetIsMaster() ? " | [<color=#0352ff>HOST</color>] |" : "")}" + $" [{text}] |" + $" [FPS: {player.GetFramesColord()}] |" + $" [Ping: {player.GetPingColord()}] " + $" {(player.ClientDetect() ? " | [<color=red>ClientUser</color>]" : "")}";
                     if (customText != null)
                     {
                         NameplateModel custom = IsCustom(player);
                         customText.text = custom.Text;
                     }
-                    wasPrevious = avatarLoaded;
-                    wasPreviousHidden = avatarHidden;
-                    wasPreviousShown = avatarShown;
                     skipX = 0;
-                } else
+                }
+                else
                 {
                     skipX++;
                 }
@@ -201,7 +172,6 @@ namespace ReModCE_ARES.Components
                 CustomNameplate nameplate = player.transform.Find("Player Nameplate/Canvas/Nameplate").gameObject.AddComponent<CustomNameplate>();
                 nameplate.player = player;
                 nameplate.OverRender = NamePlateOverRenderEnabled;
-                nameplate.VRam = VRamShowEnabled;
             }
         }
 
@@ -242,7 +212,6 @@ namespace ReModCE_ARES.Components
                             CustomNameplate nameplate = player.transform.Find("Player Nameplate/Canvas/Nameplate").gameObject.AddComponent<CustomNameplate>();
                             nameplate.player = player;
                             nameplate.OverRender = NamePlateOverRenderEnabled;
-                            nameplate.VRam = VRamShowEnabled;
                         }
                     }
                     catch { }
