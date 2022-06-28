@@ -352,7 +352,6 @@
     <Compile Include="Components\SitOnComponent.cs" />
     <Compile Include="Components\TeleportComponent.cs" />
     <Compile Include="Components\ThirdPersonComponent.cs" />
-    <Compile Include="Components\VRamComponent.cs" />
     <Compile Include="Components\VRCNewsAdjustment.cs" />
     <Compile Include="Components\WireframeComponent.cs" />
     <Compile Include="Config\AvatarProtectionConfig.cs" />
@@ -368,7 +367,6 @@
     <Compile Include="Core\DynamicContractResolver.cs" />
     <Compile Include="Core\InputAxis.cs" />
     <Compile Include="Core\NameplateModel.cs" />
-    <Compile Include="Core\VRAMCheckerInternal.cs" />
     <Compile Include="Misc.cs" />
     <Compile Include="SDK\ModerationManagerExtension.cs" />
     <Compile Include="Page\Categories\Utilties.cs" />
