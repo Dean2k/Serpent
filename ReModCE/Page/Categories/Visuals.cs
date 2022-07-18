@@ -1,4 +1,4 @@
-﻿namespace ReModCE_ARES.Page.Categories
+﻿namespace Serpent.Page.Categories
 {
     public static class Visuals
     {

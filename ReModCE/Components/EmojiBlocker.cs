@@ -2,7 +2,7 @@
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal class EmojiBlocker : ModComponent
     {
@@ -15,7 +15,7 @@ namespace ReModCE_ARES.Components
             EmojisEnabled = new ConfigValue<bool>(nameof(EmojisEnabled), true);
             EmojisEnabled.OnValueChanged += () => _emojiToggle?.Toggle(EmojisEnabled);
 
-            ReModCE_ARES.Harmony.Patch(typeof(VRCPlayer).GetMethod(nameof(VRCPlayer.SpawnEmojiRPC)),
+            Serpent.Harmony.Patch(typeof(VRCPlayer).GetMethod(nameof(VRCPlayer.SpawnEmojiRPC)),
                 GetLocalPatch(nameof(SpawnEmojiRPCPatch)));
         }
 

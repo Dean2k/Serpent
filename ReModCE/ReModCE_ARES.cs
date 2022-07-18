@@ -9,14 +9,14 @@ using ReModAres.Core.Pedals;
 using ReModAres.Core.UI.Wings;
 using ReModAres.Core.Unity;
 using ReModAres.Core.VRChat;
-using ReModCE_ARES.ApplicationBot;
-using ReModCE_ARES.Components;
-using ReModCE_ARES.Config;
-using ReModCE_ARES.Core;
-using ReModCE_ARES.Loader;
-using ReModCE_ARES.Managers;
-using ReModCE_ARES.Page;
-using ReModCE_ARES.SDK;
+using Serpent.ApplicationBot;
+using Serpent.Components;
+using Serpent.Config;
+using Serpent.Core;
+using Serpent.Loader;
+using Serpent.Managers;
+using Serpent.Page;
+using Serpent.SDK;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -39,9 +39,9 @@ using VRC.SDKBase;
 using VRC.Udon;
 using ConfigManager = ReModAres.Core.Managers.ConfigManager;
 
-namespace ReModCE_ARES
+namespace Serpent
 {
-    public static class ReModCE_ARES
+    public static class Serpent
     {
         public static List<VRCModule> Modules = new List<VRCModule>();
         private static readonly List<ModComponent> Components = new List<ModComponent>();
@@ -93,8 +93,8 @@ namespace ReModCE_ARES
 
         public static void OnApplicationStart()
         {
-            Harmony = MelonHandler.Mods.First(m => m.Info.Name == "ReModCE_ARES").HarmonyInstance;
-            Directory.CreateDirectory("UserData/ReModCE_ARES");
+            Harmony = MelonHandler.Mods.First(m => m.Info.Name == "Serpent").HarmonyInstance;
+            Directory.CreateDirectory("UserData/Serpent");
             ReLogger.Msg("Initializing...");
 
             Directory.CreateDirectory("LoadingScreenMusic");
@@ -124,7 +124,7 @@ namespace ReModCE_ARES
                 ResourceManager.LoadSprite("remodce", resourceName, ms.ToArray());
             }
 
-            _configManager = new ConfigManager(nameof(ReModCE_ARES));
+            _configManager = new ConfigManager(nameof(Serpent));
 
             EnableDisableListener.RegisterSafe();
             ClassInjector.RegisterTypeInIl2Cpp<WireframeEnabler>();
@@ -225,12 +225,12 @@ namespace ReModCE_ARES
 
         private static HarmonyMethod GetLocalPatch(string name)
         {
-            return typeof(ReModCE_ARES).GetMethod(name, BindingFlags.NonPublic | BindingFlags.Static).ToNewHarmonyMethod();
+            return typeof(Serpent).GetMethod(name, BindingFlags.NonPublic | BindingFlags.Static).ToNewHarmonyMethod();
         }
 
         private static HarmonyMethod GetLocalPublicPatch(string name)
         {
-            return typeof(ReModCE_ARES).GetMethod(name, BindingFlags.Public | BindingFlags.Static).ToNewHarmonyMethod();
+            return typeof(Serpent).GetMethod(name, BindingFlags.Public | BindingFlags.Static).ToNewHarmonyMethod();
         }
 
         private static void ForceClone(ref bool __0) => __0 = true;
@@ -252,7 +252,7 @@ namespace ReModCE_ARES
             }
             try
             {
-                Harmony.Patch(typeof(SystemInfo).GetProperty("deviceUniqueIdentifier").GetGetMethod(), new HarmonyLib.HarmonyMethod(AccessTools.Method(typeof(ReModCE_ARES), nameof(FakeHWID))));
+                Harmony.Patch(typeof(SystemInfo).GetProperty("deviceUniqueIdentifier").GetGetMethod(), new HarmonyLib.HarmonyMethod(AccessTools.Method(typeof(Serpent), nameof(FakeHWID))));
             }
             catch
             {
@@ -260,7 +260,7 @@ namespace ReModCE_ARES
             }
             try
             {
-                Harmony.Patch(typeof(APIUser).GetProperty(nameof(APIUser.allowAvatarCopying)).GetSetMethod(), new HarmonyLib.HarmonyMethod(typeof(ReModCE_ARES).GetMethod(nameof(ForceClone), BindingFlags.NonPublic | BindingFlags.Static)));
+                Harmony.Patch(typeof(APIUser).GetProperty(nameof(APIUser.allowAvatarCopying)).GetSetMethod(), new HarmonyLib.HarmonyMethod(typeof(Serpent).GetMethod(nameof(ForceClone), BindingFlags.NonPublic | BindingFlags.Static)));
             }
             catch
             {
@@ -366,7 +366,7 @@ namespace ReModCE_ARES
         {
             try
             {
-                var category = MelonPreferences.GetCategory("ReModCE_ARES");
+                var category = MelonPreferences.GetCategory("Serpent");
 
                 ApiAvatar apiAvatar2 = ((apiAvatar != IntPtr.Zero) ? new ApiAvatar(apiAvatar) : null);
                 if (apiAvatar2 == null)

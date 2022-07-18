@@ -1,7 +1,7 @@
 ﻿using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
-using ReModCE_ARES.Loader;
+using Serpent.Loader;
 using System.Linq;
 using System.Reflection;
 using UnhollowerRuntimeLib;
@@ -9,7 +9,7 @@ using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
 using UnityEngine.XR;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal class ComfyMenuComponent : ModComponent
     {
@@ -40,7 +40,7 @@ namespace ReModCE_ARES.Components
                     return;
                 }
 
-                ReModCE_ARES.Harmony.Patch(PlaceUiMethod, GetLocalPatch(nameof(PlaceUiPatch)));
+                Serpent.Harmony.Patch(PlaceUiMethod, GetLocalPatch(nameof(PlaceUiPatch)));
             }
         }
         public static bool IsInVR()

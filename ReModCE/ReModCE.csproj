@@ -7,8 +7,8 @@
     <ProjectGuid>{4EA50331-5D4E-47D3-BDA5-260600CFF84C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ReModCE_ARES</RootNamespace>
-    <AssemblyName>ReModCE_ARES</AssemblyName>
+    <RootNamespace>Serpent</RootNamespace>
+    <AssemblyName>Serpent</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

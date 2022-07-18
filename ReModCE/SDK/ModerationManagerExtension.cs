@@ -2,7 +2,7 @@
 using VRC.Core;
 using VRC.Management;
 
-namespace ReModCE_ARES.SDK
+namespace Serpent.SDK
 {
     internal static class ModerationManagerExtension
     {

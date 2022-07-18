@@ -1,5 +1,5 @@
 ﻿using MelonLoader;
-using ReModCE_ARES.Loader;
+using Serpent.Loader;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
 
-namespace ReModCE_ARES.Core
+namespace Serpent.Core
 {
     internal class RotatorPatches
     {

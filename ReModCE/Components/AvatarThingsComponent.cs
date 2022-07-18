@@ -9,7 +9,7 @@ using UnityEngine;
 using VRC.Core;
 using VRC.UI;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal sealed class AvatarThingsComponent : ModComponent
     {

@@ -1,10 +1,10 @@
 ﻿using MelonLoader;
-using ReModCE_ARES.Loader;
-using ReModCE_ARES.SDK.Utils;
+using Serpent.Loader;
+using Serpent.SDK.Utils;
 using System.Collections;
 using UnityEngine;
 
-namespace ReModCE_ARES.SDK
+namespace Serpent.SDK
 {
     internal class GeneralWrapper
     {

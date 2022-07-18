@@ -5,7 +5,7 @@ using UnityEngine;
 using VRC;
 using VRC.Core;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal sealed class CopyUserInformationComponent : ModComponent
     {

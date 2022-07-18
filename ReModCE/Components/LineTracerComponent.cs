@@ -1,7 +1,7 @@
-﻿namespace ReModCE_ARES.Components
+﻿namespace Serpent.Components
 {
 
-    using global::ReModCE_ARES.Managers;
+    using global::Serpent.Managers;
     using ReModAres.Core;
     using ReModAres.Core.Managers;
     using ReModAres.Core.UI.QuickMenu;

@@ -2,14 +2,14 @@
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
-using ReModCE_ARES.Loader;
-using ReModCE_ARES.Managers;
+using Serpent.Loader;
+using Serpent.Managers;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
 using VRCSDK2;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal class PortableMirrorComponent : ModComponent
     {

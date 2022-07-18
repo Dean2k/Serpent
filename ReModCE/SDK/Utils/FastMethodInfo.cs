@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace ReModCE_ARES.SDK.Utils
+namespace Serpent.SDK.Utils
 {
     // stolen from old munchen source
     [PatchShield]

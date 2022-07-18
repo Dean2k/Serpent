@@ -3,15 +3,15 @@ using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
-using ReModCE_ARES.Loader;
-using ReModCE_ARES.Managers;
+using Serpent.Loader;
+using Serpent.Managers;
 using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.Core;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
 
     internal class AvatarHiderComponent : ModComponent

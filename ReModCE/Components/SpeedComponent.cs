@@ -5,7 +5,7 @@ using ReModAres.Core.VRChat;
 using UnityEngine.UI;
 using VRC.SDKBase;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal class SpeedComponent : ModComponent
     {

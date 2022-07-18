@@ -3,7 +3,7 @@ using ReModAres.Core.Api;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal sealed class LoudMicComponent : ModComponent
     {

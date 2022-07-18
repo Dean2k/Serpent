@@ -1,4 +1,4 @@
-﻿using ReModCE_ARES.SDK;
+﻿using Serpent.SDK;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,7 +7,7 @@ using VRC.Core;
 using VRC.SDKBase;
 using VRC.UI;
 
-namespace ReModCE_ARES.ApplicationBot
+namespace Serpent.ApplicationBot
 {
     internal static class PlayerExtensions
     {

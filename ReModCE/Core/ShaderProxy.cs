@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace ReModCE_ARES.Core
+namespace Serpent.Core
 {
     internal class ShaderFilterApi
     {

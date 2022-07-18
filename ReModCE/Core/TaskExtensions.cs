@@ -1,7 +1,7 @@
-﻿using ReModCE_ARES.Loader;
+﻿using Serpent.Loader;
 using System.Threading.Tasks;
 
-namespace ReModCE_ARES.Core
+namespace Serpent.Core
 {
     internal static class TaskExtensions
     {

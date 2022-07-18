@@ -6,7 +6,7 @@ using UnityEngine;
 using VRC;
 using VRC.DataModel;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal sealed class SitOnComponent : ModComponent
     {

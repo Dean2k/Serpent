@@ -1,14 +1,14 @@
 ﻿using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
-using ReModCE_ARES.Loader;
+using Serpent.Loader;
 using System;
 using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal class AresThemeComponent : ModComponent
     {
@@ -78,7 +78,7 @@ namespace ReModCE_ARES.Components
                 if (_base64Background == null)
                 {
                     ReLogger.Msg("No custom background image found");
-                    ReModCE_ARES.LogDebug("No custom background image found");
+                    Serpent.LogDebug("No custom background image found");
                     _base64Background = Base64BackgroundDefault;
                 }
                 DisableTheme();
@@ -99,7 +99,7 @@ namespace ReModCE_ARES.Components
                 if (_base64Background == null)
                 {
                     ReLogger.Msg("No custom background image found");
-                    ReModCE_ARES.LogDebug("No custom background image found");
+                    Serpent.LogDebug("No custom background image found");
                     _base64Background = Base64BackgroundDefault;
                 }
                 DisableTheme();
@@ -136,7 +136,7 @@ namespace ReModCE_ARES.Components
                     if (_base64Background == null)
                     {
                         ReLogger.Msg("No custom background image found");
-                        ReModCE_ARES.LogDebug("No custom background image found");
+                        Serpent.LogDebug("No custom background image found");
                         _base64Background = Base64BackgroundDefault;
                     }
                 }

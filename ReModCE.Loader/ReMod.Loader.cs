@@ -10,21 +10,21 @@ using System.Security.Cryptography;
 using UnityEngine;
 using VRC.UI.Core;
 
-namespace ReModCE_ARES.Loader
+namespace Serpent.Loader
 {
     public static class BuildInfo
     {
-        public const string Name = "ReModCE_ARES";
+        public const string Name = "Serpent";
         public const string Author = "ShrekamusChrist, Requi, FenrixTheFox, Xaiver, Potato, Psychloor, Killer_Bigpoint";
         public const string Company = null;
         public const string Version = "1.0.0.0";
-        public const string DownloadLink = "https://github.com/Dean2k/ReModCE/releases/latest/";
+        public const string DownloadLink = "https://github.com/Dean2k/Serpent/releases/latest/";
     }
 
     internal static class GitHubInfo
     {
         public const string Author = "Dean2k";
-        public const string Repository = "ReModCE";
+        public const string Repository = "Serpent";
         public const string Version = "latest";
     }
 
@@ -47,13 +47,13 @@ namespace ReModCE_ARES.Loader
         private MelonPreferences_Entry<bool> _paranoidMode;
         public override void OnApplicationStart()
         {
-            var category = MelonPreferences.CreateCategory("ReModCE_ARES");
+            var category = MelonPreferences.CreateCategory("Serpent");
             _paranoidMode = category.CreateEntry("ParanoidMode", false, "Paranoid Mode",
                 "If enabled ReModCE will not automatically download the latest version from GitHub. Manual update will be required.",
                 true);
 
             DownloadFromGitHub("ReModAres.Core", out _);
-            DownloadFromGitHub("ReModCE_ARES", out var assembly);
+            DownloadFromGitHub("Serpent", out var assembly);
 
             if (assembly == null)
                 return;
@@ -68,7 +68,7 @@ namespace ReModCE_ARES.Loader
                 types = e.Types.Where(t => t != null);
             }
 
-            var remodClass = types.FirstOrDefault(type => type.Name == "ReModCE_ARES");
+            var remodClass = types.FirstOrDefault(type => type.Name == "Serpent");
             if (remodClass == null)
             {
                 MelonLogger.Error($"Couldn't find ReModCE class in assembly. ReModCE won't load.");

@@ -1,12 +1,12 @@
 ﻿using ExitGames.Client.Photon;
 
-namespace ReModCE_ARES
+namespace Serpent
 {
     public class VRCModule
     {
         public VRCModule()
         {
-            ReModCE_ARES.Modules.Add(this);
+            Serpent.Modules.Add(this);
         }
         public virtual void OnStart()
         {

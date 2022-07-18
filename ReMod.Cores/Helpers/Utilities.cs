@@ -6,7 +6,7 @@ using HarmonyLib;
 using MelonLoader;
 using ReModAres.Core.Pedals;
 using ReModAres.Core.Types;
-using ReModCE_ARES.Loader;
+using Serpent.Loader;
 using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
 using Object = UnityEngine.Object;

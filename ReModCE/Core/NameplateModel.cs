@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ReModCE_ARES.Core
+namespace Serpent.Core
 {
     public class NameplateModel
     {

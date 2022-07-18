@@ -10,7 +10,7 @@ using VRC.SDK3.Components;
 using VRC.SDKBase;
 using VRCSDK2;
 
-namespace ReModCE_ARES.Exploits
+namespace Serpent.Exploits
 {
     internal class ItemLagger : ModComponent
     {

@@ -1,8 +1,8 @@
-﻿using ReModCE_ARES.ControlSchemes.Interface;
-using ReModCE_ARES.Core;
+﻿using Serpent.ControlSchemes.Interface;
+using Serpent.Core;
 using UnityEngine;
 
-namespace ReModCE_ARES.ControlSchemes
+namespace Serpent.ControlSchemes
 {
     public class DefaultControlScheme : IControlScheme
     {

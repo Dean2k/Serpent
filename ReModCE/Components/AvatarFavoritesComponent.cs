@@ -5,8 +5,8 @@ using ReModAres.Core.Managers;
 using ReModAres.Core.UI;
 using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
-using ReModCE_ARES.Core;
-using ReModCE_ARES.Loader;
+using Serpent.Core;
+using Serpent.Loader;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,9 +26,9 @@ using VRC.DataModel;
 using VRC.SDKBase.Validation.Performance.Stats;
 using VRC.UI;
 using AvatarList = Il2CppSystem.Collections.Generic.List<VRC.Core.ApiAvatar>;
-using BuildInfo = ReModCE_ARES.Loader.BuildInfo;
+using BuildInfo = Serpent.Loader.BuildInfo;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal class AvatarFavoritesComponent : ModComponent, IAvatarListOwner
     {
@@ -52,7 +52,7 @@ namespace ReModCE_ARES.Components
         private HttpClient _httpClient;
         private HttpClientHandler _httpClientHandler;
 
-        private const string PinPath = "UserData/ReModCE_ARES/pin";
+        private const string PinPath = "UserData/Serpent/pin";
         private int _pinCode;
         private ReMenuButton _enterPinButton;
         private ReMenuButton _apiKeyButton;
@@ -148,7 +148,7 @@ namespace ReModCE_ARES.Components
             {
                 if (!int.TryParse(File.ReadAllText(PinPath), out _pinCode))
                 {
-                    ReModCE_ARES.LogDebug($"Couldn't read pin file from \"{PinPath}\". File might be corrupted.");
+                    Serpent.LogDebug($"Couldn't read pin file from \"{PinPath}\". File might be corrupted.");
                     ReLogger.Warning($"Couldn't read pin file from \"{PinPath}\". File might be corrupted.");
                 }
             }
@@ -308,7 +308,7 @@ namespace ReModCE_ARES.Components
         {
             base.OnUiManagerInit(uiManager);
 
-            if (ReModCE_ARES.IsRubyLoaded)
+            if (Serpent.IsRubyLoaded)
             {
                 _favoriteButton.Position += new Vector3(420f, 0f);
             }
@@ -414,12 +414,12 @@ namespace ReModCE_ARES.Components
 
             if (!_searchBox.field_Public_Button_0.interactable)
             {
-                if (!ReModCE_ARES.IsEmmVrcLoaded || _updatesWithoutSearch >= 10)
+                if (!Serpent.IsEmmVrcLoaded || _updatesWithoutSearch >= 10)
                 {
                     _searchBox.field_Public_Button_0.interactable = true;
                     _searchBox.field_Public_UnityAction_1_String_0 = _searchAvatarsAction;
                 }
-                else if (ReModCE_ARES.IsEmmVrcLoaded)
+                else if (Serpent.IsEmmVrcLoaded)
                 {
                     ++_updatesWithoutSearch;
                 }
@@ -427,7 +427,7 @@ namespace ReModCE_ARES.Components
             }
             else
             {
-                if (ReModCE_ARES.IsEmmVrcLoaded && _updatesWithoutSearch < 10)
+                if (Serpent.IsEmmVrcLoaded && _updatesWithoutSearch < 10)
                 {
                     if (_searchBox.field_Public_UnityAction_1_String_0 == null)
                         return;
@@ -502,7 +502,7 @@ namespace ReModCE_ARES.Components
                         var errorMessage = JsonConvert.DeserializeObject<ApiError>(errorData.Result).Error;
 
                         ReLogger.Error($"Could not search for avatars: \"{errorMessage}\"");
-                        ReModCE_ARES.LogDebug($"Could not search for avatars: \"{errorMessage}\"");
+                        Serpent.LogDebug($"Could not search for avatars: \"{errorMessage}\"");
                         if (searchResponse.StatusCode == HttpStatusCode.Forbidden)
                         {
                             MelonCoroutines.Start(ShowAlertDelayed($"Could not search for avatars\nReason: \"{errorMessage}\""));
@@ -564,7 +564,7 @@ namespace ReModCE_ARES.Components
                         var errorMessage = JsonConvert.DeserializeObject<ApiError>(errorData.Result).Error;
 
                         ReLogger.Error($"Could not search for avatars: \"{errorMessage}\"");
-                        ReModCE_ARES.LogDebug($"Could not search for avatars: \"{errorMessage}\"");
+                        Serpent.LogDebug($"Could not search for avatars: \"{errorMessage}\"");
                         if (searchResponse.StatusCode == HttpStatusCode.Forbidden)
                         {
                             MelonCoroutines.Start(ShowAlertDelayed($"Could not search for avatars\nReason: \"{errorMessage}\""));
@@ -599,7 +599,7 @@ namespace ReModCE_ARES.Components
                 _searchedAvatars.Add(avi);
             }
 
-            ReModCE_ARES.LogDebug($"Found {_searchedAvatars.Count} avatars");
+            Serpent.LogDebug($"Found {_searchedAvatars.Count} avatars");
             ReLogger.Msg($"Found {_searchedAvatars.Count} avatars");
             _searchedAvatarList.RefreshAvatars();
         }
@@ -659,7 +659,7 @@ namespace ReModCE_ARES.Components
                     searchResponse.Content.ReadAsStringAsync().ContinueWith(errorData =>
                     {
                         var errorMessage = JsonConvert.DeserializeObject<ApiError>(errorData.Result).Error;
-                        ReModCE_ARES.LogDebug($"Could not search for avatars: \"{errorMessage}\"");
+                        Serpent.LogDebug($"Could not search for avatars: \"{errorMessage}\"");
                         ReLogger.Error($"Could not search for avatars: \"{errorMessage}\"");
                         if (searchResponse.StatusCode == HttpStatusCode.Forbidden)
                         {
@@ -697,7 +697,7 @@ namespace ReModCE_ARES.Components
                     searchResponse.Content.ReadAsStringAsync().ContinueWith(errorData =>
                     {
                         var errorMessage = JsonConvert.DeserializeObject<ApiError>(errorData.Result).Error;
-                        ReModCE_ARES.LogDebug($"Could not search for avatars: \"{errorMessage}\"");
+                        Serpent.LogDebug($"Could not search for avatars: \"{errorMessage}\"");
                         ReLogger.Error($"Could not search for avatars: \"{errorMessage}\"");
                         if (searchResponse.StatusCode == HttpStatusCode.Forbidden)
                         {
@@ -735,7 +735,7 @@ namespace ReModCE_ARES.Components
                     searchResponse.Content.ReadAsStringAsync().ContinueWith(errorData =>
                     {
                         var errorMessage = JsonConvert.DeserializeObject<ApiError>(errorData.Result).Error;
-                        ReModCE_ARES.LogDebug($"Could not search for avatars: \"{errorMessage}\"");
+                        Serpent.LogDebug($"Could not search for avatars: \"{errorMessage}\"");
                         ReLogger.Error($"Could not search for avatars: \"{errorMessage}\"");
                         if (searchResponse.StatusCode == HttpStatusCode.Forbidden)
                         {
@@ -773,7 +773,7 @@ namespace ReModCE_ARES.Components
                     searchResponse.Content.ReadAsStringAsync().ContinueWith(errorData =>
                     {
                         var errorMessage = JsonConvert.DeserializeObject<ApiError>(errorData.Result).Error;
-                        ReModCE_ARES.LogDebug($"Could not search for avatars: \"{errorMessage}\"");
+                        Serpent.LogDebug($"Could not search for avatars: \"{errorMessage}\"");
                         ReLogger.Error($"Could not search for avatars: \"{errorMessage}\"");
                         if (searchResponse.StatusCode == HttpStatusCode.Forbidden)
                         {
@@ -876,7 +876,7 @@ namespace ReModCE_ARES.Components
                 }
                 catch (Exception ex)
                 {
-                    ReModCE_ARES.LogDebug(ex.Message);
+                    Serpent.LogDebug(ex.Message);
                     ReLogger.Error(ex.Message);
                 }
             }

@@ -1,4 +1,4 @@
-﻿namespace ReModCE_ARES.Core
+﻿namespace Serpent.Core
 {
     public static class InputAxes
     {

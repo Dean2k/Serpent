@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using UnhollowerRuntimeLib.XrefScans;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal sealed class PortalConfirmationComponent : ModComponent
     {
@@ -33,7 +33,7 @@ namespace ReModCE_ARES.Components
                 return false;
             }))
             {
-                ReModCE_ARES.Harmony.Patch(t, GetLocalPatch(nameof(EnterConfirm)));
+                Serpent.Harmony.Patch(t, GetLocalPatch(nameof(EnterConfirm)));
             }
 
             PortalConfirmationEnabled = new ConfigValue<bool>(nameof(PortalConfirmationEnabled), true);

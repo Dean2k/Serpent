@@ -7,8 +7,8 @@
     <ProjectGuid>{C87FE758-ACB9-4FA2-AF6F-10AA9AA0023C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ReModAres.Core</RootNamespace>
-    <AssemblyName>ReModAres.Core</AssemblyName>
+    <RootNamespace>Serpent.Core</RootNamespace>
+    <AssemblyName>Serpent.Core</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

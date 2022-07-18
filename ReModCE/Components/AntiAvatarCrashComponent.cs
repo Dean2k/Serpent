@@ -3,16 +3,16 @@ using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
-using ReModCE_ARES.Config;
-using ReModCE_ARES.Core;
-using ReModCE_ARES.Loader;
-using ReModCE_ARES.Managers;
+using Serpent.Config;
+using Serpent.Core;
+using Serpent.Loader;
+using Serpent.Managers;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.Core;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     // (thanks Odious)
     internal class AntiAvatarCrashComponent : ModComponent
@@ -353,7 +353,7 @@ namespace ReModCE_ARES.Components
                     if (playerDetails2.player.IsBot())
                     {
                         //ReLogger.Msg("Anti Bot: " + playerDetails2.displayName);
-                        ReModCE_ARES.LogDebug("Anti Bot: " + playerDetails2.displayName);
+                        Serpent.LogDebug("Anti Bot: " + playerDetails2.displayName);
                         return false;
                     }
                 }

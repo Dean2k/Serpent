@@ -1,12 +1,12 @@
 ﻿using ReModAres.Core;
 using ReModAres.Core.UI;
 using ReModAres.Core.VRChat;
-using ReModCE_ARES.Loader;
+using Serpent.Loader;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.SDKBase;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal class InstanceLinkComponent : ModComponent
     {
@@ -35,7 +35,7 @@ namespace ReModCE_ARES.Components
                             var instanceId = s.Substring(instanceIdIndex + "&instanceId=".Length);
 
                             joinId = $"{worldId}:{instanceId}".Trim().TrimEnd('\r', '\n');
-                            ReModCE_ARES.LogDebug($"Parsed {joinId} from join link!");
+                            Serpent.LogDebug($"Parsed {joinId} from join link!");
                             ReLogger.Msg($"Parsed {joinId} from join link!");
                         }
 

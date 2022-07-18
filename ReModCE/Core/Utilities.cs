@@ -4,7 +4,7 @@ using System.Reflection;
 using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
 
-namespace ReModCE_ARES.Core
+namespace Serpent.Core
 {
     internal static class Utilities
     {

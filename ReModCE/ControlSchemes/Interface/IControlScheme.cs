@@ -1,4 +1,4 @@
-﻿namespace ReModCE_ARES.ControlSchemes.Interface
+﻿namespace Serpent.ControlSchemes.Interface
 {
 
     using UnityEngine;

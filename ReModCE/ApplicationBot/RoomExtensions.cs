@@ -1,6 +1,6 @@
 ﻿using VRC.Core;
 
-namespace ReModCE_ARES.ApplicationBot
+namespace Serpent.ApplicationBot
 {
     internal static class RoomExtensions
     {

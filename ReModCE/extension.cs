@@ -1,4 +1,4 @@
-﻿namespace ReModCE_ARES
+﻿namespace Serpent
 {
     public static class extension
     {

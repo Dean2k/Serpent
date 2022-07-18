@@ -2,7 +2,7 @@
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI;
 using ReModAres.Core.VRChat;
-using ReModCE_ARES.Loader;
+using Serpent.Loader;
 using System;
 using System.IO;
 using System.Net;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using VRC.UI;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal sealed class DownloadVRCWComponent : ModComponent
     {
@@ -52,7 +52,7 @@ namespace ReModCE_ARES.Components
                 }
                 webClient.DownloadFileAsync(new Uri(world.assetUrl), "ARES/VRCW/" + world.name + ".vrcw");
                 ReLogger.Msg(world.name + " VRCW Downloaded");
-                ReModCE_ARES.LogDebug(world.name + " VRCW Downloaded");
+                Serpent.LogDebug(world.name + " VRCW Downloaded");
             });
         }
     }

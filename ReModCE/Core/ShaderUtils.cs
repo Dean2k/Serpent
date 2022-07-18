@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace ReModCE_ARES.Core
+namespace Serpent.Core
 {
     internal class ShaderUtils
     {

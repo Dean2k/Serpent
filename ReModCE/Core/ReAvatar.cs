@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using VRC.Core;
 
-namespace ReModCE_ARES.Core
+namespace Serpent.Core
 {
     internal class AvatarGet
     {

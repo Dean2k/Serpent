@@ -8,7 +8,7 @@ using VRC.Core;
 using VRC.UI;
 using Object = UnityEngine.Object;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal sealed class InstanceDejavuComponent : ModComponent
     {
@@ -24,11 +24,11 @@ namespace ReModCE_ARES.Components
             foreach (var m in typeof(UiWorldInstanceList).GetMethods().Where(m =>
                 m.Name.StartsWith("Method_Protected_Virtual_Void_VRCUiContentButton_Object_")))
             {
-                ReModCE_ARES.Harmony.Patch(m, postfix: GetLocalPatch(nameof(OnInstanceContentButtonGenerationPostfix)));
+                Serpent.Harmony.Patch(m, postfix: GetLocalPatch(nameof(OnInstanceContentButtonGenerationPostfix)));
             }
 
             var selectWorldInstance = typeof(PageWorldInfo).GetMethods().Single(m => XrefUtils.CheckMethod(m, "Make Home") && m.Name.StartsWith("Method_Private_Void_") && m.Name.Length < 22);
-            ReModCE_ARES.Harmony.Patch(selectWorldInstance, postfix: GetLocalPatch(nameof(UpdateWorldMainPicker)));
+            Serpent.Harmony.Patch(selectWorldInstance, postfix: GetLocalPatch(nameof(UpdateWorldMainPicker)));
         }
 
         public override void OnUiManagerInit(UiManager uiManager)

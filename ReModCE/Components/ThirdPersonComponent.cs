@@ -1,11 +1,11 @@
 ﻿using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
-using ReModCE_ARES.Managers;
+using Serpent.Managers;
 using System;
 using UnityEngine;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal enum ThirdPersonMode
     {

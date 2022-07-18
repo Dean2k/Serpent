@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace ReModCE_ARES
+namespace Serpent
 {
     internal static class Misc
     {

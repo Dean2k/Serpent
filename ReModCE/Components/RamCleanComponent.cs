@@ -6,7 +6,7 @@ using UnityEngine;
 using VRC;
 using Object = UnityEngine.Object;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal class RamCleanComponent : ModComponent
     {

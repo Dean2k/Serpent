@@ -3,8 +3,8 @@ using Newtonsoft.Json;
 using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
-using ReModCE_ARES.Core;
-using ReModCE_ARES.Loader;
+using Serpent.Core;
+using Serpent.Loader;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,7 +13,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     [ComponentDisabled]
     internal class CalibrationSavingComponent : ModComponent
@@ -31,7 +31,7 @@ namespace ReModCE_ARES.Components
 
         public CalibrationSavingComponent()
         {
-            if (ReModCE_ARES.IsOculus)
+            if (Serpent.IsOculus)
                 return;
 
             CalibrationSaverEnabled = new ConfigValue<bool>(nameof(CalibrationSaverEnabled), true);
@@ -39,32 +39,32 @@ namespace ReModCE_ARES.Components
             if (MelonHandler.Mods.Any(i => i.Info.Name == "FBT Saver"))
             {
                 ReLogger.Msg(ConsoleColor.Yellow, "Found FBT Saver Mod. Not loading Calibration Saver.");
-                //ReModCE_ARES.LogDebug("Found FBT Saver Mod. Not loading Calibration Saver.");
+                //Serpent.LogDebug("Found FBT Saver Mod. Not loading Calibration Saver.");
                 return;
             }
 
             if (MelonHandler.Mods.Any(i => i.Info.Name == "IKTweaks")) // Added by Jdbye
             {
-                //ReModCE_ARES.LogDebug("Found IKTweaks Mod. Not loading Calibration Saver.");
+                //Serpent.LogDebug("Found IKTweaks Mod. Not loading Calibration Saver.");
                 ReLogger.Msg(ConsoleColor.Yellow, "Found IKTweaks Mod. Not loading Calibration Saver.");
                 return;
             }
 
-            if (File.Exists("UserData/ReModCE_ARES/calibrations.json"))
+            if (File.Exists("UserData/Serpent/calibrations.json"))
             {
                 _savedCalibrations =
                     JsonConvert.DeserializeObject<Dictionary<string, FbtCalibration>>(
-                        File.ReadAllText("UserData/ReModCE_ARES/calibrations.json"));
+                        File.ReadAllText("UserData/Serpent/calibrations.json"));
 
-                //ReModCE_ARES.LogDebug($"Loaded {_savedCalibrations.Count} calibrations from disk.");
+                //Serpent.LogDebug($"Loaded {_savedCalibrations.Count} calibrations from disk.");
                 ReLogger.Msg($"Loaded {_savedCalibrations.Count} calibrations from disk.");
             }
             else
             {
-                //ReModCE_ARES.LogDebug($"No saved calibrations found. Creating new.");
+                //Serpent.LogDebug($"No saved calibrations found. Creating new.");
                 ReLogger.Msg($"No saved calibrations found. Creating new.");
                 _savedCalibrations = new Dictionary<string, FbtCalibration>();
-                File.WriteAllText("UserData/ReModCE_ARES/calibrations.json", JsonConvert.SerializeObject(_savedCalibrations, Formatting.Indented, new JsonSerializerSettings
+                File.WriteAllText("UserData/Serpent/calibrations.json", JsonConvert.SerializeObject(_savedCalibrations, Formatting.Indented, new JsonSerializerSettings
                 {
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                 }));
@@ -84,17 +84,17 @@ namespace ReModCE_ARES.Components
                     switch (methodInfo.GetParameters().Length)
                     {
                         case 1 when methodInfo.GetParameters().First().ParameterType == typeof(string) && methodInfo.ReturnType == typeof(bool) && methodInfo.GetRuntimeBaseDefinition() == methodInfo:
-                            ReModCE_ARES.Harmony.Patch(methodInfo, GetLocalPatch(nameof(IsCalibratedForAvatar)));
+                            Serpent.Harmony.Patch(methodInfo, GetLocalPatch(nameof(IsCalibratedForAvatar)));
                             break;
                         case 3 when methodInfo.GetParameters().First().ParameterType == typeof(Animator) && methodInfo.ReturnType == typeof(void) && methodInfo.GetRuntimeBaseDefinition() == methodInfo:
-                            ReModCE_ARES.Harmony.Patch(methodInfo, postfix: GetLocalPatch(nameof(PerformCalibration)));
+                            Serpent.Harmony.Patch(methodInfo, postfix: GetLocalPatch(nameof(PerformCalibration)));
                             break;
                     }
                 }
             }
             catch (Exception)
             {
-                //ReModCE_ARES.LogDebug($"Could not patch VRCTrackingSteam methods. CalibrationSaver won't work.");
+                //Serpent.LogDebug($"Could not patch VRCTrackingSteam methods. CalibrationSaver won't work.");
                 ReLogger.Warning($"Could not patch VRCTrackingSteam methods. CalibrationSaver won't work.");
             }
         }
@@ -107,7 +107,7 @@ namespace ReModCE_ARES.Components
             menu.AddButton("Clear Saved Calibrations", "Clear your saved calibrations from your disk.", () =>
             {
                 _savedCalibrations.Clear();
-                File.Delete("UserData/ReModCE_ARES/calibrations.json");
+                File.Delete("UserData/Serpent/calibrations.json");
             }, ResourceManager.GetSprite("remodce.dust"));
         }
 
@@ -131,7 +131,7 @@ namespace ReModCE_ARES.Components
 
             try
             {
-                File.WriteAllText("UserData/ReModCE_ARES/calibrations.json", JsonConvert.SerializeObject(_savedCalibrations, Formatting.Indented, new JsonSerializerSettings
+                File.WriteAllText("UserData/Serpent/calibrations.json", JsonConvert.SerializeObject(_savedCalibrations, Formatting.Indented, new JsonSerializerSettings
                 {
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
                     ContractResolver = new DynamicContractResolver(new List<string> { "normalized" })
@@ -139,7 +139,7 @@ namespace ReModCE_ARES.Components
             }
             catch (Exception e)
             {
-                ReModCE_ARES.LogDebug($"Could not save current calibration to file!\n {e}");
+                Serpent.LogDebug($"Could not save current calibration to file!\n {e}");
                 ReLogger.Error($"Could not save current calibration to file!\n {e}");
             }
         }

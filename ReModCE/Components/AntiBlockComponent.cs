@@ -5,14 +5,14 @@ using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
-using ReModCE_ARES.Core;
-using ReModCE_ARES.Loader;
-using ReModCE_ARES.Managers;
+using Serpent.Core;
+using Serpent.Loader;
+using Serpent.Managers;
 using UnityEngine;
 using VRC.Core;
 using Player = VRC.Player;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal class AntiBlockComponent : ModComponent
     {
@@ -64,7 +64,7 @@ namespace ReModCE_ARES.Components
                                             VRCUiManagerEx.Instance.QueueHudMessage(
                                                 playerDetails.displayName + " has blocked you.", Color.red);
                                             ReLogger.Msg(playerDetails.displayName + " has blocked you.", Color.red);
-                                            ReModCE_ARES.LogDebug(playerDetails.displayName + " has blocked you.");
+                                            Serpent.LogDebug(playerDetails.displayName + " has blocked you.");
 
                                             if (AntiBlockEnabled)
                                             {
@@ -82,7 +82,7 @@ namespace ReModCE_ARES.Components
                                                 //    Color.green);
                                                 ReLogger.Msg(playerDetails.displayName + " has unblocked or unmuted you.",
                                                     Color.green);
-                                                ReModCE_ARES.LogDebug(playerDetails.displayName +
+                                                Serpent.LogDebug(playerDetails.displayName +
                                                                   " has unblocked or unmuted you.");
                                             }
                                         }

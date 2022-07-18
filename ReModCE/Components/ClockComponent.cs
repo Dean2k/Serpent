@@ -2,12 +2,12 @@
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
-using ReModCE_ARES.Managers;
+using Serpent.Managers;
 using System;
 using UnityEngine;
 using VRC.UI.Elements;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal class ClockComponent : ModComponent
     {
@@ -38,7 +38,7 @@ namespace ReModCE_ARES.Components
 
         public override void OnUpdate()
         {
-            if (ReModCE_ARES._readyQA)
+            if (Serpent._readyQA)
             {
                 if (firstRun)
                 {
@@ -47,7 +47,7 @@ namespace ReModCE_ARES.Components
                 }
                 if (ClockEnabled)
                 {                 
-                    ReModCE_ARES._hudClock.text = DateTime.Now.ToString("HH:mm:ss");
+                    Serpent._hudClock.text = DateTime.Now.ToString("HH:mm:ss");
                 }
             }         
         }
@@ -56,11 +56,11 @@ namespace ReModCE_ARES.Components
         {
             if (ClockEnabled)
             {
-                ReModCE_ARES._hudObj.SetActive(true);
+                Serpent._hudObj.SetActive(true);
             }
             else
             {
-                ReModCE_ARES._hudObj.SetActive(false);
+                Serpent._hudObj.SetActive(false);
             }
         }
     }

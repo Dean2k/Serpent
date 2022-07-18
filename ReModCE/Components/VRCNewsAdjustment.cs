@@ -5,7 +5,7 @@ using ReModAres.Core.VRChat;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal class VRCNewsAdjustment : ModComponent
     {

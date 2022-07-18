@@ -2,9 +2,9 @@
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
-using ReModCE_ARES.Managers;
+using Serpent.Managers;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal class DebugMenuComponent : ModComponent
     {

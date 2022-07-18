@@ -4,7 +4,7 @@ using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.UI.Wings;
 using ReModAres.Core.VRChat;
-using ReModCE_ARES.Managers;
+using Serpent.Managers;
 using System.Collections.Generic;
 using System.Linq;
 using UnhollowerRuntimeLib;
@@ -20,7 +20,7 @@ using VRC_Pickup = VRC.SDKBase.VRC_Pickup;
 using VRC_UiShape = VRC.SDKBase.VRC_UiShape;
 
 // ReSharper disable InconsistentNaming
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     public class FlyComponent : ModComponent
     {
@@ -91,7 +91,7 @@ namespace ReModCE_ARES.Components
             catch { }
             _flyToggle = movementMenu.AddToggle("Fly", "Enable/Disable Fly", ToggleFly, _flyEnabled);
             _noclipToggle = movementMenu.AddToggle("Noclip", "Enable/Disable Noclip", ToggleNoclip, _noclipEnabled);
-            _noclipWingToggle = ReModCE_ARES.WingMenu.AddToggle("Noclip", "Enable/Disable Noclip", b =>
+            _noclipWingToggle = Serpent.WingMenu.AddToggle("Noclip", "Enable/Disable Noclip", b =>
             {
                 if (b)
                 {
@@ -140,7 +140,7 @@ namespace ReModCE_ARES.Components
 
         private void ToggleFlyQuick(bool value)
         {
-            if (ReModCE_ARES.RotatorEnabled)
+            if (Serpent.RotatorEnabled)
             {
                 ToggleFly(false);
                 return;
@@ -188,7 +188,7 @@ namespace ReModCE_ARES.Components
 
         private void ToggleFly(bool value)
         {
-            if (ReModCE_ARES.RotatorEnabled)
+            if (Serpent.RotatorEnabled)
             {
                 _flyEnabled = false;
                 _flyToggle?.Toggle(false);
@@ -220,7 +220,7 @@ namespace ReModCE_ARES.Components
 
         private void ToggleNoclip(bool value)
         {
-            if (ReModCE_ARES.RotatorEnabled)
+            if (Serpent.RotatorEnabled)
             {
                 _noclipEnabled = false;
                 _noclipToggle?.Toggle(false);
@@ -255,7 +255,7 @@ namespace ReModCE_ARES.Components
 
         public override void OnUpdate()
         {
-            if (ReModCE_ARES.RotatorEnabled)
+            if (Serpent.RotatorEnabled)
             {
                 ToggleFly(false);
             }

@@ -1,12 +1,12 @@
 ﻿using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
-using ReModCE_ARES.Loader;
+using Serpent.Loader;
 using System.Collections;
 using System.Diagnostics;
 using UnityEngine;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal class PerformanceComponent : ModComponent
     {
@@ -130,7 +130,7 @@ namespace ReModCE_ARES.Components
                 "Ultra Graphics setting", AdjustGraphicsUltra,
                 GfxUltraEnabled);
 
-            if (!ReModCE_ARES.IsBot)
+            if (!Serpent.IsBot)
             {
                 SetHighPriority(HighPriorityEnabled);
                 AdjustGraphicsUltraLow(GfxUltraLowEnabled);
@@ -354,7 +354,7 @@ namespace ReModCE_ARES.Components
             if (lastMessage != "Ultra")
             {
                 ReLogger.Msg("Setting graphics to Ultra");
-                ReModCE_ARES.LogDebug("Setting graphics to Ultra");
+                Serpent.LogDebug("Setting graphics to Ultra");
                 lastMessage = "Ultra";
             }
         }
@@ -367,7 +367,7 @@ namespace ReModCE_ARES.Components
             if (lastMessage != "High")
             {
                 ReLogger.Msg("Setting graphics to High");
-                ReModCE_ARES.LogDebug("Setting graphics to High");
+                Serpent.LogDebug("Setting graphics to High");
                 lastMessage = "High";
             }
         }
@@ -381,7 +381,7 @@ namespace ReModCE_ARES.Components
             if (lastMessage != "Med")
             {
                 ReLogger.Msg("Setting graphics to Med");
-                ReModCE_ARES.LogDebug("Setting graphics to Med");
+                Serpent.LogDebug("Setting graphics to Med");
                 lastMessage = "Med";
             }
         }
@@ -395,7 +395,7 @@ namespace ReModCE_ARES.Components
             if (lastMessage != "Low")
             {
                 ReLogger.Msg("Setting graphics to Low");
-                ReModCE_ARES.LogDebug("Setting graphics to Low");
+                Serpent.LogDebug("Setting graphics to Low");
                 lastMessage = "Low";
             }
         }
@@ -409,7 +409,7 @@ namespace ReModCE_ARES.Components
             if (lastMessage != "Ultra Low")
             {
                 ReLogger.Msg("Setting graphics to Ultra Low");
-                ReModCE_ARES.LogDebug("Setting graphics to Ultra Low");
+                Serpent.LogDebug("Setting graphics to Ultra Low");
                 lastMessage = "Ultra Low";
             }
         }

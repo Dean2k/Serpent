@@ -2,10 +2,10 @@
 using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
-using ReModCE_ARES.ApplicationBot;
-using ReModCE_ARES.Loader;
-using ReModCE_ARES.Managers;
-using ReModCE_ARES.SDK;
+using Serpent.ApplicationBot;
+using Serpent.Loader;
+using Serpent.Managers;
+using Serpent.SDK;
 using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -14,7 +14,7 @@ using VRC;
 using VRC.Core;
 using VRC.UI;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal class ApplicationBotComponent : ModComponent
     {

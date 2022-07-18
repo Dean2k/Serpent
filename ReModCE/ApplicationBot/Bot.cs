@@ -1,7 +1,7 @@
 ﻿using MelonLoader;
-using ReModCE_ARES.Loader;
-using ReModCE_ARES.Managers;
-using ReModCE_ARES.SDK;
+using Serpent.Loader;
+using Serpent.Managers;
+using Serpent.SDK;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ using VRC.Core;
 using VRC.SDKBase;
 using VRC.UI;
 
-namespace ReModCE_ARES.ApplicationBot
+namespace Serpent.ApplicationBot
 {
     public class Bot : VRCModule
     {
@@ -77,20 +77,20 @@ namespace ReModCE_ARES.ApplicationBot
                       if (allPlayer.field_Private_APIUser_0.id == UserID)
                             {
                                 Event7TargetPlayer = allPlayer;
-                                ReModCE_ARES.blockEvent7FromSending = true;
+                                Serpent.blockEvent7FromSending = true;
                             }
                     }
                   }
                   else
                     Event7TargetPlayer = null;
-                  ReModCE_ARES.blockEvent7FromSending = false;
+                  Serpent.blockEvent7FromSending = false;
                   ReLogger.Msg("Copy Target Set To " + Event7TargetPlayer.field_Private_APIUser_0.displayName, ConsoleColor.DarkBlue);
                 })
             },
 
 
             { "Kill", (Number) => {
-                 if (ReModCE_ARES.NumberBot.Contains(Number))
+                 if (Serpent.NumberBot.Contains(Number))
                  {
                      Application.Quit();
                  }
@@ -105,7 +105,7 @@ namespace ReModCE_ARES.ApplicationBot
                 OrbitTarget = null;
                 FollowTargetPlayer = null;
                 Event7TargetPlayer = null;
-                  ReModCE_ARES.blockEvent7FromSending = false;
+                  Serpent.blockEvent7FromSending = false;
             } },
 
             { "SitOn", (UserID) => {
@@ -223,7 +223,7 @@ namespace ReModCE_ARES.ApplicationBot
 
         public override void OnUpdate()
         {
-            if (ReModCE_ARES.IsBot)
+            if (Serpent.IsBot)
             {
                 if (LastActionOnMainThread != null)
                 {

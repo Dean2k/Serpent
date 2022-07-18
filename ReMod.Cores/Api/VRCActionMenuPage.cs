@@ -2,7 +2,7 @@ using System;
 using MelonLoader;
 using ReModAres.Core.Pedals;
 using ReModAres.Core.Types;
-using ReModCE_ARES.Loader;
+using Serpent.Loader;
 using UnityEngine;
 
 namespace ReModAres.Core.Api

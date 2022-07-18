@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ReModCE_ARES.Core
+namespace Serpent.Core
 {
     public class DynamicContractResolver : DefaultContractResolver
     {

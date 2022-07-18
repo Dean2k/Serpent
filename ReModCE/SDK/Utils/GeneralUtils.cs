@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using VRC.Core;
 
-namespace ReModCE_ARES.SDK
+namespace Serpent.SDK
 {
     internal class GeneralUtils
     {

@@ -2,7 +2,7 @@
 using VRC.Core;
 using VRC.SDKBase;
 
-namespace ReModCE_ARES.Core
+namespace Serpent.Core
 {
     public class PlayerDetails
     {

@@ -113,6 +113,7 @@ namespace ReModAres.Core.VRChat
         }
 
         private static MethodInfo _reloadAvatarMethod;
+
         private static MethodInfo LoadAvatarMethod
         {
             get
@@ -127,6 +128,7 @@ namespace ReModAres.Core.VRChat
         }
 
         private static MethodInfo _reloadAllAvatarsMethod;
+
         private static MethodInfo ReloadAllAvatarsMethod
         {
             get
@@ -139,6 +141,7 @@ namespace ReModAres.Core.VRChat
                 return _reloadAllAvatarsMethod;
             }
         }
+
         public static void ReloadAvatar(this VRCPlayer instance)
         {
             LoadAvatarMethod.Invoke(instance, new object[] { true }); // parameter is forceLoad and has to be true

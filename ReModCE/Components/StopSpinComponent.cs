@@ -7,7 +7,7 @@ using UnhollowerRuntimeLib;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal class StopSpinComponent : ModComponent
     {

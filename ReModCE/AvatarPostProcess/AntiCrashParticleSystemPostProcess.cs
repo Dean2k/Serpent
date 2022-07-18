@@ -1,4 +1,4 @@
-﻿namespace ReModCE_ARES.AvatarPostProcess
+﻿namespace Serpent.AvatarPostProcess
 {
     internal class AntiCrashParticleSystemPostProcess
     {

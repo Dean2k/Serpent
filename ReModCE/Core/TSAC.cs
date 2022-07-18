@@ -1,6 +1,6 @@
 ﻿using MelonLoader;
 using ReModAres.Core;
-using ReModCE_ARES.Loader;
+using Serpent.Loader;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using UnityEngine.SceneManagement;
 
-namespace ReModCE_ARES.Core
+namespace Serpent.Core
 {
     internal class TSAC : ModComponent
     {

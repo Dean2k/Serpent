@@ -1,10 +1,10 @@
 ﻿using Il2CppSystem.Collections.Generic;
 using ReModAres.Core.VRChat;
-using ReModCE_ARES.AvatarPostProcess;
-using ReModCE_ARES.Config;
-using ReModCE_ARES.Loader;
-using ReModCE_ARES.Managers;
-using ReModCE_ARES.SDK;
+using Serpent.AvatarPostProcess;
+using Serpent.Config;
+using Serpent.Loader;
+using Serpent.Managers;
+using Serpent.SDK;
 using System;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -12,7 +12,7 @@ using UnhollowerBaseLib;
 using UnityEngine;
 using VRC.Core;
 
-namespace ReModCE_ARES.Core
+namespace Serpent.Core
 {
     internal class AntiCrashUtils
     {

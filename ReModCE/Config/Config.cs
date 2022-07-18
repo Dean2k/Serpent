@@ -1,13 +1,13 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using ReModAres.Core;
-using ReModCE_ARES.Loader;
+using Serpent.Loader;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace ReModCE_ARES.Config
+namespace Serpent.Config
 {
     internal class Configuration : ModComponent
     {

@@ -4,8 +4,8 @@ using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
-using ReModCE_ARES.Loader;
-using ReModCE_ARES.Managers;
+using Serpent.Loader;
+using Serpent.Managers;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -14,7 +14,7 @@ using VRC;
 using VRC.Core;
 using VRC.DataModel;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal class SoftCloneComponent : ModComponent
     {
@@ -54,7 +54,7 @@ namespace ReModCE_ARES.Components
                 {
                     __0.Parameters[245].Cast<Il2CppSystem.Collections.Hashtable>()["avatarDict"] = AvatarDictCache;
                 }
-                catch (System.Exception ex) { ReModCE_ARES.LogDebug(ex.Message); }
+                catch (System.Exception ex) { Serpent.LogDebug(ex.Message); }
 
                 if (_sentTwice)
                 {

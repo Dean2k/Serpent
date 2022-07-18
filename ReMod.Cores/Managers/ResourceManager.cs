@@ -33,7 +33,8 @@ namespace ReModAres.Core.Managers
 
         public static Sprite LoadSprite(string prefix, string resourceName, byte[] bytes)
         {
-            var texture = GetTexture($"{prefix}.{resourceName}");
+            Texture2D texture = GetTexture($"{prefix}.{resourceName}");
+
             if (texture == null)
             {
                 texture = LoadTexture(prefix, resourceName, bytes);

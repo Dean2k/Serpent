@@ -6,7 +6,7 @@ using VRC;
 using VRC.DataModel;
 using VRC.SDKBase;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal sealed class ItemOrbitPlayerComponent : ModComponent
     {

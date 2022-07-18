@@ -2,7 +2,7 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace ReModCE_ARES.Core
+namespace Serpent.Core
 {
     internal class BinaryGZipSerializer
     {

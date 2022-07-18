@@ -1,17 +1,17 @@
 ﻿using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
-using ReModCE_ARES.Core;
-using ReModCE_ARES.Loader;
-using ReModCE_ARES.Managers;
-using ReModCE_ARES.SDK;
+using Serpent.Core;
+using Serpent.Loader;
+using Serpent.Managers;
+using Serpent.SDK;
 using System;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using VRC;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     public class CustomNameplate : MonoBehaviour
     {
@@ -87,7 +87,7 @@ namespace ReModCE_ARES.Components
         {
             try
             {
-                return ReModCE_ARES.NameplateModels.First(x => x.UserID == player.prop_APIUser_0.id && x.Active);
+                return Serpent.NameplateModels.First(x => x.UserID == player.prop_APIUser_0.id && x.Active);
             }
             catch
             {
@@ -193,7 +193,7 @@ namespace ReModCE_ARES.Components
             {
                 if (CustomNameplateEnabled)
                 {
-                    ReModCE_ARES.UpdateNamePlates();
+                    Serpent.UpdateNamePlates();
                 }
             }
         }

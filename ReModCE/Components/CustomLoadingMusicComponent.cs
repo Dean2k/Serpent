@@ -8,7 +8,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal class CustomLoadingMusicComponent : ModComponent
     {

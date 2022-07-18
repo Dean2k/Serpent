@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ReModCE_ARES.Managers
+namespace Serpent.Managers
 {
     public class QMLable
     {

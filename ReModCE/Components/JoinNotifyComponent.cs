@@ -2,7 +2,7 @@
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal class JoinNotifyComponent : ModComponent
     {

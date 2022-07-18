@@ -4,8 +4,8 @@ using ReModAres.Core.Managers;
 using ReModAres.Core.UI;
 using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
-using ReModCE_ARES.Core;
-using ReModCE_ARES.Loader;
+using Serpent.Core;
+using Serpent.Loader;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,7 +15,7 @@ using UnityEngine.UI;
 using VRC.Core;
 using AvatarList = Il2CppSystem.Collections.Generic.List<VRC.Core.ApiAvatar>;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal class AvatarHistoryComponent : ModComponent, IAvatarListOwner
     {
@@ -44,19 +44,19 @@ namespace ReModCE_ARES.Components
                 _excludeOwnToggle.Toggle(AvatarHistoryExcludeOwn);
             };
 
-            if (File.Exists("UserData/ReModCE_ARES/recent_avatars.bin"))
+            if (File.Exists("UserData/Serpent/recent_avatars.bin"))
             {
                 try
                 {
                     _recentAvatars =
-                        BinaryGZipSerializer.Deserialize("UserData/ReModCE_ARES/recent_avatars.bin") as List<ReAvatar>;
+                        BinaryGZipSerializer.Deserialize("UserData/Serpent/recent_avatars.bin") as List<ReAvatar>;
                 }
                 catch (GZipException)
                 {
-                    ReModCE_ARES.LogDebug($"Your recent avatars file seems to be corrupted. I renamed it for you, so this error doesn't happen again.");
+                    Serpent.LogDebug($"Your recent avatars file seems to be corrupted. I renamed it for you, so this error doesn't happen again.");
                     ReLogger.Error($"Your recent avatars file seems to be corrupted. I renamed it for you, so this error doesn't happen again.");
-                    File.Delete("UserData/ReModCE_ARES/recent_avatars.bin.corrupted");
-                    File.Move("UserData/ReModCE_ARES/recent_avatars.bin", "UserData/ReModCE_ARES/recent_avatars.bin.corrupted");
+                    File.Delete("UserData/Serpent/recent_avatars.bin.corrupted");
+                    File.Move("UserData/Serpent/recent_avatars.bin", "UserData/Serpent/recent_avatars.bin.corrupted");
                     _recentAvatars = new List<ReAvatar>();
                 }
             }
@@ -172,7 +172,7 @@ namespace ReModCE_ARES.Components
 
         private void SaveAvatarsToDisk()
         {
-            BinaryGZipSerializer.Serialize(_recentAvatars, "UserData/ReModCE_ARES/recent_avatars.bin");
+            BinaryGZipSerializer.Serialize(_recentAvatars, "UserData/Serpent/recent_avatars.bin");
         }
 
         public AvatarList GetAvatars(ReAvatarList avatarList)

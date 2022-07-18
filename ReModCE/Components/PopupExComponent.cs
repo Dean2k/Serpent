@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal class PopupExComponent : ModComponent
     {

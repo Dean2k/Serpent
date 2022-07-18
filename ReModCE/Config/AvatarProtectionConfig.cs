@@ -1,12 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace ReModCE_ARES.Config
+namespace Serpent.Config
 {
     public class AvatarProtectionConfig
     {
         [JsonIgnore]
-        private const string SavePath = "UserData/ReModCE_ARES";
+        private const string SavePath = "UserData/Serpent";
 
         [JsonIgnore]
         public static readonly string ConfigLocation = $"{SavePath}/AvatarProtectionSettings.json";

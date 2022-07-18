@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace ReModCE_ARES.Core
+namespace Serpent.Core
 {
     internal class ApiError
     {

@@ -1,11 +1,11 @@
 ﻿using ReModAres.Core;
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
-using ReModCE_ARES.Loader;
+using Serpent.Loader;
 using System;
 using VRC;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal class InfoLogsComponent : ModComponent
     {
@@ -34,7 +34,7 @@ namespace ReModCE_ARES.Components
             if (player == null) return;
             if (player.field_Private_APIUser_0 == null) return;
             ReLogger.Msg(ConsoleColor.Cyan, $"{player.field_Private_APIUser_0.displayName ?? string.Empty} joined the instance.");
-            ReModCE_ARES.LogDebug($"<color=green>{player.field_Private_APIUser_0.displayName ?? string.Empty} joined the instance.</color>");
+            Serpent.LogDebug($"<color=green>{player.field_Private_APIUser_0.displayName ?? string.Empty} joined the instance.</color>");
         }
 
         public override void OnPlayerLeft(Player player)
@@ -43,7 +43,7 @@ namespace ReModCE_ARES.Components
             if (player == null) return;
             if (player.field_Private_APIUser_0 == null) return;
             ReLogger.Msg(ConsoleColor.White, $"{player.field_Private_APIUser_0.displayName ?? string.Empty} left the instance.");
-            ReModCE_ARES.LogDebug(
+            Serpent.LogDebug(
                 $"<color=#fc4903>{player.field_Private_APIUser_0.displayName ?? string.Empty} left the instance.</color>");
         }
     }

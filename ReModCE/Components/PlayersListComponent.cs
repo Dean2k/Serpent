@@ -2,11 +2,11 @@
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
-using ReModCE_ARES.Managers;
+using Serpent.Managers;
 using TMPro;
 using UnityEngine;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal class PlayersListComponent : ModComponent
     {

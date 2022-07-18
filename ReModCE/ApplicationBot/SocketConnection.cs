@@ -6,7 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ReModCE_ARES.ApplicationBot
+namespace Serpent.ApplicationBot
 {
     internal class SocketConnection : VRCModule
     {

@@ -2,15 +2,15 @@
 using ReModAres.Core.Managers;
 using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
-using ReModCE_ARES.ControlSchemes;
-using ReModCE_ARES.Core;
-using ReModCE_ARES.Loader;
+using Serpent.ControlSchemes;
+using Serpent.Core;
+using Serpent.Loader;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC;
 using VRC.Core;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     public class RotatorComponent : ModComponent
     {

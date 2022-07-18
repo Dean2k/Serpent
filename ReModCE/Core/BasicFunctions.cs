@@ -2,7 +2,7 @@
 using UnhollowerBaseLib;
 
 //Contains all basic functions reqires for ARES to operate
-namespace ReModCE_ARES.Core
+namespace Serpent.Core
 {
     internal static class BaseFuncs
     {

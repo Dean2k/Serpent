@@ -1,6 +1,6 @@
 ﻿using ReModAres.Core.VRChat;
-using ReModCE_ARES.Components;
-using ReModCE_ARES.Core;
+using Serpent.Components;
+using Serpent.Core;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,7 +9,7 @@ using VRC.Core;
 using VRC.Management;
 using VRC.SDKBase;
 
-namespace ReModCE_ARES.Managers
+namespace Serpent.Managers
 {
     public static class Wrapper
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ReModCE_ARES.ApplicationBot
+namespace Serpent.ApplicationBot
 {
     internal class ObjectExtensions
     {

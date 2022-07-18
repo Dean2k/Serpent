@@ -3,8 +3,8 @@ using ReModAres.Core.Managers;
 using ReModAres.Core.UI;
 using ReModAres.Core.UI.QuickMenu;
 using ReModAres.Core.VRChat;
-using ReModCE_ARES.Loader;
-using ReModCE_ARES.Managers;
+using Serpent.Loader;
+using Serpent.Managers;
 using System;
 using System.IO;
 using System.Net;
@@ -14,7 +14,7 @@ using VRC;
 using VRC.DataModel;
 using VRC.UI;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal sealed class DownloadVRCAComponent : ModComponent
     {
@@ -77,7 +77,7 @@ namespace ReModCE_ARES.Components
                 }
                 webClient.DownloadFileAsync(new Uri(player.field_Private_ApiAvatar_0.assetUrl), "ARES/VRCA/" + player.field_Private_ApiAvatar_0.name + ".vrca");
                 ReLogger.Msg(player.field_Private_ApiAvatar_0.name + " VRCA Downloaded");
-                ReModCE_ARES.LogDebug(player.field_Private_ApiAvatar_0.name + " VRCA Downloaded");
+                Serpent.LogDebug(player.field_Private_ApiAvatar_0.name + " VRCA Downloaded");
             });
         }
     }

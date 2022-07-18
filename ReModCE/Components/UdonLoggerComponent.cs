@@ -6,7 +6,7 @@ using System;
 using UnityEngine;
 using VRC.Udon;
 
-namespace ReModCE_ARES.Components
+namespace Serpent.Components
 {
     internal class UdonLoggerComponent : ModComponent
     {
