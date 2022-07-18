@@ -368,6 +368,10 @@
     <Compile Include="Core\InputAxis.cs" />
     <Compile Include="Core\NameplateModel.cs" />
     <Compile Include="Misc.cs" />
+    <Compile Include="Mono\Platemanager.cs" />
+    <Compile Include="Mono\TagAnimation.cs" />
+    <Compile Include="Mono\TagRainbowcs.cs" />
+    <Compile Include="Mono\UpdateManager.cs" />
     <Compile Include="SDK\ModerationManagerExtension.cs" />
     <Compile Include="Page\Categories\Utilties.cs" />
     <Compile Include="Page\Categories\Visuals.cs" />

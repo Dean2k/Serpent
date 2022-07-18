@@ -3,7 +3,7 @@
     public static class PageNames
     {
         //Page names within Serpent.cs
-        public static string ARES = "A.R.E.S Mod Menu";
+        public static string ARES = "Serpent Mod Menu";
         public static string Movement = "Movement";
         public static string Microphone = "Microphone";
         public static string Protections = "Protections";

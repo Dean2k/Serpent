@@ -49,6 +49,8 @@ namespace Serpent
         private static ConfigManager _configManager;
 
         public static ReMirroredWingMenu WingMenu;
+
+        internal static Queue<Action> _Queue;
         public static bool IsEmmVrcLoaded { get; private set; }
         public static bool IsRubyLoaded { get; private set; }
         public static PedalSubMenu MenuPage { get; set; }
@@ -72,30 +74,32 @@ namespace Serpent
 
         public static string NumberBot = "0";
 
-        public static void UpdateNamePlates()
-        {
-            ReLogger.Msg("Reloading Nameplates");
-            string url = "https://api.ares-mod.com/records/NamePlates";
+        //public static void UpdateNamePlates()
+        //{
+        //    ReLogger.Msg("Reloading Nameplates");
+        //    string url = "https://api.ares-mod.com/records/NamePlates";
 
-            HttpWebRequest webReq = (HttpWebRequest)WebRequest.Create(url);
-            webReq.Method = "GET";
-            webReq.Timeout = 15000;
-            HttpWebResponse webResp = (HttpWebResponse)webReq.GetResponse();           
-            string jsonString;
-            using (Stream stream = webResp.GetResponseStream())
-            {
-                StreamReader reader = new StreamReader(stream, System.Text.Encoding.UTF8);
-                jsonString = reader.ReadToEnd();
-            }
-            NameplateModelList items = JsonConvert.DeserializeObject<NameplateModelList>(jsonString);
-            NameplateModels = items.records;
-        }
+        //    HttpWebRequest webReq = (HttpWebRequest)WebRequest.Create(url);
+        //    webReq.Method = "GET";
+        //    webReq.Timeout = 15000;
+        //    HttpWebResponse webResp = (HttpWebResponse)webReq.GetResponse();           
+        //    string jsonString;
+        //    using (Stream stream = webResp.GetResponseStream())
+        //    {
+        //        StreamReader reader = new StreamReader(stream, System.Text.Encoding.UTF8);
+        //        jsonString = reader.ReadToEnd();
+        //    }
+        //    NameplateModelList items = JsonConvert.DeserializeObject<NameplateModelList>(jsonString);
+        //    NameplateModels = items.records;
+        //}
 
         public static void OnApplicationStart()
         {
             Harmony = MelonHandler.Mods.First(m => m.Info.Name == "Serpent").HarmonyInstance;
             Directory.CreateDirectory("UserData/Serpent");
             ReLogger.Msg("Initializing...");
+
+            _Queue = new Queue<Action>();
 
             Directory.CreateDirectory("LoadingScreenMusic");
             if (!File.Exists("LoadingScreenMusic/Music.ogg"))
@@ -129,6 +133,10 @@ namespace Serpent
             EnableDisableListener.RegisterSafe();
             ClassInjector.RegisterTypeInIl2Cpp<WireframeEnabler>();
             ClassInjector.RegisterTypeInIl2Cpp<CustomNameplate>();
+            ClassInjector.RegisterTypeInIl2Cpp<Mono.UpdateManager>();
+            ClassInjector.RegisterTypeInIl2Cpp<Mono.Platemanager>();
+            ClassInjector.RegisterTypeInIl2Cpp<Mono.TagAnimation>();
+            ClassInjector.RegisterTypeInIl2Cpp<Mono.TagRainbow>();
 
             SetIsOculus();
 
@@ -657,7 +665,7 @@ namespace Serpent
         public static GameObject _hudObj;
         public static Text _hudClock;
         public static bool _readyQA = false;
-
+        internal static GameObject _UpdateManager { get; set; }
         private static IEnumerator WaitForQM()
         {
             while (UnityEngine.Object.FindObjectOfType<VRC.UI.Elements.QuickMenu>()?.transform.Find("Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Settings").gameObject == null) yield return null;
@@ -686,6 +694,10 @@ namespace Serpent
             _hudClock.text = "Clock";
             _hudTxtObj.SetActive(true);
             _readyQA = true;
+
+            _UpdateManager = new GameObject("VitalityUpdateManager");
+            _UpdateManager.transform.parent = GameObject.Find("/_Application").transform;
+            _UpdateManager.AddComponent<Mono.UpdateManager>();
 
             yield break;
         }

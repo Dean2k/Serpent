@@ -6,7 +6,11 @@ using Serpent.Loader;
 using Serpent.Managers;
 using Serpent.SDK;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using VRC;
@@ -20,7 +24,6 @@ namespace Serpent.Components
         private byte ping;
         private int noUpdateCount = 0;
         private TextMeshProUGUI statsText;
-        private TextMeshProUGUI customText;
         public bool OverRender;
         public bool Enabled = true;
 
@@ -53,47 +56,11 @@ namespace Serpent.Components
                 stats.Find("Performance Text").gameObject.SetActive(false);
                 stats.Find("Friend Anchor Stats").gameObject.SetActive(false);
 
-                NameplateModel custom = IsCustom(player);
-                if (custom != null)
-                {
-                    Transform customStats = UnityEngine.Object.Instantiate<Transform>(this.gameObject.transform.Find("Contents/Quick Stats"), this.gameObject.transform.Find("Contents"));
-                    customStats.parent = this.gameObject.transform.Find("Contents");
-                    customStats.name = "StaffSetNameplate";
-                    customStats.localPosition = new Vector3(0f, 104f, 0f);
-                    customStats.gameObject.SetActive(true);
-                    customText = customStats.Find("Trust Text").GetComponent<TextMeshProUGUI>();
-                    customText.color = Color.white;
-                    if (OverRender && Enabled)
-                    {
-                        customText.isOverlay = true;
-                    }
-                    else
-                    {
-                        customText.isOverlay = false;
-                    }
-
-                    customStats.Find("Trust Icon").gameObject.SetActive(false);
-                    customStats.Find("Performance Icon").gameObject.SetActive(false);
-                    customStats.Find("Performance Text").gameObject.SetActive(false);
-                    customStats.Find("Friend Anchor Stats").gameObject.SetActive(false);
-                }
-
                 frames = player._playerNet.field_Private_Byte_0;
                 ping = player._playerNet.field_Private_Byte_1;
             }
         }
 
-        private NameplateModel IsCustom(VRC.Player player)
-        {
-            try
-            {
-                return Serpent.NameplateModels.First(x => x.UserID == player.prop_APIUser_0.id && x.Active);
-            }
-            catch
-            {
-                return null;
-            }
-        }
         private int skipX = 0;
 
         private void Update()
@@ -118,11 +85,6 @@ namespace Serpent.Components
                     if (noUpdateCount > 150)
                         text = "<color=red>Crashed</color>";
                     statsText.text = $"[{player.GetPlatform()}] |" + $" [{player.GetAvatarStatus()}] |" + $"{(player.GetIsMaster() ? " | [<color=#0352ff>HOST</color>] |" : "")}" + $" [{text}] |" + $" [FPS: {player.GetFramesColord()}] |" + $" [Ping: {player.GetPingColord()}] " + $" {(player.ClientDetect() ? " | [<color=red>ClientUser</color>]" : "")}";
-                    if (customText != null)
-                    {
-                        NameplateModel custom = IsCustom(player);
-                        customText.text = custom.Text;
-                    }
                     skipX = 0;
                 }
                 else
@@ -136,9 +98,7 @@ namespace Serpent.Components
         {
             Enabled = false;
             statsText.gameObject.SetActive(false);
-            customText.gameObject.SetActive(false);
             statsText.text = null;
-            customText.text = null;
         }
     }
 
@@ -173,6 +133,60 @@ namespace Serpent.Components
                 nameplate.player = player;
                 nameplate.OverRender = NamePlateOverRenderEnabled;
             }
+
+            player.gameObject.AddComponent<Mono.Platemanager>();
+            Task.Run(() => GetTags(player));
+        }
+
+        public override void OnPlayerLeft(Player player)
+        {
+            try
+            {
+                alreadyGenerated.Remove(player.field_Private_APIUser_0.id);
+            }
+            catch { }
+        }
+
+        private static List<string> alreadyGenerated = new List<string>();
+        private static Task GetTags(Player _Player)
+        {
+            if (alreadyGenerated.Contains(_Player.field_Private_APIUser_0.id)) return null;
+            var _Req = (HttpWebRequest)WebRequest.Create($"https://api.ares-mod.com/records/VitalityPlates?filter=UserId,cs,{_Player.field_Private_APIUser_0.id}");
+            using (var res = (HttpWebResponse)_Req.GetResponse())
+            using (var stream = res.GetResponseStream())
+            using (var Reader = new StreamReader(stream))
+            {
+                var ReaderValue = Reader.ReadToEnd();
+
+                Serpent._Queue.Enqueue(new Action(() =>
+                {
+                    if (_Player == null)
+                        return;
+                    if (ReaderValue == "{\"records\":[]}")
+                        return;
+                    var _UserPlate = Newtonsoft.Json.JsonConvert.DeserializeObject<Root>(ReaderValue);
+
+                    for (int i = 0; i < _UserPlate.records.Count; i++)
+                    {
+                        if (_UserPlate.records[i].Text.StartsWith("#animatedtag#"))
+                        {
+                            var AnimatedTag = _Player.GeneratePlate(_UserPlate.records[i].Text.Replace("#animatedtag#", String.Empty));
+                            AnimatedTag.AddComponent<Mono.TagAnimation>()._Text = _UserPlate.records[i].Text.Replace("#animatedtag#", "");
+                            continue;
+                        }
+                        if (_UserPlate.records[i].Text.StartsWith("#rainbow#"))
+                        {
+                            var AnimatedTag = _Player.GeneratePlate(_UserPlate.records[i].Text.Replace("#rainbow#", String.Empty));
+                            AnimatedTag.AddComponent<Mono.TagRainbow>()._Text = _UserPlate.records[i].Text.Replace("#rainbow#", "");
+                            continue;
+                        }
+                        _Player.GeneratePlate(_UserPlate.records[i].Text);
+                    }
+                    _Player.GeneratePlate(" ");
+                    alreadyGenerated.Add(_Player.field_Private_APIUser_0.id);
+                }));
+                return null;
+            }
         }
 
         public override void OnUiManagerInit(UiManager uiManager)
@@ -185,17 +199,6 @@ namespace Serpent.Components
                 NamePlateOverRenderEnabled);
             _vRamShowEnabled = menu.AddToggle("Show VRam usage", "This can cause more memory usage and lag spikes", VRamShowEnabled.SetValue,
                 VRamShowEnabled);
-        }
-
-        public override void OnSceneWasInitialized(int buildIndex, string sceneName)
-        {
-            if (buildIndex == -1)
-            {
-                if (CustomNameplateEnabled)
-                {
-                    Serpent.UpdateNamePlates();
-                }
-            }
         }
 
         private void ToggleNameplates(bool value)
@@ -227,5 +230,18 @@ namespace Serpent.Components
             }
             catch (Exception ex) { ReLogger.Msg(ex.Message); }
         }
+    }
+
+
+    public class Record
+    {
+        public int Id { get; set; }
+        public string UserId { get; set; }
+        public string Text { get; set; }
+    }
+
+    public class Root
+    {
+        public List<Record> records { get; set; }
     }
 }
