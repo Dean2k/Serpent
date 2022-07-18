@@ -1,5 +1,5 @@
 ﻿using Il2CppSystem.Collections.Generic;
-using ReModAres.Core.VRChat;
+using SerpentCore.Core.VRChat;
 using Serpent.AvatarPostProcess;
 using Serpent.Config;
 using Serpent.Loader;

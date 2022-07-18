@@ -1,4 +1,4 @@
-﻿namespace ReModAres.Core.Types
+﻿namespace SerpentCore.Core.Types
 {
     public enum PedalType
     {

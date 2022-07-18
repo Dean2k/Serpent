@@ -1,11 +1,11 @@
 using System;
 using MelonLoader;
-using ReModAres.Core.Pedals;
-using ReModAres.Core.Types;
+using SerpentCore.Core.Pedals;
+using SerpentCore.Core.Types;
 using Serpent.Loader;
 using UnityEngine;
 
-namespace ReModAres.Core.Api
+namespace SerpentCore.Core.Api
 {
     /// <summary>
     /// VRC Page specific things

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace ReModAres.Core.Unity
+namespace SerpentCore.Core.Unity
 {
     public static class UnityExtensions
     {

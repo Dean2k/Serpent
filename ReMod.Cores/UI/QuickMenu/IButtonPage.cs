@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace ReModAres.Core.UI.QuickMenu
+namespace SerpentCore.Core.UI.QuickMenu
 {
     public interface IButtonPage
     {

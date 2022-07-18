@@ -1,7 +1,7 @@
 ﻿using Il2CppSystem.IO;
-using ReModAres.Core;
-using ReModAres.Core.Managers;
-using ReModAres.Core.UI.QuickMenu;
+using SerpentCore.Core;
+using SerpentCore.Core.Managers;
+using SerpentCore.Core.UI.QuickMenu;
 using System;
 using UnityEngine;
 using VRC.Udon;

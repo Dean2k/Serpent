@@ -1,10 +1,10 @@
 ﻿using MelonLoader;
 using Newtonsoft.Json;
-using ReModAres.Core;
-using ReModAres.Core.Managers;
-using ReModAres.Core.UI;
-using ReModAres.Core.UI.QuickMenu;
-using ReModAres.Core.VRChat;
+using SerpentCore.Core;
+using SerpentCore.Core.Managers;
+using SerpentCore.Core.UI;
+using SerpentCore.Core.UI.QuickMenu;
+using SerpentCore.Core.VRChat;
 using Serpent.Core;
 using Serpent.Loader;
 using System;

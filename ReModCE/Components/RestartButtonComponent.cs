@@ -1,9 +1,9 @@
 ﻿using MelonLoader;
-using ReModAres.Core;
-using ReModAres.Core.Managers;
-using ReModAres.Core.UI.QuickMenu;
-using ReModAres.Core.Unity;
-using ReModAres.Core.VRChat;
+using SerpentCore.Core;
+using SerpentCore.Core.Managers;
+using SerpentCore.Core.UI.QuickMenu;
+using SerpentCore.Core.Unity;
+using SerpentCore.Core.VRChat;
 using System;
 using System.Collections;
 using System.IO;

@@ -1,4 +1,4 @@
-﻿using ReModAres.Core.VRChat;
+﻿using SerpentCore.Core.VRChat;
 using Serpent.Components;
 using Serpent.Core;
 using System;

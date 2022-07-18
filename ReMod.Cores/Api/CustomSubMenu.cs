@@ -1,11 +1,11 @@
 using System;
-using ReModAres.Core.Helpers;
-using ReModAres.Core.Managers;
+using SerpentCore.Core.Helpers;
+using SerpentCore.Core.Managers;
 using UnityEngine;
 
 // ReSharper disable HeuristicUnreachableCode
 
-namespace ReModAres.Core.Api
+namespace SerpentCore.Core.Api
 {
     /// <summary>
     ///     Class for adding buttons,toggles,radial puppets inside of a custom submenu

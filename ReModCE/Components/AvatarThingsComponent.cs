@@ -1,7 +1,7 @@
 ﻿
 using MelonLoader;
-using ReModAres.Core;
-using ReModAres.Core.Managers;
+using SerpentCore.Core;
+using SerpentCore.Core.Managers;
 using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;

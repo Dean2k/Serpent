@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-namespace ReModAres.Core.UI
+namespace SerpentCore.Core.UI
 {
     public class ReUiText : UiElement
     {

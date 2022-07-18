@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using ReModAres.Core;
+using SerpentCore.Core;
 using Serpent.Loader;
 using System;
 using System.Collections.Generic;

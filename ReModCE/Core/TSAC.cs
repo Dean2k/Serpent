@@ -1,5 +1,5 @@
 ﻿using MelonLoader;
-using ReModAres.Core;
+using SerpentCore.Core;
 using Serpent.Loader;
 using System;
 using System.Collections;

@@ -1,6 +1,6 @@
-﻿using ReModAres.Core;
-using ReModAres.Core.Managers;
-using ReModAres.Core.VRChat;
+﻿using SerpentCore.Core;
+using SerpentCore.Core.Managers;
+using SerpentCore.Core.VRChat;
 using UnityEngine;
 using VRC;
 using VRC.Core;

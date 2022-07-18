@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ReModAres.Core
+namespace SerpentCore.Core
 {
     public static class EnumExtensions
     {

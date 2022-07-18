@@ -1,8 +1,8 @@
 ﻿using System;
-using ReModAres.Core.Types;
+using SerpentCore.Core.Types;
 using UnityEngine;
 
-namespace ReModAres.Core.Pedals
+namespace SerpentCore.Core.Pedals
 {
     public abstract class PedalStruct
     {

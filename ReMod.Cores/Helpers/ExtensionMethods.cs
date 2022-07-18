@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using MelonLoader;
-using ReModAres.Core.Managers;
+using SerpentCore.Core.Managers;
 using TMPro;
 using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
 using ActionMenuPage = ActionMenu.Page; //Will this change?, ¯\_(ツ)_/¯x2
 using Object = UnityEngine.Object;
 
-namespace ReModAres.Core.Helpers
+namespace SerpentCore.Core.Helpers
 {
     internal static class ExtensionMethods
     {

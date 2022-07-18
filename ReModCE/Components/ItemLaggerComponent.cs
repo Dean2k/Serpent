@@ -1,8 +1,8 @@
 ﻿using Il2CppSystem.Collections.Generic;
 using MelonLoader;
-using ReModAres.Core;
-using ReModAres.Core.Managers;
-using ReModAres.Core.UI.QuickMenu;
+using SerpentCore.Core;
+using SerpentCore.Core.Managers;
+using SerpentCore.Core.UI.QuickMenu;
 using System.Collections;
 using System.Linq;
 using UnityEngine;

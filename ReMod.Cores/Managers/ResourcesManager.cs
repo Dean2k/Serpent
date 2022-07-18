@@ -1,12 +1,12 @@
 using System.IO;
 using System.Reflection;
 using MelonLoader;
-using ReModAres.Core.Helpers;
+using SerpentCore.Core.Helpers;
 using UnhollowerRuntimeLib;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ReModAres.Core.Managers
+namespace SerpentCore.Core.Managers
 {
     public static class ResourcesManager
     {

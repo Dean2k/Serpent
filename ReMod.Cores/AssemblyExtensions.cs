@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ReModAres.Core
+namespace SerpentCore.Core
 {
     internal static class AssemblyExtensions
     {

@@ -1,12 +1,12 @@
 ﻿using System;
-using ReModAres.Core.VRChat;
+using SerpentCore.Core.VRChat;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.UI.Core.Styles;
 using Object = UnityEngine.Object;
 
-namespace ReModAres.Core.UI.QuickMenu
+namespace SerpentCore.Core.UI.QuickMenu
 {
     public class ReMenuButton : UiElement
     {

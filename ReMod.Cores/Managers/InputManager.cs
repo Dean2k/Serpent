@@ -1,8 +1,8 @@
-﻿using ReModAres.Core.Helpers;
+﻿using SerpentCore.Core.Helpers;
 using UnityEngine;
 using UnityEngine.XR;
 
-namespace ReModAres.Core.Managers
+namespace SerpentCore.Core.Managers
 {
     internal static class InputManager
     {

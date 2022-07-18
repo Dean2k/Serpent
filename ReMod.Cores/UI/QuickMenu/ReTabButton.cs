@@ -1,10 +1,10 @@
 ﻿using System;
-using ReModAres.Core.VRChat;
+using SerpentCore.Core.VRChat;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.UI.Elements.Controls;
 
-namespace ReModAres.Core.UI.QuickMenu
+namespace SerpentCore.Core.UI.QuickMenu
 {
     public class ReTabButton : UiElement
     {

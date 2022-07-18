@@ -1,5 +1,5 @@
 ﻿using System;
-using ReModAres.Core.VRChat;
+using SerpentCore.Core.VRChat;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +7,7 @@ using VRC.UI.Elements;
 using VRC.UI.Shared;
 using Object = UnityEngine.Object;
 
-namespace ReModAres.Core.UI.Wings
+namespace SerpentCore.Core.UI.Wings
 {
     [Flags]
     public enum WingSide

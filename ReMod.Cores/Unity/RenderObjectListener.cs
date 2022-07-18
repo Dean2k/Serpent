@@ -4,7 +4,7 @@ using UnhollowerBaseLib.Attributes;
 using UnhollowerRuntimeLib;
 using UnityEngine;
 
-namespace ReModAres.Core.Unity
+namespace SerpentCore.Core.Unity
 {
     [RegisterTypeInIl2Cpp]
     public class RenderObjectListener : MonoBehaviour

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using MelonLoader;
-using ReModAres.Core.Managers;
+using SerpentCore.Core.Managers;
 
-namespace ReModAres.Core
+namespace SerpentCore.Core
 {
     public class ConfigValue<T>
     {

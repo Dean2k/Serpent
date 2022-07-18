@@ -1,4 +1,4 @@
-﻿using ReModAres.Core;
+﻿using SerpentCore.Core;
 using System;
 using UnityEngine;
 using UnityEngine.UI;

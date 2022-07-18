@@ -1,4 +1,4 @@
-﻿using ReModAres.Core.Managers;
+﻿using SerpentCore.Core.Managers;
 using System.Linq;
 using TMPro;
 using UnityEngine;

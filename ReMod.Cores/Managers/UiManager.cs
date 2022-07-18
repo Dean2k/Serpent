@@ -1,8 +1,8 @@
-﻿using ReModAres.Core.UI.QuickMenu;
-using ReModAres.Core.VRChat;
+﻿using SerpentCore.Core.UI.QuickMenu;
+using SerpentCore.Core.VRChat;
 using UnityEngine;
 
-namespace ReModAres.Core.Managers
+namespace SerpentCore.Core.Managers
 {
     public class UiManager
     {

@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace ReModAres.Core.UI
+namespace SerpentCore.Core.UI
 {
     public class UiElement
     {

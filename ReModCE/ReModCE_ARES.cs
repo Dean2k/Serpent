@@ -3,12 +3,12 @@ using HarmonyLib;
 using MelonLoader;
 using Newtonsoft.Json;
 using Photon.Realtime;
-using ReModAres.Core;
-using ReModAres.Core.Managers;
-using ReModAres.Core.Pedals;
-using ReModAres.Core.UI.Wings;
-using ReModAres.Core.Unity;
-using ReModAres.Core.VRChat;
+using SerpentCore.Core;
+using SerpentCore.Core.Managers;
+using SerpentCore.Core.Pedals;
+using SerpentCore.Core.UI.Wings;
+using SerpentCore.Core.Unity;
+using SerpentCore.Core.VRChat;
 using Serpent.ApplicationBot;
 using Serpent.Components;
 using Serpent.Config;
@@ -37,7 +37,7 @@ using VRC;
 using VRC.Core;
 using VRC.SDKBase;
 using VRC.Udon;
-using ConfigManager = ReModAres.Core.Managers.ConfigManager;
+using ConfigManager = SerpentCore.Core.Managers.ConfigManager;
 
 namespace Serpent
 {

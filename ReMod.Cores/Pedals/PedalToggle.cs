@@ -1,9 +1,9 @@
 ﻿using System;
-using ReModAres.Core.Helpers;
-using ReModAres.Core.Types;
+using SerpentCore.Core.Helpers;
+using SerpentCore.Core.Types;
 using UnityEngine;
 
-namespace ReModAres.Core.Pedals
+namespace SerpentCore.Core.Pedals
 {
     public sealed class PedalToggle : PedalStruct
     {

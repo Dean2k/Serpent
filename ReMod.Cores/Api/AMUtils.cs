@@ -1,10 +1,10 @@
 using System;
 using MelonLoader;
-using ReModAres.Core.Helpers;
-using ReModAres.Core.Managers;
+using SerpentCore.Core.Helpers;
+using SerpentCore.Core.Managers;
 using UnityEngine;
 
-namespace ReModAres.Core.Api
+namespace SerpentCore.Core.Api
 {
     /// <summary>
     /// General Action Menu Things

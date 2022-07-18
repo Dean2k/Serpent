@@ -8,7 +8,7 @@ using VRC.DataModel;
 using VRC.SDKBase;
 using VRC.UI;
 
-namespace ReModAres.Core.VRChat
+namespace SerpentCore.Core.VRChat
 {
     public static class PlayerExtensions
     {

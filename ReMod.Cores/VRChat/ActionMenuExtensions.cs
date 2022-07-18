@@ -1,4 +1,4 @@
-﻿namespace ReModAres.Core.VRChat
+﻿namespace SerpentCore.Core.VRChat
 {
     public static class ActionMenuExtensions
     {

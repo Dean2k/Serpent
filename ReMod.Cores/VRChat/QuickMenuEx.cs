@@ -5,7 +5,7 @@ using VRC.UI.Elements;
 using VRC.UI.Elements.Menus;
 using VRC.UI.Shared;
 
-namespace ReModAres.Core.VRChat
+namespace SerpentCore.Core.VRChat
 {
     public static class QuickMenuEx
     {

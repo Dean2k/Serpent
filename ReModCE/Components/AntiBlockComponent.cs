@@ -1,10 +1,10 @@
 ﻿using ExitGames.Client.Photon;
 using Il2CppSystem.Collections.Generic;
 using Photon.Realtime;
-using ReModAres.Core;
-using ReModAres.Core.Managers;
-using ReModAres.Core.UI.QuickMenu;
-using ReModAres.Core.VRChat;
+using SerpentCore.Core;
+using SerpentCore.Core.Managers;
+using SerpentCore.Core.UI.QuickMenu;
+using SerpentCore.Core.VRChat;
 using Serpent.Core;
 using Serpent.Loader;
 using Serpent.Managers;

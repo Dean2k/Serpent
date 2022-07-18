@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace ReModAres.Core.VRChat
+namespace SerpentCore.Core.VRChat
 {
     public class VRCUiManagerEx
     {

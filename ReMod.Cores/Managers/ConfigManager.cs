@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ReModAres.Core.Managers
+namespace SerpentCore.Core.Managers
 {
     public class ConfigManager
     {

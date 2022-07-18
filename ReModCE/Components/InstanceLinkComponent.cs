@@ -1,6 +1,6 @@
-﻿using ReModAres.Core;
-using ReModAres.Core.UI;
-using ReModAres.Core.VRChat;
+﻿using SerpentCore.Core;
+using SerpentCore.Core.UI;
+using SerpentCore.Core.VRChat;
 using Serpent.Loader;
 using UnityEngine;
 using UnityEngine.UI;

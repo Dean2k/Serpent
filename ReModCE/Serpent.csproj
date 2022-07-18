@@ -398,13 +398,13 @@
     <Compile Include="ApplicationBot\VRCBotModule.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ReMod.Cores\ReModAres.Core.csproj">
+    <ProjectReference Include="..\ReMod.Cores\SerpentCore.Core.csproj">
       <Project>{C87FE758-ACB9-4FA2-AF6F-10AA9AA0023C}</Project>
-      <Name>ReModAres.Core</Name>
+      <Name>SerpentCore.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ReModCE.Loader\ReModCE.Loader.csproj">
+    <ProjectReference Include="..\ReModCE.Loader\Serpent.Loader.csproj">
       <Project>{6e5e0e59-73d9-4d74-b734-d040d26710c4}</Project>
-      <Name>ReModCE.Loader</Name>
+      <Name>Serpent.Loader</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>

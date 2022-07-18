@@ -2,7 +2,7 @@
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace ReModAres.Core.UI.Wings
+namespace SerpentCore.Core.UI.Wings
 {
     public class ReMirroredWingButton
     {

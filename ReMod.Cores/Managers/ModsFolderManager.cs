@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using ReModAres.Core.Api;
-using ReModAres.Core.Helpers;
+using SerpentCore.Core.Api;
+using SerpentCore.Core.Helpers;
 
-namespace ReModAres.Core.Managers
+namespace SerpentCore.Core.Managers
 {
     internal static class ModsFolderManager
     {

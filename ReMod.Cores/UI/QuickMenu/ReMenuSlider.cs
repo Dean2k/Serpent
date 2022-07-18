@@ -1,12 +1,12 @@
 ﻿using System;
-using ReModAres.Core.Unity;
-using ReModAres.Core.VRChat;
+using SerpentCore.Core.Unity;
+using SerpentCore.Core.VRChat;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-namespace ReModAres.Core.UI.QuickMenu
+namespace SerpentCore.Core.UI.QuickMenu
 {
     public class ReMenuSlider : UiElement
     {

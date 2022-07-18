@@ -1,6 +1,6 @@
-﻿using ReModAres.Core;
-using ReModAres.Core.Managers;
-using ReModAres.Core.UI.QuickMenu;
+﻿using SerpentCore.Core;
+using SerpentCore.Core.Managers;
+using SerpentCore.Core.UI.QuickMenu;
 using Serpent.Core;
 using Serpent.Loader;
 using Serpent.Managers;
@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using VRC;
+using VRC.Core;
 
 namespace Serpent.Components
 {
@@ -145,6 +146,11 @@ namespace Serpent.Components
                 alreadyGenerated.Remove(player.field_Private_APIUser_0.id);
             }
             catch { }
+        }
+
+        public override void OnEnterWorld(ApiWorld world, ApiWorldInstance instance)
+        {
+            alreadyGenerated = new List<string>();
         }
 
         private static List<string> alreadyGenerated = new List<string>();

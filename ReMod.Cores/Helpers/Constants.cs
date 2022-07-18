@@ -1,4 +1,4 @@
-﻿namespace ReModAres.Core.Helpers
+﻿namespace SerpentCore.Core.Helpers
 {
     internal static class Constants
     {

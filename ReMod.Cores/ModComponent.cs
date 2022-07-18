@@ -3,7 +3,7 @@ using HarmonyLib;
 using MelonLoader;
 using Photon.Pun;
 using Photon.Realtime;
-using ReModAres.Core.Managers;
+using SerpentCore.Core.Managers;
 using System;
 using System.Reflection;
 using UnityEngine;
@@ -13,7 +13,7 @@ using VRC.SDKBase;
 using VRC.Udon;
 using Player = VRC.Player;
 
-namespace ReModAres.Core
+namespace SerpentCore.Core
 {
     public class ComponentDisabled : Attribute
     {

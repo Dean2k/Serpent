@@ -52,7 +52,7 @@ namespace Serpent.Loader
                 "If enabled ReModCE will not automatically download the latest version from GitHub. Manual update will be required.",
                 true);
 
-            DownloadFromGitHub("Serpent.Core", out _);
+            DownloadFromGitHub("SerpentCore.Core", out _);
             DownloadFromGitHub("Serpent", out var assembly);
 
             if (assembly == null)
@@ -71,7 +71,7 @@ namespace Serpent.Loader
             var remodClass = types.FirstOrDefault(type => type.Name == "Serpent");
             if (remodClass == null)
             {
-                MelonLogger.Error($"Couldn't find ReModCE class in assembly. ReModCE won't load.");
+                MelonLogger.Error($"Couldn't find Serpent class in assembly. Serpent won't load.");
                 return;
             }
 

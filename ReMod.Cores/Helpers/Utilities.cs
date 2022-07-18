@@ -4,14 +4,14 @@ using System.Linq;
 using System.Reflection;
 using HarmonyLib;
 using MelonLoader;
-using ReModAres.Core.Pedals;
-using ReModAres.Core.Types;
+using SerpentCore.Core.Pedals;
+using SerpentCore.Core.Types;
 using Serpent.Loader;
 using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace ReModAres.Core.Helpers
+namespace SerpentCore.Core.Helpers
 {
     public static class Utilities
     {

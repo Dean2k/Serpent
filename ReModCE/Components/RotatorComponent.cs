@@ -1,7 +1,7 @@
-﻿using ReModAres.Core;
-using ReModAres.Core.Managers;
-using ReModAres.Core.UI.QuickMenu;
-using ReModAres.Core.VRChat;
+﻿using SerpentCore.Core;
+using SerpentCore.Core.Managers;
+using SerpentCore.Core.UI.QuickMenu;
+using SerpentCore.Core.VRChat;
 using Serpent.ControlSchemes;
 using Serpent.Core;
 using Serpent.Loader;
@@ -62,7 +62,7 @@ namespace Serpent.Components
             }
             else RotationSystem.CurrentControlScheme = new DefaultControlScheme();
 
-            ReLogger.Msg("ReModAres-PlayerRotator " + Version);
+            ReLogger.Msg("SerpentCore-PlayerRotator " + Version);
         }
 
         public override void OnUiManagerInit(UiManager uiManager)
