@@ -59,6 +59,8 @@ In case you want to update you can always grab the latest and even previous vers
 * Hud Clock (Thanks to Blaze for his Join notification)
 * Nameplate tags (Thanks to Edward7 [Edward7s])
 
+if i've missed you out of the credits just drop me a message or raise an issue.
+
 ## Hotkeys
 * CTRL + F = Noclip
 * CTRL + T = Thirdperson
