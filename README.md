@@ -15,7 +15,7 @@ By default the loader will attempt to load the mod from your VRChat directory us
 If there is a newer version available on GitHub it will automatically update to that version.  
 
 If you don't want automatic updates, you can open your MelonPreferences.cfg with any text editor and set **ParanoidMode** in the **[Serpent]** category to **true**. That way the loader will notify if there is a new version available, but it won't load it until you download it yourself and replace the old version.  
-In case you want to update you can always grab the latest and even previous versions of ReModCE.dll [here](https://github.com/Dean2k/Serpent/releases/).
+In case you want to update you can always grab the latest and even previous versions of Serpent.dll [here](https://github.com/Dean2k/Serpent/releases/).
 
 ## Features
 * Unlimited Avatar Favorites (Saved in the Cloud and protected by a PIN!)
